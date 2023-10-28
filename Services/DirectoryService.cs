@@ -14,7 +14,25 @@ namespace FileExplorer.Services
         {
             this.dataTranformerService = dataTranformerService;
         }
-        public async Task<FileExploreViewModel> GetDataInViewModel(string path)
+
+        public async Task<FileExploreViewModel> SearchResult(string searching, FileExploreViewModel pathData)
+        {
+            pathData.Files = pathData.Files.Where(f => f.Name.Contains(searching) ||
+                                                     f.path.Contains(searching) ||
+                                                     f.Size.Contains(searching) ||
+                                                     f.Type.Contains(searching) ||
+                                                     f.CreatedDate.Contains(searching)).ToList();
+
+
+            pathData.Directories = pathData.Directories.Where(f => f.Name.Contains(searching) ||
+                                                  f.path.Contains(searching) ||
+                                                  f.Size.Contains(searching) ||
+                                                  f.Type.Contains(searching) ||
+                                                  f.CreatedDate.Contains(searching)).ToList();
+            return pathData;
+
+        }
+            public async Task<FileExploreViewModel> GetDataInViewModel(string path)
         {
             var data = await GetData(path);
             var dataVM = new FileExploreViewModel()
@@ -122,14 +140,14 @@ namespace FileExplorer.Services
                     );
             }
 
-
+            
             return items.ToArray();
         }
 
 
-        public async Task<bool> ConverViewModelToFile(FileExploreViewModel fileExploreViewModel, string path)
+        public  string ConverViewModelTostring(FileExploreViewModel fileExploreViewModel)
         {
-            var text = File.CreateText(path);
+            var text =  "";
             
             
 
@@ -137,9 +155,9 @@ namespace FileExplorer.Services
             {
                 foreach (var file in fileExploreViewModel.Files)
                 {
-                    await text.WriteLineAsync("Name : " + file.Name + " | " + "Path : " + file.path + " | "
+                    text+=("Name : " + file.Name + " | " + "Path : " + file.path + " | "
                         + "DateCreated : " + file.CreatedDate + " | " + "Size : " + file.Size + " | " +
-                        "Type : " + file.Type);
+                        "Type : " + file.Type+"\n\n");
                 }
 
             }
@@ -148,14 +166,14 @@ namespace FileExplorer.Services
             {
                 foreach (var file in fileExploreViewModel.Directories)
                 {
-                    await text.WriteLineAsync("Name : " + file.Name + " | " + "Path : " + file.path + " | "
+                    text+=("Name : " + file.Name + " | " + "Path : " + file.path + " | "
                         + "DateCreated : " + file.CreatedDate + " | " + "Size : " + file.Size + " | " +
                         "Type : " + file.Type);
                 }
 
             }
-            text.Close();
-            return Directory.Exists(path); 
+
+            return text; 
         }
 
 

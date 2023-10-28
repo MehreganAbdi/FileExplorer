@@ -24,6 +24,7 @@ namespace FileExplorer.Controllers
 
             var pathData = await directoryService.GetDataInViewModel(path);
 
+            pathData.path = path;
 
             if (pathData == null)
             {
@@ -33,27 +34,22 @@ namespace FileExplorer.Controllers
 
             if (searching != null)
             {
-                pathData.Files = pathData.Files.Where(f => f.Name.Contains(searching) ||
-                                                      f.path.Contains(searching) ||
-                                                      f.Size.Contains(searching) ||
-                                                      f.Type.Contains(searching) ||
-                                                      f.CreatedDate.Contains(searching)).ToList();
+                pathData.searching = searching;
 
-
-                pathData.Directories = pathData.Directories.Where(f => f.Name.Contains(searching) ||
-                                                      f.path.Contains(searching) ||
-                                                      f.Size.Contains(searching) ||
-                                                      f.Type.Contains(searching) ||
-                                                      f.CreatedDate.Contains(searching)).ToList();
+                pathData = await directoryService.SearchResult(searching, pathData);
 
             }
             
+
             return View(pathData);
         }
 
-        //public async Task<IActionResult> Save(FileExploreViewModel fileExploreViewModel)
-        //{
-
-        //}
+        public async Task<FileResult> SaveFile(string path , string searching)
+        {
+            var pathData = await directoryService.GetDataInViewModel(path);
+            pathData = await directoryService.SearchResult(searching, pathData);
+            string dataString = directoryService.ConverViewModelTostring(pathData);
+            return File(System.Text.Encoding.UTF8.GetBytes(dataString), "text/xml", "Download");
+        }
     }
 }

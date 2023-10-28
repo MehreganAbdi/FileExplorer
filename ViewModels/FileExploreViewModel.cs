@@ -6,5 +6,7 @@ namespace FileExplorer.ViewModels
     {
         public List<FileDTO> Files{ get; set; }
         public List<DirectoryDTO> Directories{ get; set; }
+        public string? path { get; set; }
+        public string? searching { get; set; }
     }
 }
