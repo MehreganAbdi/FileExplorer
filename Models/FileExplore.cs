@@ -1,4 +1,4 @@
-﻿namespace WebApplication.Models
+﻿namespace FileExplorer.Models
 {
     public class FileExplore
     {

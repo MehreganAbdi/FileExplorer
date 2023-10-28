@@ -1,6 +1,6 @@
-﻿using WebApplication.DTOs;
+﻿using FileExplorer.DTOs;
 
-namespace WebApplication.ViewModels
+namespace FileExplorer.ViewModels
 {
     public class FileExploreViewModel
     {

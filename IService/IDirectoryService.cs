@@ -1,10 +1,10 @@
-﻿using WebApplication.Models;
+﻿using FileExplorer.Models;
 
-namespace WebApplication.IService
+namespace FileExplorer.IService
 {
     public interface IDirectoryService
     {
-        FileExplore GetData(string path);
+        Task<FileExplore> GetData(string path);
 
     }
 }

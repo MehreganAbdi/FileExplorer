@@ -1,4 +1,7 @@
-namespace WebApplication
+using FileExplorer.IService;
+using FileExplorer.Services;
+
+namespace FileExplorer
 {
     public class Program
     {
@@ -8,6 +11,17 @@ namespace WebApplication
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+
+            #region DI
+
+            //Services DI
+
+            builder.Services.AddScoped<IDirectoryService, DirectoryService>();
+
+            #endregion
+
+
 
             var app = builder.Build();
 

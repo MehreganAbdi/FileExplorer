@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebApplication.Models
+namespace FileExplorer.Models
 {
     public class Directory_
     {

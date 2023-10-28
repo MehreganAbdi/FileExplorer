@@ -1,13 +1,13 @@
 ﻿using System.IO;
-using WebApplication.IService;
-using WebApplication.Models;
+using FileExplorer.IService;
+using FileExplorer.Models;
 
-namespace WebApplication.Services
+namespace FileExplorer.Services
 {
     public class DirectoryService : IDirectoryService
     {
 
-        public  FileExplore GetData(string path)
+        public async Task<FileExplore> GetData(string path)
         {
             var pathFiles = Directory.GetFiles(path);
             var pathDirectories = Directory.GetDirectories(path);

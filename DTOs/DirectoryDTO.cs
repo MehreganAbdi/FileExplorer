@@ -1,4 +1,4 @@
-﻿namespace WebApplication.DTOs
+﻿namespace FileExplorer.DTOs
 {
     public class DirectoryDTO
     {
