@@ -168,7 +168,7 @@ namespace FileExplorer.Services
                 {
                     text+=("Name : " + file.Name + " | " + "Path : " + file.path + " | "
                         + "DateCreated : " + file.CreatedDate + " | " + "Size : " + file.Size + " | " +
-                        "Type : " + file.Type);
+                        "Type : " + file.Type.ToString()+"\n\n");
                 }
 
             }

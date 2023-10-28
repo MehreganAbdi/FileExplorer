@@ -49,7 +49,7 @@ namespace FileExplorer.Controllers
             var pathData = await directoryService.GetDataInViewModel(path);
             pathData = await directoryService.SearchResult(searching, pathData);
             string dataString = directoryService.ConverViewModelTostring(pathData);
-            return File(System.Text.Encoding.UTF8.GetBytes(dataString), "text/xml", "Download");
+            return File(System.Text.Encoding.UTF8.GetBytes(dataString), "text/xml", "FileData");
         }
     }
 }

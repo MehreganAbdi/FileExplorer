@@ -15,10 +15,16 @@
         <br />
         @Html.TextBox("searching")
        <input type="submit" value=" Search  " class="btn-primary" />
+    }
         
-
+    @using (Html.BeginForm("SaveFile", "Home", FormMethod.Get))
+    {
+        <input asp-for="path" type="hidden" value="@Model.path"/>
+        <input asp-for="searching" type="hidden" value="@Model.searching" />
+        <input type="submit" value=" Download " class="btn-primary" />
 
     }
+
     
         
 

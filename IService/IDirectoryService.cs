@@ -8,6 +8,6 @@ namespace FileExplorer.IService
         Task<FileExplore> GetData(string path);
         Task<FileExploreViewModel> GetDataInViewModel(string path);
         string ConverViewModelTostring(FileExploreViewModel fileExploreViewModel);
-        Task<FileExploreViewModel> SearchResult(string searching, FileExploreViewModel pathData)
+        Task<FileExploreViewModel> SearchResult(string searching, FileExploreViewModel pathData);
     }
 }
