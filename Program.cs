@@ -18,6 +18,7 @@ namespace FileExplorer
             //Services DI
 
             builder.Services.AddScoped<IDirectoryService, DirectoryService>();
+            builder.Services.AddScoped<IDataTranformerService, DataTransformerService>();
 
             #endregion
 

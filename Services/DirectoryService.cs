@@ -1,11 +1,47 @@
 ﻿using System.IO;
+using FileExplorer.DTOs;
 using FileExplorer.IService;
 using FileExplorer.Models;
+using FileExplorer.ViewModels;
 
 namespace FileExplorer.Services
 {
     public class DirectoryService : IDirectoryService
     {
+        private readonly IDataTranformerService dataTranformerService;
+
+        public DirectoryService(IDataTranformerService dataTranformerService)
+        {
+            this.dataTranformerService = dataTranformerService;
+        }
+        public async Task<FileExploreViewModel> GetDataInViewModel(string path)
+        {
+            var data = await GetData(path);
+            var dataVM = new FileExploreViewModel()
+            {
+                Directories = new List<DirectoryDTO>(),
+                Files = new List<FileDTO>()
+            };
+ 
+            if (data.Files != null)
+            {
+                foreach (var file in data.Files)
+                {
+                    dataVM.Files.Add(dataTranformerService.ChangeFileToFileDTO(file));
+                }
+            }
+
+            if(data.Directories != null)
+            {
+                foreach (var directory in data.Directories)
+                {
+                    dataVM.Directories.Add(dataTranformerService.ChangeDirectoryToDirectoryDTO(directory));
+                }
+            }
+
+            return dataVM;
+
+        }
 
         public async Task<FileExplore> GetData(string path)
         {
@@ -34,8 +70,8 @@ namespace FileExplorer.Services
             };
         }
 
-       
-        private  File_[] GetFilesData(string[] files)
+
+        private File_[] GetFilesData(string[] files)
         {
             if (files == null)
             {
@@ -51,7 +87,7 @@ namespace FileExplorer.Services
                     {
                         Name = GetName(item),
                         path = item,
-                        Size = GetFileSize(item).ToString() + " KB",
+                        Size = GetFileSize(item).ToString() + " B",
                         CreatedDate = GetFileCreatedTime(item),
                         Type = GetTypeOfFile(item)
                     }
@@ -63,7 +99,7 @@ namespace FileExplorer.Services
         }
 
 
-        private  Directory_[] GetDirectoriesData(string[] directories)
+        private Directory_[] GetDirectoriesData(string[] directories)
         {
             if (directories == null)
             {
@@ -79,9 +115,9 @@ namespace FileExplorer.Services
                     {
                         Name = GetName(item),
                         path = item,
-                        Size = GetDirectorySize(item).ToString() + " KB",
+                        Size = GetDirectorySize(item).ToString() + " B",
                         CreatedDate = GetDirectoryCreatedTime(item),
-                        Type = "Directory"
+                        Type = "Folder"
                     }
                     );
             }
@@ -94,7 +130,7 @@ namespace FileExplorer.Services
 
         //Helper Methods
 
-        private  string GetName(string path)
+        private string GetName(string path)
         {
             var name = path.Split(@"\")[^1];
 
@@ -106,13 +142,13 @@ namespace FileExplorer.Services
         }
 
 
-        private  long GetFileSize(string path)
+        private long GetFileSize(string path)
         {
             return new FileInfo(path).Length;
         }
 
 
-        private  long GetDirectorySize(string path)
+        private long GetDirectorySize(string path)
         {
             long size = 0;
 
@@ -141,17 +177,17 @@ namespace FileExplorer.Services
         }
 
 
-        private  string GetDirectoryCreatedTime(string path)
+        private string GetDirectoryCreatedTime(string path)
         {
             return Directory.GetCreationTime(path).ToString();
         }
 
-        private  string GetFileCreatedTime(string path)
+        private string GetFileCreatedTime(string path)
         {
             return File.GetCreationTime(path).ToString();
         }
 
-        private  string GetTypeOfFile(string path)
+        private string GetTypeOfFile(string path)
         {
             return path.Split(".")[^1] == null ? "NotDefined" : path.Split(".")[^1];
         }

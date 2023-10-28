@@ -1,4 +1,87 @@
-﻿
+﻿@using FileExplorer.ViewModels;
+@model FileExploreViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
+
+<center>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+
+        @Html.TextBox("path")
+        <input type="submit" value="Get Path" class="btn-primary" />
+        <br />
+        <br />
+        @Html.TextBox("searching")
+       
+        <input type="submit" value=" Search  " class="btn-primary" />
+    }
+</center>
+<br />
+<br />
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Path</th>
+            <th scope="col">Date Created</th>
+            <th scope="col">Size </th>
+            <th scope="col">Type</th>
+        </tr>
+    </thead>
+    @{
+        var i = 1;
+    }
+    @if (Model.Files != null)
+    {
+
+        @foreach (var item in Model.Files)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">@i</th>
+
+                    <td>@item.Name</td>
+                    <td>@item.path</td>
+                    <td>@item.CreatedDate</td>
+                    <td>@item.Size</td>
+                    <td>@item.Type</td>
+
+
+
+                </tr>
+            </tbody>
+            i++;
+        }
+    }
+    @if (Model.Directories != null)
+    {
+
+        @foreach (var item in Model.Directories)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">@i</th>
+
+                    <td>@item.Name</td>
+                    <td>@item.path</td>
+                    <td>@item.CreatedDate</td>
+                    <td>@item.Size</td>
+                    <td><a class="btn btn-secondary" asp-controller="Home" asp-action="Index"   asp-route-path="@item.path">Folder</a></td>
+
+
+
+                </tr>
+            </tbody>
+            i++;
+        }
+    }
+</table>
+
+
+<br />
