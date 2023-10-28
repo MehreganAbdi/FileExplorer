@@ -22,7 +22,7 @@ namespace FileExplorer.Services
                 Directories = new List<DirectoryDTO>(),
                 Files = new List<FileDTO>()
             };
- 
+
             if (data.Files != null)
             {
                 foreach (var file in data.Files)
@@ -31,7 +31,7 @@ namespace FileExplorer.Services
                 }
             }
 
-            if(data.Directories != null)
+            if (data.Directories != null)
             {
                 foreach (var directory in data.Directories)
                 {
@@ -125,6 +125,40 @@ namespace FileExplorer.Services
 
             return items.ToArray();
         }
+
+
+        public async Task<bool> ConverViewModelToFile(FileExploreViewModel fileExploreViewModel, string path)
+        {
+            var text = File.CreateText(path);
+            
+            
+
+            if (fileExploreViewModel.Files != null)
+            {
+                foreach (var file in fileExploreViewModel.Files)
+                {
+                    await text.WriteLineAsync("Name : " + file.Name + " | " + "Path : " + file.path + " | "
+                        + "DateCreated : " + file.CreatedDate + " | " + "Size : " + file.Size + " | " +
+                        "Type : " + file.Type);
+                }
+
+            }
+
+            if (fileExploreViewModel.Directories != null)
+            {
+                foreach (var file in fileExploreViewModel.Directories)
+                {
+                    await text.WriteLineAsync("Name : " + file.Name + " | " + "Path : " + file.path + " | "
+                        + "DateCreated : " + file.CreatedDate + " | " + "Size : " + file.Size + " | " +
+                        "Type : " + file.Type);
+                }
+
+            }
+            text.Close();
+            return Directory.Exists(path); 
+        }
+
+
 
 
 
