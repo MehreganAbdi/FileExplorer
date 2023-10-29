@@ -55,7 +55,7 @@ namespace FileExplorer.Controllers
             }
             string dataString = directoryService.ConverViewModelTostring(pathData);
 
-            return File(System.Text.Encoding.UTF8.GetBytes(dataString), "text/xml", "FileData.txt");
+            return File(System.Text.Encoding.UTF8.GetBytes(dataString), "text/xml", "FileExplorerData.txt");
         }
     }
 }
