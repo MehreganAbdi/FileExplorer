@@ -157,7 +157,7 @@ namespace FileExplorer.Services
                 {
                     text+=("Name : " + file.Name + " | " + "Path : " + file.path + " | "
                         + "DateCreated : " + file.CreatedDate + " | " + "Size : " + file.Size + " | " +
-                        "Type : " + file.Type+"\n\n");
+                        "Type : " + file.Type+"\n,\n");
                 }
 
             }
@@ -168,7 +168,7 @@ namespace FileExplorer.Services
                 {
                     text+=("Name : " + file.Name + " | " + "Path : " + file.path + " | "
                         + "DateCreated : " + file.CreatedDate + " | " + "Size : " + file.Size + " | " +
-                        "Type : " + file.Type.ToString()+"\n\n");
+                        "Type : " + file.Type.ToString()+"\n,\n");
                 }
 
             }
