@@ -70,6 +70,13 @@
         @if (TempData["AddResult"] != null)
         {
             <h5>@TempData["AddResult"]</h5>
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+            {
+                <input asp-for="path" type="hidden" value="@TempData["AddResult"].ToString().Split(">")[^1]" />
+                <input asp-for="searching" type="hidden" value="@Model.searching" />
+                <input type="submit" value=" Go To Directory " class="btn-primary-download" />
+
+            }
         }
 
     </center>

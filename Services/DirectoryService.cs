@@ -260,7 +260,13 @@ namespace FileExplorer.Services
 
         public async Task<bool> AddFileToPath(string path,IFormFile file)
         {
-            return true;
+            string filePath = path + "\\" + file.FileName;
+
+            using (Stream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            {
+                file.CopyTo(fileStream);
+            }
+            return PathExists(path + file.Name);
         }
     }
 }
