@@ -1,5 +1,7 @@
+using FileExplorer.Controllers;
 using FileExplorer.IService;
 using FileExplorer.Services;
+using FileExplorer.ViewModels;
 
 namespace FileExplorer
 {
@@ -18,7 +20,7 @@ namespace FileExplorer
             //Services DI
 
             builder.Services.AddScoped<IDirectoryService, DirectoryService>();
-            builder.Services.AddScoped<IDataTranformerService, DataTransformerService>();
+            builder.Services.AddScoped<IDataTranformerService, DataTransformerService>(); 
 
             #endregion
 
