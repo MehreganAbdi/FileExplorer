@@ -9,5 +9,9 @@ namespace FileExplorer.IService
         Task<FileExploreViewModel> GetDataInViewModel(string path);
         string ConverViewModelTostring(FileExploreViewModel fileExploreViewModel);
         Task<FileExploreViewModel> SearchResult(string searching, FileExploreViewModel pathData);
+        bool PathExists(string path);
+        Task<bool> AddFileToPath(string path,IFormFile file);
+        Task<bool> NewFolder(string path,string? name = "NewFolder");
+
     }
 }

@@ -1,0 +1,104 @@
+﻿body {
+    background-color : peru;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: antiquewhite;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 25px;
+}
+
+button.btn-primary {
+    border-radius: 10%;
+    color: brown;
+    background-color: coral;
+    margin: 15px;
+    font-size: 18px;
+    padding : 4px;
+}
+
+    button.btn-primary :hover {
+        border-radius: 10%;
+        color: brown;
+        background-color: coral;
+        margin: 15px;
+        font-size: 20px;
+    }
+
+a.btn-primary {
+    border-top-right-radius: 30%;
+    border-bottom-right-radius: 30%;
+    color: brown;
+    background-color: coral;
+    margin: 15px;
+    font-size: 18px;
+    text-underline-offset: unset;
+    text-decoration: none;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+    a.btn-primary:hover {
+        border-top-right-radius: 30%;
+        border-bottom-right-radius: 30%;
+        color: brown;
+        background-color: coral;
+        margin: 15px;
+        font-size: 20px;
+        text-decoration: none;
+    }
+
+input.btn-primary {
+    border-top-right-radius: 30%;
+    border-bottom-right-radius: 30%;
+    color: brown;
+    font-size: 18px;
+    background-color: coral;
+    margin: 15px;
+    font-size: 18px;
+    border: dotted;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 4px;
+     
+}
+    input.btn-primary:hover {
+        border-top-right-radius: 30%;
+        border-bottom-right-radius: 30%;
+        color: brown;
+        font-size: 19px;
+        background-color: coral;
+        margin: 15px;
+        font-size: 18px;
+        border: dotted;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 4px;
+    }
+input.btn-primary-download {
+    border-top-right-radius: 30%;
+    border-bottom-right-radius: 30%;
+    border-top-left-radius:30%;
+    border-bottom-left-radius:30%;
+    color: brown;
+    font-size: 18px;
+    background-color: coral;
+    margin: 15px;
+    font-size: 18px;
+    border: dotted;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 4px;
+}
+input.input-primary {
+    background-color: coral;
+    font-size: 18px;
+    color: brown;
+    border: none;
+    padding-left:8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 4px;
+}
+    input.input-primary:focus {
+        background-color: coral;
+        font-size: 18px;
+        color: brown;
+        border: none;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 4px;
+    }   

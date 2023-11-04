@@ -3,6 +3,7 @@ using FileExplorer.Models;
 using FileExplorer.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Reflection.Metadata.Ecma335;
 using System.Xml.Linq;
 
 namespace FileExplorer.Controllers
@@ -17,11 +18,11 @@ namespace FileExplorer.Controllers
         }
         public async Task<IActionResult> Index(string path, string searching)
         {
-            if (path == null)
+            if (path == null || !directoryService.PathExists(path))
             {
+                TempData["Error"] = "Insert An Existing Path";
                 return View(new FileExploreViewModel());
             }
-
 
             var pathData = await directoryService.GetDataInViewModel(path);
 
@@ -38,6 +39,11 @@ namespace FileExplorer.Controllers
                 pathData.searching = searching;
 
                 pathData = await directoryService.SearchResult(searching, pathData);
+                if (pathData == null)
+                {
+                    TempData["Error"] = "Nothing Found";
+                    return RedirectToAction("Index", "Home");
+                }
 
             }
 
@@ -56,6 +62,39 @@ namespace FileExplorer.Controllers
             string dataString = directoryService.ConverViewModelTostring(pathData);
 
             return File(System.Text.Encoding.UTF8.GetBytes(dataString), "text/xml", "FileExplorerData.txt");
+        }
+
+        public async Task<IActionResult> NewFolder(string path, string? NewFolderName)
+        {
+            if (path == null || !directoryService.PathExists(path))
+            {
+                TempData["Error"] = "Insert An Existing Path";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            await directoryService.NewFolder(path, NewFolderName);
+            TempData["AddResult"] =NewFolderName == null ?"NewFolder Created Successfuly In \n  "+path.ToString():
+                                                           $"{NewFolderName} Created Successfuly In \n  " + path.ToString();
+
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddFilesToPath(FileExploreViewModel fileExploreViewModel)
+        {
+            if(fileExploreViewModel.SelectedFile == null)
+            {
+                TempData["SelectError"] = "Select A File First";
+                return RedirectToAction("Index", "Home");
+            }
+            string filePath = fileExploreViewModel.path+"\\"+fileExploreViewModel.SelectedFile.FileName;
+
+            using (Stream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            {
+                fileExploreViewModel.SelectedFile.CopyTo(fileStream);
+            }
+            TempData["AddResult"] = "File Successfully Added To \n" + fileExploreViewModel.path.ToString();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

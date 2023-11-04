@@ -8,5 +8,7 @@ namespace FileExplorer.ViewModels
         public List<DirectoryDTO> Directories{ get; set; }
         public string? path { get; set; }
         public string? searching { get; set; }
+        public string? NewFolderName { get; set; }
+        public IFormFile? SelectedFile { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace FileExplorer.Services
             return pathData;
 
         }
-            public async Task<FileExploreViewModel> GetDataInViewModel(string path)
+        public async Task<FileExploreViewModel> GetDataInViewModel(string path)
         {
             var data = await GetData(path);
             var dataVM = new FileExploreViewModel()
@@ -63,6 +63,7 @@ namespace FileExplorer.Services
 
         public async Task<FileExplore> GetData(string path)
         {
+            
             var pathFiles = Directory.GetFiles(path);
             var pathDirectories = Directory.GetDirectories(path);
 
@@ -140,24 +141,24 @@ namespace FileExplorer.Services
                     );
             }
 
-            
+
             return items.ToArray();
         }
 
 
-        public  string ConverViewModelTostring(FileExploreViewModel fileExploreViewModel)
+        public string ConverViewModelTostring(FileExploreViewModel fileExploreViewModel)
         {
-            var text =  "";
-            
-            
+            var text = "";
+
+
 
             if (fileExploreViewModel.Files != null)
             {
                 foreach (var file in fileExploreViewModel.Files)
                 {
-                    text+=("Name : " + file.Name + " | " + "Path : " + file.path + " | "
+                    text += ("Name : " + file.Name + " | " + "Path : " + file.path + " | "
                         + "DateCreated : " + file.CreatedDate + " | " + "Size : " + file.Size + " | " +
-                        "Type : " + file.Type+"\n,\n");
+                        "Type : " + file.Type + "\n,\n");
                 }
 
             }
@@ -166,16 +167,29 @@ namespace FileExplorer.Services
             {
                 foreach (var file in fileExploreViewModel.Directories)
                 {
-                    text+=("Name : " + file.Name + " | " + "Path : " + file.path + " | "
+                    text += ("Name : " + file.Name + " | " + "Path : " + file.path + " | "
                         + "DateCreated : " + file.CreatedDate + " | " + "Size : " + file.Size + " | " +
-                        "Type : " + file.Type.ToString()+"\n,\n");
+                        "Type : " + file.Type.ToString() + "\n,\n");
                 }
 
             }
 
-            return text; 
+            return text;
+        }
+        public bool PathExists(string path)
+        {
+            return Directory.Exists(path);
         }
 
+
+       
+
+        public async Task<bool> NewFolder(string path , string? name = "NewFolder")
+        {
+            Directory.CreateDirectory(path+"\\"+name);
+           
+            return  PathExists(path + "\\" + name);
+        }
 
 
 
@@ -244,5 +258,9 @@ namespace FileExplorer.Services
             return path.Split(".")[^1] == null ? "NotDefined" : path.Split(".")[^1];
         }
 
+        public async Task<bool> AddFileToPath(string path,IFormFile file)
+        {
+            return true;
+        }
     }
 }
