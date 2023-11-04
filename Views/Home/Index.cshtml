@@ -8,151 +8,183 @@
 }
 <body>
     <center>
-        @if (TempData["Error"] != null)
-        {
-            <h5>@TempData["Error"]</h5>
-        }
+        <div class="parent">
+            <div class="child">
 
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                {
+                    <div class="parent">
+                        <div class="child">
+                            <input asp-for="path" type="text" class="input-primary" placeholder="Path" />
+                            <input type="submit" value="Get Path" class="btn-primary" />
+                           
+                        </div>
+                        <div class="child">
+                            <input asp-for="searching" type="text" class="input-primary" />
+                            <input type="submit" value=" Search  " class="btn-primary" />
+                        </div><br />
+                        <left>
+                             <span asp-validation-for="path" style="margin-right:400px;"></span>
 
-        @using (Html.BeginForm("Index", "Home", FormMethod.Get))
-        {
+                        </left>
+                    </div>
+                }
 
-            //@Html.TextBox("path")
-            <input asp-for="path" type="text" class="input-primary" />
+            </div>
 
-            <input type="submit" value="Get Path" class="btn-primary" />
             <br />
+            <div class="child">
 
-            <input asp-for="searching" type="text" class="input-primary" />
-            <input type="submit" value=" Search  " class="btn-primary" />
-        }
-       
+                @if (Model.path != null)
+                {
+
+                    <div class="parent" style="margin-top:4px">
+                        <div class="child">
+                            @using (Html.BeginForm("NewFolder", "Home", FormMethod.Get))
+                            {
+                                <input asp-for="path" type="hidden" value="@Model.path" />
+                               
+                                <input asp-for="NewFolderName" type="text" class="input-primary" placeholder="Folder Name ..."/>
+                                <input type="submit" value="Add New Folder" class="btn-primary" />
 
 
+                            }
+                        </div>
+                        <div class="child">
+                            <form method="post" enctype="multipart/form-data" asp-action="AddFilesToPath">
+                                <input asp-for="path" type="hidden" value="@Model.path" />
+                                <input asp-for="Directories" type="hidden" value="@Model.Directories" />
+                                <input asp-for="Files" type="hidden" value="@Model.Files" />
 
-        @if (Model.path != null)
-        {
 
-            <br />
-            @using (Html.BeginForm("NewFolder", "Home", FormMethod.Get))
+                               <label class="btn-primary" >
+                                  Select
+                                <input asp-for="SelectedFile" type="file" class="input-primary">
+                               </label> 
+                                <span asp-validation-for="SelectedFile"></span>
+
+                                <input type="submit" value="Add+" class="btn-primary" />
+
+                            </form>
+                        </div>
+                            @if (TempData["SelectError"] != null)
+                            {
+                                <small>@TempData["SelectError"]</small>
+                            }
+                    </div>
+                }
+                else
+                {
+                    <small>In Order To Add Files Or Create New Folder , Insert A Path</small>
+                }
+            </div>
+
+
+            @if (TempData["AddResult"] != null)
             {
-                <input asp-for="path" type="hidden" value="@Model.path" />
-                <label>New Folder Name </label>
-                <input asp-for="NewFolderName" type="text" class="input-primary" />
-                <input type="submit" value="Add New Folder" class="btn-primary" />
-                <br />
-                
+                <h5>@TempData["AddResult"]</h5>
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                {
+                    <input asp-for="path" type="hidden" value="@TempData["AddResult"].ToString().Split(">")[^1]" />
+                    <input asp-for="searching" type="hidden" value="@Model.searching" />
+                    <input type="submit" value=" Go To Directory " class="btn-primary-download" />
+
+                }
             }
-            @if (TempData["SelectError"] != null)
+            @if (Model.Directories != null && Model.Files != null)
             {
-                <h5>@TempData["SelectError"]</h5>
+
+                using (Html.BeginForm("SaveFile", "Home", FormMethod.Get))
+                {
+                    <input asp-for="path" type="hidden" value="@Model.path" />
+                    <input asp-for="searching" type="hidden" value="@Model.searching" />
+                    <input type="submit" value=" Download List Result" class="btn-primary-download" />
+
+                }
             }
-            <form method="post" enctype="multipart/form-data" asp-action="AddFilesToPath">
-                <input asp-for="path" type="hidden" value="@Model.path" />
-                <input asp-for="Directories" type="hidden" value="@Model.Directories" />
-                <input asp-for="Files" type="hidden" value="@Model.Files" />
-
-
-                <label asp-for="SelectedFile">Select File</label>
-                <input asp-for="SelectedFile" type="file" placeholder="Image" class="input-primary">
-                <span asp-validation-for="SelectedFile"></span>
-
-                <input type="submit" value="Add To Path" class="btn-primary" />
-                <br />
-            </form>
-        }
-        else
-        {
-            <small>In Order To Add Files Or Create New Folder , Insert A Path</small>
-        }
-
-
-        @if (TempData["AddResult"] != null)
-        {
-            <h5>@TempData["AddResult"]</h5>
-            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
-            {
-                <input asp-for="path" type="hidden" value="@TempData["AddResult"].ToString().Split(">")[^1]" />
-                <input asp-for="searching" type="hidden" value="@Model.searching" />
-                <input type="submit" value=" Go To Directory " class="btn-primary-download" />
-
-            }
-        }
-
+        </div>
     </center>
     <br />
     <br />
 
+    <div class="parent2">
 
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Path</th>
-                <th scope="col">Date Created</th>
-                <th scope="col">Size </th>
-                <th scope="col">Type</th>
-            </tr>
-        </thead>
-        @{
-            var i = 1;
-        }
-        @if (Model.Files != null)
-        {
-
-            @foreach (var item in Model.Files)
-            {
-                <tbody>
-                    <tr>
-                        <th scope="row">@i</th>
-
-                        <td>@item.Name</td>
-                        <td>@item.path</td>
-                        <td>@item.CreatedDate</td>
-                        <td>@item.Size</td>
-                        <td>@item.Type</td>
-
-
-
-                    </tr>
-                </tbody>
-                i++;
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Path</th>
+                    <th scope="col">Date Created</th>
+                    <th scope="col">Size </th>
+                    <th scope="col">Type</th>
+                </tr>
+            </thead>
+            @{
+                var i = 1;
             }
-        }
-        @if (Model.Directories != null)
-        {
-
-            @foreach (var item in Model.Directories)
+            @if (Model.Files != null)
             {
-                <tbody>
-                    <tr>
-                        <th scope="row">@i</th>
 
-                        <td>@item.Name</td>
-                        <td>@item.path</td>
-                        <td>@item.CreatedDate</td>
-                        <td>@item.Size</td>
-                        <td><a class="btn-primary" asp-controller="Home" asp-action="Index" asp-route-path="@item.path">  Folder  </a></td>
+                @foreach (var item in Model.Files)
+                {
+                    <tbody>
+                        <tr>
+                            <th scope="row">@i</th>
+
+                            <td>@item.Name</td>
+                            <td>@item.path</td>
+                            <td>@item.CreatedDate</td>
+                            <td>@item.Size</td>
+                            <td>  @item.Type</td>
 
 
 
-                    </tr>
-                </tbody>
-                i++;
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <th scope="row"></th>
 
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+
+
+                        </tr>
+                    </tbody>
+                    i++;
+                }
             }
-        }
-    </table>
+            @if (Model.Directories != null)
+            {
+
+                @foreach (var item in Model.Directories)
+                {
+                    <tbody>
+                        <tr>
+                            <th scope="row">@i</th>
+
+                            <td>@item.Name</td>
+                            <td>@item.path</td>
+                            <td>@item.CreatedDate</td>
+                            <td>@item.Size</td>
+                            <td><a class="btn-primary" asp-controller="Home" asp-action="Index" asp-route-path="@item.path">  Go To Folder  </a></td>
 
 
-    <br />
-    @using (Html.BeginForm("SaveFile", "Home", FormMethod.Get))
-    {
-        <input asp-for="path" type="hidden" value="@Model.path" />
-        <input asp-for="searching" type="hidden" value="@Model.searching" />
-        <input type="submit" value=" Download " class="btn-primary-download" />
 
-    }
+                        </tr>
+                    </tbody>
+                    i++;
+
+                }
+            }
+        </table>
+
+
+        <br />
+    </div>
 </body>

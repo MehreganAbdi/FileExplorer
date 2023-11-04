@@ -1,23 +1,23 @@
 ﻿body {
-    background-color : peru;
+    background-color : whitesmoke;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: antiquewhite;
+    color: dodgerblue;
     margin-left: 100px;
     margin-right: 100px;
     margin-top: 25px;
 }
 
 button.btn-primary {
-    border-radius: 10%;
-    color: brown;
-    background-color: coral;
+    border-radius: 8px;
+    color: dodgerblue;
+    background-color: whitesmoke;
     margin: 15px;
     font-size: 18px;
-    padding : 4px;
+    padding: 4px;
 }
 
     button.btn-primary :hover {
-        border-radius: 10%;
+        border-radius: 8px;
         color: brown;
         background-color: coral;
         margin: 15px;
@@ -25,10 +25,9 @@ button.btn-primary {
     }
 
 a.btn-primary {
-    border-top-right-radius: 30%;
-    border-bottom-right-radius: 30%;
-    color: brown;
-    background-color: coral;
+    border-radius: 8px;
+    color: dodgerblue;
+    background-color: lightblue;
     margin: 15px;
     font-size: 18px;
     text-underline-offset: unset;
@@ -37,68 +36,114 @@ a.btn-primary {
     padding-right: 4px;
 }
     a.btn-primary:hover {
-        border-top-right-radius: 30%;
-        border-bottom-right-radius: 30%;
-        color: brown;
-        background-color: coral;
+        border-radius:10px;
+        color: cornflowerblue;
+        background-color: lightblue;
         margin: 15px;
-        font-size: 20px;
+        font-size: 18px;
         text-decoration: none;
     }
 
 input.btn-primary {
-    border-top-right-radius: 30%;
-    border-bottom-right-radius: 30%;
-    color: brown;
+    border-radius: 8px;
+    color: dodgerblue;
     font-size: 18px;
-    background-color: coral;
+    background-color: lightblue;
     margin: 15px;
     font-size: 18px;
-    border: dotted;
+    border: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 4px;
-     
 }
     input.btn-primary:hover {
-        border-top-right-radius: 30%;
-        border-bottom-right-radius: 30%;
-        color: brown;
+        border-radius: 10px;
+        color: dodgerblue;
         font-size: 19px;
-        background-color: coral;
+        background-color: lightblue;
         margin: 15px;
         font-size: 18px;
-        border: dotted;
+        border: none;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         padding: 4px;
     }
 input.btn-primary-download {
-    border-top-right-radius: 30%;
-    border-bottom-right-radius: 30%;
-    border-top-left-radius:30%;
-    border-bottom-left-radius:30%;
-    color: brown;
+    border-radius: 8px;
+    color: dodgerblue;
     font-size: 18px;
-    background-color: coral;
+    background-color: lightblue;
     margin: 15px;
     font-size: 18px;
-    border: dotted;
+    border: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 4px;
 }
+    input.btn-primary-download:hover {
+        border-radius: 8px;
+        color: darkblue;
+        font-size: 18px;
+        background-color: lightblue;
+        margin: 15px;
+        font-size: 18px;
+        border: none;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 4px;
+    }
 input.input-primary {
-    background-color: coral;
+    background-color: lightblue;
+    border-radius:6px;
     font-size: 18px;
-    color: brown;
+    color: dodgerblue;
     border: none;
-    padding-left:8px;
+    padding-left: 8px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 4px;
 }
     input.input-primary:focus {
-        background-color: coral;
+        background-color: whitesmoke;
         font-size: 18px;
-        color: brown;
+        color: dodgerblue;
         border: none;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         padding: 4px;
-    }   
+    }
+.parent {
+    border: 2px solid lightblue;
+    margin: 0.25rem;
+    padding: 0.25rem 0.25rem;
+    text-align: center;
+    background-color: lightskyblue;
+    border-radius : 20px;
+    margin-top:34px;
+}
+
+.child {
+    display: inline-flex;
+    border: none;
+    padding: 0.25rem 0.25rem;
+    vertical-align: middle;
+}
+.parent2 {
+    border: 2px solid;
+    margin: 0.25rem;
+    padding: 0.25rem 0.25rem;
+    text-align: center;
+    background-color: aliceblue;
+    border-radius: 18px;
+    margin-top: 20px;
+    color :dodgerblue;
+    font-size:16px;
+}
+input[type="file"]{
+    display:none;
+}
+
+label.btn-primary {
+    background-color: lightblue;
+    border-radius: 6px;
+    font-size: 18px;
+    color: dodgerblue;
+    border: none;
+    padding-left: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 4px;
+}

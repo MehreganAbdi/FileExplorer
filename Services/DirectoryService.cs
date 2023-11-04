@@ -186,6 +186,7 @@ namespace FileExplorer.Services
 
         public async Task<bool> NewFolder(string path , string? name = "NewFolder")
         {
+            
             Directory.CreateDirectory(path+"\\"+name);
            
             return  PathExists(path + "\\" + name);
