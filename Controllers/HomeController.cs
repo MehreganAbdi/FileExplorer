@@ -1,4 +1,5 @@
-﻿using FileExplorer.IService;
+﻿using FileExplorer.DTOs;
+using FileExplorer.IService;
 
 using FileExplorer.ViewModels;
 using Microsoft.AspNetCore.Hosting.Server;
@@ -11,12 +12,12 @@ namespace FileExplorer.Controllers
     public class HomeController : Controller
     {
         private readonly IDirectoryService directoryService;
+        private readonly IEmailService emailService;
 
-
-        public HomeController(IDirectoryService directoryService)
+        public HomeController(IDirectoryService directoryService , IEmailService emailService)
         {
             this.directoryService = directoryService;
-
+            this.emailService = emailService;
         }
         public async Task<IActionResult> Index(string path, string searching)
         {
@@ -138,5 +139,22 @@ namespace FileExplorer.Controllers
             }
 
         }
+
+        public async Task<IActionResult> EmailListReult(FileExploreViewModel fileExploreViewModel)
+        {
+            var data = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
+            directoryService.CreateLocalFile(directoryService.ConverViewModelTostring(data));
+
+            var emailDTO = new EmailDTO() {
+                Reciever = fileExploreViewModel.Reciever,
+            Subject = "Your Requested File",
+            message ="File : "
+            };
+
+            await emailService.SendFileByEmail(emailDTO, "FileData.txt");
+            directoryService.DeleteLocalFile();
+
+            return View("Index", fileExploreViewModel);
+        } 
     }
 }

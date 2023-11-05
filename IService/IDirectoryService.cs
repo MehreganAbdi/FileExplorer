@@ -13,6 +13,7 @@ namespace FileExplorer.IService
         Task<bool> AddFileToPath(string path,IFormFile file);
         Task<bool> NewFolder(string path,string? name = "NewFolder");
         Task<bool> DownloadFileInDownloads(string path);
-
+        void CreateLocalFile(string content);
+        void DeleteLocalFile();
     }
 }
