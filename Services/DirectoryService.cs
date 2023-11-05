@@ -274,8 +274,8 @@ namespace FileExplorer.Services
 
         public async Task<bool> DownloadFileInDownloads(string path)
         {
-            File.Copy(path, $"Downloads\\{path.Split(".")[^2]}");
-            return PathExists($"Downloads\\{path.Split(".")[^2]}");
+            File.Copy(path, $"G:\\Downloads\\{path.Split("\\")[^1]}");
+            return  PathExists($"G:\\Downloads\\{path.Split("\\")[^1]}");
         }
     }
 }

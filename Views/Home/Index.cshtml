@@ -16,7 +16,9 @@
     {
 
         @Html.TextBox("pathhh")
+        
         <br />
+        <input asp-for="path" type="hidden" value="@Model.path"/>
         <br />
         <input type="submit" value="path" class="btn-primary" />
 

@@ -20,11 +20,16 @@ namespace FileExplorer
             //Services DI
 
             builder.Services.AddScoped<IDirectoryService, DirectoryService>();
-            builder.Services.AddScoped<IDataTranformerService, DataTransformerService>(); 
+            builder.Services.AddScoped<IDataTranformerService, DataTransformerService>();
 
             #endregion
 
 
+            #region Configs
+
+            builder.Services.Configure<CloudinarySetup.CloudinarySetup>(builder.Configuration.GetSection("CloudinarySetup"));
+
+            #endregion
 
             var app = builder.Build();
 
