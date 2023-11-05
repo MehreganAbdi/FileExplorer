@@ -4,7 +4,7 @@ namespace FileExplorer.IService
 {
     public interface IEmailService
     {
-        Task<bool> SendEmail(EmailDTO email);
-        Task<bool> SendRegistrationCodeByEmail(string UserId);
+        Task<bool> SendFileByEmail(EmailDTO email,string path);
+        
     }
 }
