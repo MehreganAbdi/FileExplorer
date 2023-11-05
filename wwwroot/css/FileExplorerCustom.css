@@ -23,12 +23,21 @@ button.btn-primary {
     button.btn-primary :hover {
         border-radius: 10px;
         color: cornflowerblue;
-        background-color: lightblue;
+        background-color: cornflowerblue;
         margin: 15px;
         font-size: 18px;
         text-decoration: none;
     }
+    button.btn-primary:focus {
 
+        border-radius: 10px;
+        color: whitesmoke;
+        background-color: dodgerblue;
+        margin: 15px;
+        font-size: 18px;
+        text-decoration: none;
+    
+        }
 a.btn-primary {
     border-radius: 8px;
     color: dodgerblue;

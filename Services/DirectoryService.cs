@@ -17,6 +17,7 @@ namespace FileExplorer.Services
 
         public async Task<FileExploreViewModel> SearchResult(string searching, FileExploreViewModel pathData)
         {
+
             pathData.Files = pathData.Files.Where(f => f.Name.Contains(searching) ||
                                                      f.path.Contains(searching) ||
                                                      f.Size.Contains(searching) ||
@@ -34,6 +35,7 @@ namespace FileExplorer.Services
         }
         public async Task<FileExploreViewModel> GetDataInViewModel(string path)
         {
+
             var data = await GetData(path);
             var dataVM = new FileExploreViewModel()
             {
