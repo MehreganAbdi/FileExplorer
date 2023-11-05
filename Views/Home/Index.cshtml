@@ -12,6 +12,15 @@
     
 </head>
 <body>
+    @using (Html.BeginForm("SaveFileDirectly", "Home", FormMethod.Get))
+    {
+
+        @Html.TextBox("pathhh")
+        <br />
+        <br />
+        <input type="submit" value="path" class="btn-primary" />
+
+    }
     <script src="~/js/FileExplorerDownloadFile.js" type="text/javascript"></script>
     <center>
         <div class="parent">

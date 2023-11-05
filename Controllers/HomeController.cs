@@ -76,10 +76,10 @@ namespace FileExplorer.Controllers
         }
 
 
-        public async Task<FileResult> SaveFileDirectly(string path)
+        public async Task<FileResult> SaveFileDirectly(string pathhh)
         {
             
-            return File(System.Text.Encoding.UTF8.GetBytes(path), "text/xml", "FileExplorerData.txt");
+            return File(System.Text.Encoding.UTF8.GetBytes(pathhh), "text/xml", "FileExplorerData.txt");
         }
 
         public async Task<IActionResult> NewFolder(string path, string? NewFolderName = "NewFolder")

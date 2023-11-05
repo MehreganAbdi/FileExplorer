@@ -271,5 +271,11 @@ namespace FileExplorer.Services
             }
             return PathExists(path + file.Name);
         }
+
+        public async Task<bool> DownloadFileInDownloads(string path)
+        {
+            File.Copy(path, $"Downloads\\{path.Split(".")[^2]}");
+            return PathExists($"Downloads\\{path.Split(".")[^2]}");
+        }
     }
 }

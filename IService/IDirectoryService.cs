@@ -12,6 +12,7 @@ namespace FileExplorer.IService
         bool PathExists(string path);
         Task<bool> AddFileToPath(string path,IFormFile file);
         Task<bool> NewFolder(string path,string? name = "NewFolder");
+        Task<bool> DownloadFileInDownloads(string path);
 
     }
 }
