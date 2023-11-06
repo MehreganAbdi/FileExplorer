@@ -26,11 +26,7 @@ namespace FileExplorer
             #endregion
 
 
-            #region Configs
-
-            builder.Services.Configure<CloudinarySetup.CloudinarySetup>(builder.Configuration.GetSection("CloudinarySetup"));
-
-            #endregion
+        
 
             var app = builder.Build();
 

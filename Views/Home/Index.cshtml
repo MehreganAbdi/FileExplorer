@@ -97,21 +97,7 @@
                     <small>In Order To Add Files Or Create New Folder , Insert A Path</small>
                 }
 
-
-                <div class="parent">
-                    <div class="child">
-                        @using (Html.BeginForm("Download", "Home", FormMethod.Get))
-                        {
-                            <input asp-for="path" type="hidden" value="@Model.path" />
-                            <label>
-                                Select file(s) To Download
-                            <input asp-for="FileToDownload" type="file" class="btn-primary" placeholder="Select File(s)" />
-                            </label>
-                            <span asp-validation-for="Reciever"></span>
-                            <input type="submit" value="Download" class="btn-primary" />
-                        }
-                    </div>
-                </div>
+ 
             </div>
 
 
