@@ -280,11 +280,11 @@ namespace FileExplorer.Services
 
         public void CreateLocalFile(string content)
         {
-            File.CreateText("FileData.txt").Write(content);
+            File.WriteAllText("G:\\Downloads\\FileData.txt",content);
         }
         public void DeleteLocalFile()
         {
-            File.Delete("FileData.txt");
+            File.Delete("G:\\Downloads\\FileData.txt");
         }
     }
 }

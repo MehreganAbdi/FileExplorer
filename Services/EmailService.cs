@@ -9,9 +9,9 @@ namespace FileExplorer.Services
     {
         public async Task<bool> SendFileByEmail(EmailDTO email, string path)
         {
-            var senderEmail = new MailAddress("mehreganabdiwebmail@gmail.com");
+            var senderEmail = new MailAddress("fileexplorerwebapp@gmail.com");
             var receiverEmail = new MailAddress(email.Reciever, "Receiver");
-            var password = "kxbo ipin pkyn vgfo";
+            var password = "eufy izjc ogeq jxjy";
             var sub = email.Subject;
             var body = email.message ;
             Attachment attachment;
@@ -27,7 +27,7 @@ namespace FileExplorer.Services
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(senderEmail.Address, password)
             };
-            var message = new MailMessage()
+            var message = new MailMessage(senderEmail,receiverEmail)
             {
                 Body = body,
                 Subject = sub

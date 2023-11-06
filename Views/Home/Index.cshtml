@@ -75,19 +75,21 @@
                         {
                             <small>@TempData["SelectError"]</small>
                         }
-                    </div>
-                    <div class="parent">
+                    </div><br />
+                    <div class="parent" >
                         <div class="child">
-                            @using (Html.BeginForm("SendFileByEmail", "Home", FormMethod.Get))
+                            @using (Html.BeginForm("EmailListResult", "Home", FormMethod.Get))
                             {
                                 <input asp-for="path" type="hidden" value="@Model.path" />
-                                <input asp-for="Reciever" type="email" />
+                                <input asp-for="Reciever" type="email" class="btn-primary" placeholder="Your Email Address"/>
                                 <span asp-validation-for="Reciever"></span>
-                                <input type="submit" value="Send Me Result" class="btn-primary" />
+                                <input type="submit" value="Send Me Result (Email)" class="btn-primary" />
                             }
 
                                 
                         </div>
+                        <br />
+                        <br />
                     </div>
                 }
                 else

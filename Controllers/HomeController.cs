@@ -5,6 +5,7 @@ using FileExplorer.ViewModels;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration.UserSecrets;
+using System.Net;
 using System.Runtime.InteropServices;
 
 namespace FileExplorer.Controllers
@@ -88,6 +89,7 @@ namespace FileExplorer.Controllers
 
         public async Task<IActionResult> NewFolder(string path, string? NewFolderName = "NewFolder")
         {
+
             try
             {
                 if (path == null || !directoryService.PathExists(path))
@@ -140,7 +142,7 @@ namespace FileExplorer.Controllers
 
         }
 
-        public async Task<IActionResult> EmailListReult(FileExploreViewModel fileExploreViewModel)
+        public async Task<IActionResult> EmailListResult(FileExploreViewModel fileExploreViewModel)
         {
             var data = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
             directoryService.CreateLocalFile(directoryService.ConverViewModelTostring(data));
@@ -148,13 +150,15 @@ namespace FileExplorer.Controllers
             var emailDTO = new EmailDTO() {
                 Reciever = fileExploreViewModel.Reciever,
             Subject = "Your Requested File",
-            message ="File : "
+            message ="File : \n"
             };
 
-            await emailService.SendFileByEmail(emailDTO, "FileData.txt");
-            directoryService.DeleteLocalFile();
+            await emailService.SendFileByEmail(emailDTO, "G:\\Downloads\\FileData.txt");
+            
+            fileExploreViewModel = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
 
             return View("Index", fileExploreViewModel);
         } 
+        
     }
 }
