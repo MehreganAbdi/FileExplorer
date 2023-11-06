@@ -15,7 +15,7 @@ namespace FileExplorer.Controllers
         private readonly IDirectoryService directoryService;
         private readonly IEmailService emailService;
 
-        public HomeController(IDirectoryService directoryService , IEmailService emailService)
+        public HomeController(IDirectoryService directoryService, IEmailService emailService)
         {
             this.directoryService = directoryService;
             this.emailService = emailService;
@@ -83,13 +83,13 @@ namespace FileExplorer.Controllers
         }
 
 
-         
+
         public async Task<IActionResult> SaveFileDirectly(string pathhh)
         {
             await directoryService.DownloadFileInDownloads(pathhh);
 
             return View("Index");
-        
+
         }
 
         public async Task<IActionResult> NewFolder(string path, string? NewFolderName = "NewFolder")
@@ -152,19 +152,20 @@ namespace FileExplorer.Controllers
             var data = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
             directoryService.CreateLocalFile(directoryService.ConverViewModelTostring(data));
 
-            var emailDTO = new EmailDTO() {
+            var emailDTO = new EmailDTO()
+            {
                 Reciever = fileExploreViewModel.Reciever,
-            Subject = "Your Requested File",
-            message ="File : \n"
+                Subject = "Your Requested File",
+                message = "File : \n"
             };
 
             await emailService.SendFileByEmail(emailDTO, "G:\\Downloads\\FileData.txt");
-            
+
             fileExploreViewModel = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
 
             return View("Index", fileExploreViewModel);
-        } 
-        
+        }
+
         public async Task<IActionResult> Delete(string bothpath)
         {
             directoryService.DeleteFileByPath(bothpath.Split("&&&")[^2]);
@@ -175,8 +176,19 @@ namespace FileExplorer.Controllers
         }
 
 
-        public async Task<FileResult> Download(FileExploreViewModel fileExploreViewModel)
+        public async Task<FileResult> Download(string path, string type)
         {
+
+            var bytes = await directoryService.GetBytes(path);
+
+
+
+            if (type == "gpg" || type == "jpg" || type == "png" || type == "gif")
+            {
+                return File(bytes, "image/jpg", "FileExploreDownload." + type);
+            }
+
+            return File(bytes, "text/xml", "FileExploreDownload." + type);
 
         }
     }

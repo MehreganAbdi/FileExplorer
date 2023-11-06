@@ -292,5 +292,11 @@ namespace FileExplorer.Services
             File.Delete(path);
             return !PathExists(path);
         }
+
+        public async Task<byte[]> GetBytes(string path)
+        {
+            var bytes  = await File.ReadAllBytesAsync(path);
+            return bytes;
+        }
     }
 }

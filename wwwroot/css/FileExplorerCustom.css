@@ -23,7 +23,8 @@ button.btn-primary {
 a.btn-delete {
     border-radius: 10px;
     color: dodgerblue;
-    padding:5px;
+    padding-left:5px;
+    padding-right:5px;
     background-color: lightblue;
     margin: 15px;
     font-size: 18px;

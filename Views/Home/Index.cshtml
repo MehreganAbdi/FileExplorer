@@ -177,12 +177,12 @@
                                     <td><center>@item.Size</center></td>
                                     <td><center>@item.Type</center></td>
 
-                                    <td><button class="btn-primary" onclick="downloadFile()">Download File</button></td>
+                                    <td><a class="btn-primary" asp-action="Download" asp-route-path="@item.path" asp-controller="Home" asp-route-type="@item.Type">Download File</a></td>
                                     @{
                                         var bothpath = item.path + "&&&" + Model.path;
                                         var confirmMessageName = item.path.ToString();
                                     }
-                                    <td><a onclick="confirm ('Are You Sure You Want To Delete @confirmMessageName ?')" class="btn-delete" asp-action="Delete" asp-controller="Home" asp-route-bothpath="@bothpath"> Delete </a> </td>
+                                    <td><a onclick="confirm ('Are You Sure You Want To Delete @confirmMessageName ?')" class="btn-delete" asp-action="Delete" asp-controller="Home" asp-route-bothpath="@bothpath" > Delete </a> </td>
                                 </tr>
                             </tbody>
                             i++;
