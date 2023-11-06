@@ -21,6 +21,7 @@ namespace FileExplorer
 
             builder.Services.AddScoped<IDirectoryService, DirectoryService>();
             builder.Services.AddScoped<IDataTranformerService, DataTransformerService>();
+            builder.Services.AddScoped<IEmailService, EmailService>();
 
             #endregion
 

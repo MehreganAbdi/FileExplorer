@@ -277,5 +277,14 @@ namespace FileExplorer.Services
             File.Copy(path, $"G:\\Downloads\\{path.Split("\\")[^1]}");
             return  PathExists($"G:\\Downloads\\{path.Split("\\")[^1]}");
         }
+
+        public void CreateLocalFile(string content)
+        {
+            File.WriteAllText("G:\\Downloads\\FileData.txt",content);
+        }
+        public void DeleteLocalFile()
+        {
+            File.Delete("G:\\Downloads\\FileData.txt");
+        }
     }
 }
