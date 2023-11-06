@@ -20,6 +20,25 @@ button.btn-primary {
     padding-right: 4px;
 }
 
+a.btn-delete {
+    border-radius: 10px;
+    color: dodgerblue;
+    padding-left:5px;
+    padding-right:5px;
+    background-color: lightblue;
+    margin: 15px;
+    font-size: 18px;
+    text-decoration: none;
+}
+    a.btn-delete:hover {
+        border-radius: 10px;
+        color: whitesmoke;
+        background-color: red;
+        margin: 15px;
+        padding:5px;
+        font-size: 18px;
+        text-decoration: none;
+    }
     button.btn-primary :hover {
         border-radius: 10px;
         color: cornflowerblue;

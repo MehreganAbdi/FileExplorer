@@ -15,7 +15,7 @@ namespace FileExplorer.Controllers
         private readonly IDirectoryService directoryService;
         private readonly IEmailService emailService;
 
-        public HomeController(IDirectoryService directoryService , IEmailService emailService)
+        public HomeController(IDirectoryService directoryService, IEmailService emailService)
         {
             this.directoryService = directoryService;
             this.emailService = emailService;
@@ -78,14 +78,8 @@ namespace FileExplorer.Controllers
         }
 
 
-         
-        public async Task<IActionResult> SaveFileDirectly(string pathhh)
-        {
-            await directoryService.DownloadFileInDownloads(pathhh);
 
-            return View("Index");
-        
-        }
+
 
         public async Task<IActionResult> NewFolder(string path, string? NewFolderName = "NewFolder")
         {
@@ -144,21 +138,70 @@ namespace FileExplorer.Controllers
 
         public async Task<IActionResult> EmailListResult(FileExploreViewModel fileExploreViewModel)
         {
-            var data = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
-            directoryService.CreateLocalFile(directoryService.ConverViewModelTostring(data));
+            if (fileExploreViewModel.Reciever == null)
+            {
+                TempData["Error"] = "To Send You Results Through Email , You Need To Fill Email Address Field";
 
-            var emailDTO = new EmailDTO() {
-                Reciever = fileExploreViewModel.Reciever,
-            Subject = "Your Requested File",
-            message ="File : \n"
-            };
+            }
+            else
+            {
 
-            await emailService.SendFileByEmail(emailDTO, "G:\\Downloads\\FileData.txt");
-            
-            fileExploreViewModel = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
+                var data = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
+                directoryService.CreateLocalFile(directoryService.ConverViewModelTostring(data));
 
-            return View("Index", fileExploreViewModel);
-        } 
-        
+                var emailDTO = new EmailDTO()
+                {
+                    Reciever = fileExploreViewModel.Reciever,
+                    Subject = "Your Requested File",
+                    message = "File : \n"
+                };
+
+
+
+                await emailService.SendFileByEmail(emailDTO, "G:\\Downloads\\FileData.txt");
+
+            }
+            var newFileExploreViewModel = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
+
+            newFileExploreViewModel.path = fileExploreViewModel.path;
+
+            return View("Index", newFileExploreViewModel);
+        }
+
+        public async Task<IActionResult> Delete(string bothpath)
+        {
+            try
+            {
+
+                directoryService.DeleteFileByPath(bothpath.Split("&&&")[^2]);
+                var fileExploreViewModel = await directoryService.GetDataInViewModel(bothpath.Split("&&&")[^1]);
+                fileExploreViewModel.path = bothpath.Split("&&&")[^1];
+
+                return View("Index", fileExploreViewModel);
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message.ToString();
+                var fileExploreViewModel = await directoryService.GetDataInViewModel(bothpath.Split("&&&")[^1]);
+                fileExploreViewModel.path = bothpath.Split("&&&")[^1];
+
+                return View("Index", fileExploreViewModel);
+            }
+        }
+
+
+        public async Task<FileResult> Download(string path, string type)
+        {
+
+            var bytes = await directoryService.GetBytes(path);
+
+            if (type == "jpg" || type == "png" || type == "gif")
+            {
+                return File(bytes, "image/jpg", "FileExploreDownload." + type);
+            }
+
+            return File(bytes, "text/xml", "FileExploreDownload." + type);
+
+        }
     }
 }
