@@ -1,6 +1,12 @@
 ﻿
-async function downloadFile() {
-    //this.filePath = path;
-    window.open ('I:\\sneakers\\Screenshot_20231016_233433',null);
-    
+async function PathExists(path) {
+    import * as PathData from path;
+
+    File.PathExists(path);
+    if (PathData != null) {
+        document.write('<a class="btn-primary" asp-action="DownloadView" asp-route-path="@item.path" asp-controller="Home" asp-route-type="@item.Type" asp-route-directory="@Model.path">Download File</a>');
+    } 
+
+    document.write('Didn"t Exist , Reload');
 }
+    

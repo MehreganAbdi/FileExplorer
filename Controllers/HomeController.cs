@@ -181,7 +181,7 @@ namespace FileExplorer.Controllers
             }
             catch (Exception ex)
             {
-                TempData["Error"] = ex.Message.ToString();
+                TempData["DeleteError"] = ex.Message.ToString();
                 var fileExploreViewModel = await directoryService.GetDataInViewModel(bothpath.Split("&&&")[^1]);
                 fileExploreViewModel.path = bothpath.Split("&&&")[^1];
 
@@ -189,6 +189,23 @@ namespace FileExplorer.Controllers
             }
         }
 
+        public async Task<IActionResult> DownloadView(string path , string type , string directory)
+        {
+            var fileViewModel = await directoryService.GetDataInViewModel(directory);
+            fileViewModel.path = directory;
+
+            if (Path.Exists(path))
+            {
+                await Download(path, type);
+                
+                return View( "Index" , fileViewModel );
+            }
+            else
+            {
+                TempData["DownloadError"] = "File Has Been Deleted , Refresh To Get Latest Update";
+                return View("Index",fileViewModel);
+            }
+        }
 
         public async Task<FileResult> Download(string path, string type)
         {
@@ -201,6 +218,7 @@ namespace FileExplorer.Controllers
             }
 
             return File(bytes, "text/xml", "FileExploreDownload." + type);
+
 
         }
     }
