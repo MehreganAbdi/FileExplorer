@@ -181,7 +181,7 @@ namespace FileExplorer.Controllers
             }
             catch (Exception ex)
             {
-                TempData["DeleteError"] = ex.Message.ToString();
+                TempData["Error"] = ex.Message.ToString();
                 var fileExploreViewModel = await directoryService.GetDataInViewModel(bothpath.Split("&&&")[^1]);
                 fileExploreViewModel.path = bothpath.Split("&&&")[^1];
 
@@ -206,6 +206,11 @@ namespace FileExplorer.Controllers
                 return View("Index",fileViewModel);
             }
         }
+
+        //public async Task<bool> FileExists(string path)
+        //{
+        //    return await directoryService.PathExists(path);
+        //}
 
         public async Task<FileResult> Download(string path, string type)
         {

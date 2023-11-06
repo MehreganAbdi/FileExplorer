@@ -176,11 +176,13 @@
                                     <td><center>@item.Type</center></td>
 
                                     @* <td><a class="btn-primary" asp-action="DownloadView" asp-route-path="@item.path" asp-controller="Home" asp-route-type="@item.Type" asp-route-directory="@Model.path">Download File</a></td> *@
-                                    <td><center><input onclick="PathExists()" value="Download" type="button" class="btn-primary"></center></td>
+                                    
                                     @{
                                         var bothpath = item.path + "&&&" + Model.path;
                                         var confirmMessageName = item.path.ToString();
+                                        
                                     }
+                                    <td><center><input onclick="PathExists('@item.path.ToString().Replace("\\","%5C").Replace(":","%3A")','@item.Type.ToString()')" value="Download" type="button" class="btn-primary"></center></td> 
                                     <td><a onclick="confirm ('Are You Sure You Want To Delete @confirmMessageName ?')" class="btn-delete" asp-action="Delete" asp-controller="Home" asp-route-bothpath="@bothpath"> Delete </a> </td>
                                 </tr>
                             </tbody>
