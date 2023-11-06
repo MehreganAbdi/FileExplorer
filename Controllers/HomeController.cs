@@ -25,6 +25,11 @@ namespace FileExplorer.Controllers
 
             try
             {
+                if (directoryService.PathExists("G:\\Downloads\\FileData.txt"))
+                {
+                    directoryService.DeleteLocalFile();
+                }
+
                 if (path == null || !directoryService.PathExists(path))
                 {
                     TempData["Error"] = "Insert An Existing Path";
@@ -160,5 +165,19 @@ namespace FileExplorer.Controllers
             return View("Index", fileExploreViewModel);
         } 
         
+        public async Task<IActionResult> Delete(string bothpath)
+        {
+            directoryService.DeleteFileByPath(bothpath.Split("&&&")[^2]);
+            var fileExploreViewModel = await directoryService.GetDataInViewModel(bothpath.Split("&&&")[^1]);
+            fileExploreViewModel.path = bothpath.Split("&&&")[^1];
+
+            return View("Index", fileExploreViewModel);
+        }
+
+
+        public async Task<FileResult> Download(FileExploreViewModel fileExploreViewModel)
+        {
+
+        }
     }
 }

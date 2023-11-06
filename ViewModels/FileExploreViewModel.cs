@@ -7,12 +7,13 @@ namespace FileExplorer.ViewModels
     {
         public List<FileDTO> Files{ get; set; }
         public List<DirectoryDTO> Directories{ get; set; }
-
+        public string? DeletionPath { get; set; }
         public string? Reciever { get; set; }
         [Required]
         public string path { get; set; }
         public string? searching { get; set; }
         public string? NewFolderName { get; set; }
         public IFormFile? SelectedFile { get; set; }
+        public IFormFile? FileToDownload { get; set; }
     }
 }

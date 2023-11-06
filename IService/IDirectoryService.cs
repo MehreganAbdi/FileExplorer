@@ -15,5 +15,6 @@ namespace FileExplorer.IService
         Task<bool> DownloadFileInDownloads(string path);
         void CreateLocalFile(string content);
         void DeleteLocalFile();
+        bool DeleteFileByPath(string path);
     }
 }

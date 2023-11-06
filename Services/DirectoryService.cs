@@ -286,5 +286,11 @@ namespace FileExplorer.Services
         {
             File.Delete("G:\\Downloads\\FileData.txt");
         }
+
+        public bool DeleteFileByPath(string path)
+        {
+            File.Delete(path);
+            return !PathExists(path);
+        }
     }
 }
