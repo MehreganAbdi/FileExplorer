@@ -1,7 +1,9 @@
 using FileExplorer.Controllers;
+using FileExplorer.Data;
 using FileExplorer.IService;
 using FileExplorer.Services;
 using FileExplorer.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace FileExplorer
 {
@@ -26,7 +28,15 @@ namespace FileExplorer
             #endregion
 
 
-        
+
+            builder.Services.AddDbContext<FileExplorerDbContext>(
+               options =>
+               {
+                   options.UseSqlServer(builder.Configuration.GetConnectionString("FileExplorerDefaultConnection"));
+               });
+
+
+
 
             var app = builder.Build();
 
