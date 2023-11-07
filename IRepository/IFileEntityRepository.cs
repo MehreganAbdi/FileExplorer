@@ -8,11 +8,13 @@ namespace FileExplorer.IRepository
         Task<ICollection<FileEntity>> GetAllByTypeAsync(string type);
 
         ICollection<FileEntity> GetAll();
-        ICollection<FileEntity> GetFilesByProjectId(int projectId);
-        FileEntity GetById(int Id);
         Task<ICollection<FileEntity>> GetAllAsync();
+        ICollection<FileEntity> GetFilesByProjectId(int projectId);
         Task<ICollection<FileEntity>> GetFilesByProjectIdAsync(int projectId);
+        FileEntity GetById(int Id);
         Task<FileEntity> GetByIdAsync(int Id);
+        FileEntity GetByIdAsNoTracking(int Id);
+        Task<FileEntity> GetByIdAsNoTrackingAsync(int Id);
         bool AddFileEntity(FileEntity file);
         Task<bool> AddFileEntityAsync(FileEntity file);
 
