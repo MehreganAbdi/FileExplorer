@@ -128,6 +128,65 @@ namespace FileExplorer.Controllers
 
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> CreateFromHome(string path , string name ,string type ,string size)
+        {
+            var fileEntityDTO = new FileEntityDTO()
+            { 
+                Size = size,
+                DateCreated = DateTime.Now,
+                Description = "Not Defined Yet",
+                FilePath = path,
+                Name = name,
+                ProjectName = "NotDefined",
+                Type = type,
+                ProjectId = 13
+            };
+
+            ViewBag.data = await projectService.GetAllAsync();
+            return View(fileEntityDTO);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateFromeHome(FileEntityDTO fileEntityDTO)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    TempData["CreateError"] = "Make Sure That You Filled All Gaps";
+
+                    return View(fileEntityDTO);
+                }
+                var projectByName = await projectService.GetProjectByNameAsync(fileEntityDTO.ProjectName);
+                fileEntityDTO.ProjectId = projectByName.Id;
+
+
+                var result = await fileEntityService.AddFileEntityAsync(fileEntityDTO);
+                if (!result)
+                {
+                    TempData["CreateError"] = "An Error Happened While Creating , try Again";
+                    return View(fileEntityDTO);
+                }
+
+                TempData["CreateError"] = "File Added Successfully";
+
+                return RedirectToAction("Index", "FileEntity");
+            }
+            catch (Exception ex)
+            {
+                var allProjects = await projectService.GetAllAsync();
+                ViewBag.data = allProjects;
+
+                TempData["CreateError"] = ex.Message.ToString();
+
+                return View(fileEntityDTO);
+            }
+        }
+
+
+
+
         public async Task<IActionResult> Delete(int Id)
         {
             try
