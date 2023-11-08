@@ -76,6 +76,17 @@ namespace FileExplorer.Services
              return await dataTranformerService.ChangeProjectToProjectDTOAsync(await projectRepository.GetByIdAsync(Id));
         }
 
+        public ProjectDTO GetProjectByName(string Name)
+        {
+            return dataTranformerService.ChangeProjectToProjectDTO(projectRepository.GetProjectByProjectName(Name));
+
+        }
+
+        public async Task<ProjectDTO> GetProjectByNameAsync(string Name)
+        {
+            return await dataTranformerService.ChangeProjectToProjectDTOAsync(await projectRepository.GetProjectByProjectNameAsync(Name));
+        }
+
         public bool RemoveProject(ProjectDTO project)
         {
             return projectRepository.RemoveProject(dataTranformerService.ChangeProjectDTOToProjectWithId(project));

@@ -105,7 +105,7 @@ namespace FileExplorer.Services
             return await dataTranformerService.ChangeFileEntityToFileEntityDTOAsync(await fileEntityRepository.GetByIdAsync(Id));
         }
 
-
+       
         public ICollection<FileEntityDTO> GetFilesByProjectId(int projectId)
         {
             var files = fileEntityRepository.GetFilesByProjectId(projectId);

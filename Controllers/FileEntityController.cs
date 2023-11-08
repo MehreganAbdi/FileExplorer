@@ -7,10 +7,13 @@ namespace FileExplorer.Controllers
     public class FileEntityController : Controller
     {
         private readonly IFileEntityService fileEntityService;
+        private readonly IProjectService projectService;
 
-        public FileEntityController(IFileEntityService fileEntityService)
+        public FileEntityController(IFileEntityService fileEntityService,
+                                    IProjectService projectService)
         {
             this.fileEntityService = fileEntityService;
+            this.projectService = projectService;
         }
 
         public async Task<IActionResult> Index()
@@ -23,6 +26,11 @@ namespace FileExplorer.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+            var allProjects = await projectService.GetAllAsync();
+            ViewBag.data = allProjects;
+
+
+
             var reloadSafety = new FileEntityDTO();
             return View(reloadSafety);
         }
@@ -37,6 +45,9 @@ namespace FileExplorer.Controllers
 
                     return View(fileEntityDTO);
                 }
+                var projectByName = await projectService.GetProjectByNameAsync(fileEntityDTO.ProjectName);
+                fileEntityDTO.ProjectId = projectByName.Id;
+
 
                 var result = await fileEntityService.AddFileEntityAsync(fileEntityDTO);
                 if (!result)
@@ -76,7 +87,7 @@ namespace FileExplorer.Controllers
             catch (Exception ex)
             {
                 TempData["EditError"] = ex.Message.ToString();
-                return RedirectToAction("Index","FileEntity");
+                return RedirectToAction("Index", "FileEntity");
             }
         }
         [HttpPost]
@@ -116,7 +127,7 @@ namespace FileExplorer.Controllers
             try
             {
                 var fileEntity = await fileEntityService.GetByIdAsNoTrackingAsync(Id);
-                if(fileEntity == null)
+                if (fileEntity == null)
                 {
                     TempData["DeleteError"] = "File Doesn't Exists";
 
@@ -134,10 +145,10 @@ namespace FileExplorer.Controllers
 
                 return RedirectToAction("Index", "fileEntity");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 TempData["DeleteError"] = ex.Message.ToString();
-                return RedirectToAction("Index", "FileEntity"); 
+                return RedirectToAction("Index", "FileEntity");
             }
         }
 

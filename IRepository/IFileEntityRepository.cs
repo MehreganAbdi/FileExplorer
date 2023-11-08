@@ -22,6 +22,7 @@ namespace FileExplorer.IRepository
         Task<bool> UpdateAsync(FileEntity file);
         bool RemoveFileEntity(FileEntity file);
         Task<bool> RemoveFileEntityAsync(FileEntity file);
+
         bool Save();
         Task<bool> SaveAsync();
 
