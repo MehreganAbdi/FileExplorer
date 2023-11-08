@@ -26,6 +26,8 @@ namespace FileExplorer.Services
                 Name = fileDTO.Name,
                 DateCreated = fileDTO.DateCreated,
                 Size = fileDTO.Size,
+                ProjectName = fileDTO.ProjectName,
+
                 Description = fileDTO.Description,
                 FilePath = fileDTO.FilePath,
                 ProjectId = fileDTO.ProjectId,
@@ -43,6 +45,8 @@ namespace FileExplorer.Services
                 Description = fileDTO.Description,
                 FilePath = fileDTO.FilePath,
                 ProjectId = fileDTO.ProjectId,
+                ProjectName = fileDTO.ProjectName,
+                 
                 Type = fileDTO.Type
             };
         }
@@ -57,6 +61,8 @@ namespace FileExplorer.Services
                 Description = fileDTO.Description,
                 FilePath = fileDTO.FilePath,
                 ProjectId = fileDTO.ProjectId,
+                ProjectName = fileDTO.ProjectName,
+
                 Type = fileDTO.Type,
                 Id = fileDTO.Id
             };
@@ -72,6 +78,7 @@ namespace FileExplorer.Services
                 Description = fileDTO.Description,
                 FilePath = fileDTO.FilePath,
                 ProjectId = fileDTO.ProjectId,
+                ProjectName = fileDTO.ProjectName,
                 Type = fileDTO.Type,
                 Id = fileDTO.Id
             };
@@ -88,10 +95,12 @@ namespace FileExplorer.Services
                 Description = file.Description,
                 FilePath = file.FilePath,
                 ProjectId = file.ProjectId,
-                Type= file.Type,
-                Id = file.Id
+                Type = file.Type,
+                Id = file.Id,
+                ProjectName = file.ProjectName
             };
         }
+
 
         public async Task<FileEntityDTO> ChangeFileEntityToFileEntityDTOAsync(FileEntity file)
         {
@@ -103,6 +112,7 @@ namespace FileExplorer.Services
                 Description = file.Description,
                 FilePath = file.FilePath,
                 ProjectId = file.ProjectId,
+                ProjectName = file.ProjectName,
                 Type = file.Type,
                 Id = file.Id
             };

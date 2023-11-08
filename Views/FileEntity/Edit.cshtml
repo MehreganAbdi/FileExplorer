@@ -1,21 +1,23 @@
 ﻿@using FileExplorer.DTOs;
 @model FileEntityDTO
+
 @{
-    ViewData["Title"] = "Add file Record";
+    ViewData["Title"] = "Edit FileEntity";
     Layout = "CustomLayout";
-    var allProjectNames = ViewBag.data;
+    var allprojectNames = ViewBag.data;
 }
 
+
 <body>
-    <form method="post" asp-action="Create" enctype="multipart/form-data">
-         
+    <form method="post" asp-action="Edit" enctype="multipart/form-data">
+        <input type="hidden" value="@Model.Id"/>
         <div class="form-group">
             <label asp-for="Name">Name</label>
             <input asp-for="Name" type="text" class="btn-primary" placeholder="Enter Name">
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        
-         
+
+
 
         <br />
         <div class="form-group">
@@ -32,21 +34,21 @@
         </div>
 
         <br />
-        
+
         <input type="hidden" asp-for="ProjectId" value="0" />
 
         <div class="form-group">
             <label asp-for="ProjectName">ProjectName</label>
-            <select asp-for="ProjectName" >
-                @foreach (var project in allProjectNames)
+            <select asp-for="ProjectName" onselect="@Model.ProjectName" >
+                @foreach (var project in allprojectNames)
                 {
-                    <option  itemid="@project.Id.ToString()" onclick="assignToModel('@project.ProjectName')" >@project.ProjectName</option>
-                    
+                    <option itemid="@project.Id.ToString()" onclick="assignToModel('@project.ProjectName')">@project.ProjectName</option>
+
                 }
             </select>
             <span asp-validation-for="ProjectName" class="text-danger"></span>
         </div>
-       
+
         <br />
         <div class="form-group">
             <label asp-for="Size">Size</label>
@@ -69,10 +71,10 @@
         <br />
         <br />
         <br />
-    
+
 
         <br />
         <button type="submit" class="btn-primary">Submit</button>
     </form>
-   
+
 </body>

@@ -239,7 +239,7 @@ namespace FileExplorer.Controllers
                 Description = "NotDefined",
                 FilePath = path,
                 ProjectName = "NotDefined",
-                ProjectId = 0,
+                ProjectId = 13,
                 Type = path.Split(".")[^1]
             };
 

@@ -58,11 +58,15 @@ namespace FileExplorer.Controllers
 
                 TempData["CreateError"] = "File Added Successfully";
 
-                return RedirectToAction("Index", "Project");
+                return RedirectToAction("Index", "FileEntity");
             }
             catch (Exception ex)
             {
+                var allProjects = await projectService.GetAllAsync();
+                ViewBag.data = allProjects;
+
                 TempData["CreateError"] = ex.Message.ToString();
+                
                 return View(fileEntityDTO);
             }
         }
@@ -73,7 +77,8 @@ namespace FileExplorer.Controllers
         {
             try
             {
-                var fileEntity = await fileEntityService.GetByIdAsNoTrackingAsync(Id);
+                ViewBag.data = await projectService.GetAllAsync();
+                var fileEntity = await fileEntityService.GetByIdAsync(Id);
 
                 if (fileEntity == null)
                 {
@@ -93,6 +98,7 @@ namespace FileExplorer.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(FileEntityDTO fileEntityDTO)
         {
+            ViewBag.data = await projectService.GetAllAsync();
             if (!ModelState.IsValid)
             {
                 TempData["Error"] = "Make Sure To All Gaps Are Filled";
@@ -143,7 +149,7 @@ namespace FileExplorer.Controllers
                 }
                 TempData["Error"] = "File Record Deleted Successfully";
 
-                return RedirectToAction("Index", "fileEntity");
+                return RedirectToAction("Index", "FileEntity");
             }
             catch (Exception ex)
             {

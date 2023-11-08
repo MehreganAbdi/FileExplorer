@@ -57,7 +57,7 @@ namespace FileExplorer.Repositories
 
         public async Task<FileEntity> GetByIdAsNoTrackingAsync(int Id)
         {
-            return await context.Files.FirstOrDefaultAsync(f => f.Id == Id);
+            return await context.Files.AsNoTracking().FirstOrDefaultAsync(f => f.Id == Id);
         }
 
         public async Task<FileEntity> GetByIdAsync(int Id)
