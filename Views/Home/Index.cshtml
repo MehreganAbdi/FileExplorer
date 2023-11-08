@@ -17,6 +17,7 @@
     <script src="~/js/FileExplorerDownloadFile.js" type="text/javascript"></script>
     <center>
         <div class="parent">
+            <a asp-controller="Project" asp-action="Index" class="btn-primary">All Projects</a>
             <div class="child">
 
                 @using (Html.BeginForm("Index", "Home", FormMethod.Get))

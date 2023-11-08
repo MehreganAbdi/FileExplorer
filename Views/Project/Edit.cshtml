@@ -8,8 +8,8 @@
 
     <input type="hidden" asp-for="Id" value="@Model.Id"/>
     <div class="form-group">
-        <label asp-for="ProjectName">ProjectName</label>
-        <input asp-for="ProjectName" type="text" class="form-control" placeholder="Enter ProjectName">
+        <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
+        <input asp-for="ProjectName" type="text" class="btn-primary" placeholder="Enter ProjectName">
         <span asp-validation-for="ProjectName" class="text-danger"></span>
     </div>
     <br />
