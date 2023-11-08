@@ -1,5 +1,7 @@
 ﻿using FileExplorer.DTOs;
 using FileExplorer.IService;
+using FileExplorer.Services;
+using FileExplorer.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FileExplorer.Controllers
@@ -8,12 +10,15 @@ namespace FileExplorer.Controllers
     {
         private readonly IFileEntityService fileEntityService;
         private readonly IProjectService projectService;
+        private readonly IDirectoryService directoryService;
 
         public FileEntityController(IFileEntityService fileEntityService,
-                                    IProjectService projectService)
+                                    IProjectService projectService,
+                                    IDirectoryService directoryService)
         {
             this.fileEntityService = fileEntityService;
             this.projectService = projectService;
+            this.directoryService = directoryService;
         }
 
         public async Task<IActionResult> Index()
@@ -66,7 +71,7 @@ namespace FileExplorer.Controllers
                 ViewBag.data = allProjects;
 
                 TempData["CreateError"] = ex.Message.ToString();
-                
+
                 return View(fileEntityDTO);
             }
         }
@@ -130,10 +135,10 @@ namespace FileExplorer.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> CreateFromHome(string path , string name ,string type ,string size)
+        public async Task<IActionResult> CreateFromHome(string path, string name, string type, string size)
         {
             var fileEntityDTO = new FileEntityDTO()
-            { 
+            {
                 Size = size,
                 DateCreated = DateTime.Now,
                 Description = "Not Defined Yet",
@@ -216,6 +221,66 @@ namespace FileExplorer.Controllers
                 return RedirectToAction("Index", "FileEntity");
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddFilesToPath(FileExploreViewModel fileExploreViewModel)
+        {
+            try
+            {
+                if (fileExploreViewModel.SelectedFile == null)
+                {
+                    TempData["SelectError"] = "Select A File First";
+
+                    return RedirectToAction("Index", fileExploreViewModel);
+                
+                }
+                var typo = fileExploreViewModel.path;
+                if (typo != "jpg" || typo!="png" || typo!="jpeg"|| typo != "gif")
+                {
+                    TempData["SelectError"] = "Selected File Must Be img";
+                    return View("Index",fileExploreViewModel);
+                }
+
+                await directoryService.AddFileToPath(fileExploreViewModel.path, fileExploreViewModel.SelectedFile);
+                
+                var redirectedFileExploreViewModel = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
+                
+                redirectedFileExploreViewModel.path = fileExploreViewModel.path;
+
+                TempData["AddResult"] = "File Successfully Added To \n  >" + fileExploreViewModel.path.ToString();
+
+
+
+                var fileEntityDTO = new FileEntityDTO()
+                {
+                    ProjectId = 13,
+                    ProjectName = "NotDefined",
+                    Type = fileExploreViewModel.path.Split(".")[^2],
+                    DateCreated = DateTime.Now,
+                    Size = new FileInfo(fileExploreViewModel.path).Length.ToString() + "B",
+                    Description = "NotDefined",
+                    FilePath = fileExploreViewModel.path,
+                    Name = fileExploreViewModel.path.Split(".")[^1]
+                };
+
+                var result = await fileEntityService.AddFileEntityAsync(fileEntityDTO);
+
+                if (!result)
+                {
+                    TempData["CreateError"] = "Couldn't Copy the File , Try Again";
+                }
+
+                return View("CreateFromHome", result);
+            }
+            catch (Exception ex)
+            {
+                TempData["AddResult"] = ex.Message.ToString();
+                return View("Index", fileExploreViewModel);
+
+            }
+        }
+
+
 
     }
 }
