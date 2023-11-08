@@ -59,7 +59,7 @@
 
 
                         <div class="child">
-                            <form method="post" enctype="multipart/form-data" asp-action="AddFilesToPath">
+                            <form method="post" enctype="multipart/form-data" asp-action="AddFilesToPath" asp-controller="FileEntity" >
                                 <input asp-for="path" type="hidden" value="@Model.path" />
                                 
                                 <label class="btn-primary">
