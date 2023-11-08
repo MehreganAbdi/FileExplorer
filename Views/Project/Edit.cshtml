@@ -1,0 +1,20 @@
+﻿@using FileExplorer.DTOs;
+@model ProjectDTO
+@{
+    ViewData["Title"] = "Edit Project";
+    Layout = "CustomLayout";
+}
+<form method="post" asp-action="Edit">
+
+    <input type="hidden" asp-for="Id" value="@Model.Id"/>
+    <div class="form-group">
+        <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
+        <input asp-for="ProjectName" type="text" class="btn-primary" placeholder="Enter ProjectName">
+        <span asp-validation-for="ProjectName" class="text-danger"></span>
+    </div>
+    <br />
+
+
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

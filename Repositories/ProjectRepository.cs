@@ -1,7 +1,7 @@
 ﻿using FileExplorer.Data;
 using FileExplorer.IRepository;
-using FileExplorer.Models;
-using System.Data.Entity;
+using FileExplorer.Models; 
+using Microsoft.EntityFrameworkCore;
 
 namespace FileExplorer.Repositories
 {
