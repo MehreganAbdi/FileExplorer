@@ -16,6 +16,7 @@ namespace FileExplorer.IRepository
         Task<bool> UpdateAsync(Project project);
         bool RemoveProject(Project project);
         Task<bool> RemoveProjectAsync(Project project);
-
+        bool Save();
+        Task<bool> SaveAsync();
     }
 }
