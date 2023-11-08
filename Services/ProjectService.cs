@@ -67,7 +67,7 @@ namespace FileExplorer.Services
 
         public async Task<ProjectDTO> GetByIdAsNoTrackingAsync(int Id)
         {
-            return await dataTranformerService.ChangeProjectToProjectDTOAsync(await projectRepository.GetByIdAsync(Id));
+            return await dataTranformerService.ChangeProjectToProjectDTOAsync(await projectRepository.GetByIdAsNoTrackingAsync(Id));
 
         }
 
@@ -78,23 +78,23 @@ namespace FileExplorer.Services
 
         public bool RemoveProject(ProjectDTO project)
         {
-            return projectRepository.RemoveProject(dataTranformerService.ChangeProjectDTOToProject(project));
+            return projectRepository.RemoveProject(dataTranformerService.ChangeProjectDTOToProjectWithId(project));
         }
 
         public async Task<bool> RemoveProjectAsync(ProjectDTO project)
         {
-            return await projectRepository.RemoveProjectAsync(await dataTranformerService.ChangeProjectDTOToProjectAsync(project));
+            return await projectRepository.RemoveProjectAsync(await dataTranformerService.ChangeProjectDTOToProjectAsyncWithId(project));
 
         }
 
         public bool Update(ProjectDTO project)
         {
-            return projectRepository.Update(dataTranformerService.ChangeProjectDTOToProject(project));
+            return projectRepository.Update(dataTranformerService.ChangeProjectDTOToProjectWithId(project));
         }
 
         public async Task<bool> UpdateAsync(ProjectDTO project)
         {
-            return await projectRepository.UpdateAsync(await dataTranformerService.ChangeProjectDTOToProjectAsync(project));
+            return await projectRepository.UpdateAsync(await dataTranformerService.ChangeProjectDTOToProjectAsyncWithId(project));
 
         }
     }

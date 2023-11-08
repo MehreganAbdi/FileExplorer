@@ -1,4 +1,4 @@
-﻿using CloudinaryDotNet.Actions;
+﻿
 using FileExplorer.DTOs;
 using FileExplorer.IService;
 using Microsoft.AspNetCore.Mvc;
@@ -56,7 +56,7 @@ namespace FileExplorer.Controllers
         {
             try
             {
-                var project = await projectService.GetByIdAsNoTrackingAsync(Id);
+                var project = await projectService.GetByIdAsync(Id);
 
                 if (project == null)
                 {
@@ -64,7 +64,7 @@ namespace FileExplorer.Controllers
 
                     return RedirectToAction("Index", "Project");
                 }
-
+                
                 return View(project);
 
             }
@@ -87,14 +87,10 @@ namespace FileExplorer.Controllers
                     return View(projectDTO);
                 }
 
-                var editResult = await projectService.UpdateAsync(projectDTO);
-                if (!editResult)
-                {
-                    TempData["EditError"] = "Error occured During Updating , Try Again.";
-                    return View(projectDTO);
-                }
+                 await projectService.UpdateAsync(projectDTO);
+                
 
-                TempData["Error"] = "Project Updated Successfully.";
+                TempData["EditError"] = "Project Updated Successfully.";
                 return RedirectToAction("Index", "Project");
 
             }
@@ -109,13 +105,14 @@ namespace FileExplorer.Controllers
         {
             try
             {
-                var project = await projectService.GetByIdAsync(Id);
+                var project = await projectService.GetByIdAsNoTrackingAsync(Id);
                 if (project == null)
                 {
                     TempData["DeleteError"] = "Project Didn't Exist";
                     return RedirectToAction("Index", "Project");
 
                 }
+                project.Id = Id;
                 await projectService.RemoveProjectAsync(project);
                 
                 TempData["DeleteError"] = " File Deleted Successfully";

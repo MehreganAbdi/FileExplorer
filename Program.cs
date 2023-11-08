@@ -1,6 +1,8 @@
 using FileExplorer.Controllers;
 using FileExplorer.Data;
+using FileExplorer.IRepository;
 using FileExplorer.IService;
+using FileExplorer.Repositories;
 using FileExplorer.Services;
 using FileExplorer.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +26,19 @@ namespace FileExplorer
             builder.Services.AddScoped<IDirectoryService, DirectoryService>();
             builder.Services.AddScoped<IDataTranformerService, DataTransformerService>();
             builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.AddScoped<IProjectService, ProjectService>();
+            builder.Services.AddScoped<IFileEntityService, FileEntityService>();
+
+
+
+
+            //Repositories DI
+
+            builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+            builder.Services.AddScoped<IFileEntityRepository, FileEntityRepository>();
+
+
+
 
             #endregion
 

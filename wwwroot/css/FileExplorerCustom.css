@@ -35,10 +35,35 @@ a.btn-delete {
         color: whitesmoke;
         background-color: red;
         margin: 15px;
-        padding:5px;
+        padding-left:5px;
+        padding-right:5pc
         font-size: 18px;
         text-decoration: none;
     }
+
+
+a.btn-edit {
+    border-radius: 10px;
+    color: dodgerblue;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: lightblue;
+    margin: 15px;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+    a.btn-edit:hover {
+        border-radius: 10px;
+        color: whitesmoke;
+        background-color: springgreen;
+        margin: 15px;
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: 18px;
+        text-decoration: none;
+    }
+
     button.btn-primary :hover {
         border-radius: 10px;
         color: cornflowerblue;
@@ -179,4 +204,10 @@ label.btn-primary {
     padding-left: 8px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 4px;
+}
+
+span.text-danger{
+    font:300;
+    color:red;
+    background-color:Background;
 }
