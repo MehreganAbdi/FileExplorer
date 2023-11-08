@@ -1,12 +1,9 @@
 ﻿using FileExplorer.DTOs;
 using FileExplorer.IService;
 
-using FileExplorer.ViewModels;
-using Microsoft.AspNetCore.Hosting.Server;
+using FileExplorer.ViewModels; 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.Net;
-using System.Runtime.InteropServices;
+ 
 
 namespace FileExplorer.Controllers
 {
@@ -15,12 +12,17 @@ namespace FileExplorer.Controllers
         private readonly IDirectoryService directoryService;
         private readonly IEmailService emailService;
         private readonly IFileEntityService fileEntityService;
+        private readonly IProjectService projectService;
 
-        public HomeController(IDirectoryService directoryService, IEmailService emailService,IFileEntityService fileEntityService)
+        public HomeController(IDirectoryService directoryService,
+                              IEmailService emailService,
+                              IFileEntityService fileEntityService,
+                              IProjectService projectService)
         {
             this.directoryService = directoryService;
             this.emailService = emailService;
             this.fileEntityService = fileEntityService;
+            this.projectService = projectService;
         }
 
         public async Task<IActionResult> Index(string path, string searching)
@@ -121,23 +123,65 @@ namespace FileExplorer.Controllers
                 if (fileExploreViewModel.SelectedFile == null)
                 {
                     TempData["SelectError"] = "Select A File First";
+
                     return RedirectToAction("Index", fileExploreViewModel);
+
                 }
+
+                var typo = fileExploreViewModel.SelectedFile.ContentType;
+
+                if (typo != "image/jpg" || typo != "image/png" || typo != "image/jpeg" )
+                {
+                    TempData["SelectError"] = "Selected File Must Be img";
+                    return View("Index", fileExploreViewModel);
+                }
+
                 await directoryService.AddFileToPath(fileExploreViewModel.path, fileExploreViewModel.SelectedFile);
+
                 var redirectedFileExploreViewModel = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
+
                 redirectedFileExploreViewModel.path = fileExploreViewModel.path;
 
                 TempData["AddResult"] = "File Successfully Added To \n  >" + fileExploreViewModel.path.ToString();
-                return View("Index", redirectedFileExploreViewModel);
+
+
+
+                var fileEntityDTO = new FileEntityDTO()
+                {
+                    ProjectId = 13,
+                    ProjectName = "NotDefined",
+                    Type = fileExploreViewModel.path.Split(".")[^2],
+                    DateCreated = DateTime.Now,
+                    Size = new FileInfo(fileExploreViewModel.path).Length.ToString() + "B",
+                    Description = "NotDefined",
+                    FilePath = fileExploreViewModel.path,
+                    Name = fileExploreViewModel.path.Split(".")[^1]
+                };
+
+                
+                var result = await fileEntityService.AddFileEntityAsync(fileEntityDTO);
+
+
+                if (!result)
+                {
+                    TempData["CreateError"] = "Couldn't Copy the File , Try Again";
+                }
+
+
+                return View("Create", fileEntityDTO);
+
+
             }
             catch (Exception ex)
             {
                 TempData["AddResult"] = ex.Message.ToString();
-                return View("Index", fileExploreViewModel);
+                return View("Create", fileExploreViewModel);
 
             }
-
         }
+
+
+
 
         public async Task<IActionResult> EmailListResult(FileExploreViewModel fileExploreViewModel)
         {
@@ -192,7 +236,7 @@ namespace FileExplorer.Controllers
             }
         }
 
-        public async Task<IActionResult> DownloadView(string path , string type , string directory)
+        public async Task<IActionResult> DownloadView(string path, string type, string directory)
         {
             var fileViewModel = await directoryService.GetDataInViewModel(directory);
             fileViewModel.path = directory;
@@ -200,17 +244,17 @@ namespace FileExplorer.Controllers
             if (Path.Exists(path))
             {
                 await Download(path, type);
-                
-                return View( "Index" , fileViewModel );
+
+                return View("Index", fileViewModel);
             }
             else
             {
                 TempData["DownloadError"] = "File Has Been Deleted , Refresh To Get Latest Update";
-                return View("Index",fileViewModel);
+                return View("Index", fileViewModel);
             }
         }
 
-        
+
 
         public async Task<FileResult> Download(string path, string type)
         {
@@ -228,7 +272,7 @@ namespace FileExplorer.Controllers
         }
 
 
-        public async Task<IActionResult> AddToRecords(string path,string size ,string type)
+        public async Task<IActionResult> AddToRecords(string path, string size, string type)
         {
 
             var fileEntityDTO = new FileEntityDTO()
@@ -248,5 +292,55 @@ namespace FileExplorer.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var allProjects = await projectService.GetAllAsync();
+            ViewBag.data = allProjects;
+
+
+
+            var reloadSafety = new FileEntityDTO();
+            return View(reloadSafety);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(FileEntityDTO fileEntityDTO)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    TempData["CreateError"] = "Make Sure That You Filled All Gaps";
+
+                    return View(fileEntityDTO);
+                }
+                var projectByName = await projectService.GetProjectByNameAsync(fileEntityDTO.ProjectName);
+                fileEntityDTO.ProjectId = projectByName.Id;
+
+
+                var result = await fileEntityService.AddFileEntityAsync(fileEntityDTO);
+                if (!result)
+                {
+                    TempData["CreateError"] = "An Error Happened While Creating , try Again";
+                    return View(fileEntityDTO);
+                }
+
+                TempData["CreateError"] = "File Added Successfully";
+
+                return RedirectToAction("Index", "FileEntity");
+            }
+            catch (Exception ex)
+            {
+                var allProjects = await projectService.GetAllAsync();
+                ViewBag.data = allProjects;
+
+                TempData["CreateError"] = ex.Message.ToString();
+
+                return View(fileEntityDTO);
+            }
+        }
+
+
     }
 }
