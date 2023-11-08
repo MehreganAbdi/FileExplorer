@@ -19,6 +19,95 @@ namespace FileExplorer.Services
             };
         }
 
+        public FileEntity ChangeFileEntityDTOToFileEntity(FileEntityDTO fileDTO)
+        {
+            return new FileEntity()
+            {
+                Name = fileDTO.Name,
+                DateCreated = fileDTO.DateCreated,
+                Size = fileDTO.Size,
+                Description = fileDTO.Description,
+                FilePath = fileDTO.FilePath,
+                ProjectId = fileDTO.ProjectId,
+                Type = fileDTO.Type
+            };
+        }
+
+        public async Task<FileEntity> ChangeFileEntityDTOToFileEntityAsync(FileEntityDTO fileDTO)
+        {
+            return new FileEntity()
+            {
+                Name = fileDTO.Name,
+                DateCreated = fileDTO.DateCreated,
+                Size = fileDTO.Size,
+                Description = fileDTO.Description,
+                FilePath = fileDTO.FilePath,
+                ProjectId = fileDTO.ProjectId,
+                Type = fileDTO.Type
+            };
+        }
+
+        public async Task<FileEntity> ChangeFileEntityDTOToFileEntityAsyncWithId(FileEntityDTO fileDTO)
+        {
+            return new FileEntity()
+            {
+                Name = fileDTO.Name,
+                DateCreated = fileDTO.DateCreated,
+                Size = fileDTO.Size,
+                Description = fileDTO.Description,
+                FilePath = fileDTO.FilePath,
+                ProjectId = fileDTO.ProjectId,
+                Type = fileDTO.Type,
+                Id = fileDTO.Id
+            };
+        }
+
+        public FileEntity ChangeFileEntityDTOToFileEntityWithId(FileEntityDTO fileDTO)
+        {
+            return new FileEntity()
+            {
+                Name = fileDTO.Name,
+                DateCreated = fileDTO.DateCreated,
+                Size = fileDTO.Size,
+                Description = fileDTO.Description,
+                FilePath = fileDTO.FilePath,
+                ProjectId = fileDTO.ProjectId,
+                Type = fileDTO.Type,
+                Id = fileDTO.Id
+            };
+
+        }
+
+        public FileEntityDTO ChangeFileEntityToFileEntityDTO(FileEntity file)
+        {
+            return new FileEntityDTO()
+            {
+                Name = file.Name,
+                Size = file.Size,
+                DateCreated = file.DateCreated,
+                Description = file.Description,
+                FilePath = file.FilePath,
+                ProjectId = file.ProjectId,
+                Type= file.Type,
+                Id = file.Id
+            };
+        }
+
+        public async Task<FileEntityDTO> ChangeFileEntityToFileEntityDTOAsync(FileEntity file)
+        {
+            return new FileEntityDTO()
+            {
+                Name = file.Name,
+                Size = file.Size,
+                DateCreated = file.DateCreated,
+                Description = file.Description,
+                FilePath = file.FilePath,
+                ProjectId = file.ProjectId,
+                Type = file.Type,
+                Id = file.Id
+            };
+        }
+
         public FileDTO ChangeFileToFileDTO(File_ file)
         {
             return new FileDTO()
@@ -30,6 +119,59 @@ namespace FileExplorer.Services
                 Type = file.Type
 
             };
+        }
+
+        public Project ChangeProjectDTOToProject(ProjectDTO projectDTO)
+        {
+            return new Project()
+            {
+                ProjectName = projectDTO.ProjectName
+            };
+        }
+
+        public async Task<Project> ChangeProjectDTOToProjectAsync(ProjectDTO projectDTO)
+        {
+            return new Project()
+            {
+                ProjectName = projectDTO.ProjectName,
+            };
+        }
+
+        public async Task<Project> ChangeProjectDTOToProjectAsyncWithId(ProjectDTO projectDTO)
+        {
+            return new Project()
+            {
+                ProjectName = projectDTO.ProjectName,
+                Id = projectDTO.Id
+            };
+        }
+
+        public Project ChangeProjectDTOToProjectWithId(ProjectDTO projectDTO)
+        {
+            return new Project()
+            {
+                ProjectName = projectDTO.ProjectName,
+                Id = projectDTO.Id
+            };
+        }
+
+        public ProjectDTO ChangeProjectToProjectDTO(Project project)
+        {
+            return new ProjectDTO()
+            {
+                ProjectName = project.ProjectName,
+                Id = project.Id
+            };
+        }
+
+        public async Task<ProjectDTO> ChangeProjectToProjectDTOAsync(Project project)
+        {
+            return new ProjectDTO()
+            {
+                ProjectName = project.ProjectName,
+                Id = project.Id
+            };
+
         }
     }
 }
