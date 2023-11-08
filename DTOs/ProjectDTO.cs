@@ -1,6 +1,6 @@
-﻿namespace FileExplorer.Models
+﻿namespace FileExplorer.DTOs
 {
-    public class Project
+    public class ProjectDTO
     {
         public int Id { get; set; }
         public string ProjectName { get; set; }
