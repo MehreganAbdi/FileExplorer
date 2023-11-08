@@ -56,6 +56,17 @@ namespace FileExplorer.Repositories
             return await context.Projects.FirstOrDefaultAsync(p => p.Id == Id);
         }
 
+        public Project GetProjectByProjectName(string ProjectName)
+        {
+            return context.Projects.FirstOrDefault(p => p.ProjectName == ProjectName);
+        }
+
+        public Task<Project> GetProjectByProjectNameAsync(string ProjectName)
+        {
+            return context.Projects.FirstOrDefaultAsync(p => p.ProjectName == ProjectName);
+
+        }
+
         public bool RemoveProject(Project project)
         {
             context.Projects.Remove(project);

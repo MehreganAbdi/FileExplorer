@@ -33,7 +33,15 @@ namespace FileExplorer.Controllers
         {
             try
             {
+
+                if (projectService.GetProjectByNameAsync(projectDTO.ProjectName) != null)
+                {
+                    TempData["CreateError"] = "There Is An Existing PRoject With This Name";
+                    return View(projectDTO);
+                }
+
                 var addResult = await projectService.AddProjectAsync(projectDTO);
+                
                 if (!addResult)
                 {
                     TempData["CreateError"] = "Adding Failed , Try Again";

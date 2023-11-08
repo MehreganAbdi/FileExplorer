@@ -14,12 +14,15 @@ namespace FileExplorer.Controllers
     {
         private readonly IDirectoryService directoryService;
         private readonly IEmailService emailService;
+        private readonly IFileEntityService fileEntityService;
 
-        public HomeController(IDirectoryService directoryService, IEmailService emailService)
+        public HomeController(IDirectoryService directoryService, IEmailService emailService,IFileEntityService fileEntityService)
         {
             this.directoryService = directoryService;
             this.emailService = emailService;
+            this.fileEntityService = fileEntityService;
         }
+
         public async Task<IActionResult> Index(string path, string searching)
         {
 
@@ -207,10 +210,7 @@ namespace FileExplorer.Controllers
             }
         }
 
-        //public async Task<bool> FileExists(string path)
-        //{
-        //    return await directoryService.PathExists(path);
-        //}
+        
 
         public async Task<FileResult> Download(string path, string type)
         {
@@ -225,6 +225,28 @@ namespace FileExplorer.Controllers
             return File(bytes, "text/xml", "FileExploreDownload." + type);
 
 
+        }
+
+
+        public async Task<IActionResult> AddToRecords(string path,string size ,string type)
+        {
+
+            var fileEntityDTO = new FileEntityDTO()
+            {
+                Name = path.Split(".")[^2],
+                Size = size,
+                DateCreated = DateTime.Now,
+                Description = "NotDefined",
+                FilePath = path,
+                ProjectName = "NotDefined",
+                ProjectId = 13,
+                Type = path.Split(".")[^1]
+            };
+
+            await fileEntityService.AddFileEntityAsync(fileEntityDTO);
+
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -105,7 +105,7 @@ namespace FileExplorer.Services
             return await dataTranformerService.ChangeFileEntityToFileEntityDTOAsync(await fileEntityRepository.GetByIdAsync(Id));
         }
 
-
+       
         public ICollection<FileEntityDTO> GetFilesByProjectId(int projectId)
         {
             var files = fileEntityRepository.GetFilesByProjectId(projectId);
@@ -135,23 +135,23 @@ namespace FileExplorer.Services
 
         public bool RemoveFileEntity(FileEntityDTO file)
         {
-            return fileEntityRepository.RemoveFileEntity(dataTranformerService.ChangeFileEntityDTOToFileEntity(file));
+            return fileEntityRepository.RemoveFileEntity(dataTranformerService.ChangeFileEntityDTOToFileEntityWithId(file));
         }
 
         public async Task<bool> RemoveFileEntityAsync(FileEntityDTO file)
         {
-            return await fileEntityRepository.RemoveFileEntityAsync(await dataTranformerService.ChangeFileEntityDTOToFileEntityAsync(file));
+            return await fileEntityRepository.RemoveFileEntityAsync(await dataTranformerService.ChangeFileEntityDTOToFileEntityAsyncWithId(file));
 
         }
 
         public bool Update(FileEntityDTO file)
         {
-            return fileEntityRepository.Update(dataTranformerService.ChangeFileEntityDTOToFileEntity(file));
+            return fileEntityRepository.Update(dataTranformerService.ChangeFileEntityDTOToFileEntityWithId(file));
         }
 
         public async Task<bool> UpdateAsync(FileEntityDTO file)
         {
-            return await fileEntityRepository.UpdateAsync(await dataTranformerService.ChangeFileEntityDTOToFileEntityAsync(file));
+            return await fileEntityRepository.UpdateAsync(await dataTranformerService.ChangeFileEntityDTOToFileEntityAsyncWithId(file));
 
         }
     }

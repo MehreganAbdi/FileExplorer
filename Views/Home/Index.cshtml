@@ -61,7 +61,7 @@
                         <div class="child">
                             <form method="post" enctype="multipart/form-data" asp-action="AddFilesToPath">
                                 <input asp-for="path" type="hidden" value="@Model.path" />
-
+                                
                                 <label class="btn-primary">
                                     Select File(s)
                                     <input asp-for="SelectedFile" type="file" class="input-primary">
@@ -176,7 +176,6 @@
                                     <td><center>@item.Size</center></td>
                                     <td><center>@item.Type</center></td>
 
-                                    @* <td><a class="btn-primary" asp-action="DownloadView" asp-route-path="@item.path" asp-controller="Home" asp-route-type="@item.Type" asp-route-directory="@Model.path">Download File</a></td> *@
                                     
                                     @{
                                         var bothpath = item.path + "&&&" + Model.path;
@@ -185,6 +184,7 @@
                                     }
                                     <td><center><input onclick="PathExists('@item.path.ToString().Replace("\\","%5C").Replace(":","%3A")','@item.Type.ToString()')" value="Download" type="button" class="btn-primary"></center></td> 
                                     <td><a onclick="confirm ('Are You Sure You Want To Delete @confirmMessageName ?')" class="btn-delete" asp-action="Delete" asp-controller="Home" asp-route-bothpath="@bothpath"> Delete </a> </td>
+                                    
                                 </tr>
                             </tbody>
                             i++;

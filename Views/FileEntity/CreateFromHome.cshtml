@@ -1,0 +1,76 @@
+﻿@using FileExplorer.DTOs;
+@model FileEntityDTO
+@{
+    ViewData["Title"] = "Add File Entity Record";
+    Layout = "CustomLayout";
+    var allProjectNames = ViewBag.data;
+}
+
+<body>
+    <form method="post" asp-action="Edit" enctype="multipart/form-data">
+        <input type="hidden" value="@Model.Id" />
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" type="text" class="btn-primary" placeholder="Enter Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+
+
+        <br />
+        <div class="form-group">
+            <label asp-for="FilePath">FilePath</label>
+            <input asp-for="FilePath" type="text" class="btn-primary" placeholder="Enter FilePath">
+            <span asp-validation-for="FilePath" class="text-danger"></span>
+        </div>
+
+        <br />
+        <div class="form-group">
+            <label asp-for="DateCreated">DateCreated</label>
+            <input asp-for="DateCreated" type="date" class="btn-primary" placeholder="Enter DateCreated">
+            <span asp-validation-for="DateCreated" class="text-danger"></span>
+        </div>
+
+        <br />
+
+        <input type="hidden" asp-for="ProjectId" value="0" />
+
+        <div class="form-group">
+            <label asp-for="ProjectName">ProjectName</label>
+            <select asp-for="ProjectName" onselect="@Model.ProjectName">
+                @foreach (var project in allProjectNames)
+                {
+                    <option itemid="@project.Id.ToString()" onclick="assignToModel('@project.ProjectName')">@project.ProjectName</option>
+
+                }
+            </select>
+            <span asp-validation-for="ProjectName" class="text-danger"></span>
+        </div>
+
+        <br />
+        <div class="form-group">
+            <label asp-for="Size">Size</label>
+            <input asp-for="Size" type="text" class="btn-primary" placeholder="Size">
+            <span asp-validation-for="Size" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="form-group">
+            <label asp-for="Description">Description</label>
+            <input asp-for="Description" type="text" class="btn-primary" placeholder="Description">
+            <span asp-validation-for="Description"  class="text-danger"></span>
+        </div>
+        <br />
+
+        <div class="form-group"> 
+            <input asp-for="Type" type="hidden" value="img" class="btn-primary" placeholder="Enter Type"> 
+        </div>
+        <br />
+        <br />
+        <br />
+
+
+        <br />
+        <button type="submit" class="btn-primary">Submit</button>
+    </form>
+
+</body>
