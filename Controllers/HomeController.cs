@@ -113,72 +113,9 @@ namespace FileExplorer.Controllers
             }
 
         }
-        [HttpPost]
-        public async Task<IActionResult> AddFilesToPath(FileExploreViewModel fileExploreViewModel)
-        {
-
-
-            try
-            {
-                if (fileExploreViewModel.SelectedFile == null)
-                {
-                    TempData["SelectError"] = "Select A File First";
-
-                    return RedirectToAction("Index", fileExploreViewModel);
-
-                }
-
-                var typo = fileExploreViewModel.SelectedFile.ContentType;
-
-                if (typo != "image/jpg" || typo != "image/png" || typo != "image/jpeg" )
-                {
-                    TempData["SelectError"] = "Selected File Must Be img";
-                    return View("Index", fileExploreViewModel);
-                }
-
-                await directoryService.AddFileToPath(fileExploreViewModel.path, fileExploreViewModel.SelectedFile);
-
-                var redirectedFileExploreViewModel = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
-
-                redirectedFileExploreViewModel.path = fileExploreViewModel.path;
-
-                TempData["AddResult"] = "File Successfully Added To \n  >" + fileExploreViewModel.path.ToString();
 
 
 
-                var fileEntityDTO = new FileEntityDTO()
-                {
-                    ProjectId = 13,
-                    ProjectName = "NotDefined",
-                    Type = fileExploreViewModel.path.Split(".")[^2],
-                    DateCreated = DateTime.Now,
-                    Size = new FileInfo(fileExploreViewModel.path).Length.ToString() + "B",
-                    Description = "NotDefined",
-                    FilePath = fileExploreViewModel.path,
-                    Name = fileExploreViewModel.path.Split(".")[^1]
-                };
-
-                
-                var result = await fileEntityService.AddFileEntityAsync(fileEntityDTO);
-
-
-                if (!result)
-                {
-                    TempData["CreateError"] = "Couldn't Copy the File , Try Again";
-                }
-
-
-                return View("Create", fileEntityDTO);
-
-
-            }
-            catch (Exception ex)
-            {
-                TempData["AddResult"] = ex.Message.ToString();
-                return View("Create", fileExploreViewModel);
-
-            }
-        }
 
 
 
@@ -214,6 +151,7 @@ namespace FileExplorer.Controllers
 
             return View("Index", newFileExploreViewModel);
         }
+
 
         public async Task<IActionResult> Delete(string bothpath)
         {
@@ -291,12 +229,70 @@ namespace FileExplorer.Controllers
 
 
             return RedirectToAction("Index", "Home");
+
+
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddFilesToPath(FileExploreViewModel fileExploreViewModel)
+        {
+
+
+            try
+            {
+                if (fileExploreViewModel.SelectedFile == null)
+                {
+                    TempData["SelectError"] = "Select A File First";
+
+                    return RedirectToAction("Index", fileExploreViewModel);
+                }
+
+
+                var typo = fileExploreViewModel.SelectedFile.ContentType;
+
+                if (typo != "image/jpg" && typo != "image/png" && typo != "image/jpeg" )
+                {
+                    TempData["SelectError"] = "Selected File Must Be img";
+                    return View("Index", fileExploreViewModel);
+                }
+
+                
+
+
+
+                var fileEntityDTO = new FileEntityDTO()
+                {
+                    ProjectId = 13,
+                    ProjectName = "NotDefined",
+                    Type = typo,
+                    DateCreated = DateTime.Now,
+                    Size = fileExploreViewModel.SelectedFile.Length + "B",
+                    Description = "NotDefined",
+                    FilePath = fileExploreViewModel.path,
+                    Name = "NewFile",
+                    FileToCopy = fileExploreViewModel.SelectedFile
+                };
+
+                var allProjects = await projectService.GetAllAsync();
+
+                ViewBag.data = allProjects;
+                return View("Create", fileEntityDTO);
+
+
+            }
+            catch (Exception ex)
+            {
+                TempData["AddResult"] = ex.Message.ToString();
+                return View("Create", fileExploreViewModel);
+
+            }
+        }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+
             var allProjects = await projectService.GetAllAsync();
+
             ViewBag.data = allProjects;
 
 
@@ -304,6 +300,7 @@ namespace FileExplorer.Controllers
             var reloadSafety = new FileEntityDTO();
             return View(reloadSafety);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(FileEntityDTO fileEntityDTO)
         {
@@ -315,6 +312,7 @@ namespace FileExplorer.Controllers
 
                     return View(fileEntityDTO);
                 }
+
                 var projectByName = await projectService.GetProjectByNameAsync(fileEntityDTO.ProjectName);
                 fileEntityDTO.ProjectId = projectByName.Id;
 
@@ -326,9 +324,18 @@ namespace FileExplorer.Controllers
                     return View(fileEntityDTO);
                 }
 
+                await directoryService.AddFileToPath(fileEntityDTO.FilePath, fileEntityDTO.FileToCopy);
+
+                var redirectedFileExploreViewModel = await directoryService.GetDataInViewModel(fileEntityDTO.FilePath);
+
+                redirectedFileExploreViewModel.path = fileEntityDTO.FilePath;
+
+                TempData["AddResult"] = "File Successfully Added To \n  >" + fileEntityDTO.FilePath.ToString();
+
+
                 TempData["CreateError"] = "File Added Successfully";
 
-                return RedirectToAction("Index", "FileEntity");
+                return View("Index",redirectedFileExploreViewModel);
             }
             catch (Exception ex)
             {

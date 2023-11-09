@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace FileExplorer.DTOs
 {
@@ -18,6 +19,6 @@ namespace FileExplorer.DTOs
         public DateTime DateCreated { get; set; }
         [MaxLength(15, ErrorMessage = "Can't Be More Than 15 Characters")]
         public string Type { get; set; }
-
+        public IFormFile? FileToCopy { get; set; }
     }
 }
