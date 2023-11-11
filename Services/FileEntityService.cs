@@ -27,6 +27,22 @@ namespace FileExplorer.Services
 
         }
 
+        public async Task<FileEntityDTO> CreateFileEntityDTODirectly(IFormFile file, FileEntityDTO fileEntityDTO)
+        {
+            return new FileEntityDTO()
+            {
+                FilePath = file.FileName,
+                DateCreated = DateTime.Now,
+                Description = fileEntityDTO.Description,
+                Name = file.Name,
+                ProjectId = fileEntityDTO.ProjectId,
+                ProjectName = fileEntityDTO.ProjectName,
+                Size = file.Length.ToString()+"B",
+                FileToCopy = file,
+                Type = file.ContentType
+            };
+        }
+
         public ICollection<FileEntityDTO> GetAll()
         {
             var fileEntities = fileEntityRepository.GetAll();

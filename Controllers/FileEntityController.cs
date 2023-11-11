@@ -50,15 +50,25 @@ namespace FileExplorer.Controllers
 
                     return View(fileEntityDTO);
                 }
+                if(fileEntityDTO.FileToCopy == null)
+                {
+                    TempData["SelectError"] = "A File Must Be Selected";
+                    return View(fileEntityDTO);
+                }
+
+
                 var projectByName = await projectService.GetProjectByNameAsync(fileEntityDTO.ProjectName);
                 fileEntityDTO.ProjectId = projectByName.Id;
 
 
-                var result = await fileEntityService.AddFileEntityAsync(fileEntityDTO);
+                var file = fileEntityDTO.FileToCopy;
+                var finalFileEntityDTO = await fileEntityService.CreateFileEntityDTODirectly(file, fileEntityDTO);
+
+                var result = await fileEntityService.AddFileEntityAsync(finalFileEntityDTO);
                 if (!result)
                 {
                     TempData["CreateError"] = "An Error Happened While Creating , try Again";
-                    return View(fileEntityDTO);
+                    return View(finalFileEntityDTO);
                 }
 
                 TempData["CreateError"] = "File Added Successfully";

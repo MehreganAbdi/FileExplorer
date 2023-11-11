@@ -8,12 +8,49 @@
 }
 
 
+<script>
+    function validation() {
+        var name = document.myform.name.value;
+        var filePath = document.myform.filepath.value;
+        var desc = document.myform.description.value;
+
+
+
+        if (name.length > 100 || name.length <3) {
+            alert("name must be between 3 and 100 length");
+            return false;
+        } else if (desc.length > 180 ) {
+            alert("description can't be more than 150 characters");
+            return false;
+        } else if (filePath.length > 150 || filePath.length < 3) {
+            alert("file Path must be between 3 and 100 length");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function CountCharsName(obj) {
+        document.getElementById("name_count").innerHTML = '100 . ' + obj.value.length;
+    }
+    function CountCharsFilePath(obj) {
+        document.getElementById("filepath_count").innerHTML = '180 . ' + obj.value.length;
+
+    }
+    function CountCharsDesc(obj) {
+        document.getElementById("desc_count").innerHTML = '150 . ' + obj.value.length;
+
+    }
+</script>
+
 <body>
-    <form method="post" asp-action="Edit" enctype="multipart/form-data">
+    <form method="post" asp-action="Edit" onsubmit="return validation()" name="myform" enctype="multipart/form-data">
         <input type="hidden" value="@Model.Id"/>
         <div class="form-group">
             <label asp-for="Name">Name</label>
-            <input asp-for="Name" type="text" class="btn-primary" placeholder="Enter Name">
+            <input asp-for="Name" type="text" name="name" class="btn-primary" placeholder="Enter Name">
+
+            <small id="name_count">100 . @Model.Name.Length</small>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
 
@@ -22,7 +59,8 @@
         <br />
         <div class="form-group">
             <label asp-for="FilePath">FilePath</label>
-            <input asp-for="FilePath" type="text" class="btn-primary" placeholder="Enter FilePath">
+            <input asp-for="FilePath" type="text" name="filepath" class="btn-primary" placeholder="Enter FilePath">
+            <small id="filepath_count">180 . @Model.FilePath.Length</small>
             <span asp-validation-for="FilePath" class="text-danger"></span>
         </div>
 
@@ -58,7 +96,8 @@
         <br />
         <div class="form-group">
             <label asp-for="Description">Description</label>
-            <input asp-for="Description" type="text" class="btn-primary" placeholder="Description">
+            <input asp-for="Description" type="text" name="description" class="btn-primary" placeholder="Description">
+            <small id="desc_count">150 . @Model.Description.Length</small>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <br />

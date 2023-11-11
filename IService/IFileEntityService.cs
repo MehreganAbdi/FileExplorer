@@ -16,6 +16,7 @@ namespace FileExplorer.IService
         Task<FileEntityDTO> GetByIdAsync(int Id);
         FileEntityDTO GetByIdAsNoTracking(int Id);
         Task<FileEntityDTO> GetByIdAsNoTrackingAsync(int Id);
+        Task<FileEntityDTO> CreateFileEntityDTODirectly(IFormFile file, FileEntityDTO fileEntityDTO);
         bool AddFileEntity(FileEntityDTO file);
         Task<bool> AddFileEntityAsync(FileEntityDTO file);
 

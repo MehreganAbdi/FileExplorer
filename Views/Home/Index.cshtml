@@ -112,15 +112,19 @@
             @if (TempData["AddResult"] != null)
             {
                 <h5>@TempData["AddResult"]</h5>
-
+                
             }
             @if (TempData["DownloadError"] != null)
             {
+
                 <small>@TempData["DownloadError"]</small>
+            
             }
             @if (TempData["DeleteError"] != null)
             {
+
                 <small>@TempData["DeleteError"]</small>
+            
             }
             @if (Model.Directories != null && Model.Files != null)
             {
