@@ -1,8 +1,10 @@
 ﻿using System.IO;
+using System.Linq;
 using FileExplorer.DTOs;
 using FileExplorer.IService;
 using FileExplorer.Models;
 using FileExplorer.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FileExplorer.Services
 {
@@ -302,6 +304,20 @@ namespace FileExplorer.Services
         {
             var bytes  = await File.ReadAllBytesAsync(path);
             return bytes;
+        }
+
+        public async Task<bool> ValidatePathPattern(string path)
+        {
+            if(path.Contains('*')||path.Contains("<")||
+                path.Contains(':') || path.Contains(">")||
+                path.Contains('|') || path.Contains("?")||
+                path.Contains("\\") || path.Contains("/"))
+            {
+
+                return false;
+            }
+
+            return true;
         }
     }
 }
