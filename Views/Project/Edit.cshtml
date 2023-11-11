@@ -4,12 +4,19 @@
     ViewData["Title"] = "Edit Project";
     Layout = "CustomLayout";
 }
+
+<script>
+    function CountCharsProject(obj) {
+        document.getElementById("porject_name_count").innerHTML = '100 . ' + obj.value.length;
+    }
+</script>
 <form method="post" asp-action="Edit">
 
     <input type="hidden" asp-for="Id" value="@Model.Id"/>
     <div class="form-group">
         <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
-        <input asp-for="ProjectName" type="text" class="btn-primary" placeholder="Enter ProjectName">
+        <input asp-for="ProjectName" onkeyup="CountCharsProject(this)" type="text" class="btn-primary" placeholder="Enter ProjectName">
+        <small id="project_name_count">100 . @Model.ProjectName.Length</small>
         <span asp-validation-for="ProjectName" class="text-danger"></span>
     </div>
     <br />

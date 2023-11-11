@@ -8,10 +8,16 @@
 <br />
 <br />
 <br />
+<script>
+    function CountCharsProject(obj){
+        document.getElementById("porject_name_count").innerHTML = '100 . ' + obj.value.length;
+    }
+</script>
 <form method="post" asp-action="Create"  >
     <div class="form-group">
         <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
         <input asp-for="ProjectName" type="text" class="btn-primary" placeholder="Enter ProjectName">
+        <small id="project_name_count">100 . 0 </small>
         <span asp-validation-for="ProjectName" class="text-danger"></span>
     </div>
     <br />
