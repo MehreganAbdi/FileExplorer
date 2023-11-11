@@ -313,7 +313,11 @@ namespace FileExplorer.Controllers
 
                     return View(fileEntityDTO);
                 }
-
+                else if (!await directoryService.ValidatePathPattern(fileEntityDTO.FilePath) || !await directoryService.ValidatePathPattern(fileEntityDTO.Name))
+                {
+                    TempData["NamingError"] = " Name Or Path Is Unvalid";
+                    return View(fileEntityDTO);
+                }
                 var projectByName = await projectService.GetProjectByNameAsync(fileEntityDTO.ProjectName);
                 fileEntityDTO.ProjectId = projectByName.Id;
 
