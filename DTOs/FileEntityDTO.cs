@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿ using System.ComponentModel.DataAnnotations;
 
 namespace FileExplorer.DTOs
 {
@@ -9,6 +8,7 @@ namespace FileExplorer.DTOs
         [MaxLength(100, ErrorMessage = "Name Must Be Proximately 100 Characters")]
         [Required(ErrorMessage = "Name Is Required")]
         public string Name { get; set; }
+        [MaxLength(150,ErrorMessage="Description Must Be Approximately 150 Characters")]
         public string? Description { get; set; }
         [MaxLength(180, ErrorMessage = "File Path Can Be Approximately 180 Characters")]
         public string FilePath { get; set; }
