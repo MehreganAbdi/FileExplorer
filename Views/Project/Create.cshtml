@@ -7,19 +7,38 @@
 }
 <br />
 <br />
-<br />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
+
 <script>
-    function validation(){
+      function validation() {
         var projectName = document.myform.projectname.value;
 
         if (projectName.length < 3 || projectName.length > 100) {
-            alert('project name must be between 3 and 100 characters');
+            sweetAlert({
+                title: "project name must be between 3 and 100 characters",
+                text: "",
+                icon: "error",
+                timer: 5000,
+                showConfirmButton: false
+            });
             return false;
         } else {
+
+            sweetAlert({
+                title: "Done!",
+                text: "Project Added",
+                icon: "success",
+                timer: 4000,
+                showConfirmButton: false
+            });
             return true;
         }
     }
-    function CountCharsProject(obj){
+
+
+    function CountCharsProject(obj) {
         document.getElementById("project_name_count").innerHTML = '100 . ' + obj.value.length;
     }
 </script>
@@ -29,7 +48,7 @@
         <h5>@TempData["CreateError"]</h5>
     }
 </center>
-<form method="post" name="myform" onsubmit="return validation()" asp-action="Create"  >
+<form method="post" name="myform" asp-action="Create">
     <div class="form-group">
         <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
         <input asp-for="ProjectName" onkeyup="CountCharsProject(this)" type="text" name="projectname" class="btn-primary" placeholder="Enter ProjectName">
@@ -37,8 +56,8 @@
         <span asp-validation-for="ProjectName" class="text-danger"></span>
     </div>
     <br />
-     
+
 
     <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" onclick="return validation()" class="btn btn-primary">Submit</button>
 </form>

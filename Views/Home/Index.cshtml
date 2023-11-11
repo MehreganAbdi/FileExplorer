@@ -11,10 +11,28 @@
     <script src="~/js/FileExplorerDownloadFile.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+
 </head>
 <body>
 
     <script src="~/js/FileExplorerDownloadFile.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
+    <script>
+        function deleteConfirm() {
+
+            sweetAlert({
+                title: "Are You Sure?",
+                text: "Deleted Files Are Not Recycable",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Delete!",
+                cancelButtonText: "Cancel"
+            })
+            
+            
+        }
+    </script>
     <center>
         <div class="parent">
             <a asp-controller="Project" asp-action="Index" class="btn-primary">All Projects</a>
@@ -61,10 +79,10 @@
 
 
                         <div class="child">
-                            <form method="post" onsubmit="confirm ('Are You Sure You Want To Add Selected File To Path : @Model.path')" enctype="multipart/form-data" asp-action="AddFilesToPath" asp-controller="Home" >
+                            <form method="post" onsubmit="confirm ('Are You Sure You Want To Add Selected File To Path : @Model.path')" enctype="multipart/form-data" asp-action="AddFilesToPath" asp-controller="Home">
                                 <input asp-for="path" type="hidden" value="@Model.path" />
 
-                                
+
                                 <label class="btn-primary">
                                     Select File(s)
                                     <input asp-for="SelectedFile" type="file" class="input-primary">
@@ -109,23 +127,7 @@
             </div>
 
 
-            @if (TempData["AddResult"] != null)
-            {
-                <h5>@TempData["AddResult"]</h5>
-                
-            }
-            @if (TempData["DownloadError"] != null)
-            {
 
-                <small>@TempData["DownloadError"]</small>
-            
-            }
-            @if (TempData["DeleteError"] != null)
-            {
-
-                <small>@TempData["DeleteError"]</small>
-            
-            }
             @if (Model.Directories != null && Model.Files != null)
             {
 
@@ -183,15 +185,20 @@
                                     <td><center>@item.Size</center></td>
                                     <td><center>@item.Type</center></td>
 
-                                    
+
                                     @{
                                         var bothpath = item.path + "&&&" + Model.path;
                                         var confirmMessageName = item.path.ToString();
-                                        
+
                                     }
-                                    <td><center><input onclick="PathExists('@item.path.ToString().Replace("\\","%5C").Replace(":","%3A")','@item.Type.ToString()')" value="Download" type="button" class="btn-primary"></center></td> 
-                                    <td><a onclick="confirm ('Are You Sure You Want To Delete @confirmMessageName ?')" class="btn-delete" asp-action="Delete" asp-controller="Home" asp-route-bothpath="@bothpath"> Delete </a> </td>
-                                    
+                                    <td><center><input onclick="PathExists('@item.path.ToString().Replace("\\","%5C").Replace(":","%3A")','@item.Type.ToString()')" value="Download" type="button" class="btn-primary"></center></td>
+                                    <td>
+                                        <button asp-action="Delete" asp-controller="Home" asp-route-bothpath="@bothpath" type="submit"
+                                                onclick="deleteConfirm()" class="btn-primary">
+                                                Delete
+                                        </button>
+                                    </td>
+
                                 </tr>
                             </tbody>
                             i++;

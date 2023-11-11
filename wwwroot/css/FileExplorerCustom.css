@@ -205,13 +205,13 @@ label.btn-primary {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 4px;
 }
-
+/*
 span.text-danger{
     font:300;
     color:red;
     background-color:Background;
 }
-
+*/
 select.btn-primary {
     border-radius: 8px;
     color: dodgerblue;

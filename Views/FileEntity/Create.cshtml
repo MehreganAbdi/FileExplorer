@@ -15,22 +15,41 @@
         var file = document.myform.filetocopy;
 
 
-        if (name.length > 100 || name.length <3) {
-            alert("name must be between 3 and 100 length");
+        if (name.length > 100 || name.length < 3) {
+            sweetAlert({
+                title: "project name must be between 3 and 100 characters",
+                text: "",
+                icon: "error",
+                timer: 4000,
+                showConfirmButton: false
+            });
             return false;
         } else if (desc.length > 180) {
-            alert("description can't be more than 150 characters");
+            sweetAlert({
+                title: "Description must be less than 180 characters",
+                text: "",
+                icon: "error",
+                timer: 4000,
+                showConfirmButton: false
+            });
             return false;
         } else if (filePath.length > 150) {
-            alert("file path length is too long");
+            sweetAlert({
+                title: "file path must be less than 150 characters",
+                text: "",
+                icon: "error",
+                timer: 4000,
+                showConfirmButton: false
+            });
             return false;
-        }
-        else if(file == null)
-        {
-            alert("file Must Be Selected");
-            return false;
-        }
-        else {
+        } else {
+            sweetAlert({
+                title: "Done!",
+                text: "Record Added",
+                icon: "success",
+                timer: 4000,
+                showConfirmButton: false
+            });
             return true;
         }
     }
