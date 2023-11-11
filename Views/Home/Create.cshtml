@@ -5,6 +5,17 @@
     Layout = "CustomLayout";
     var allProjectNames = ViewBag.data;
 }
+
+@if(TempData["NamingError"] != null)
+{
+    <h3>@TempData["NamingError"]</h3>
+}
+@if(TempData["CreateError"] != null)
+{
+    <h3>@TempData["NamingError"]</h3>
+}
+
+
 <script>
     function validation() {
         var name = document.myform.name.value;
@@ -48,7 +59,7 @@
     <form method="post" name="myform" asp-action="Create" enctype="multipart/form-data" onsubmit="return validation()">
 
         <input type="file" asp-for="FileToCopy" value="@Model.FileToCopy" />
-
+S
         <div class="form-group">
             <label asp-for="Name">Name</label>
             <input asp-for="Name" name="name" type="text" onkeyup="CountCharsName(this)" class="btn-primary" placeholder="Enter Name">
@@ -73,8 +84,7 @@
             <span asp-validation-for="DateCreated" class="text-danger"></span>
         </div>
 
-        <br />
-        <input type="hidden" asp-for="FileToCopy" value="@Model.FileToCopy"/>
+        <br /> 
         <input type="hidden" asp-for="ProjectId" value="0" />
 
         <div class="form-group">

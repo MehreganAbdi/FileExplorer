@@ -86,7 +86,10 @@ namespace FileExplorer.Services
         {
             return await dataTranformerService.ChangeProjectToProjectDTOAsync(await projectRepository.GetProjectByProjectNameAsync(Name));
         }
-
+        public async Task<bool> ProjectExists(string name)
+        {
+            return await projectRepository.GetProjectByProjectNameAsync(name) != null ? true : false;
+        }
         public bool RemoveProject(ProjectDTO project)
         {
             return projectRepository.RemoveProject(dataTranformerService.ChangeProjectDTOToProjectWithId(project));

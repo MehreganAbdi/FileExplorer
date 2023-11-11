@@ -305,6 +305,10 @@ namespace FileExplorer.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(FileEntityDTO fileEntityDTO)
         {
+            var allProjects = await projectService.GetAllAsync();
+
+            ViewBag.data = allProjects;
+
             try
             {
                 if (!ModelState.IsValid)
@@ -313,22 +317,23 @@ namespace FileExplorer.Controllers
 
                     return View(fileEntityDTO);
                 }
-                else if (!await directoryService.ValidatePathPattern(fileEntityDTO.FilePath) || !await directoryService.ValidatePathPattern(fileEntityDTO.Name))
+                else if (!await directoryService.ValidatePathPattern(fileEntityDTO.FilePath) )
                 {
-                    TempData["NamingError"] = " Name Or Path Is Unvalid";
+                    TempData["NamingError"] = " Path Is Unvalid";
                     return View(fileEntityDTO);
+                }
+                else if(!await directoryService.ValidateNamePattern(fileEntityDTO.Name))
+                {
+                    TempData["NamingError"] = " FileName Is Unvalid";
+                    return View(fileEntityDTO);
+
                 }
                 var projectByName = await projectService.GetProjectByNameAsync(fileEntityDTO.ProjectName);
                 fileEntityDTO.ProjectId = projectByName.Id;
 
 
-                var result = await fileEntityService.AddFileEntityAsync(fileEntityDTO);
-                if (!result)
-                {
-                    TempData["CreateError"] = "An Error Happened While Creating , try Again";
-                    return View(fileEntityDTO);
-                }
-
+                 await fileEntityService.AddFileEntityAsync(fileEntityDTO);
+                
 
                 var redirectedFileExploreViewModel = await directoryService.GetDataInViewModel(fileEntityDTO.FilePath);
 
@@ -343,7 +348,7 @@ namespace FileExplorer.Controllers
             }
             catch (Exception ex)
             {
-                var allProjects = await projectService.GetAllAsync();
+               
                 ViewBag.data = allProjects;
 
                 TempData["CreateError"] = ex.Message.ToString();

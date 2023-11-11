@@ -19,6 +19,7 @@ namespace FileExplorer.IService
         Task<bool> RemoveProjectAsync(ProjectDTO project);
         ProjectDTO GetProjectByName(string Name);
         Task<ProjectDTO> GetProjectByNameAsync(string Name);
+        Task<bool> ProjectExists(string name);
 
     }
 }

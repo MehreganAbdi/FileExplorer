@@ -18,6 +18,9 @@
             <h1>
                 .  File Records  .
             </h1>
+            <br />
+            <a asp-controller="FileEntity" asp-action="Create" class="btn-primary">Add File Record+</a>
+            <a asp-controller="Home" asp-action="Index" class="btn-primary">Home </a>
             @{
                  
                 if (TempData["CreateError"] != null)
@@ -34,7 +37,6 @@
                 }
             }
             <center>
-                <a asp-controller="FileEntity" asp-action="Create" class="btn-primary">Add File To Records +</a>
             </center>
             <table class="table">
                 <thead>

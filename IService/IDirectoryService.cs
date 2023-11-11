@@ -19,5 +19,6 @@ namespace FileExplorer.IService
         bool DeleteFileByPath(string path);
         Task<byte[]> GetBytes(string path);
         Task<bool> ValidatePathPattern(string path);
+        Task<bool> ValidateNamePattern(string name);
     }
 }

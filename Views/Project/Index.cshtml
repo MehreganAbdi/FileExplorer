@@ -35,8 +35,9 @@
                 }
             }
             <center>
-            <a asp-controller="Project" asp-action="Create" class="btn-primary" >Add Project+</a>
-</center>
+                <a asp-controller="Project" asp-action="Create" class="btn-primary">Add Project+</a>
+                <a asp-action="Index" asp-controller="Home" class="btn-primary">Home</a>
+            </center>
             <table class="table">
                 <thead>
                     <tr>
@@ -60,11 +61,11 @@
                                 <td><center>@project.Id</center></td>
                                 <td><center><a asp-action="Edit" asp-controller="Project" asp-route-id="@project.Id" class="btn-edit">Edit</a></center></td>
                                 <td><center> <a asp-action="Delete" asp-controller="Project" asp-route-id="@project.Id" class="btn-delete">Delete</a></center></td>
-                                
+
                             </tr>
                         </tbody>
-                        
-                    i++;
+
+                        i++;
                     }
 
 

@@ -18,6 +18,8 @@
     <center>
         <div class="parent">
             <a asp-controller="Project" asp-action="Index" class="btn-primary">All Projects</a>
+            <a asp-controller="FileEntity" asp-action="Index" class="btn-primary">All File Records</a>
+
             <div class="child">
 
                 @using (Html.BeginForm("Index", "Home", FormMethod.Get))

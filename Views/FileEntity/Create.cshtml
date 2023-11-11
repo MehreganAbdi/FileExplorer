@@ -6,21 +6,60 @@
     var allProjectNames = ViewBag.data;
 }
 
+
+<script>
+    function validation() {
+        var name = document.myform.name.value;
+        var filePath = document.myform.filepath.value;
+        var desc = document.myform.description.value;
+
+
+
+        if (name.length > 100 || name.length == "") {
+            alert("name must be between 3 and 100 length");
+            return false;
+        } else if (desc.length > 180) {
+            alert("description can't be more than 150 characters");
+            return false;
+        } else if (filePath.length > 150) {
+            alert("file length is too long");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function CountCharsName(obj) {
+        document.getElementById("name_count").innerHTML = '100 . ' + obj.value.length;
+    }
+    function CountCharsFilePath(obj) {
+        document.getElementById("filepath_count").innerHTML = '180 . ' + obj.value.length;
+
+    }
+    function CountCharsDesc(obj) {
+        document.getElementById("desc_count").innerHTML = '150 . ' + obj.value.length;
+
+    }
+</script>
+
+
 <body>
-    <form method="post" asp-action="Create" enctype="multipart/form-data">
-         
+    <form method="post" name="myform" asp-action="Create" enctype="multipart/form-data">
+
         <div class="form-group">
             <label asp-for="Name">Name</label>
-            <input asp-for="Name" type="text" class="btn-primary" placeholder="Enter Name">
+            <input asp-for="Name" onkeyup="CountCharsName(this)" name="name" type="text" class="btn-primary" placeholder="Enter Name">
+            <small id="name_count">100 . 0</small>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        
-         
+
+
 
         <br />
         <div class="form-group">
             <label asp-for="FilePath">FilePath</label>
-            <input asp-for="FilePath" type="text" class="btn-primary" placeholder="Enter FilePath">
+            <input asp-for="FilePath" name="filepath" type="text" onkeyup="CountCharsFilePath(this)" class="btn-primary" placeholder="Enter FilePath">
+            <small id="filepath_count">180 . 0 </small>
             <span asp-validation-for="FilePath" class="text-danger"></span>
         </div>
 
@@ -32,21 +71,21 @@
         </div>
 
         <br />
-        
+
         <input type="hidden" asp-for="ProjectId" value="0" />
 
         <div class="form-group">
             <label asp-for="ProjectName">ProjectName</label>
-            <select asp-for="ProjectName" >
+            <select asp-for="ProjectName">
                 @foreach (var project in allProjectNames)
                 {
-                    <option  itemid="@project.Id.ToString()" onclick="assignToModel('@project.ProjectName')" >@project.ProjectName</option>
-                    
+                    <option itemid="@project.Id.ToString()" onclick="assignToModel('@project.ProjectName')">@project.ProjectName</option>
+
                 }
             </select>
             <span asp-validation-for="ProjectName" class="text-danger"></span>
         </div>
-       
+
         <br />
         <div class="form-group">
             <label asp-for="Size">Size</label>
@@ -56,7 +95,8 @@
         <br />
         <div class="form-group">
             <label asp-for="Description">Description</label>
-            <input asp-for="Description" type="text" class="btn-primary" placeholder="Description">
+            <input asp-for="Description" name="description" onKeyup="CountCharsDesc(this)" type="text" class="btn-primary" placeholder="Description">
+            <small id="desc_count">150 . 0</small>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <br />
@@ -65,14 +105,14 @@
             <label asp-for="Type">Type</label>
             <input asp-for="Type" type="text" class="btn-primary" placeholder="Enter Type">
             <span asp-validation-for="Type" class="text-danger"></span>
-        </div>
+        </div>S
         <br />
         <br />
         <br />
-    
+
 
         <br />
         <button type="submit" class="btn-primary">Submit</button>
     </form>
-   
+
 </body>

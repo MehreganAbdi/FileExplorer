@@ -309,9 +309,24 @@ namespace FileExplorer.Services
         public async Task<bool> ValidatePathPattern(string path)
         {
             if(path.Contains('*')||path.Contains("<")||
-                path.Contains(':') || path.Contains(">")||
+                  path.Contains(">")||
                 path.Contains('|') || path.Contains("?")||
-                path.Contains("\\") || path.Contains("/"))
+                  path.Contains("/"))
+            {
+
+                return false;
+            }
+
+            return true;
+        }
+
+
+        public async Task<bool> ValidateNamePattern(string name)
+        {
+            if (name.Contains('*') || name.Contains("<") ||
+                  name.Contains(">") ||name.Contains("|")||
+                name.Contains('|') || name.Contains("?") ||
+                  name.Contains("/")||name.Contains(":"))
             {
 
                 return false;

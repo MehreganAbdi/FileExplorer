@@ -9,14 +9,30 @@
 <br />
 <br />
 <script>
+    function validation(){
+        var projectName = document.myform.projectname.value;
+
+        if (projectName.length < 3 || projectName.length > 100) {
+            alert('project name must be between 3 and 100 characters');
+            return false;
+        } else {
+            return true;
+        }
+    }
     function CountCharsProject(obj){
-        document.getElementById("porject_name_count").innerHTML = '100 . ' + obj.value.length;
+        document.getElementById("project_name_count").innerHTML = '100 . ' + obj.value.length;
     }
 </script>
-<form method="post" asp-action="Create"  >
+<center>
+    @if (TempData["CreateError"] != null)
+    {
+        <h5>@TempData["CreateError"]</h5>
+    }
+</center>
+<form method="post" name="myform" onsubmit="return validation()" asp-action="Create"  >
     <div class="form-group">
         <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
-        <input asp-for="ProjectName" type="text" class="btn-primary" placeholder="Enter ProjectName">
+        <input asp-for="ProjectName" onkeyup="CountCharsProject(this)" type="text" name="projectname" class="btn-primary" placeholder="Enter ProjectName">
         <small id="project_name_count">100 . 0 </small>
         <span asp-validation-for="ProjectName" class="text-danger"></span>
     </div>
