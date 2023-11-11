@@ -1,9 +1,9 @@
 ﻿using FileExplorer.DTOs;
 using FileExplorer.IService;
 
-using FileExplorer.ViewModels; 
+using FileExplorer.ViewModels;
 using Microsoft.AspNetCore.Mvc;
- 
+
 
 namespace FileExplorer.Controllers
 {
@@ -250,14 +250,15 @@ namespace FileExplorer.Controllers
 
                 var typo = fileExploreViewModel.SelectedFile.ContentType;
 
-                if (typo != "image/jpg" && typo != "image/png" && typo != "image/jpeg" )
+                if (typo != "image/jpg" && typo != "image/png" && typo != "image/jpeg")
                 {
                     TempData["SelectError"] = "Selected File Must Be img";
                     return View("Index", fileExploreViewModel);
                 }
 
-                
 
+
+                await directoryService.AddFileToPath(fileExploreViewModel.path, fileExploreViewModel.SelectedFile);
 
 
                 var fileEntityDTO = new FileEntityDTO()
@@ -324,7 +325,6 @@ namespace FileExplorer.Controllers
                     return View(fileEntityDTO);
                 }
 
-                await directoryService.AddFileToPath(fileEntityDTO.FilePath, fileEntityDTO.FileToCopy);
 
                 var redirectedFileExploreViewModel = await directoryService.GetDataInViewModel(fileEntityDTO.FilePath);
 
@@ -335,7 +335,7 @@ namespace FileExplorer.Controllers
 
                 TempData["CreateError"] = "File Added Successfully";
 
-                return View("Index",redirectedFileExploreViewModel);
+                return View("Index", redirectedFileExploreViewModel);
             }
             catch (Exception ex)
             {

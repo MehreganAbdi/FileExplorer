@@ -11,11 +11,7 @@
         var filePath = document.myform.filepath.value;
         var desc = document.myform.description.value;
 
-        var nameText = document.myform.name;
-        nameText.addEventListener("input", () => {
-            let count = nameText.value.length;
-            document.getElementById("name_count").textContent = '100/ ${count}';
-        });
+      
 
         if (name.length > 100 || name.length < 3) {
             alert("name must be between 3 and 100 length");
@@ -30,6 +26,18 @@
             return true;
         }
     }
+
+    function CountCharsName(obj){
+        document.getElementById("name_count").innerHTML = '100 . ' + obj.value.length ;
+    }
+    function CountCharsFilePath(obj){
+        document.getElementById("filepath_count").innerHTML = '180 . ' + obj.value.length;
+
+    }
+    function CountCharsDesc(obj){
+        document.getElementById("desc_count").innerHTML = '150 . ' + obj.value.length;
+
+    }
 </script>
 
 
@@ -39,12 +47,12 @@
 <body>
     <form method="post" name="myform" asp-action="Create" enctype="multipart/form-data" onsubmit="return validation()">
 
-        <input type="hidden" asp-for="FileToCopy" value="@Model.FileToCopy" />
+        <input type="file" asp-for="FileToCopy" value="@Model.FileToCopy" />
 
         <div class="form-group">
             <label asp-for="Name">Name</label>
-            <input asp-for="Name" name="name" type="text" class="btn-primary" placeholder="Enter Name">
-            <p id="name_count">100/</p>
+            <input asp-for="Name" name="name" type="text" onkeyup="CountCharsName(this)" class="btn-primary" placeholder="Enter Name">
+            <small id="name_count">100 . @Model.Name.Length</small>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
 
@@ -53,7 +61,8 @@
         <br />
         <div class="form-group">
             <label asp-for="FilePath">FilePath</label>
-            <input asp-for="FilePath" name="filepath" type="text" class="btn-primary" placeholder="Enter FilePath">
+            <input asp-for="FilePath" onkeyup="CountCharsFilePath(this)" name="filepath" type="text" class="btn-primary" placeholder="Enter FilePath">
+            <small id="filepath_count">180 . @Model.FilePath.Length </small>
             <span asp-validation-for="FilePath" class="text-danger"></span>
         </div>
 
@@ -65,7 +74,7 @@
         </div>
 
         <br />
-
+        <input type="hidden" asp-for="FileToCopy" value="@Model.FileToCopy"/>
         <input type="hidden" asp-for="ProjectId" value="0" />
 
         <div class="form-group">
@@ -82,21 +91,22 @@
 
         <br />
         <div class="form-group">
-            <label asp-for="Size">Size</label>
-            <input asp-for="Size" type="text" class="btn-primary" placeholder="Size">
+            <label asp-for="Size">Size : @Model.Size</label>
+            <input asp-for="Size" type="hidden" class="btn-primary" placeholder="Size">
             <span asp-validation-for="Size" class="text-danger"></span>
         </div>
         <br />
         <div class="form-group">
             <label asp-for="Description">Description</label>
-            <input asp-for="Description" type="text" name="description" class="btn-primary" placeholder="Description">
+            <input asp-for="Description" type="text" onkeyup="CountCharsDesc(this)" name="description" class="btn-primary" placeholder="Description">
+            <small id="desc_count" >150 . @Model.Description.Length</small>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <br />
 
         <div class="form-group">
-            <label asp-for="Type">Type</label>
-            <input asp-for="Type" type="text" class="btn-primary" placeholder="Enter Type">
+            <label asp-for="Type">Type : @Model.Type</label>
+            <input asp-for="Type" type="hidden" class="btn-primary" placeholder="Enter Type">
             <span asp-validation-for="Type" class="text-danger"></span>
         </div>
         <br />
