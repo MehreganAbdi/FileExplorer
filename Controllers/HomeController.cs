@@ -266,11 +266,11 @@ namespace FileExplorer.Controllers
                     ProjectId = 13,
                     ProjectName = "NotDefined",
                     Type = typo,
-                    DateCreated = DateTime.Now,
+                    DateCreated = directoryService.GetCreationTime(fileExploreViewModel.path+"\\"+ fileExploreViewModel.SelectedFile.FileName),
                     Size = fileExploreViewModel.SelectedFile.Length + "B",
                     Description = "NotDefined",
                     FilePath = fileExploreViewModel.path,
-                    Name = "NewFile",
+                    Name = fileExploreViewModel.SelectedFile.FileName.Split(".")[^2],
                     FileToCopy = fileExploreViewModel.SelectedFile
                 };
 

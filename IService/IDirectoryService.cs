@@ -5,6 +5,7 @@ namespace FileExplorer.IService
 {
     public interface IDirectoryService
     {
+        DateTime GetCreationTime(string path);
         Task<FileExplore> GetData(string path);
         Task<FileExploreViewModel> GetDataInViewModel(string path);
         string ConverViewModelTostring(FileExploreViewModel fileExploreViewModel);

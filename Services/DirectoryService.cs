@@ -15,6 +15,11 @@ namespace FileExplorer.Services
             this.dataTranformerService = dataTranformerService;
         }
 
+        public DateTime GetCreationTime(string path)
+        {
+            return File.GetCreationTime(path);
+        }
+
         public async Task<FileExploreViewModel> SearchResult(string searching, FileExploreViewModel pathData)
         {
 
