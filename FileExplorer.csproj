@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\project.edit\ProjectEdit.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\project.edit\ProjectEdit.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CurrieTechnologies.Razor.SweetAlert2" Version="5.5.0" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="jQuery" Version="3.7.1" />
@@ -31,8 +39,12 @@
     <Folder Include="wwwroot\js\FileEntity.Index\" />
     <Folder Include="wwwroot\js\FileEntity.Create\" />
     <Folder Include="wwwroot\js\FileEntity.Edit\" />
-    <Folder Include="wwwroot\js\Project.Edit\" />
     <Folder Include="wwwroot\js\Project.Create\" />
+    <Folder Include="wwwroot\js\Project.Edit\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\project.edit\ProjectEdit.js" />
   </ItemGroup>
 
 </Project>
