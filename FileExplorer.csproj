@@ -27,4 +27,12 @@
     <PackageReference Include="System.Reactive.Windows.Forms" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\js\FileEntity.Index\" />
+    <Folder Include="wwwroot\js\FileEntity.Create\" />
+    <Folder Include="wwwroot\js\FileEntity.Edit\" />
+    <Folder Include="wwwroot\js\Project.Edit\" />
+    <Folder Include="wwwroot\js\Project.Create\" />
+  </ItemGroup>
+
 </Project>

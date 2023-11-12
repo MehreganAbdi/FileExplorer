@@ -84,14 +84,23 @@
         </div>
 
         <br />
+        
+
 
         <div class="form-group">
-            <label asp-for="FileToCopy">File </label>
-            <input asp-for="FileToCopy" name="filepath" type="file"  class="btn-primary" >
-            <small id="filepath_count">Nothing Selected</small>
-            <span asp-validation-for="FilePath" class="text-danger"></span>
+            <label>Select File 
+
+            <input asp-for="FileToCopy"  type="file"  class="btn-primary" >
+            </label>
+            <br />
+            <small id="filepath_count"></small>
+            <span asp-validation-for="FileToCopy" class="text-danger"></span>
         </div>
       
+
+
+
+
         <br />
 
         <input type="hidden" asp-for="ProjectId" value="0" />

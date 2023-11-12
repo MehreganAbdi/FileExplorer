@@ -34,7 +34,7 @@ namespace FileExplorer.Services
                 FilePath = file.FileName,
                 DateCreated = DateTime.Now,
                 Description = fileEntityDTO.Description,
-                Name = file.Name,
+                Name = file.FileName.Split(".")[^2] != null? file.FileName.Split(".")[^2] : "Record",
                 ProjectId = fileEntityDTO.ProjectId,
                 ProjectName = fileEntityDTO.ProjectName,
                 Size = file.Length.ToString()+"B",

@@ -15,7 +15,7 @@
         sweetAlert({
             title: "Are You Sure?",
             text: "Deleted Files Are Not Recycable",
-            icon: "warning",
+            type: "warning",
             showCancelButton: true,
             confirmButtonText: "Delete!",
             cancelButtonText: "Cancel"
@@ -37,21 +37,7 @@
             <br />
             <a asp-controller="FileEntity" asp-action="Create" class="btn-primary">Add File Record+</a>
             <a asp-controller="Home" asp-action="Index" class="btn-primary">Home </a>
-            @{
-                 
-                if (TempData["CreateError"] != null)
-                {
-                    <h4>@TempData["CreateError"]</h4>
-                }
-                if (TempData["EditError"] != null)
-                {
-                    <h4>@TempData["EditError"]</h4>
-                }
-                if (TempData["DeleteError"] != null)
-                {
-                    <h4>@TempData["DeleteError"]</h4>
-                }
-            }
+            
             <center>
             </center>
             <table class="table">
@@ -86,7 +72,7 @@
                                 <td><center>@file.Description</center></td>
                                 <td><center>@file.Size</center></td>
                                 <td><center><a asp-action="Edit" asp-controller="FileEntity" asp-route-id="@file.Id" class="btn-edit">Edit</a></center></td>
-                                <td><center> <button type="button" onclick="deleteConfirm()" asp-action="Delete" asp-controller="FileEntity" asp-route-id="@file.Id" class="btn-delete">Delete</button></center></td>
+                                <td><center> <button class="btn-delete" type="button" onclick="deleteConfirm()" asp-action="Delete" asp-controller="FileEntity" asp-route-id="@file.Id" class="btn-delete">Delete</button></center></td>
 
                             </tr>
                         </tbody>

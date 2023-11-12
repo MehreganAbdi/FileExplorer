@@ -30,6 +30,16 @@ a.btn-delete {
     font-size: 18px;
     text-decoration: none;
 }
+button.btn-delete {
+    border-radius: 10px;
+    color: dodgerblue;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: lightblue;
+    margin: 15px;
+    font-size: 18px;
+    text-decoration: none;
+}
     a.btn-delete:hover {
         border-radius: 10px;
         color: whitesmoke;
@@ -40,7 +50,15 @@ a.btn-delete {
         font-size: 18px;
         text-decoration: none;
     }
-
+button.btn-delete:hover {
+    border-radius: 10px;
+    color: whitesmoke;
+    background-color: red;
+    margin: 15px;
+    padding-left: 5px;
+    padding-right: 5pc font-size: 18px;
+    text-decoration: none;
+}
 
 a.btn-edit {
     border-radius: 10px;
