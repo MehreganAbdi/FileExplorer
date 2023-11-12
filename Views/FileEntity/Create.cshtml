@@ -7,69 +7,11 @@
 }
 
 
-<script>
-    function validation() {
-        var name = document.myform.name.value;
-        var filePath = document.myform.filepath.value;
-        var desc = document.myform.description.value;
-        var file = document.myform.filetocopy;
-
-
-        if (name.length > 100 || name.length < 3) {
-            sweetAlert({
-                title: "project name must be between 3 and 100 characters",
-                text: "",
-                icon: "error",
-                timer: 4000,
-                showConfirmButton: false
-            });
-            return false;
-        } else if (desc.length > 180) {
-            sweetAlert({
-                title: "Description must be less than 180 characters",
-                text: "",
-                icon: "error",
-                timer: 4000,
-                showConfirmButton: false
-            });
-            return false;
-        } else if (filePath.length > 150) {
-            sweetAlert({
-                title: "file path must be less than 150 characters",
-                text: "",
-                icon: "error",
-                timer: 4000,
-                showConfirmButton: false
-            });
-            return false;
-        } else {
-            sweetAlert({
-                title: "Done!",
-                text: "Record Added",
-                icon: "success",
-                timer: 4000,
-                showConfirmButton: false
-            });
-            return true;
-        }
-    }
-
-    function CountCharsName(obj) {
-        document.getElementById("name_count").innerHTML = '100 . ' + obj.value.length;
-    }
-    function CountCharsFilePath(obj) {
-        document.getElementById("filepath_count").innerHTML = '180 . ' + obj.value.length;
-
-    }
-    function CountCharsDesc(obj) {
-        document.getElementById("desc_count").innerHTML = '150 . ' + obj.value.length;
-
-    }
-</script>
+<script src="~/js//FileEntity.Create/FileEntityCreate.js"></script>
 
 
 <body>
-    <form method="post" name="myform" onsubmit="return validation()" asp-action="Create" enctype="multipart/form-data">
+    <form method="post" id="fileentitycreatefrom" onsubmit="return validation()" asp-action="Create" enctype="multipart/form-data">
         <input asp-for="Name" value="NewFile" type="hidden"/>
         <input asp-for="Size" value="0" type="hidden" />
         <input asp-for="Type" value="type" type="hidden"/>
@@ -78,7 +20,7 @@
         <br />
         <div class="form-group">
             <label asp-for="FilePath">FilePath</label>
-            <input asp-for="FilePath" name="filepath" type="text" onkeyup="CountCharsFilePath(this)" class="btn-primary" placeholder="Enter FilePath">
+            <input asp-for="FilePath" id="fileentitycreatefromfilepath" type="text" onkeyup="CountCharsFilePath(this)" class="btn-primary" placeholder="Enter FilePath">
             <small id="filepath_count">180 . 0 </small>
             <span asp-validation-for="FilePath" class="text-danger"></span>
         </div>
@@ -122,7 +64,7 @@
         <br />
         <div class="form-group">
             <label asp-for="Description">Description</label>
-            <input asp-for="Description" name="description" onKeyup="CountCharsDesc(this)" type="text" class="btn-primary" placeholder="Description">
+            <input asp-for="Description" id="fileentitycreatefromdesc" type="text" class="btn-primary" placeholder="Description">
             <small id="desc_count">150 . 0</small>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>

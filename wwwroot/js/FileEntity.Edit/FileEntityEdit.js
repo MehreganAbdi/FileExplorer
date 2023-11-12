@@ -1,8 +1,9 @@
-﻿function validation() {
-    var name = document.myform.name.value;
-    var filePath = document.myform.filepath.value;
-    var desc = document.myform.description.value;
-    var file = document.myform.filetocopy;
+﻿
+function validation() {
+    var name = document.getElementById("fileentityeditformname").value;
+    var filePath = document.getElementById("fileentityeditformfilepath").value;
+    var desc = document.getElementById("fileentityeditformdesc").value;
+
 
 
     if (name.length > 100 || name.length < 3) {
@@ -35,7 +36,7 @@
     } else {
         sweetAlert({
             title: "Done!",
-            text: "Record Added",
+            text: "Record Updated",
             icon: "success",
             timer: 4000,
             showConfirmButton: false
@@ -44,14 +45,14 @@
     }
 }
 
-function CountCharsName(obj) {
-    document.getElementById("name_count").innerHTML = '100 . ' + obj.value.length;
+function CountCharsName() {
+    document.getElementById("name_count").innerHTML = '100 . ' + document.getElementById("fileentityeditformname").value.length;
 }
-function CountCharsFilePath(obj) {
-    document.getElementById("filepath_count").innerHTML = '180 . ' + obj.value.length;
+function CountCharsFilePath() {
+    document.getElementById("filepath_count").innerHTML = '180 / ' + document.getElementById("fileentityeditformfilepath").value.length;
 
 }
-function CountCharsDesc(obj) {
-    document.getElementById("desc_count").innerHTML = '150 . ' + obj.value.length;
+function CountCharsDesc() {
+    document.getElementById("desc_count").innerHTML = '150 / ' + document.getElementById("fileentityeditformdesc").value.length;
 
 }
