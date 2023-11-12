@@ -8,7 +8,16 @@
 
 
 <script src="~/js//FileEntity.Create/FileEntityCreate.js"></script>
+<script>
 
+    document.getElementById("fileentitycreatefrom").onsubmit(validation);
+
+    document.getElementById("fileentitycreatefromname").onkeyup = function () { return CountCharsName() };
+
+    document.getElementById("fileentitycreatefromfilepath").onkeyup = function () { return CountCharsFilePath() };
+
+    document.getElementById("fileentitycreatefromdesc").onkeyup = function () { return CountCharsDesc() };
+</script>
 
 <body>
     <form method="post" id="fileentitycreatefrom" onsubmit="return validation()" asp-action="Create" enctype="multipart/form-data">
