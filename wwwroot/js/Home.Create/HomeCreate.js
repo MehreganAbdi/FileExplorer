@@ -47,15 +47,15 @@ function validation() {
     }
 }
 
-function CountCharsName(obj) {
-    document.getElementById("name_count").innerHTML = '100 . ' + obj.value.length;
+function CountCharsName() {
+    document.getElementById("name_count").innerHTML = '100 / ' + document.getElementById("createname").value.length;
    
 }
-function CountCharsFilePath(obj) {
-    document.getElementById("filepath_count").innerHTML = '180 . ' + obj.value.length;
+function CountCharsFilePath() {
+    document.getElementById("filepath_count").innerHTML = '180 / ' + document.getElementById("createfilepath").value.length;
 
 }
-function CountCharsDesc(obj) {
-    document.getElementById("desc_count").innerHTML = '150 . ' + obj.value.length;
+function CountCharsDesc() {
+    document.getElementById("desc_count").innerHTML = '150 . ' + document.getElementById("createdescription").value.length;
 
 }

@@ -37,7 +37,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\js\FileEntity.Index\" />
-    <Folder Include="wwwroot\js\FileEntity.Create\" />
     <Folder Include="wwwroot\js\FileEntity.Edit\" />
     <Folder Include="wwwroot\js\Project.Create\" />
     <Folder Include="wwwroot\js\Project.Edit\" />

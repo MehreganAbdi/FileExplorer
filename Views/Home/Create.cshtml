@@ -11,7 +11,12 @@
 <script src="~/js/Home.Create/HomeCreate.js" type="text/javascript"></script> 
 
 
-
+<script>
+    document.getElementById("createform").onsubmit(validation);
+    document.getElementById("createname").onkeyup = function () {return CountCharsName() };
+    document.getElementById("createfilepath").onkeyup = function () { return CountCharsFilePath() };
+    document.getElementById("createdescription").onkeyup = function () { return CountCharsDesc() };
+</script>
 
 
 
@@ -22,7 +27,7 @@
 S
         <div class="form-group">
             <label asp-for="Name">Name</label>
-            <input asp-for="Name" id="createname" type="text" onkeyup="CountCharsName(this)" class="btn-primary" placeholder="Enter Name">
+            <input asp-for="Name" id="createname" type="text"  class="btn-primary" placeholder="Enter Name">
             <small id="name_count">100 . @Model.Name.Length</small>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
@@ -32,7 +37,7 @@ S
         <br />
         <div class="form-group">
             <label asp-for="FilePath">FilePath</label>
-            <input asp-for="FilePath" onkeyup="CountCharsFilePath(this)" id="createfilepath" type="text" class="btn-primary" placeholder="Enter FilePath">
+            <input asp-for="FilePath"   id="createfilepath" type="text" class="btn-primary" placeholder="Enter FilePath">
             <small id="filepath_count">180 . @Model.FilePath.Length </small>
             <span asp-validation-for="FilePath" class="text-danger"></span>
         </div>
@@ -68,7 +73,7 @@ S
         <br />
         <div class="form-group">
             <label asp-for="Description">Description</label>
-            <input asp-for="Description" type="text" onkeyup="CountCharsDesc(this)" id="createdescription" class="btn-primary" placeholder="Description">
+            <input asp-for="Description" type="text"  id="createdescription" class="btn-primary" placeholder="Description">
             <small id="desc_count" >150 . @Model.Description.Length</small>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>

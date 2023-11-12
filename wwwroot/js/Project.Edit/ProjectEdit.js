@@ -23,6 +23,6 @@ function validation() {
         return true;
     }
 }
-function CountCharsProject() {
+function CountCharsEditProject() {
     document.getElementById("editporject_name_count").innerHTML = '100 / ' + document.getElementById("projecteditformname").value.length;
 }

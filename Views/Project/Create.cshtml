@@ -23,13 +23,13 @@
     
     document.getElementById("createprojectform").onsubmit(validation);
 
-    document.getElementById("createprojectformname").onkeyup(CountCharsProject);
+    document.getElementById("createprojectformname").onkeyup = function () { return CountCharsProject() };
 
 </script>
 <form method="post" id="createprojectform" asp-action="Create">
     <div class="form-group">
         <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
-        <input asp-for="ProjectName" id="createprojectformname" onkeyup="CountCharsProject(this)" type="text" name="projectname" class="btn-primary" placeholder="Enter ProjectName">
+        <input asp-for="ProjectName" id="createprojectformname"   type="text" name="projectname" class="btn-primary" placeholder="Enter ProjectName">
         <small id="project_name_count">100 / 0 </small>
         <span asp-validation-for="ProjectName" class="text-danger"></span>
     </div>

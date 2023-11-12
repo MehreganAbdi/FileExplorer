@@ -13,7 +13,7 @@
 
     document.getElementById("projecteditform").onsubmit(validation);
 
-    document.getElementById("projecteditformname").onkeyup(CountCharsProject);
+     document.getElementById("projecteditformname").onkeyup = function () { return CountCharsEditProject() };
     
  </script>
 
