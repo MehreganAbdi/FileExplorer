@@ -42,14 +42,11 @@ namespace FileExplorer.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(FileEntityDTO fileEntityDTO)
         {
+            var allProjects = await projectService.GetAllAsync();
+            ViewBag.data = allProjects;
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    TempData["CreateError"] = "Make Sure That You Filled All Gaps";
-
-                    return View(fileEntityDTO);
-                }
+                 
                 if(fileEntityDTO.FileToCopy == null)
                 {
                     TempData["SelectError"] = "A File Must Be Selected";
@@ -77,7 +74,6 @@ namespace FileExplorer.Controllers
             }
             catch (Exception ex)
             {
-                var allProjects = await projectService.GetAllAsync();
                 ViewBag.data = allProjects;
 
                 TempData["CreateError"] = ex.Message.ToString();

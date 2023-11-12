@@ -5,34 +5,21 @@
 @model FileExploreViewModel
 @{
     ViewData["Title"] = "Home Page";
+    
 }
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.1/axios.min.js"> </script>
-    <script src="~/js/FileExplorerDownloadFile.js" type="text/javascript"></script>
+    <script src="~/js/Home.Index/HomeIndex.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="~/js/FileExplorerDownloadFile.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
+
 
 
 </head>
 <body>
 
-    <script src="~/js/FileExplorerDownloadFile.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
-    <script>
-        function deleteConfirm() {
-
-            sweetAlert({
-                title: "Are You Sure?",
-                text: "Deleted Files Are Not Recycable",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Delete!",
-                cancelButtonText: "Cancel"
-            })
-            
-            
-        }
-    </script>
     <center>
         <div class="parent">
             <a asp-controller="Project" asp-action="Index" class="btn-primary">All Projects</a>
@@ -79,7 +66,7 @@
 
 
                         <div class="child">
-                            <form method="post" onsubmit="confirm ('Are You Sure You Want To Add Selected File To Path : @Model.path')" enctype="multipart/form-data" asp-action="AddFilesToPath" asp-controller="Home">
+                            <form method="post"   enctype="multipart/form-data" asp-action="AddFilesToPath" asp-controller="Home">
                                 <input asp-for="path" type="hidden" value="@Model.path" />
 
 
@@ -94,6 +81,7 @@
 
                             </form>
                         </div>
+                        <br />
                         @if (TempData["SelectError"] != null)
                         {
                             <small>@TempData["SelectError"]</small>
@@ -170,10 +158,10 @@
                         var i = 1;
                     }
                     @if (Model.Files != null)
-                    {//
+                    {
 
                         @foreach (var item in Model.Files)
-                        {//
+                        {
 
                             <tbody>
                                 <tr>
@@ -189,14 +177,20 @@
                                     @{
                                         var bothpath = item.path + "&&&" + Model.path;
                                         var confirmMessageName = item.path.ToString();
-
+                                        var downloadbuttonid = "downloadfilebutton" + i.ToString();
                                     }
-                                    <td><center><input onclick="PathExists('@item.path.ToString().Replace("\\","%5C").Replace(":","%3A")','@item.Type.ToString()')" value="Download" type="button" class="btn-primary"></center></td>
+                                    <td><center><input id="@downloadbuttonid" value="Download" type="button" class="btn-primary"></center></td>
                                     <td>
                                         <button asp-action="Delete" asp-controller="Home" asp-route-bothpath="@bothpath" type="submit"
-                                                onclick="deleteConfirm()" class="btn-primary">
-                                                Delete
+                                                id="deletefilebutton" class="btn-delete">
+                                            Delete
                                         </button>
+
+                                        <script>
+                                           
+                                            document.getElementById('@downloadbuttonid').addEventListener("click", function () { PathExists('@item.path.ToString().Replace("\\","%5C").Replace(":","%3A")', '@item.Type.ToString()'); })
+
+                                        </script>
                                     </td>
 
                                 </tr>
@@ -233,5 +227,15 @@
             <br />
         </div>
     }
+
+
+
+    <script type="text/javascript">
+
+        document.getElementById("deletefilebutton").addEventListener("click", function () { deleteConfirm(); });
+
+    </script>
+
+
 
 </body>

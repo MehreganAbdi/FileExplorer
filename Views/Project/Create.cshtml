@@ -10,49 +10,27 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
-
-<script>
-      function validation() {
-        var projectName = document.myform.projectname.value;
-
-        if (projectName.length < 3 || projectName.length > 100) {
-            sweetAlert({
-                title: "project name must be between 3 and 100 characters",
-                text: "",
-                icon: "error",
-                timer: 5000,
-                showConfirmButton: false
-            });
-            return false;
-        } else {
-
-            sweetAlert({
-                title: "Done!",
-                text: "Project Added",
-                icon: "success",
-                timer: 4000,
-                showConfirmButton: false
-            });
-            return true;
-        }
-    }
+ <script src="~/js/Project.Create/ProjectCreate.js"> </script>
 
 
-    function CountCharsProject(obj) {
-        document.getElementById("project_name_count").innerHTML = '100 . ' + obj.value.length;
-    }
-</script>
 <center>
     @if (TempData["CreateError"] != null)
     {
         <h5>@TempData["CreateError"]</h5>
     }
 </center>
-<form method="post" name="myform" asp-action="Create">
+<script>
+    
+    document.getElementById("createprojectform").onsubmit(validation);
+
+    document.getElementById("createprojectformname").onkeyup = function () { return CountCharsProject() };
+
+</script>
+<form method="post" id="createprojectform" asp-action="Create">
     <div class="form-group">
         <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
-        <input asp-for="ProjectName" onkeyup="CountCharsProject(this)" type="text" name="projectname" class="btn-primary" placeholder="Enter ProjectName">
-        <small id="project_name_count">100 . 0 </small>
+        <input asp-for="ProjectName" id="createprojectformname"   type="text" name="projectname" class="btn-primary" placeholder="Enter ProjectName">
+        <small id="project_name_count">100 / 0 </small>
         <span asp-validation-for="ProjectName" class="text-danger"></span>
     </div>
     <br />

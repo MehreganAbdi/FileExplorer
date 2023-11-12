@@ -7,21 +7,7 @@
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
-<script>
-    function deleteConfirm() {
 
-        sweetAlert({
-            title: "Are You Sure?",
-            text: "Deleted Files Are Not Recycable",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Delete!",
-            cancelButtonText: "Cancel"
-        })
-
-
-    }
-</script>
 
 @if (Model != null)
 {
@@ -33,7 +19,7 @@
             <h1>
                 .  Projects  .
             </h1>
-            
+
             <center>
                 <a asp-controller="Project" asp-action="Create" class="btn-primary">Add Project+</a>
                 <a asp-action="Index" asp-controller="Home" class="btn-primary">Home</a>
@@ -60,7 +46,16 @@
                                 <td><center>@project.ProjectName</center></td>
                                 <td><center>@project.Id</center></td>
                                 <td><center><a asp-action="Edit" asp-controller="Project" asp-route-id="@project.Id" class="btn-edit">Edit</a></center></td>
-                                <td><center> <button type="submit"  asp-action="Delete" asp-controller="Project" onclick="DeleteConfirm()" asp-route-id="@project.Id" class="btn-delete">Delete</button></center></td>
+                                <td>
+                                    <center>
+                                        <button type="submit" asp-action="Delete" asp-controller="Project" id="deleteproject" asp-route-id="@project.Id" class="btn-delete">Delete</button>
+                                        <script>
+
+                                            document.getElementById("deleteproject").addEventListener("click", deleteConfirm);
+
+                                        </script>
+                                    </center>
+                                </td>
 
                             </tr>
                         </tbody>

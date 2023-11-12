@@ -4,26 +4,15 @@
 @{
     ViewData["Title"] = "FileEntities";
     Layout = "CustomLayout";
-  
+
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
-<script>
-    function deleteConfirm() {
-
-        sweetAlert({
-            title: "Are You Sure?",
-            text: "Deleted Files Are Not Recycable",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Delete!",
-            cancelButtonText: "Cancel"
-        })
+<script src="~/js/FileEntity.Index/FileEntityIndex.js"></script>
 
 
-    }
-</script>
+
 @if (Model != null)
 {
 
@@ -37,27 +26,13 @@
             <br />
             <a asp-controller="FileEntity" asp-action="Create" class="btn-primary">Add File Record+</a>
             <a asp-controller="Home" asp-action="Index" class="btn-primary">Home </a>
-            @{
-                 
-                if (TempData["CreateError"] != null)
-                {
-                    <h4>@TempData["CreateError"]</h4>
-                }
-                if (TempData["EditError"] != null)
-                {
-                    <h4>@TempData["EditError"]</h4>
-                }
-                if (TempData["DeleteError"] != null)
-                {
-                    <h4>@TempData["DeleteError"]</h4>
-                }
-            }
+
             <center>
             </center>
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th> 
+                        <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">ProjectName</th>
                         <th scope="col">DateCreated</th>
@@ -73,23 +48,33 @@
                 @{
                     var i = 1;
 
-                    @foreach (var file in Model)
+                        @foreach (var file in Model)
                     {
-                        <tbody>
-                            <tr>
-                                <th scope="row">@i</th>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">@i</th>
 
-                                <td><center>@file.Name</center></td>
-                                <td><center>@file.ProjectName</center></td>
-                                <td><center>@file.DateCreated</center></td>
-                                <td><center>@file.FilePath</center></td>
-                                <td><center>@file.Description</center></td>
-                                <td><center>@file.Size</center></td>
-                                <td><center><a asp-action="Edit" asp-controller="FileEntity" asp-route-id="@file.Id" class="btn-edit">Edit</a></center></td>
-                                <td><center> <button type="button" onclick="deleteConfirm()" asp-action="Delete" asp-controller="FileEntity" asp-route-id="@file.Id" class="btn-delete">Delete</button></center></td>
+                                    <td><center>@file.Name</center></td>
+                                    <td><center>@file.ProjectName</center></td>
+                                    <td><center>@file.DateCreated</center></td>
+                                    <td><center>@file.FilePath</center></td>
+                                    <td><center>@file.Description</center></td>
+                                    <td><center>@file.Size</center></td>
+                                    <td><center><a asp-action="Edit" asp-controller="FileEntity" asp-route-id="@file.Id" class="btn-edit">Edit</a></center></td>
+                                    @{
+                                    var deleteButtonId = "buttounId" + i;
+                                    }
+                                    <td>
+                                        <center>
+                                            <button class="btn-delete" id="@deleteButtonId" type="button" asp-action="Delete" asp-controller="FileEntity" asp-route-id="@file.Id" class="btn-delete">Delete</button>
+                                            <script>
+                                                document.getElementById('@deleteButtonId').addEventListener("click", deleteConfirm);
+                                            </script>
+                                        </center>
+                                    </td>
 
-                            </tr>
-                        </tbody>
+                                </tr>
+                            </tbody>
 
                         i++;
                     }

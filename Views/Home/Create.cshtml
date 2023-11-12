@@ -5,91 +5,29 @@
     Layout = "CustomLayout";
     var allProjectNames = ViewBag.data;
 }
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
-
-@if(TempData["NamingError"] != null)
-{
-    <h3>@TempData["NamingError"]</h3>
-}
-@if(TempData["CreateError"] != null)
-{
-    <h3>@TempData["NamingError"]</h3>
-}
+<script src="~/js/Home.Create/HomeCreate.js" type="text/javascript"></script> 
 
 
 <script>
-    function validation() {
-        var name = document.myform.name.value;
-        var filePath = document.myform.filepath.value;
-        var desc = document.myform.description.value;
-
-      
-
-        if (name.length > 100 || name.length < 3) {
-            sweetAlert({
-                title: "project name must be between 3 and 100 characters",
-                text: "",
-                icon: "error",
-                timer: 4000,
-                showConfirmButton: false
-            });
-            return false;
-        } else if (desc.length > 180) {
-            sweetAlert({
-                title: "Description must be less than 180 characters",
-                text: "",
-                icon: "error",
-                timer: 4000,
-                showConfirmButton: false
-            });
-            return false;
-        } else if (filePath.length > 150) {
-            sweetAlert({
-                title: "file path must be less than 150 characters",
-                text: "",
-                icon: "error",
-                timer: 4000,
-                showConfirmButton: false
-            });
-            return false;
-        } else {
-            sweetAlert({
-                title: "Done!",
-                text: "Record Added",
-                icon: "success",
-                timer: 4000,
-                showConfirmButton: false
-            });
-            return true;
-        }
-    }
-
-    function CountCharsName(obj){
-        document.getElementById("name_count").innerHTML = '100 . ' + obj.value.length ;
-    }
-    function CountCharsFilePath(obj){
-        document.getElementById("filepath_count").innerHTML = '180 . ' + obj.value.length;
-
-    }
-    function CountCharsDesc(obj){
-        document.getElementById("desc_count").innerHTML = '150 . ' + obj.value.length;
-
-    }
+    document.getElementById("createform").onsubmit(validation);
+    document.getElementById("createname").onkeyup = function () {return CountCharsName() };
+    document.getElementById("createfilepath").onkeyup = function () { return CountCharsFilePath() };
+    document.getElementById("createdescription").onkeyup = function () { return CountCharsDesc() };
 </script>
 
 
 
-
-
 <body>
-    <form method="post" name="myform" asp-action="Create" enctype="multipart/form-data" onsubmit="return validation()">
+    <form method="post" id="createform" asp-action="Create" enctype="multipart/form-data" onsubmit="return validation()">
 
         <input type="file" asp-for="FileToCopy" value="@Model.FileToCopy" />
 S
         <div class="form-group">
             <label asp-for="Name">Name</label>
-            <input asp-for="Name" name="name" type="text" onkeyup="CountCharsName(this)" class="btn-primary" placeholder="Enter Name">
+            <input asp-for="Name" id="createname" type="text"  class="btn-primary" placeholder="Enter Name">
             <small id="name_count">100 . @Model.Name.Length</small>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
@@ -99,7 +37,7 @@ S
         <br />
         <div class="form-group">
             <label asp-for="FilePath">FilePath</label>
-            <input asp-for="FilePath" onkeyup="CountCharsFilePath(this)" name="filepath" type="text" class="btn-primary" placeholder="Enter FilePath">
+            <input asp-for="FilePath"   id="createfilepath" type="text" class="btn-primary" placeholder="Enter FilePath">
             <small id="filepath_count">180 . @Model.FilePath.Length </small>
             <span asp-validation-for="FilePath" class="text-danger"></span>
         </div>
@@ -135,7 +73,7 @@ S
         <br />
         <div class="form-group">
             <label asp-for="Description">Description</label>
-            <input asp-for="Description" type="text" onkeyup="CountCharsDesc(this)" name="description" class="btn-primary" placeholder="Description">
+            <input asp-for="Description" type="text"  id="createdescription" class="btn-primary" placeholder="Description">
             <small id="desc_count" >150 . @Model.Description.Length</small>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
