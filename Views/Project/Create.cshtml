@@ -13,19 +13,8 @@
  <script src="~/js/Project.Create/ProjectCreate.js"> </script>
 
 
-<center>
-    @if (TempData["CreateError"] != null)
-    {
-        <h5>@TempData["CreateError"]</h5>
-    }
-</center>
-<script>
-    
-    document.getElementById("createprojectform").onsubmit(validation);
+ 
 
-    document.getElementById("createprojectformname").onkeyup = function () { return CountCharsProject() };
-
-</script>
 <form method="post" id="createprojectform" asp-action="Create">
     <div class="form-group">
         <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
@@ -37,5 +26,15 @@
 
 
     <br />
-    <button type="submit" onclick="return validation()" class="btn btn-primary">Submit</button>
+    <button type="submit"   class="btn btn-primary">Submit</button>
 </form>
+
+<script>
+
+    document.getElementById("createprojectform").onsubmit = function () {
+        validation();
+    };
+
+    document.getElementById("createprojectformname").onkeyup = function () { return CountCharsProject() };
+
+</script>

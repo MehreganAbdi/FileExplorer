@@ -212,7 +212,7 @@ input.input-primary {
 input[type="file"]{
     display:none;
 }
-
+ 
 label.btn-primary {
     background-color: lightblue;
     border-radius: 6px;
@@ -240,4 +240,36 @@ select.btn-primary {
     text-decoration: none;
     padding-left: 4px;
     padding-right: 4px;
+}
+
+
+form.createhome {
+    width: 90%;
+    margin: 0 auto;
+    align-items:self-start;
+    padding-right:100px;
+    
+}
+
+label,
+input.createhome {
+    display: inline-block;
+}
+
+    label.createhome {
+        width: 40%;
+        text-align: right;
+    }
+
+
+
+
+
+
+input.createhome {
+    width: 300px;
+    align-content: center;
+    margin-left: 10px;
+    padding-left: 20px;
+    align-self: flex-start;
 }

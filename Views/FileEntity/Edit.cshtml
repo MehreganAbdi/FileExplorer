@@ -6,18 +6,6 @@
     Layout = "CustomLayout";
     var allprojectNames = ViewBag.data;
 }
-<script src="~/js//FileEntity.Edit/FileEntityEdit.js"></script>
- 
-<script>
-
-    document.getElementById("fileentityeditformname").onkeyup = function () { return CountCharsName() };
-
-    document.getElementById("fileentityeditformfilepath").onkeyup = function () { return CountCharsFilePath() };
-
-    document.getElementById("fileentityeditformdesc").onkeyup = function () { return CountCharsDesc() };
-
-    document.getElementById("fileentityform").onsubmit = function () { return validation() };
-</script>
 
 
 <body>
@@ -93,4 +81,19 @@
         <button type="submit" class="btn-primary">Submit</button>
     </form>
 
+
+
 </body>
+
+<script src="~/js//FileEntity.Edit/FileEntityEdit.js"></script>
+
+<script>
+
+    document.getElementById("fileentityeditformname").onkeyup = function () { return CountCharsName() };
+
+    document.getElementById("fileentityeditformfilepath").onkeyup = function () { return CountCharsFilePath() };
+
+    document.getElementById("fileentityeditformdesc").onkeyup = function () { return CountCharsDesc() };
+
+    document.getElementById("fileentityform").onsubmit = function () { return validation() };
+</script>

@@ -1,20 +1,11 @@
 ﻿function validation() {
-    var name = document.myform.name.value;
-    var filePath = document.myform.filepath.value;
-    var desc = document.myform.description.value;
-    var file = document.myform.filetocopy;
+
+    var filePath = document.getElementById("fileentitycreatefromfilepath").value;
+    var desc = document.getElementById("fileentitycreatefromdesc").value;
+    var file = document.getElementById("fileentitycreatefromfile").value;
 
 
-    if (name.length > 100 || name.length < 3) {
-        sweetAlert({
-            title: "project name must be between 3 and 100 characters",
-            text: "",
-            icon: "error",
-            timer: 4000,
-            showConfirmButton: false
-        });
-        return false;
-    } else if (desc.length > 180) {
+    if (desc.length > 180) {
         sweetAlert({
             title: "Description must be less than 180 characters",
             text: "",
@@ -44,14 +35,12 @@
     }
 }
 
-function CountCharsName(obj) {
-    document.getElementById("name_count").innerHTML = '100 . ' + obj.value.length;
-}
-function CountCharsFilePath(obj) {
-    document.getElementById("filepath_count").innerHTML = '180 . ' + obj.value.length;
+
+function CountCharsFilePath() {
+    document.getElementById("filepath_count").innerHTML = '180 / ' + document.getElementById("fileentitycreateformfilepath").value != null?document.getElementById("fileentitycreateformfilepath").value.length:0;
 
 }
-function CountCharsDesc(obj) {
-    document.getElementById("desc_count").innerHTML = '150 . ' + obj.value.length;
+function CountCharsDesc() {
+    document.getElementById("desc_count").innerHTML = '150 / ' + document.getElementById("fileentitycreateformdesc").value != null ? document.getElementById("fileentitycreateformdesc").value.length : 0 ;
 
 }

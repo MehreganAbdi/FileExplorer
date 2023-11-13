@@ -1,3 +1,8 @@
+document.getElementById("createprojectform").onsubmit = function () {
+    validation();
+};
+
+document.getElementById("createprojectformname").onkeyup = function () { return CountCharsProject() };
 
 
 function validation() {

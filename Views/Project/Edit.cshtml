@@ -6,16 +6,6 @@
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
-<script src="~/js/Project.Edit/ProjectEdit.js"> </script>
-
-
- <script>
-
-    document.getElementById("projecteditform").onsubmit(validation);
-
-     document.getElementById("projecteditformname").onkeyup = function () { return CountCharsEditProject() };
-    
- </script>
 
 
 <form method="post"   id="projecteditform" asp-action="Edit">
@@ -35,3 +25,13 @@
     <br />
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<script src="~/js/Project.Edit/ProjectEdit.js"> </script>
+
+
+ <script>
+
+    document.getElementById("projecteditform").onsubmit(validation);
+
+     document.getElementById("projecteditformname").onkeyup = function () { return CountCharsEditProject() };
+    
+ </script>
