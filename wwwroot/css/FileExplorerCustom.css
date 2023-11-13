@@ -32,6 +32,7 @@ a.btn-delete {
 }
 button.btn-delete {
     border-radius: 10px;
+    border:0;
     color: dodgerblue;
     padding-left: 5px;
     padding-right: 5px;
@@ -40,24 +41,27 @@ button.btn-delete {
     font-size: 18px;
     text-decoration: none;
 }
-    a.btn-delete:hover {
-        border-radius: 10px;
-        color: whitesmoke;
-        background-color: red;
-        margin: 15px;
-        padding-left:5px;
-        padding-right:5pc
-        font-size: 18px;
-        text-decoration: none;
-    }
+a.btn-delete:hover {
+    border-radius: 10px;
+    color: whitesmoke;
+    background-color: red;
+    margin: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    border: 0;
+}
 button.btn-delete:hover {
     border-radius: 10px;
     color: whitesmoke;
     background-color: red;
     margin: 15px;
     padding-left: 5px;
-    padding-right: 5pc font-size: 18px;
+    padding-right: 5px;
+    font-size: 18px;
     text-decoration: none;
+    border:0;
 }
 
 a.btn-edit {
@@ -271,5 +275,10 @@ input.createhome {
     align-content: center;
     margin-left: 10px;
     padding-left: 20px;
-    align-self: flex-start;
 }
+    input.createhome:hover {
+        width: 300px;
+        align-content: center;
+        margin-left: 10px;
+        padding-left: 20px;
+    }   

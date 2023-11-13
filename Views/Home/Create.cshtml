@@ -18,7 +18,7 @@ S
         <div class="form-group">
             <label asp-for="Name">Name</label>
             <input asp-for="Name" id="createname" type="text"  class="btn-primary createhome" placeholder="Enter Name">
-            <small id="name_count">100 . @Model.Name.Length</small>
+            <small id="namecount">100 / @Model.Name.Length</small>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
 
@@ -28,7 +28,7 @@ S
         <div class="form-group">
             <label asp-for="FilePath">FilePath</label>
             <input asp-for="FilePath"   id="createfilepath" type="text" class="btn-primary createhome" placeholder="Enter FilePath">
-            <small id="filepath_count">180 . @Model.FilePath.Length </small>
+            <small id="filepathcount">180 / @Model.FilePath.Length </small>
             <span asp-validation-for="FilePath" class="text-danger"></span>
         </div>
 
@@ -36,18 +36,18 @@ S
         <br /> 
         <input type="hidden" asp-for="ProjectId" value="0" />
 
-        <br />
-        <div class="form-group">
-            <label asp-for="DateCreated">DateCreated</label>
-            <input asp-for="DateCreated" style="margin-left:10px" type="date" class="btn-primary createhome" placeholder="Enter DateCreated">
-            <small id="desc_count"></small>
-            <span asp-validation-for="DateCreated" class="text-danger"></span>
-        </div>
         <div class="form-group">
             <label asp-for="Description">Description</label>
             <input asp-for="Description" type="text"  id="createdescription" class="createhome btn-primary" placeholder="Description">
-            <small id="desc_count" >150 / @Model.Description.Length</small>
+            <small id="desccount" >150 / @Model.Description.Length</small>
             <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="form-group"> 
+            <br />
+            <input asp-for="DateCreated" style="margin-left:10px" type="date" class="btn-primary createhome" placeholder="Enter DateCreated">
+             
+            <span asp-validation-for="DateCreated" class="text-danger"></span>
         </div>
         <br />
         <div class="form-group">
@@ -55,7 +55,7 @@ S
             <select asp-for="ProjectName" style="width:100px " class="bg-opacity-10 align-content-md-center">
                 @foreach (var project in allProjectNames)
                 {
-                    <option itemid="@project.Id.ToString()" onclick="assignToModel('@project.ProjectName')">@project.ProjectName</option>
+                    <option >@project.ProjectName</option>
 
                 }
             </select>
@@ -83,10 +83,10 @@ S
 
 
 <script>
-    document.getElementById("createform").onsubmit(validation);
+    document.getElementById("createform").onsubmit = function () { return validation(); };
     document.getElementById("createname").onkeyup = function () {return CountCharsName() };
-    document.getElementById("createfilepath").onkeyup = function () { return CountCharsFilePath() };
-    document.getElementById("createdescription").onkeyup = function () { return CountCharsDesc() };
+    document.getElementById("createfilepath").onkeyup = function () { return CountCharsFilePath(); };
+    document.getElementById("createdescription").onkeyup = function () { return CountCharsDesc(); };
 </script>
 
 

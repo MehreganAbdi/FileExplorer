@@ -1,7 +1,4 @@
-﻿
-
-
-function validation() {
+﻿function validation() {
     var name = document.getElementById("createname");
     var filePath = document.getElementById("createfilepath");
     var desc = document.myform.getElementById("createdescription");
@@ -12,7 +9,7 @@ function validation() {
         sweetAlert({
             title: "project name must be between 3 and 100 characters",
             text: "",
-            type: "error",
+            icon: "error",
             timer: 4000,
             showConfirmButton: false
         });
@@ -21,7 +18,7 @@ function validation() {
         sweetAlert({
             title: "Description must be less than 180 and more than 3 characters",
             text: "",
-            type: "error",
+            icon: "error",
             timer: 4000,
             showConfirmButton: false
         });
@@ -30,7 +27,7 @@ function validation() {
         sweetAlert({
             title: "file path must be less than 150 and more than 3 characters",
             text: "",
-            type: "error",
+            icon: "error",
             timer: 4000,
             showConfirmButton: false
         });
@@ -39,7 +36,7 @@ function validation() {
         sweetAlert({
             title: "Done!",
             text: "Record Added",
-            type: "success",
+            icon: "success",
             timer: 4000,
             showConfirmButton: false
         });
@@ -56,6 +53,6 @@ function CountCharsFilePath() {
 
 }
 function CountCharsDesc() {
-    document.getElementById("desccount").innerHTML = '150 . ' + document.getElementById("createdescription").value.length;
+    document.getElementById("desccount").innerHTML = '150 / ' + document.getElementById("createdescription").value.length;
 
 }
