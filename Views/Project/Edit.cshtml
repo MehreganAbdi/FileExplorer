@@ -9,15 +9,6 @@
 <script src="~/js/Project.Edit/ProjectEdit.js"> </script>
 
 
- <script>
-
-    document.getElementById("projecteditform").onsubmit(validation);
-
-     document.getElementById("projecteditformname").onkeyup = function () { return CountCharsEditProject() };
-    
- </script>
-
-
 <form method="post"   id="projecteditform" asp-action="Edit">
 
     <input type="hidden" asp-for="Id" value="@Model.Id"/>
@@ -25,9 +16,8 @@
         <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
         <input asp-for="ProjectName" id="projecteditformname" type="text" class="btn-primary" placeholder="Enter ProjectName">
 
-        <small id="editproject_name_count">100 /  @Model.ProjectName.Length</small>
-        
-        <span asp-validation-for="ProjectName" class="text-danger"></span>
+        <small id="editprojectnc">100 /  @Model.ProjectName.Length</small>
+         
     </div>
     <br />
 
@@ -35,3 +25,14 @@
     <br />
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+
+
+
+ <script>
+
+     document.getElementById("projecteditformname").onkeyup = function () { return CountCharsEditProject(); };
+
+     document.getElementById("projecteditform").onsubmit = function () { return validation(); };
+    
+ </script>

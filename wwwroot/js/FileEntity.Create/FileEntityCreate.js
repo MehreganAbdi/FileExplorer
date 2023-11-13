@@ -1,29 +1,29 @@
 ﻿function validation() {
-    var name = document.myform.name.value;
-    var filePath = document.myform.filepath.value;
-    var desc = document.myform.description.value;
-    var file = document.myform.filetocopy;
+
+    var filePath = document.getElementById("fileentitycreatefromfilepath").value;
+    var desc = document.getElementById("fileentitycreatefromdesc").value;
+    var file = document.getElementById("fileentitycreatefromfile").value;
 
 
-    if (name.length > 100 || name.length < 3) {
+    if (filePath.length > 150 || file.path < 3) {
         sweetAlert({
-            title: "project name must be between 3 and 100 characters",
+            title: "Description must be less than 180 and more than 3 characters",
+            text: "",
+            icon: "error",
+            timer: 5000,
+            showConfirmButton: false
+        });
+        return false;
+    } else if (desc.length > 180 || desc.length < 3) {
+        sweetAlert({
+            title: "file path must be less than 150 and more than 3 characters",
             text: "",
             icon: "error",
             timer: 4000,
             showConfirmButton: false
         });
         return false;
-    } else if (desc.length > 180) {
-        sweetAlert({
-            title: "Description must be less than 180 characters",
-            text: "",
-            icon: "error",
-            timer: 4000,
-            showConfirmButton: false
-        });
-        return false;
-    } else if (filePath.length > 150) {
+    } else if (file == null) {
         sweetAlert({
             title: "file path must be less than 150 characters",
             text: "",
@@ -32,7 +32,7 @@
             showConfirmButton: false
         });
         return false;
-    } else {
+    }else {
         sweetAlert({
             title: "Done!",
             text: "Record Added",
@@ -44,14 +44,12 @@
     }
 }
 
-function CountCharsName(obj) {
-    document.getElementById("name_count").innerHTML = '100 . ' + obj.value.length;
-}
-function CountCharsFilePath(obj) {
-    document.getElementById("filepath_count").innerHTML = '180 . ' + obj.value.length;
+
+function CountCharsFilePath() {
+    document.getElementById("filepathcount").innerHTML = '180 / ' + document.getElementById("fileentitycreatefromfilepath").value.length;
 
 }
-function CountCharsDesc(obj) {
-    document.getElementById("desc_count").innerHTML = '150 . ' + obj.value.length;
+function CountCharsDesc() {
+    document.getElementById("desccount").innerHTML = '150 / ' + document.getElementById("fileentitycreatefromdesc").value.length;
 
 }

@@ -32,6 +32,7 @@ a.btn-delete {
 }
 button.btn-delete {
     border-radius: 10px;
+    border:0;
     color: dodgerblue;
     padding-left: 5px;
     padding-right: 5px;
@@ -40,24 +41,27 @@ button.btn-delete {
     font-size: 18px;
     text-decoration: none;
 }
-    a.btn-delete:hover {
-        border-radius: 10px;
-        color: whitesmoke;
-        background-color: red;
-        margin: 15px;
-        padding-left:5px;
-        padding-right:5pc
-        font-size: 18px;
-        text-decoration: none;
-    }
+a.btn-delete:hover {
+    border-radius: 10px;
+    color: whitesmoke;
+    background-color: red;
+    margin: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    border: 0;
+}
 button.btn-delete:hover {
     border-radius: 10px;
     color: whitesmoke;
     background-color: red;
     margin: 15px;
     padding-left: 5px;
-    padding-right: 5pc font-size: 18px;
+    padding-right: 5px;
+    font-size: 18px;
     text-decoration: none;
+    border:0;
 }
 
 a.btn-edit {
@@ -212,7 +216,7 @@ input.input-primary {
 input[type="file"]{
     display:none;
 }
-
+ 
 label.btn-primary {
     background-color: lightblue;
     border-radius: 6px;
@@ -241,3 +245,40 @@ select.btn-primary {
     padding-left: 4px;
     padding-right: 4px;
 }
+
+
+form.createhome {
+    width: 90%;
+    margin: 0 auto;
+    align-items:self-start;
+    padding-right:100px;
+    
+}
+
+label,
+input.createhome {
+    display: inline-block;
+}
+
+    label.createhome {
+        width: 40%;
+        text-align: right;
+    }
+
+
+
+
+
+
+input.createhome {
+    width: 300px;
+    align-content: center;
+    margin-left: 10px;
+    padding-left: 20px;
+}
+    input.createhome:hover {
+        width: 300px;
+        align-content: center;
+        margin-left: 10px;
+        padding-left: 20px;
+    }   

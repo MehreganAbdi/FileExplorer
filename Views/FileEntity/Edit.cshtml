@@ -6,8 +6,83 @@
     Layout = "CustomLayout";
     var allprojectNames = ViewBag.data;
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
+
+<script src="~/js//FileEntity.Create/FileEntityCreate.js"></script>
+
+<body>
+    <form method="post" id="fileentityeditform" asp-action="Create" enctype="multipart/form-data">
+         
+        <input asp-for="Size" value="0" type="hidden" />
+        <input asp-for="Type" value="type" type="hidden" />
+
+        <br />
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" id="fileentityeditformname" type="text"  class="btn-primary createhome" placeholder="Enter FilePath">
+            <small id="namecount">100 / @Model </small>
+            <span asp-validation-for="FilePath" class="text-danger"></span>
+        </div>
+
+        <br />
+        <div class="form-group">
+            <label asp-for="FilePath">FilePath</label>
+            <input asp-for="FilePath" id="fileentityeditformfilepath" type="text"   class="btn-primary createhome" placeholder="Enter FilePath">
+            <small id="filepathcount">180 / @Model.FilePath.Length </small>
+            <span asp-validation-for="FilePath" class="text-danger"></span>
+        </div>
+
+        <br />
+
+
+        <br />
+        <div class="form-group">
+            <label asp-for="Description">Description</label>
+            <input asp-for="Description" id="fileentityeditformdesc" type="text" class="btn-primary createhome" placeholder="Description">
+            <small id="desccount">150 / @Model.Description.Length</small>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <br />
+         
+
+        <br />
+
+        <input type="hidden" asp-for="ProjectId" value="0" />
+
+        <div class="form-group">
+            <label>
+                 
+
+                <input asp-for="FileToCopy" id="fileentityeditformfile" style="display:none;" type="file" class="btn-primary">
+            </label>
+            <br />
+            <small id="filepath_count"></small>
+            <label asp-for="ProjectName">ProjectName</label>
+            <select asp-for="ProjectName">
+                @foreach (var project in allprojectNames)
+                {
+                    <option >@project.ProjectName</option>
+
+                }
+            </select>
+            <span asp-validation-for="ProjectName" class="text-danger"></span>
+        </div>
+
+        
+
+        <br />
+        <button type="submit" class="btn-primary">Submit</button>
+    </form>
+
+
+
+
+</body>
+
+
 <script src="~/js//FileEntity.Edit/FileEntityEdit.js"></script>
- 
+
 <script>
 
     document.getElementById("fileentityeditformname").onkeyup = function () { return CountCharsName() };
@@ -16,81 +91,5 @@
 
     document.getElementById("fileentityeditformdesc").onkeyup = function () { return CountCharsDesc() };
 
-    document.getElementById("fileentityform").onsubmit = function () { return validation() };
+    document.getElementById("fileentityeditform").onsubmit = function () { return validation() };
 </script>
-
-
-<body>
-    <form method="post" asp-action="Edit"   id="fileentityeditform" enctype="multipart/form-data">
-        <input type="hidden" value="@Model.Id"/>
-        <div class="form-group">
-            <label asp-for="Name">Name</label>
-            <input asp-for="Name" type="text" id="fileentityeditformnamename" class="btn-primary" placeholder="Enter Name">
-
-            <small id="name_count">100 . @Model.Name.Length</small>
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-
-
-
-        <br />
-        <div class="form-group">
-            <label asp-for="FilePath">FilePath</label>
-            <input asp-for="FilePath" type="text" id="fileentityeditformname" class="btn-primary" placeholder="Enter FilePath">
-            <small id="filepath_count">180 . @Model.FilePath.Length</small>
-            <span asp-validation-for="FilePath" class="text-danger"></span>
-        </div>
-
-        <br />
-        <div class="form-group">
-            <label asp-for="DateCreated">DateCreated</label>
-            <input asp-for="DateCreated" type="date" class="btn-primary" placeholder="Enter DateCreated">
-            <span asp-validation-for="DateCreated" class="text-danger"></span>
-        </div>
-
-        <br />
-
-        <input type="hidden" asp-for="ProjectId" value="0" />
-
-        <div class="form-group">
-            <label asp-for="ProjectName">ProjectName</label>
-            <select asp-for="ProjectName" onselect="@Model.ProjectName" >
-                @foreach (var project in allprojectNames)
-                {
-                    <option itemid="@project.Id.ToString()" onclick="assignToModel('@project.ProjectName')">@project.ProjectName</option>
-
-                }
-            </select>
-            <span asp-validation-for="ProjectName" class="text-danger"></span>
-        </div>
-
-        <br />
-        <div class="form-group">
-            <label asp-for="Size">Size</label>
-            <input asp-for="Size" type="text" class="btn-primary" placeholder="Size">
-            <span asp-validation-for="Size" class="text-danger"></span>
-        </div>
-        <br />
-        <div class="form-group">
-            <label asp-for="Description">Description</label>
-            <input asp-for="Description" type="text" id="fileentityeditformdesc" class="btn-primary" placeholder="Description">
-            <small id="desc_count">150 . @Model.Description.Length</small>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
-        <br />
-
-        <div class="form-group">
-            <label asp-for="Type">Type</label>
-            <input asp-for="Type" type="text" class="btn-primary" placeholder="Enter Type">
-            <span asp-validation-for="Type" class="text-danger"></span>
-        </div>
-        <br />
-        <br />
-        <br />
-
-
-        <br />
-        <button type="submit" class="btn-primary">Submit</button>
-    </form>
-
-</body>

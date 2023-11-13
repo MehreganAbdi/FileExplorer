@@ -6,48 +6,45 @@
     var allProjectNames = ViewBag.data;
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
 
 <script src="~/js//FileEntity.Create/FileEntityCreate.js"></script>
-<script>
-
-    document.getElementById("fileentitycreatefrom").onsubmit(validation);
-
-    document.getElementById("fileentitycreatefromname").onkeyup = function () { return CountCharsName() };
-
-    document.getElementById("fileentitycreatefromfilepath").onkeyup = function () { return CountCharsFilePath() };
-
-    document.getElementById("fileentitycreatefromdesc").onkeyup = function () { return CountCharsDesc() };
-</script>
 
 <body>
-    <form method="post" id="fileentitycreatefrom" onsubmit="return validation()" asp-action="Create" enctype="multipart/form-data">
-        <input asp-for="Name" value="NewFile" type="hidden"/>
+    <form method="post" id="fileentitycreatefrom" asp-action="Create" enctype="multipart/form-data">
+        <input asp-for="Name" value="NewFile" type="hidden" />
         <input asp-for="Size" value="0" type="hidden" />
-        <input asp-for="Type" value="type" type="hidden"/>
-        
-        
+        <input asp-for="Type" value="type" type="hidden" />
+
+
         <br />
         <div class="form-group">
             <label asp-for="FilePath">FilePath</label>
-            <input asp-for="FilePath" id="fileentitycreatefromfilepath" type="text" onkeyup="CountCharsFilePath(this)" class="btn-primary" placeholder="Enter FilePath">
-            <small id="filepath_count">180 . 0 </small>
+            <input asp-for="FilePath" id="fileentitycreatefromfilepath" type="text"   class="btn-primary createhome" placeholder="Enter FilePath">
+            <small id="filepathcount">180 / 0 </small>
             <span asp-validation-for="FilePath" class="text-danger"></span>
         </div>
 
         <br />
-        
 
 
+        <br />
         <div class="form-group">
-            <label>Select File 
-
-            <input asp-for="FileToCopy"  type="file"  class="btn-primary" >
-            </label>
-            <br />
-            <small id="filepath_count"></small>
-            <span asp-validation-for="FileToCopy" class="text-danger"></span>
+            <label asp-for="Description">Description</label>
+            <input asp-for="Description" id="fileentitycreatefromdesc" type="text" class="btn-primary createhome" placeholder="Description">
+            <small id="desccount">150 / 0</small>
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-      
+        <br />
+
+
+
+
+
+
+
+
 
 
 
@@ -57,11 +54,18 @@
         <input type="hidden" asp-for="ProjectId" value="0" />
 
         <div class="form-group">
+            <label>
+                Select File
+
+                <input asp-for="FileToCopy" id="fileentitycreatefromfile" type="file" class="btn-primary">
+            </label>
+            <br />
+            <small id="filepath_count"></small>
             <label asp-for="ProjectName">ProjectName</label>
             <select asp-for="ProjectName">
                 @foreach (var project in allProjectNames)
                 {
-                    <option itemid="@project.Id.ToString()" onclick="assignToModel('@project.ProjectName')">@project.ProjectName</option>
+                    <option  >@project.ProjectName</option>
 
                 }
             </select>
@@ -69,17 +73,7 @@
         </div>
 
         <br />
-        
-        <br />
-        <div class="form-group">
-            <label asp-for="Description">Description</label>
-            <input asp-for="Description" id="fileentitycreatefromdesc" type="text" class="btn-primary" placeholder="Description">
-            <small id="desc_count">150 . 0</small>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
-        <br />
 
-      
         <br />
         <br />
         <br />
@@ -89,4 +83,17 @@
         <button type="submit" class="btn-primary">Submit</button>
     </form>
 
+
+
+
 </body>
+
+<script>
+
+    document.getElementById("fileentitycreatefromdesc").onkeyup = function () { return CountCharsDesc() };
+
+    document.getElementById("fileentitycreatefromfilepath").onkeyup = function () { return CountCharsFilePath() };
+
+    document.getElementById("fileentitycreatefrom").onsubmit = function () { return validation(); };
+
+</script>
