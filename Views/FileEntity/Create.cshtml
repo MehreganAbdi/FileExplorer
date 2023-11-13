@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
 
-<script src="~/js//FileEntity.Create/FileEntityCreate.js"></script>
+
 
 <body>
     <form method="post" id="fileentitycreatefrom" asp-action="Create" enctype="multipart/form-data">
@@ -87,13 +87,6 @@
 
 
 </body>
+<script src="~/js//FileEntity.Create/FileEntityCreate.js"></script>
 
-<script>
-
-    document.getElementById("fileentitycreatefromdesc").onkeyup = function () { return CountCharsDesc() };
-
-    document.getElementById("fileentitycreatefromfilepath").onkeyup = function () { return CountCharsFilePath() };
-
-    document.getElementById("fileentitycreatefrom").onsubmit = function () { return validation(); };
-
-</script>
+ 

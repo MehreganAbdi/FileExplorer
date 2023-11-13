@@ -56,3 +56,9 @@ function CountCharsDesc() {
     document.getElementById("desccount").innerHTML = '150 / ' + document.getElementById("createdescription").value.length;
 
 }
+
+
+document.getElementById("createform").onsubmit = function () { return validation(); };
+document.getElementById("createname").onkeyup = function () { return CountCharsName() };
+document.getElementById("createfilepath").onkeyup = function () { return CountCharsFilePath(); };
+document.getElementById("createdescription").onkeyup = function () { return CountCharsDesc(); };

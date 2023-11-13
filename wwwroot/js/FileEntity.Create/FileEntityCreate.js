@@ -53,3 +53,9 @@ function CountCharsDesc() {
     document.getElementById("desccount").innerHTML = '150 / ' + document.getElementById("fileentitycreatefromdesc").value.length;
 
 }
+
+document.getElementById("fileentitycreatefromdesc").onkeyup = function () { return CountCharsDesc() };
+
+document.getElementById("fileentitycreatefromfilepath").onkeyup = function () { return CountCharsFilePath() };
+
+document.getElementById("fileentitycreatefrom").onsubmit = function () { return validation(); };

@@ -21,7 +21,7 @@
         <div class="form-group">
             <label asp-for="Name">Name</label>
             <input asp-for="Name" id="fileentityeditformname" type="text"  class="btn-primary createhome" placeholder="Enter FilePath">
-            <small id="namecount">100 / @Model </small>
+            <small id="namecount">100 / @Model.Name.Length </small>
             <span asp-validation-for="FilePath" class="text-danger"></span>
         </div>
 
@@ -83,13 +83,4 @@
 
 <script src="~/js//FileEntity.Edit/FileEntityEdit.js"></script>
 
-<script>
-
-    document.getElementById("fileentityeditformname").onkeyup = function () { return CountCharsName() };
-
-    document.getElementById("fileentityeditformfilepath").onkeyup = function () { return CountCharsFilePath() };
-
-    document.getElementById("fileentityeditformdesc").onkeyup = function () { return CountCharsDesc() };
-
-    document.getElementById("fileentityeditform").onsubmit = function () { return validation() };
-</script>
+ 
