@@ -26,3 +26,8 @@ function validation() {
 function CountCharsEditProject() {
     document.getElementById("editprojectnc").innerHTML = '100 / ' + document.getElementById("projecteditformname").value.length;
 }
+
+
+document.getElementById("projecteditformname").onkeyup = function () { return CountCharsEditProject(); };
+
+document.getElementById("projecteditform").onsubmit = function () { return validation(); };

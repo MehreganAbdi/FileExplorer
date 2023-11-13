@@ -177,7 +177,7 @@
                                         var confirmMessageName = item.path.ToString();
                                         var downloadbuttonid = "downloadfilebutton" + i.ToString();
                                     }
-                                    <td><center><input id="@downloadbuttonid" value="Download" type="button" class="btn-primary"></center></td>
+                                    <td><center><input id="@downloadbuttonid" value="Download" data-path="@item.path" type="button" class="btn-primary"></center></td>
                                     <td>
                                         <button asp-action="Delete" asp-controller="Home" asp-route-bothpath="@bothpath" type="submit"
                                                 id="deletefilebutton" class="btn-delete">

@@ -6,6 +6,8 @@ function validation() {
 
 
 
+
+
     if (name.length > 100 || name.length < 3) {
         sweetAlert({
             title: "project name must be between 3 and 100 characters",
