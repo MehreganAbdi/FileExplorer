@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using FileExplorer.DTOs;
 using FileExplorer.IService;
 using FileExplorer.Models;
@@ -308,31 +310,23 @@ namespace FileExplorer.Services
 
         public async Task<bool> ValidatePathPattern(string path)
         {
-            if(path.Contains('*')||path.Contains("<")||
-                  path.Contains(">")||
-                path.Contains('|') || path.Contains("?")||
-                  path.Contains("/"))
-            {
+            var regex = new Regex(@"G:\\omefile\\newFolder\\pdf.txt");
+            
 
-                return false;
-            }
-
-            return true;
+            return regex.Match(path).Success;
         }
+            
+
+
 
 
         public async Task<bool> ValidateNamePattern(string name)
         {
-            if (name.Contains('*') || name.Contains("<") ||
-                  name.Contains(">") ||name.Contains("|")||
-                name.Contains('|') || name.Contains("?") ||
-                  name.Contains("/")||name.Contains(":"))
-            {
+            var regex = new Regex(@"G:\\omefile\\newFolder\\pdf.txt");
 
-                return false;
-            }
 
-            return true;
+            return regex.Match(name).Success;
+
         }
     }
 }

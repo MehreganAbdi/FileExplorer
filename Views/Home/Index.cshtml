@@ -12,10 +12,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
-
-
-
 </head>
+
+
+
 <body>
 
     <center>
@@ -177,19 +177,14 @@
                                         var confirmMessageName = item.path.ToString();
                                         var downloadbuttonid = "downloadfilebutton" + i.ToString();
                                     }
-                                    <td><center><input id="@downloadbuttonid" value="Download" data-path="@item.path" type="button" class="btn-primary"></center></td>
+                                    <td><center><input  value="Download" data-path="@item.path" data-type="@item.Type" type="button" class="btn-primary home-index"></center></td>
                                     <td>
-                                        <button asp-action="Delete" asp-controller="Home" asp-route-bothpath="@bothpath" type="submit"
-                                                id="deletefilebutton" class="btn-delete">
-                                            Delete
-                                        </button>
-
-                                        <script>
-                                           
-                                            document.getElementById('@downloadbuttonid').addEventListener("click", function () { PathExists('@item.path.ToString().Replace("\\","%5C").Replace(":","%3A")', '@item.Type.ToString()'); })
-
-                                        </script>
+                                        <input data-bothpath="@bothpath"  type="button"
+                                                id="deletefilebutton" class="btn-delete home-index-delete" />
                                     </td>
+                                        
+                                        
+
    
 
                                 </tr>
