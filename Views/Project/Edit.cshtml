@@ -6,6 +6,7 @@
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
+<script src="~/js/Project.Edit/ProjectEdit.js"> </script>
 
 
 <form method="post"   id="projecteditform" asp-action="Edit">
@@ -15,9 +16,8 @@
         <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
         <input asp-for="ProjectName" id="projecteditformname" type="text" class="btn-primary" placeholder="Enter ProjectName">
 
-        <small id="editproject_name_count">100 /  @Model.ProjectName.Length</small>
-        
-        <span asp-validation-for="ProjectName" class="text-danger"></span>
+        <small id="editprojectnc">100 /  @Model.ProjectName.Length</small>
+         
     </div>
     <br />
 
@@ -25,13 +25,14 @@
     <br />
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-<script src="~/js/Project.Edit/ProjectEdit.js"> </script>
+
+
 
 
  <script>
 
-    document.getElementById("projecteditform").onsubmit(validation);
+     document.getElementById("projecteditformname").onkeyup = function () { return CountCharsEditProject(); };
 
-     document.getElementById("projecteditformname").onkeyup = function () { return CountCharsEditProject() };
+     document.getElementById("projecteditform").onsubmit = function () { return validation(); };
     
  </script>

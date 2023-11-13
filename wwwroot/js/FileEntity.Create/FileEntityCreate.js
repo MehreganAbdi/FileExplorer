@@ -5,16 +5,25 @@
     var file = document.getElementById("fileentitycreatefromfile").value;
 
 
-    if (desc.length > 180) {
+    if (filePath.length > 150 || file.path < 3) {
         sweetAlert({
-            title: "Description must be less than 180 characters",
+            title: "Description must be less than 180 and more than 3 characters",
+            text: "",
+            icon: "error",
+            timer: 5000,
+            showConfirmButton: false
+        });
+        return false;
+    } else if (desc.length > 180 || desc.length < 3) {
+        sweetAlert({
+            title: "file path must be less than 150 and more than 3 characters",
             text: "",
             icon: "error",
             timer: 4000,
             showConfirmButton: false
         });
         return false;
-    } else if (filePath.length > 150) {
+    } else if (file == null) {
         sweetAlert({
             title: "file path must be less than 150 characters",
             text: "",
@@ -23,7 +32,7 @@
             showConfirmButton: false
         });
         return false;
-    } else {
+    }else {
         sweetAlert({
             title: "Done!",
             text: "Record Added",
@@ -37,10 +46,10 @@
 
 
 function CountCharsFilePath() {
-    document.getElementById("filepath_count").innerHTML = '180 / ' + document.getElementById("fileentitycreateformfilepath").value != null?document.getElementById("fileentitycreateformfilepath").value.length:0;
+    document.getElementById("filepathcount").innerHTML = '180 / ' + document.getElementById("fileentitycreatefromfilepath").value.length;
 
 }
 function CountCharsDesc() {
-    document.getElementById("desc_count").innerHTML = '150 / ' + document.getElementById("fileentitycreateformdesc").value != null ? document.getElementById("fileentitycreateformdesc").value.length : 0 ;
+    document.getElementById("desccount").innerHTML = '150 / ' + document.getElementById("fileentitycreatefromdesc").value.length;
 
 }

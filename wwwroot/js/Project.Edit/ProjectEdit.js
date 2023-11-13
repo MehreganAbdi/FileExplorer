@@ -24,5 +24,5 @@ function validation() {
     }
 }
 function CountCharsEditProject() {
-    document.getElementById("editporject_name_count").innerHTML = '100 / ' + document.getElementById("projecteditformname").value.length;
+    document.getElementById("editprojectnc").innerHTML = '100 / ' + document.getElementById("projecteditformname").value.length;
 }

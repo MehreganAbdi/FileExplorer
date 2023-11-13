@@ -29,10 +29,12 @@
     <button type="submit"   class="btn btn-primary">Submit</button>
 </form>
 
+
+
 <script>
 
     document.getElementById("createprojectform").onsubmit = function () {
-        validation();
+        return  validation();
     };
 
     document.getElementById("createprojectformname").onkeyup = function () { return CountCharsProject() };

@@ -17,9 +17,9 @@ function validation() {
             showConfirmButton: false
         });
         return false;
-    } else if (desc.length > 180) {
+    } else if (desc.length > 180 || desc.length < 3) {
         sweetAlert({
-            title: "Description must be less than 180 characters",
+            title: "Description must be less than 180 and more than 3 characters",
             text: "",
             type: "error",
             timer: 4000,
@@ -28,7 +28,7 @@ function validation() {
         return false;
     } else if (filePath.length > 150) {
         sweetAlert({
-            title: "file path must be less than 150 characters",
+            title: "file path must be less than 150 and more than 3 characters",
             text: "",
             type: "error",
             timer: 4000,
@@ -48,14 +48,14 @@ function validation() {
 }
 
 function CountCharsName() {
-    document.getElementById("name_count").innerHTML = '100 / ' + document.getElementById("createname").value.length;
+    document.getElementById("namecount").innerHTML = '100 / ' + document.getElementById("createname").value.length;
    
 }
 function CountCharsFilePath() {
-    document.getElementById("filepath_count").innerHTML = '180 / ' + document.getElementById("createfilepath").value.length;
+    document.getElementById("filepathcount").innerHTML = '180 / ' + document.getElementById("createfilepath").value.length;
 
 }
 function CountCharsDesc() {
-    document.getElementById("desc_count").innerHTML = '150 . ' + document.getElementById("createdescription").value.length;
+    document.getElementById("desccount").innerHTML = '150 . ' + document.getElementById("createdescription").value.length;
 
 }
