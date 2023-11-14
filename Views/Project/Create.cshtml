@@ -10,9 +10,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
- <script src="~/js/Project.Create/ProjectCreate.js"> </script>
-
-
+ 
  
 
 <form method="post" id="createprojectform" asp-action="Create">
@@ -29,14 +27,6 @@
     <button type="submit"   class="btn btn-primary">Submit</button>
 </form>
 
+<script src="~/js/Project.Create/ProjectCreate.js"> </script>
 
 
-<script>
-
-    document.getElementById("createprojectform").onsubmit = function () {
-        return  validation();
-    };
-
-    document.getElementById("createprojectformname").onkeyup = function () { return CountCharsProject() };
-
-</script>

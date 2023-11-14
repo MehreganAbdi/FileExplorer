@@ -6,6 +6,8 @@ function validation() {
 
 
 
+
+
     if (name.length > 100 || name.length < 3) {
         sweetAlert({
             title: "project name must be between 3 and 100 characters",
@@ -46,7 +48,7 @@ function validation() {
 }
 
 function CountCharsName() {
-    document.getElementById("namecount").innerHTML = '100 . ' + document.getElementById("fileentityeditformname").value.length;
+    document.getElementById("namecount").innerHTML = '100 / ' + document.getElementById("fileentityeditformname").value.length;
 }
 function CountCharsFilePath() {
     document.getElementById("filepathcount").innerHTML = '180 / ' + document.getElementById("fileentityeditformfilepath").value.length;
@@ -56,3 +58,10 @@ function CountCharsDesc() {
     document.getElementById("desccount").innerHTML = '150 / ' + document.getElementById("fileentityeditformdesc").value.length;
 
 }
+document.getElementById("fileentityeditformname").onkeyup = function () { return CountCharsName() };
+
+document.getElementById("fileentityeditformfilepath").onkeyup = function () { return CountCharsFilePath() };
+
+document.getElementById("fileentityeditformdesc").onkeyup = function () { return CountCharsDesc() };
+
+document.getElementById("fileentityeditform").onsubmit = function () { return validation() };
