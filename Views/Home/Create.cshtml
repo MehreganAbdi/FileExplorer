@@ -7,14 +7,13 @@
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
 
 
 <body>
     <form method="post" id="createform" asp-action="Create" enctype="multipart/form-data" >
 
         <input type="file" asp-for="FileToCopy" value="@Model.FileToCopy" />
-S
+
         <div class="form-group">
             <label asp-for="Name">Name</label>
             <input asp-for="Name" id="createname" type="text"  class="btn-primary createhome" placeholder="Enter Name">
@@ -51,11 +50,11 @@ S
         </div>
         <br />
         <div class="form-group">
-            <label asp-for="ProjectName">ProjectName</label>
-            <select asp-for="ProjectName" style="width:100px " class="bg-opacity-10 align-content-md-center">
+            <label >ProjectName</label>
+            <select asp-for="ProjectId" style="width:100px " >
                 @foreach (var project in allProjectNames)
                 {
-                    <option >@project.ProjectName</option>
+                    <option value="@project.Id" selected="@project.Id" >@project.ProjectName</option>
 
                 }
             </select>
@@ -79,6 +78,7 @@ S
         <button type="submit" class="btn-primary">Submit</button>
     </form>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
 <script src="~/js/Home.Create/HomeCreate.js" type="text/javascript"></script> 
 
 

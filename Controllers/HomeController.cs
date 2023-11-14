@@ -258,8 +258,7 @@ namespace FileExplorer.Controllers
 
 
 
-                await directoryService.AddFileToPath(fileExploreViewModel.path, fileExploreViewModel.SelectedFile);
-
+               
 
                 var fileEntityDTO = new FileEntityDTO()
                 {
@@ -328,11 +327,16 @@ namespace FileExplorer.Controllers
                     return View(fileEntityDTO);
 
                 }
-                var projectByName = await projectService.GetProjectByNameAsync(fileEntityDTO.ProjectName);
-                fileEntityDTO.ProjectId = projectByName.Id;
+
+                await directoryService.AddFileToPath(fileEntityDTO.FilePath, fileEntityDTO.FileToCopy);
 
 
-                 await fileEntityService.AddFileEntityAsync(fileEntityDTO);
+                fileEntityDTO.ProjectName = (await projectService.GetByIdAsync(fileEntityDTO.ProjectId)).ProjectName;
+
+
+                await fileEntityService.AddFileEntityAsync(fileEntityDTO);
+
+
                 
 
                 var redirectedFileExploreViewModel = await directoryService.GetDataInViewModel(fileEntityDTO.FilePath);

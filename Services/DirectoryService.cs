@@ -310,10 +310,10 @@ namespace FileExplorer.Services
 
         public async Task<bool> ValidatePathPattern(string path)
         {
-            var regex = new Regex(@"G:\\omefile\\newFolder\\pdf.txt");
+            var regex = new Regex(@"^(?:[a-zA-Z]\:|\\\\[\w\.]+\\[\w.$]+)\\(?:[\w]+\\)*\w([\w.])+$");
             
 
-            return regex.Match(path).Success;
+            return regex.IsMatch(path);
         }
             
 
@@ -322,11 +322,9 @@ namespace FileExplorer.Services
 
         public async Task<bool> ValidateNamePattern(string name)
         {
-            var regex = new Regex(@"G:\\omefile\\newFolder\\pdf.txt");
-
-
-            return regex.Match(name).Success;
-
+            return !(name.Contains("*") || name.Contains(">") || name.Contains("<") || name.Contains("|") ||
+                        name.Contains("[") || name.Contains("]"));
         }
+
     }
 }
