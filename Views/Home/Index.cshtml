@@ -80,10 +80,32 @@
                             </form>
                         </div>
                         <br />
-                        @if (TempData["SelectError"] != null)
+                       @if(Model.SelectErrorTD != null)
                         {
-                            <small>@TempData["SelectError"]</small>
+                            <small>@Model.SelectErrorTD</small>
                         }
+
+                        @if(TempData["DeleteError"] != null)
+                        {
+                            <small>@TempData["DeleteError"]</small>
+                        }else if (TempData["EditError"] != null)
+                        {
+                            <small>@TempData["EditError"]</small>
+                        }
+
+                        @if(Model.CreateErrorTD != null)
+                        {
+                            <small>@Model.CreateErrorTD</small>
+                        }
+                        @if(Model.NamingErrorTD != null)
+                        {
+                            <small>@Model.NamingErrorTD</small>
+                        }
+                        @if(Model.AddResultTD != null)
+                        {
+                            <small>@Model.AddResultTD</small>
+                        }
+                  
 
                     </div>
 

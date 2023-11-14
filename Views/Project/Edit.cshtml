@@ -7,6 +7,21 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
 
+@if (Model.EditErrorTD != null)
+{
+    <small>@Model.CreateErrorTD</small>
+}else if(TempData["EditError"] != null)
+{
+    <small>@TempData["EditError"]</small>
+}
+@if(Model.Error != null)
+{
+    <small>@Model.Error</small>
+}else if (TempData["Error"] != null)
+{
+    <small>@TempData["Error"]</small>
+}
+
 <form method="post"   id="projecteditform" asp-action="Edit">
 
     <input type="hidden" asp-for="Id" value="@Model.Id"/>
