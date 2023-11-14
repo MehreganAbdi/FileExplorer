@@ -11,6 +11,25 @@
 
 <script src="~/js//FileEntity.Create/FileEntityCreate.js"></script>
 
+@if (Model.EditErrorTD != null)
+{
+    <small>@Model.EditErrorTD</small>
+}else if(TempData["EditError"] != null)
+{
+    <small>@TempData["EditError"]</small>
+}
+
+
+@if (Model.Error != null)
+{
+    <small>@Model.Error </small>
+}else if(TempData["EditError"] != null)
+{
+    <small>@TempData["EditError"]</small>
+}
+
+
+
 <body>
     <form method="post" id="fileentityeditform" asp-action="Create" enctype="multipart/form-data">
          

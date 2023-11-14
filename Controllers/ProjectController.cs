@@ -36,7 +36,7 @@ namespace FileExplorer.Controllers
                 
                 if (await projectService.ProjectExists(projectDTO.ProjectName))
                 {
-                    TempData["CreateError"] = "There Is An Existing Project With This Name";
+                    projectDTO.CreateErrorTD =  "There Is An Existing Project With This Name";
                     return View(projectDTO);
                 }
 
@@ -44,7 +44,7 @@ namespace FileExplorer.Controllers
                 
                 if (!addResult)
                 {
-                    TempData["CreateError"] = "Adding Failed , Try Again";
+                    projectDTO.CreateErrorTD = "Adding Failed , Try Again";
                     return View(projectDTO);
                 }
 
@@ -54,7 +54,7 @@ namespace FileExplorer.Controllers
             }
             catch (Exception ex)
             {
-                TempData["CreateError"] = ex.Message.ToString();
+                projectDTO.CreateErrorTD = ex.Message.ToString();
                 return View(projectDTO);
             }
         }
@@ -91,14 +91,13 @@ namespace FileExplorer.Controllers
             {
                 if (projectDTO == null)
                 {
-                    TempData["EditError"] = "Inser Value To Edit";
+                    projectDTO.EditErrorTD = "Inser Value To Edit";
                     return View(projectDTO);
                 }
 
                  await projectService.UpdateAsync(projectDTO);
                 
 
-                TempData["EditError"] = "Project Updated Successfully.";
                 return RedirectToAction("Index", "Project");
 
             }

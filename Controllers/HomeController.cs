@@ -32,8 +32,10 @@ namespace FileExplorer.Controllers
             {
                 if (path == null || !directoryService.PathExists(path))
                 {
-                    TempData["Error"] = "Insert An Existing Path";
-                    return View(new FileExploreViewModel());
+                    return View(new FileExploreViewModel()
+                    {
+                        Error = "Insert An Existing Path"
+                    });
                 }
 
                 var pathData = await directoryService.GetDataInViewModel(path);
@@ -53,8 +55,11 @@ namespace FileExplorer.Controllers
                     pathData = await directoryService.SearchResult(searching, pathData);
                     if (pathData == null)
                     {
-                        TempData["Error"] = "Nothing Found";
-                        return RedirectToAction("Index", "Home");
+
+                        return View(new FileExploreViewModel()
+                        {
+                            Error = "Nothing Found"
+                        });
                     }
 
                 }
@@ -64,8 +69,11 @@ namespace FileExplorer.Controllers
             }
             catch (Exception ex)
             {
-                TempData["Error"] = ex.Message.ToString();
-                return View("Index");
+                
+                return View(new FileExploreViewModel()
+                {
+                    Error = $"Error Occured ({ex.Message}), Try Again "
+                });
             }
         }
 
@@ -93,22 +101,29 @@ namespace FileExplorer.Controllers
             {
                 if (path == null || !directoryService.PathExists(path))
                 {
-                    TempData["Error"] = "Insert An Existing Path";
-
-                    return RedirectToAction("Index", "Home");
+                    return View(new FileExploreViewModel()
+                    {
+                        Error = "Path Didn't Exist , Check And Try Again"
+                    });
                 }
                 await directoryService.NewFolder(path, NewFolderName);
-                TempData["AddResult"] = NewFolderName == null ? "NewFolder Created Successfuly In \n  >" + path.ToString() :
-                                                               $"{NewFolderName} Created Successfuly In \n  >" + path.ToString();
+                
                 var redirectedFileExploreViewModel = await directoryService.GetDataInViewModel(path);
+               
+                
+                redirectedFileExploreViewModel.AddResultTD = NewFolderName == null ? "NewFolder Created Successfuly In \n  >" + path.ToString() :
+                                                               $"{NewFolderName} Created Successfuly In \n  >" + path.ToString();
+                
                 redirectedFileExploreViewModel.path = path;
 
+                
                 return View("Index", redirectedFileExploreViewModel);
             }
             catch (Exception ex)
             {
-                TempData["AddResult"] = ex.Message.ToString();
-                return View("Index");
+                var viewModel = await directoryService.GetDataInViewModel(path);
+                viewModel.Error = ex.Message;
+                return View("Index",viewModel);
 
             }
 
@@ -122,9 +137,10 @@ namespace FileExplorer.Controllers
 
         public async Task<IActionResult> EmailListResult(FileExploreViewModel fileExploreViewModel)
         {
+            var newFileExploreViewModel = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
             if (fileExploreViewModel.Reciever == null)
             {
-                TempData["Error"] = "To Send You Results Through Email , You Need To Fill Email Address Field";
+                newFileExploreViewModel.Error = "To Send You Results Through Email , You Need To Fill Email Address Field";
 
             }
             else
@@ -145,7 +161,7 @@ namespace FileExplorer.Controllers
                 await emailService.SendFileByEmail(emailDTO, "G:\\Downloads\\FileData.txt");
 
             }
-            var newFileExploreViewModel = await directoryService.GetDataInViewModel(fileExploreViewModel.path);
+          
 
             newFileExploreViewModel.path = fileExploreViewModel.path;
 
@@ -166,31 +182,18 @@ namespace FileExplorer.Controllers
             }
             catch (Exception ex)
             {
-                TempData["Error"] = ex.Message.ToString();
+               
                 var fileExploreViewModel = await directoryService.GetDataInViewModel(bothpath.Split("&&&")[^1]);
+                
                 fileExploreViewModel.path = bothpath.Split("&&&")[^1];
-
+                
+                fileExploreViewModel.Error = ex.Message;
+                
                 return View("Index", fileExploreViewModel);
             }
         }
 
-        public async Task<IActionResult> DownloadView(string path, string type, string directory)
-        {
-            var fileViewModel = await directoryService.GetDataInViewModel(directory);
-            fileViewModel.path = directory;
-
-            if (Path.Exists(path))
-            {
-                await Download(path, type);
-
-                return View("Index", fileViewModel);
-            }
-            else
-            {
-                TempData["DownloadError"] = "File Has Been Deleted , Refresh To Get Latest Update";
-                return View("Index", fileViewModel);
-            }
-        }
+        
 
 
 
@@ -210,28 +213,7 @@ namespace FileExplorer.Controllers
         }
 
 
-        public async Task<IActionResult> AddToRecords(string path, string size, string type)
-        {
-
-            var fileEntityDTO = new FileEntityDTO()
-            {
-                Name = path.Split(".")[^2],
-                Size = size,
-                DateCreated = DateTime.Now,
-                Description = "NotDefined",
-                FilePath = path,
-                ProjectName = "NotDefined",
-                ProjectId = 13,
-                Type = path.Split(".")[^1]
-            };
-
-            await fileEntityService.AddFileEntityAsync(fileEntityDTO);
-
-
-            return RedirectToAction("Index", "Home");
-
-
-        }
+       
 
         [HttpPost]
         public async Task<IActionResult> AddFilesToPath(FileExploreViewModel fileExploreViewModel)
@@ -242,7 +224,7 @@ namespace FileExplorer.Controllers
             {
                 if (fileExploreViewModel.SelectedFile == null)
                 {
-                    TempData["SelectError"] = "Select A File First";
+                   fileExploreViewModel.SelectErrorTD = "Select A File First";
 
                     return RedirectToAction("Index", fileExploreViewModel);
                 }
@@ -252,7 +234,7 @@ namespace FileExplorer.Controllers
 
                 if (typo != "image/jpg" && typo != "image/png" && typo != "image/jpeg")
                 {
-                    TempData["SelectError"] = "Selected File Must Be img";
+                    fileExploreViewModel.SelectErrorTD = "Selected File Must Be img";
                     return View("Index", fileExploreViewModel);
                 }
 
@@ -282,7 +264,7 @@ namespace FileExplorer.Controllers
             }
             catch (Exception ex)
             {
-                TempData["AddResult"] = ex.Message.ToString();
+                fileExploreViewModel.Error = ex.Message.ToString();
                 return View("Create", fileExploreViewModel);
 
             }
@@ -312,18 +294,18 @@ namespace FileExplorer.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    TempData["CreateError"] = "Make Sure That You Filled All Gaps";
+                    fileEntityDTO.CreateErrorTD = "Make Sure That You Filled All Gaps";
 
                     return View(fileEntityDTO);
                 }
                 else if (!await directoryService.ValidatePathPattern(fileEntityDTO.FilePath) )
                 {
-                    TempData["NamingError"] = " Path Is Unvalid";
+                    fileEntityDTO.NamingErrorTD = " Path Is Unvalid";
                     return View(fileEntityDTO);
                 }
                 else if(!await directoryService.ValidateNamePattern(fileEntityDTO.Name))
                 {
-                    TempData["NamingError"] = " FileName Is Unvalid";
+                    fileEntityDTO.NamingErrorTD = " FileName Is Unvalid";
                     return View(fileEntityDTO);
 
                 }
@@ -343,10 +325,7 @@ namespace FileExplorer.Controllers
 
                 redirectedFileExploreViewModel.path = fileEntityDTO.FilePath;
 
-                TempData["AddResult"] = "File Successfully Added To \n  >" + fileEntityDTO.FilePath.ToString();
-
-
-                TempData["CreateError"] = "File Added Successfully";
+                redirectedFileExploreViewModel.AddResultTD = "File Successfully Added To \n  >" + fileEntityDTO.FilePath.ToString();
 
                 return View("Index", redirectedFileExploreViewModel);
             }
@@ -355,7 +334,7 @@ namespace FileExplorer.Controllers
                
                 ViewBag.data = allProjects;
 
-                TempData["CreateError"] = ex.Message.ToString();
+                fileEntityDTO.Error = ex.Message.ToString();
 
                 return View(fileEntityDTO);
             }

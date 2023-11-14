@@ -8,6 +8,24 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 
+@if (Model.SelectErrorTD != null)
+{
+    <small>@Model.SelectErrorTD</small>
+}
+
+@if(Model.Error != null)
+{
+    <small>@Model.Error</small>
+}
+@if (Model.CreateErrorTD != null)
+{
+    <small>@Model.CreateErrorTD</small>
+}
+@if (Model.NamingErrorTD != null)
+{
+    <small>@Model.NamingErrorTD</small>
+}
+
 
 <body>
     <form method="post" id="createform" asp-action="Create" enctype="multipart/form-data" >
