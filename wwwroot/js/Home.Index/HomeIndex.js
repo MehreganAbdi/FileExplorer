@@ -120,13 +120,16 @@ xhr.send();
     
 }
 
+
 document.getElementById("selectfilehomepageinput").onchange = function () {
-    document.getElementById("selectfilehomepagelabel").innerHTML = "Selected ";
+
+    document.getElementById("selectfilehomepagelabel").innerHTML = "Selected";
     document.getElementById("selectfilehomepagesubmit").type = "submit";
 }
 
-const alldownloadbuttons = document.querySelectorAll('.home-index');
 
+
+const alldownloadbuttons = document.querySelectorAll('.home-index');
 for (const item of alldownloadbuttons) {
     item.addEventListener("click", function () { PathExists(item.getAttribute("data-path"), item.getAttribute("data-type")) });
 

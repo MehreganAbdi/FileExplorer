@@ -38,11 +38,7 @@ namespace FileExplorer.Controllers
 
 
 
-            var pathHistory = new recenPath()
-            {
-                recentPaths = fileEntityService.LastFivePaths()
-            };
-            ViewBag.recentPaths = pathHistory;
+            ViewBag.recentPaths = fileEntityService.LastFivePaths();
 
 
             var reloadSafety = new FileEntityDTO();
@@ -53,8 +49,18 @@ namespace FileExplorer.Controllers
         {
             var allProjects = new ProjectsStruct(){AllProjects = await projectService.GetAllAsync()}; 
             ViewBag.data = allProjects;
+
+
+            ViewBag.recentPaths = fileEntityService.LastFivePaths();
+
             try
             {
+
+                if (!await directoryService.ValidatePathPattern(fileEntityDTO.FilePath))
+                {
+                    fileEntityDTO.NamingErrorTD = "Path Is Not Valid";
+                    return View(fileEntityDTO);
+                }
 
                 if (fileEntityDTO.FileToCopy == null)
                 {

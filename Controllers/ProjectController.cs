@@ -17,7 +17,7 @@ namespace FileExplorer.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var allProjects = new ProjectsStruct(){AllProjects = await projectService.GetAllAsync()}; 
+            var allProjects = await projectService.GetAllAsync(); 
 
             return View(allProjects);
         }
