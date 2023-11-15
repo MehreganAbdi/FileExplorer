@@ -50,7 +50,7 @@ function deleteConfirm(path) {
         confirmButtonText: "Yes, Delete It",
         cancelButtonText : "No"
     }).then(async function(result) {
-        if (result) {
+        if (result.dismiss != 'cancel') {
             const response = await fetch(url, {
                 method: 'GET'
 
@@ -60,13 +60,15 @@ function deleteConfirm(path) {
                 sweetAlert({
                     title: "Done!",
                     text: "File Deleted Successfully",
-                    type : "success"
+                    type: "success"
                 });
+            } else {
+                sweetAlert("Error Occured" , "Try Again Later" , "error" )
             }
 
 
         } else {
-            sweetAlert("Error Occured", "Try Again Later", "error");
+            sweetAlert("Proccess Canceled ", "File Is Safe", "success");
         }
 
     });

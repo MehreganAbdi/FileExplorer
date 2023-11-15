@@ -298,6 +298,11 @@ namespace FileExplorer.Controllers
 
                     return View(fileEntityDTO);
                 }
+                else if(fileEntityDTO.ProjectId == 0)
+                {
+                    fileEntityDTO.Error = "You Must Assign This Record To A Project";
+                    return View(fileEntityDTO);
+                }
                 else if (!await directoryService.ValidatePathPattern(fileEntityDTO.FilePath) )
                 {
                     fileEntityDTO.NamingErrorTD = " Path Is Unvalid";
