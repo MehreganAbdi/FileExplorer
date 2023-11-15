@@ -4,7 +4,7 @@
     ViewData["Title"] = "Add file Record";
     Layout = "CustomLayout";
     var allProjectNames = ViewBag.data.AllProjects;
-    var recentPaths = ViewBag.recentPaths.recentPaths;
+    List<string> recentPaths = ViewBag.recentPaths.recentPaths;
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
@@ -21,20 +21,7 @@
 
 <body>
 
-    @* <div style="position:relative;width:200px;height:25px;border:0;padding:0;margin:0;">
-        <select style="position:absolute;top:0px;left:0px;width:200px; height:25px;line-height:20px;margin:0;padding:0;"
-                onchange="document.getElementById('displayValue').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
-            <option></option>
-            <option value="one">one</option>
-            <option value="two">two</option>
-            <option value="three">three</option>
-        </select>
-        <input type="text" name="displayValue" id="displayValue"
-               placeholder="add/select a value" onfocus="this.select()"
-               style="position:absolute;top:0px;left:0px;width:183px;width:180px\9;#width:180px;height:23px; height:21px\9;#height:18px;border:1px solid #556;">
-        <input name="idValue" id="idValue" type="hidden">
-    </div> *@
-    
+  
     
     <form method="post" id="fileentitycreatefrom" asp-action="Create" enctype="multipart/form-data">
         <input asp-for="Name" value="NewFile" type="hidden" />
@@ -73,7 +60,6 @@
             <small id="desccount">150 / 0</small>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-        <br />
 
 
 
@@ -85,16 +71,12 @@
 
 
 
-
-        <br />
-
-        <input type="hidden" asp-for="ProjectId" value="0" />
 
         <div class="form-group">
             <br />
             <small id="filepath_count"></small>
             <label asp-for="ProjectName">ProjectName</label>
-            <select asp-for="ProjectName" style="width:200px; height:25px;line-height:20px;margin:0;padding:0;color:dodgerblue">
+            <select asp-for="ProjectName" class="project-selection">
                 @foreach (var project in allProjectNames)
                 {
                     <option  >@project.ProjectName</option>

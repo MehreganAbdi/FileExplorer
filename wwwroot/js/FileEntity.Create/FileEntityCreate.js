@@ -58,6 +58,7 @@ document.getElementById("fileentitycreatefromdesc").onkeyup = function () { retu
 
 document.getElementById("fileentitycreatefromfilepath").onkeyup = function () { return CountCharsFilePath() };
 
+
 document.getElementById("fileentitycreatefrom").onsubmit = function () { return validation(); };
 
 document.getElementById("fileentitycreatefromfile").onchange = function () {
@@ -66,4 +67,5 @@ document.getElementById("fileentitycreatefromfile").onchange = function () {
 document.getElementById("pathsuggestion").onchange = function () {
 
     document.getElementById("fileentitycreatefromfilepath").value = document.getElementById("pathsuggestion").options[document.getElementById("pathsuggestion").selectedIndex].text;
+    CountCharsFilePath();
 };

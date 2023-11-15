@@ -71,14 +71,14 @@
 
         <div class="form-group">
             <label>
-                 
+
 
                 <input asp-for="FileToCopy" id="fileentityeditformfile" style="display:none;" type="file" class="btn-primary">
             </label>
             <br />
             <small id="filepath_count"></small>
             <label asp-for="ProjectName">ProjectName</label>
-            <select asp-for="ProjectName">
+            <select asp-for="ProjectName" class="project-selection">
                 @foreach (var project in allprojectNames)
                 {
                     <option >@project.ProjectName</option>
