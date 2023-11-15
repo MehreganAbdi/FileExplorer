@@ -1,5 +1,6 @@
 ﻿using FileExplorer.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FileExplorer.Data
 {

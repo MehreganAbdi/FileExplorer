@@ -30,7 +30,6 @@
 <body>
     <form method="post" id="createform" asp-action="Create" enctype="multipart/form-data" >
 
-        <input type="file" asp-for="FileToCopy" value="@Model.FileToCopy" />
 
         <div class="form-group">
             <label asp-for="Name">Name</label>
@@ -68,7 +67,7 @@
         <br />
         <div class="form-group">
             <label >ProjectName</label>
-            <select asp-for="ProjectId" style="width:100px " >
+            <select asp-for="ProjectId" class="project-dropdown" style="width:100px " >
                 @foreach (var project in allProjectNames)
                 {
                     <option value="@project.Id">@project.ProjectName</option>
@@ -87,10 +86,7 @@
             <span asp-validation-for="Type" class="text-danger"></span>
         </div>
         <br />
-        <br />
-        <br />
-
-
+        
         <br />
         <button type="submit" class="btn-primary">Submit</button>
     </form>

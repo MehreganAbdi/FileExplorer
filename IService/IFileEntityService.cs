@@ -1,5 +1,6 @@
 ﻿using FileExplorer.DTOs;
 using FileExplorer.Models;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FileExplorer.IService
 {
@@ -25,6 +26,9 @@ namespace FileExplorer.IService
         bool RemoveFileEntity(FileEntityDTO file);
         Task<bool> RemoveFileEntityAsync(FileEntityDTO file);
         List<string> LastFivePaths();
+        string ChangeBytesToString(byte[] fileInBytes);
+        byte[] ChangeStringToByte(string file);
+
 
     }
 }

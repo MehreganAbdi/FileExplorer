@@ -27,6 +27,32 @@ namespace FileExplorer.Services
 
         }
 
+        public string ChangeBytesToString(byte[] fileInBytes)
+        {
+            var result = "";
+            foreach (byte b in fileInBytes)
+            {
+                result += $",{b}";
+            }
+
+
+            return result;
+        }
+
+        public byte[] ChangeStringToByte(string fileInString)
+        {
+            var strings = fileInString.Split(",").ToArray();
+            var result = new List<byte>();
+
+            foreach (var str in strings)
+            {
+                result.Add(Convert.ToByte(str));
+            }
+
+            return result.ToArray();
+        
+        }
+
         public async Task<FileEntityDTO> CreateFileEntityDTODirectly(IFormFile file, FileEntityDTO fileEntityDTO)
         {
             return new FileEntityDTO()
