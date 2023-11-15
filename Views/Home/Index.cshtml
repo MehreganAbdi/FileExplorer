@@ -14,7 +14,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
 </head>
 
+@if (Model.SelectErrorTD != null)
+{
+    <small>@Model.SelectErrorTD</small>
+}
 
+@if (TempData["DeleteError"] != null)
+{
+    <small>@TempData["DeleteError"]</small>
+}
+else if (TempData["EditError"] != null)
+{
+    <small>@TempData["EditError"]</small>
+}
+
+@if (Model.CreateErrorTD != null)
+{
+    <small>@Model.CreateErrorTD</small>
+}
+@if (Model.NamingErrorTD != null)
+{
+    <small>@Model.NamingErrorTD</small>
+}
+@if (Model.AddResultTD != null)
+{
+    <small>@Model.AddResultTD</small>
+}
 
 <body>
 
@@ -68,44 +93,20 @@
                                 <input asp-for="path" type="hidden" value="@Model.path" />
 
 
-                                <label class="btn-primary">
-                                    Select File(s)
-                                    <input asp-for="SelectedFile" type="file" class="input-primary">
+                                <label class="btn-primary" >
+                                    <span id="selectfilehomepagelabel">Select File</span>
+                                    <input asp-for="SelectedFile" type="file" id="selectfilehomepageinput" class="input-primary">
 
                                 </label>
                                 <span asp-validation-for="SelectedFile"></span>
 
-                                <input type="submit" value="Add+" class="btn-primary" />
+                                <input type="hidden" id="selectfilehomepagesubmit" value="Add+" class="btn-primary" />
 
                             </form>
                         </div>
                         <br />
-                       @if(Model.SelectErrorTD != null)
-                        {
-                            <small>@Model.SelectErrorTD</small>
-                        }
-
-                        @if(TempData["DeleteError"] != null)
-                        {
-                            <small>@TempData["DeleteError"]</small>
-                        }else if (TempData["EditError"] != null)
-                        {
-                            <small>@TempData["EditError"]</small>
-                        }
-
-                        @if(Model.CreateErrorTD != null)
-                        {
-                            <small>@Model.CreateErrorTD</small>
-                        }
-                        @if(Model.NamingErrorTD != null)
-                        {
-                            <small>@Model.NamingErrorTD</small>
-                        }
-                        @if(Model.AddResultTD != null)
-                        {
-                            <small>@Model.AddResultTD</small>
-                        }
-                  
+                      
+                        
 
                     </div>
 
@@ -195,14 +196,13 @@
 
 
                                     @{
-                                        var bothpath = item.path + "&&&" + Model.path;
                                         var confirmMessageName = item.path.ToString();
                                         var downloadbuttonid = "downloadfilebutton" + i.ToString();
                                     }
                                     <td><center><input  value="Download" data-path="@item.path" data-type="@item.Type" type="button" class="btn-primary home-index"></center></td>
                                     <td>
-                                        <input data-bothpath="@bothpath"  type="button"
-                                                id="deletefilebutton" class="btn-delete home-index-delete" />
+                                        <input data-path="@item.path"  type="button"
+                                                id="deletefilebutton" value="Delete" class="btn-delete home-index-delete" />
                                     </td>
                                         
                                         
@@ -247,13 +247,6 @@
 
 
     <script src="~/js/Home.Index/HomeIndex.js" type="text/javascript"></script>
-    <script src="~/js/FileExplorerDownloadFile.js" type="text/javascript"></script>
-    <script type="text/javascript">
-
-        document.getElementById("deletefilebutton").addEventListener("click", function () { deleteConfirm(); });
-
-    </script>
-
 
 
 </body>

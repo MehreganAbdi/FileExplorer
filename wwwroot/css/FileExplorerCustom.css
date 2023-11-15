@@ -55,6 +55,29 @@ a.btn-delete:hover {
     border: 0;
 }
 
+input.btn-delete {
+    border-radius: 10px;
+    border: 0;
+    color: dodgerblue;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: lightblue;
+    margin: 15px;
+    font-size: 18px;
+    text-decoration: none;
+}
+    input.btn-delete:hover {
+        border-radius: 10px;
+        color: whitesmoke;
+        background-color: red;
+        margin: 15px;
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: 18px;
+        text-decoration: none;
+        border: 0;
+    }
+
 button.btn-delete:hover {
     border-radius: 10px;
     color: whitesmoke;

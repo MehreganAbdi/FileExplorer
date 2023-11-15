@@ -26,6 +26,7 @@ namespace FileExplorer.DTOs
         public string? SelectErrorTD { get; set; }
         public string? Error { get; set; }
         public string? EditErrorTD { get; set; }
+        public string? FileInStringFormat { get; set; }
 
     }
 }
