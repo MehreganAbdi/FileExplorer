@@ -196,14 +196,13 @@ else if (TempData["EditError"] != null)
 
 
                                     @{
-                                        var bothpath = item.path + "&&&" + Model.path;
                                         var confirmMessageName = item.path.ToString();
                                         var downloadbuttonid = "downloadfilebutton" + i.ToString();
                                     }
                                     <td><center><input  value="Download" data-path="@item.path" data-type="@item.Type" type="button" class="btn-primary home-index"></center></td>
                                     <td>
-                                        <input data-bothpath="@bothpath"  type="button"
-                                                id="deletefilebutton" class="btn-delete home-index-delete" />
+                                        <input data-path="@item.path"  type="button"
+                                                id="deletefilebutton" value="Delete" class="btn-delete home-index-delete" />
                                     </td>
                                         
                                         

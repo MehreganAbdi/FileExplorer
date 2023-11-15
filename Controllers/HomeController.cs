@@ -169,28 +169,25 @@ namespace FileExplorer.Controllers
             return View("Index", newFileExploreViewModel);
         }
 
-
-        public async Task<IActionResult> Delete(string bothpath)
+        [HttpGet]
+        public async Task<IActionResult> Delete(string path)
         {
             try
             {
 
-                directoryService.DeleteFileByPath(bothpath.Split("&&&")[^2]);
-                var fileExploreViewModel = await directoryService.GetDataInViewModel(bothpath.Split("&&&")[^1]);
-                fileExploreViewModel.path = bothpath.Split("&&&")[^1];
-
-                return View("Index", fileExploreViewModel);
+                directoryService.DeleteFileByPath(path); 
+                return Ok(true);
             }
             catch (Exception ex)
             {
                
-                var fileExploreViewModel = await directoryService.GetDataInViewModel(bothpath.Split("&&&")[^1]);
+                //var fileExploreViewModel = await directoryService.GetDataInViewModel(bothpath.Split("&&&")[^1]);
                 
-                fileExploreViewModel.path = bothpath.Split("&&&")[^1];
+                //fileExploreViewModel.path = bothpath.Split("&&&")[^1];
                 
-                fileExploreViewModel.Error = ex.Message;
+                //fileExploreViewModel.Error = ex.Message;
                 
-                return View("Index", fileExploreViewModel);
+                return Ok(false);
             }
         }
 

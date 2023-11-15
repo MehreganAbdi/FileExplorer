@@ -6,7 +6,7 @@ function validation() {
         sweetAlert({
             title: "project name must be between 3 and 100 characters",
             text: "",
-            icon: "error",
+            type: "error",
             timer: 5000,
             showConfirmButton: false
         });
@@ -16,7 +16,7 @@ function validation() {
         sweetAlert({
             title: "Done!",
             text: "Project Updated",
-            icon: "success",
+            type: "success",
             timer: 4000,
             showConfirmButton: false
         });

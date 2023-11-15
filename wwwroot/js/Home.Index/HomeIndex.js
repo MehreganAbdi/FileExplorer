@@ -37,87 +37,39 @@ function saveBlob(blob, fileName) {
     a.dispatchEvent(new MouseEvent('click'));
 }
 
-function deleteConfirm(bothpath) {
-   
+function deleteConfirm(path) {
+
+    let url = "https://localhost:7242/Home/Delete?path=" + path;
 
     sweetAlert({
         title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    }).then((result) => {
-        if (result.isConfirmed) {
-            var xhr = new XMLHttpRequest();
+        text: "Once deleted, you will not be able to recover\n",
+        type: "warning",
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Yes, Delete It",
+        cancelButtonText : "No"
+    }).then(async function(result) {
+        if (result) {
+            const response = await fetch(url, {
+                method: 'GET'
 
-            xhr.responseType = 'blob';
+            });
 
-            let url = "https://localhost:7242/Home/Delete?bothpath=" + bothpath;
-
-            xhr.open("GET", url, true);
-            xhr.onreadystatechange = function () {
-                if (this.response != null) {
-
-                    if (this.status == 200) {
-
-                        return response;
-
-                    } else {
-
-                        sweetAlert({
-                            title: "Some Error Occured",
-                            text: "Try Again",
-                            icon: "error",
-                            type: "error",
-                            showCancelButton: false,
-                            timer: 4000
-                        });
-
-                    }
-
-
-                }
+            if (response.ok) {
+                sweetAlert({
+                    title: "Done!",
+                    text: "File Deleted Successfully",
+                    type : "success"
+                });
             }
 
 
-            xhr.send();
-
         } else {
-            return false;
+            sweetAlert("Error Occured", "Try Again Later", "error");
         }
 
     });
-    
-
-xhr.onreadystatechange = function () {
-    if (this.response != null) {
-
-        if (this.status == 200) {
-
-            return response;
-
-        } else {
-
-            sweetAlert({
-                title: "Some Error Occured",
-                text: "Try Again",
-                icon: "error",
-                type: "error",
-                showCancelButton: false,
-                timer: 4000
-            });
-
-        }
-
-
-    }
-}
-
-
-xhr.send();
-
-
-    
 }
 
 
@@ -136,7 +88,7 @@ for (const item of alldownloadbuttons) {
 }
 const allDeleteButtons = document.querySelectorAll('.home-index-delete');
 for (const delbtn of allDeleteButtons) {
-    delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-bothpath")); });
+    delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-path")); });
 }
 
 
