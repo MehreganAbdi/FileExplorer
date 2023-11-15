@@ -25,6 +25,6 @@ namespace FileExplorer.IRepository
 
         bool Save();
         Task<bool> SaveAsync();
-
+        List<string> LastFivePaths();
     }
 }

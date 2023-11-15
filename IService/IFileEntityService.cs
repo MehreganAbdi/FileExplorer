@@ -24,6 +24,7 @@ namespace FileExplorer.IService
         Task<bool> UpdateAsync(FileEntityDTO file);
         bool RemoveFileEntity(FileEntityDTO file);
         Task<bool> RemoveFileEntityAsync(FileEntityDTO file);
+        List<string> LastFivePaths();
 
     }
 }

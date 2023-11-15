@@ -75,6 +75,16 @@ namespace FileExplorer.Repositories
             return await context.Files.Where(f => f.ProjectId == projectId).ToListAsync();
         }
 
+        public List<string> LastFivePaths()
+        {
+            var allFiles = context.Files.Select(f => f.FilePath).ToList();
+            if (allFiles.Count < 6)
+            {
+                return allFiles;
+            }
+            return allFiles.TakeLast(5).ToList();
+        }
+
         public bool RemoveFileEntity(FileEntity file)
         {
             context.Files.Remove(file);
