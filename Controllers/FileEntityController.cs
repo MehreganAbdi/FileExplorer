@@ -1,4 +1,5 @@
-﻿using FileExplorer.DTOs;
+﻿using FileExplorer.Data.structs;
+using FileExplorer.DTOs;
 using FileExplorer.IService;
 using FileExplorer.Services;
 using FileExplorer.ViewModels;
@@ -27,6 +28,7 @@ namespace FileExplorer.Controllers
             return View(allfileEntities);
         }
 
+       
 
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -34,6 +36,13 @@ namespace FileExplorer.Controllers
             var allProjects = await projectService.GetAllAsync();
             ViewBag.data = allProjects;
 
+
+
+            var pathHistory = new recenPath()
+            {
+                recentPaths = fileEntityService.LastFivePaths()
+            };
+            ViewBag.recentPaths = pathHistory;
 
 
             var reloadSafety = new FileEntityDTO();
@@ -46,10 +55,10 @@ namespace FileExplorer.Controllers
             ViewBag.data = allProjects;
             try
             {
-                 
-                if(fileEntityDTO.FileToCopy == null)
+
+                if (fileEntityDTO.FileToCopy == null)
                 {
-                   fileEntityDTO.Error = "A File Must Be Selected";
+                    fileEntityDTO.Error = "A File Must Be Selected";
                     return View(fileEntityDTO);
                 }
 
@@ -64,11 +73,11 @@ namespace FileExplorer.Controllers
                 var result = await fileEntityService.AddFileEntityAsync(finalFileEntityDTO);
                 if (!result)
                 {
-                    fileEntityDTO.CreateErrorTD= "An Error Happened While Creating , try Again";
+                    fileEntityDTO.CreateErrorTD = "An Error Happened While Creating , try Again";
                     return View(finalFileEntityDTO);
                 }
 
-                fileEntityDTO.CreateErrorTD= "File Added Successfully";
+                fileEntityDTO.CreateErrorTD = "File Added Successfully";
 
                 return RedirectToAction("Index", "FileEntity");
             }
@@ -121,11 +130,11 @@ namespace FileExplorer.Controllers
                 var result = await fileEntityService.UpdateAsync(fileEntityDTO);
                 if (!result)
                 {
-                    fileEntityDTO.EditErrorTD= "Update Failed ,Try Again";
+                    fileEntityDTO.EditErrorTD = "Update Failed ,Try Again";
 
                     return View(fileEntityDTO);
                 }
-                 
+
                 return RedirectToAction("Index", "FileEntity");
 
             }
@@ -138,7 +147,7 @@ namespace FileExplorer.Controllers
         }
 
 
-       
+
 
 
 
@@ -172,7 +181,7 @@ namespace FileExplorer.Controllers
             }
         }
 
-       
+
 
 
 
