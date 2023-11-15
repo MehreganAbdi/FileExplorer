@@ -1,4 +1,5 @@
-﻿using FileExplorer.DTOs;
+﻿using FileExplorer.Data.structs;
+using FileExplorer.DTOs;
 using FileExplorer.IService;
 
 using FileExplorer.ViewModels;
@@ -255,7 +256,7 @@ namespace FileExplorer.Controllers
                     FileToCopy = fileExploreViewModel.SelectedFile
                 };
 
-                var allProjects = await projectService.GetAllAsync();
+                var allProjects = new ProjectsStruct(){AllProjects = await projectService.GetAllAsync()}; 
 
                 ViewBag.data = allProjects;
                 return View("Create", fileEntityDTO);
@@ -273,7 +274,7 @@ namespace FileExplorer.Controllers
         public async Task<IActionResult> Create()
         {
 
-            var allProjects = await projectService.GetAllAsync();
+            var allProjects = new ProjectsStruct(){AllProjects = await projectService.GetAllAsync()}; 
 
             ViewBag.data = allProjects;
 
@@ -286,7 +287,7 @@ namespace FileExplorer.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(FileEntityDTO fileEntityDTO)
         {
-            var allProjects = await projectService.GetAllAsync();
+            var allProjects = new ProjectsStruct(){AllProjects = await projectService.GetAllAsync()}; 
 
             ViewBag.data = allProjects;
 

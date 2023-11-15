@@ -33,7 +33,7 @@ namespace FileExplorer.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var allProjects = await projectService.GetAllAsync();
+            var allProjects = new ProjectsStruct(){AllProjects = await projectService.GetAllAsync()}; 
             ViewBag.data = allProjects;
 
 
@@ -51,7 +51,7 @@ namespace FileExplorer.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(FileEntityDTO fileEntityDTO)
         {
-            var allProjects = await projectService.GetAllAsync();
+            var allProjects = new ProjectsStruct(){AllProjects = await projectService.GetAllAsync()}; 
             ViewBag.data = allProjects;
             try
             {

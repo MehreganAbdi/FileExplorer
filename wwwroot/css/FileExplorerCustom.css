@@ -290,3 +290,39 @@ input.home-index{
 input.home-index-delete{
 
 }
+
+select.filepath-sug {
+    position: absolute;
+    top: 15px;
+    left: 105px;
+    width: 350px;
+    margin-left: 10px;
+    margin-top: 20px;
+    height: 33px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+}
+select.project-dropdown {
+    background-color: lightblue;
+    border-radius: 6px;
+    font-size: 18px;
+    color: dodgerblue;
+    border: none;
+    padding-left: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 4px;
+}
+input.filepath-sug {
+    border:0px;
+    position: absolute;
+    top: 0px;
+    left: 95px;
+    width: 300px;
+    width: 180px\9;
+    #width:180px;
+    height: 23px;
+    height: 21px\9;
+    #height:18px;
+    border: 1px solid #556;
+}

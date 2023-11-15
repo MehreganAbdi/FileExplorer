@@ -15,7 +15,7 @@ namespace FileExplorer.DTOs
         public int ProjectId { get; set; }
         public string Size { get; set; }
         [MaxLength(100, ErrorMessage = "Project Name Can Be Approximately 100 Characters")]
-        public string ProjectName { get; set; }
+        public string? ProjectName { get; set; }
         public DateTime DateCreated { get; set; }
         [MaxLength(15, ErrorMessage = "Can't Be More Than 15 Characters")]
         public string Type { get; set; }

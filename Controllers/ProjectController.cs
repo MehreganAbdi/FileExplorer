@@ -1,4 +1,5 @@
 ﻿
+using FileExplorer.Data.structs;
 using FileExplorer.DTOs;
 using FileExplorer.IService;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace FileExplorer.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var allProjects = await projectService.GetAllAsync();
+            var allProjects = new ProjectsStruct(){AllProjects = await projectService.GetAllAsync()}; 
 
             return View(allProjects);
         }

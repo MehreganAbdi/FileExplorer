@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Add file Record";
     Layout = "CustomLayout";
-    var allProjectNames = ViewBag.data;
+    var allProjectNames = ViewBag.data.AllProjects;
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
@@ -51,7 +51,6 @@
 
         
         <br /> 
-        <input type="hidden" asp-for="ProjectId" value="0" />
 
         <div class="form-group">
             <label asp-for="Description">Description</label>
@@ -72,7 +71,7 @@
             <select asp-for="ProjectId" style="width:100px " >
                 @foreach (var project in allProjectNames)
                 {
-                    <option value="@project.Id" selected="@project.Id" >@project.ProjectName</option>
+                    <option value="@project.Id">@project.ProjectName</option>
 
                 }
             </select>

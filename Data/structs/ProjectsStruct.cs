@@ -4,6 +4,6 @@ namespace FileExplorer.Data.structs
 {
     public struct ProjectsStruct
     {
-        public List<ProjectDTO> AllProjects;
+        public ICollection<ProjectDTO> AllProjects;
     }
 }
