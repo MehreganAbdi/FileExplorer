@@ -14,7 +14,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
 </head>
 
+@if (Model.SelectErrorTD != null)
+{
+    <small>@Model.SelectErrorTD</small>
+}
 
+@if (TempData["DeleteError"] != null)
+{
+    <small>@TempData["DeleteError"]</small>
+}
+else if (TempData["EditError"] != null)
+{
+    <small>@TempData["EditError"]</small>
+}
+
+@if (Model.CreateErrorTD != null)
+{
+    <small>@Model.CreateErrorTD</small>
+}
+@if (Model.NamingErrorTD != null)
+{
+    <small>@Model.NamingErrorTD</small>
+}
+@if (Model.AddResultTD != null)
+{
+    <small>@Model.AddResultTD</small>
+}
 
 <body>
 
@@ -68,43 +93,19 @@
                                 <input asp-for="path" type="hidden" value="@Model.path" />
 
 
-                                <label class="btn-primary">
+                                <label class="btn-primary" id="selectfilehomepagelabel">
                                     Select File(s)
-                                    <input asp-for="SelectedFile" type="file" class="input-primary">
+                                    <input asp-for="SelectedFile" type="file" id="selectfilehomepageinput" class="input-primary">
 
                                 </label>
                                 <span asp-validation-for="SelectedFile"></span>
 
-                                <input type="submit" value="Add+" class="btn-primary" />
+                                <input type="hidden" id="selectfilehomepagesubmit" value="Add+" class="btn-primary" />
 
                             </form>
                         </div>
                         <br />
-                       @if(Model.SelectErrorTD != null)
-                        {
-                            <small>@Model.SelectErrorTD</small>
-                        }
-
-                        @if(TempData["DeleteError"] != null)
-                        {
-                            <small>@TempData["DeleteError"]</small>
-                        }else if (TempData["EditError"] != null)
-                        {
-                            <small>@TempData["EditError"]</small>
-                        }
-
-                        @if(Model.CreateErrorTD != null)
-                        {
-                            <small>@Model.CreateErrorTD</small>
-                        }
-                        @if(Model.NamingErrorTD != null)
-                        {
-                            <small>@Model.NamingErrorTD</small>
-                        }
-                        @if(Model.AddResultTD != null)
-                        {
-                            <small>@Model.AddResultTD</small>
-                        }
+                      
                         
 
                     </div>

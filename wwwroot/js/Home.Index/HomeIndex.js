@@ -120,6 +120,10 @@ xhr.send();
     
 }
 
+document.getElementById("selectfilehomepageinput").onchange = function () {
+    document.getElementById("selectfilehomepagelabel").innerHTML = "Selected ";
+    document.getElementById("selectfilehomepagesubmit").type = "submit";
+}
 
 const alldownloadbuttons = document.querySelectorAll('.home-index');
 
@@ -129,7 +133,7 @@ for (const item of alldownloadbuttons) {
 }
 const allDeleteButtons = document.querySelectorAll('.home-index-delete');
 for (const delbtn of allDeleteButtons) {
-    delbtn.addEventListener("click", deleteConfirm(delbtn.getAttribute("data-bothpath")));
+    delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-bothpath")); });
 }
 
 
