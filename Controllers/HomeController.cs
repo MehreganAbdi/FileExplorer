@@ -253,7 +253,8 @@ namespace FileExplorer.Controllers
                     Description = "NotDefined",
                     FilePath = fileExploreViewModel.path,
                     Name = fileExploreViewModel.SelectedFile.FileName.Split(".")[^2],
-                    FileToCopy = fileExploreViewModel.SelectedFile
+                    //FileToCopy = fileExploreViewModel.SelectedFile,
+                    //FileInStringFormat = fileEntityService.ChangeBytesToString(System.IO.File.ReadAllBytes(fileExploreViewModel.path+"\\"+ fileExploreViewModel.SelectedFile.FileName.Split(".")[^2]))
                 };
 
                 var allProjects = new ProjectsStruct(){AllProjects = await projectService.GetAllAsync()}; 
@@ -265,8 +266,9 @@ namespace FileExplorer.Controllers
             }
             catch (Exception ex)
             {
-                fileExploreViewModel.Error = ex.Message.ToString();
-                return View("Create", fileExploreViewModel);
+                fileExploreViewModel.CreateErrorTD = ex.Message.ToString();
+                
+                return View("Index", fileExploreViewModel);
 
             }
         }
@@ -311,13 +313,16 @@ namespace FileExplorer.Controllers
 
                 }
 
-                await directoryService.AddFileToPath(fileEntityDTO.FilePath, fileEntityDTO.FileToCopy);
+                //var fileToCopy = File(fileEntityService.ChangeStringToByte(fileEntityDTO.FileInStringFormat),fileEntityDTO.Type);
+
+                //await directoryService.AddFileToPath(fileEntityDTO.FilePath,(IFormFile)fileToCopy);
 
 
                 fileEntityDTO.ProjectName = (await projectService.GetByIdAsync(fileEntityDTO.ProjectId)).ProjectName;
 
 
                 await fileEntityService.AddFileEntityAsync(fileEntityDTO);
+
 
 
                 
