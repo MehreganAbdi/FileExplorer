@@ -47,9 +47,8 @@ namespace FileExplorer.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(FileEntityDTO fileEntityDTO)
         {
-            var allProjects = new ProjectsStruct(){AllProjects = await projectService.GetAllAsync()}; 
+             var allProjects = await projectService.GetAllAsync();
             ViewBag.data = allProjects;
-
 
             ViewBag.recentPaths = fileEntityService.LastFivePaths();
 
@@ -69,8 +68,8 @@ namespace FileExplorer.Controllers
                 }
 
 
-                var projectByName = await projectService.GetProjectByNameAsync(fileEntityDTO.ProjectName);
-                fileEntityDTO.ProjectId = projectByName.Id;
+                fileEntityDTO.ProjectName = (await projectService.GetByIdAsync(fileEntityDTO.ProjectId)).ProjectName;
+
 
 
                 var file = fileEntityDTO.FileToCopy;
@@ -104,6 +103,7 @@ namespace FileExplorer.Controllers
             try
             {
                 ViewBag.data = await projectService.GetAllAsync();
+
                 var fileEntity = await fileEntityService.GetByIdAsync(Id);
 
                 if (fileEntity == null)
@@ -133,6 +133,8 @@ namespace FileExplorer.Controllers
             }
             try
             {
+                fileEntityDTO.ProjectName = (await projectService.GetByIdAsync(fileEntityDTO.ProjectId)).ProjectName;
+
                 var result = await fileEntityService.UpdateAsync(fileEntityDTO);
                 if (!result)
                 {
@@ -173,17 +175,19 @@ namespace FileExplorer.Controllers
                 if (!result)
                 {
                     TempData["DeleteError"] = "File Didn't Delete , Try Again";
-                    return RedirectToAction("Index", "FileEntity");
+                    
+                    return Ok(false);
 
                 }
                 TempData["Error"] = "File Record Deleted Successfully";
 
-                return RedirectToAction("Index", "FileEntity");
+                return Ok(true);
             }
             catch (Exception ex)
             {
                 TempData["DeleteError"] = ex.Message.ToString();
-                return RedirectToAction("Index", "FileEntity");
+                
+                return Ok(false);
             }
         }
 

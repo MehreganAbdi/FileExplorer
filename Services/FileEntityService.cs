@@ -199,7 +199,7 @@ namespace FileExplorer.Services
 
         public async Task<bool> UpdateAsync(FileEntityDTO file)
         {
-            return await fileEntityRepository.UpdateAsync(await dataTranformerService.ChangeFileEntityDTOToFileEntityAsyncWithId(file));
+            return fileEntityRepository.Update(await dataTranformerService.ChangeFileEntityDTOToFileEntityAsyncWithId(file));
 
         }
     }

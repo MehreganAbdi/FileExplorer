@@ -4,12 +4,11 @@
 @{
     ViewData["Title"] = "Edit FileEntity";
     Layout = "CustomLayout";
-    var allprojectNames = ViewBag.data.AllProjects;
+    var allprojectNames = ViewBag.data ;
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
 
-<script src="~/js//FileEntity.Create/FileEntityCreate.js"></script>
 
 @if (Model.EditErrorTD != null)
 {
@@ -31,7 +30,7 @@
 
 
 <body>
-    <form method="post" id="fileentityeditform" asp-action="Create" enctype="multipart/form-data">
+    <form method="post" id="fileentityeditform" asp-action="Edit" enctype="multipart/form-data">
          
         <input asp-for="Size" value="0" type="hidden" />
         <input asp-for="Type" value="type" type="hidden" />
@@ -67,7 +66,6 @@
 
         <br />
 
-        <input type="hidden" asp-for="ProjectId" value="0" />
 
         <div class="form-group">
             <label>
@@ -78,10 +76,10 @@
             <br />
             <small id="filepath_count"></small>
             <label asp-for="ProjectName">ProjectName</label>
-            <select asp-for="ProjectName" class="project-selection">
+            <select asp-for="ProjectId" class="project-selection">
                 @foreach (var project in allprojectNames)
                 {
-                    <option >@project.ProjectName</option>
+                    <option value="@project.Id">@project.ProjectName</option>
 
                 }
             </select>

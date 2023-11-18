@@ -64,15 +64,14 @@
         <div class="form-group">
             <br />
             <small id="filepath_count"></small>
-            <label asp-for="ProjectName">ProjectName</label>
-            <select asp-for="ProjectName" class="project-selection">
+            <label  >ProjectName</label>
+            <select asp-for="ProjectId" class="project-selection">
                 @foreach (var project in allProjectNames)
                 {
-                    <option  >@project.ProjectName</option>
+                    <option  value="@project.Id">@project.ProjectName</option>
                 }
 
-            </select>
-            <span asp-validation-for="ProjectName" class="text-danger"></span>
+            </select> 
         </div>
 
         <br />
