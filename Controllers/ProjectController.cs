@@ -51,7 +51,8 @@ namespace FileExplorer.Controllers
 
                 TempData["Error"] = "Project Created Successfully.";
 
-                return RedirectToAction("Index", "Project");
+                return View(projectDTO);
+                //return Json(true);
             }
             catch (Exception ex)
             {

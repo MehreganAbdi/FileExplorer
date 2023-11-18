@@ -21,18 +21,18 @@
 }
 
 
-<form method="post" id="createprojectform" asp-action="Create">
+<form method="post" id="createprojectform" >
     <div class="form-group">
         <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
         <input asp-for="ProjectName" id="createprojectformname"   type="text" name="projectname" class="btn-primary" placeholder="Enter ProjectName">
-        <small id="project_name_count">100 / 0 </small>
+        <small id="projectnamecount">100 / 0 </small>
         <span asp-validation-for="ProjectName" class="text-danger"></span>
     </div>
     <br />
 
 
     <br />
-    <button type="submit"   class="btn btn-primary">Submit</button>
+    <button type="submit" id="createpeojectsubmit"  class="btn btn-primary">Submit</button>
 </form>
 
 <script src="~/js/Project.Create/ProjectCreate.js"> </script>

@@ -63,7 +63,7 @@ function deleteConfirm(path) {
                     type: "success"
                 });
             } else {
-                sweetAlert("Error Occured" , "Try Again Later" , "error" )
+                sweetAlert("Error Occured" , "File Didn't Exist Or An Error Occurred" , "error" )
             }
 
 
