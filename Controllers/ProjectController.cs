@@ -126,13 +126,13 @@ namespace FileExplorer.Controllers
                 
                 TempData["DeleteError"] = " File Deleted Successfully";
 
-                return RedirectToAction("Index", "Project");
+                return Ok(true);
             }
             catch(Exception ex)
             {
                 TempData["DeleteError"] = ex.Message.ToString();
 
-                return RedirectToAction("Index", "Project");
+                return Ok(false);
 
             }
         }
