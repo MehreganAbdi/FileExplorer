@@ -6,6 +6,9 @@
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+
 
 @if (Model.EditErrorTD != null)
 {
@@ -22,7 +25,12 @@
     <small>@TempData["Error"]</small>
 }
 
-<form method="post"   id="projecteditform" asp-action="Edit">
+<center style="display:none" id="redirecttoprojectindex">
+    <a asp-controller="Project" asp-action="Index" class="btn-primary">All Projects</a>
+
+</center>
+
+<form method="post"   id="editprojectform" >
 
     <input type="hidden" asp-for="Id" value="@Model.Id"/>
     <div class="form-group">
@@ -36,7 +44,8 @@
 
 
     <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <input type="button" id="editprojectsubmit" class="btn btn-primary" value="submit" />
+
 </form>
 
 

@@ -9,6 +9,10 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
 
 @if (Model.CreateErrorTD != null)
 {
@@ -78,7 +82,7 @@
             <label >
             <span id="createfileentityselectfile" style="color:dodgerblue; font-size:15px;">SelectFile</span>
 
-                <input asp-for="FileToCopy" id="fileentitycreatefromfile" type="file" class="btn-primary">
+                <input asp-for="FileToCopy" name="filetocopy" id="fileentitycreatefromfile"  type="file" class="btn-primary">
             </label>
 
         <br />
@@ -87,7 +91,8 @@
 
 
         <br />
-        <button type="submit" class="btn-primary">Submit</button>
+        <input type="button" value="Submit" id="fileentitycreateformsubmit" class="btn btn-primary"/>
+
     </form>
 
 
