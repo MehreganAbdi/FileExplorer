@@ -24,12 +24,15 @@
 {
     <small>@Model.Error</small>
 }
+<center style="display:none" id="redirecttoprojectindex">
+    <a asp-controller="Project" asp-action="Index" class="btn-primary">All Projects</a>
 
+</center>
 
 <form   id="createprojectform" >
     <div class="form-group">
-        <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
-        <input asp-for="ProjectName" id="createprojectformname"   type="text" name="projectname" class="btn-primary" placeholder="Enter ProjectName">
+        <label   class="btn-primary">ProjectName</label>
+        <input   id="createprojectformname"   type="text" name="projectname" class="btn-primary" placeholder="Enter ProjectName">
         <small id="projectnamecount">100 / 0 </small>
         <span asp-validation-for="ProjectName" class="text-danger"></span>
     </div>

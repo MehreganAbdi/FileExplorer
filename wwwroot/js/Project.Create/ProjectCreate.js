@@ -32,12 +32,12 @@ function validation() {
 function CountCharsProject() {
     document.getElementById("projectnamecount").innerHTML = '100 / ' + document.getElementById("createprojectformname").value.length;
 }
-document.getElementById("createprojectformname").onkeyup = function () { return CountCharsProject() }; 
+document.getElementById("createprojectformname").onkeyup = function () { return CountCharsProject() };
 
 document.getElementById("createpeojectsubmit").onclick = function () {
     if (validation()) {
 
-        let url = "https://localhost:7242/Project/Create/"
+        let urel = "https://localhost:7242/Project/Create/"
 
         var valdata = $("#createprojectform").serialize();
 
@@ -49,27 +49,40 @@ document.getElementById("createpeojectsubmit").onclick = function () {
             showCancelButton: true,
             confirmButtonText: "Yes, Submit It",
             cancelButtonText: "No",
-            
+
         }).then(async function (result) {
             if (result.dismiss != 'cancel') {
 
-                const response = await fetch(url, {
-                    method: 'POST',
-                    body: JSON.stringify(valdata),
-                    headers: {
-                        "Content-type": "application/json; charset=UTF-8"
-                    }
-                })
+                $.ajax({
+                    url: urel,
+                    type: 'POST',
+                    data: valdata,
+                    success: function () {
+                        sweetAlert({
+                            title: "Done!",
+                            text: "Form Submitted Successfully",
+                            type: "success"
+                        });
 
-                if (response.ok) {
-                    sweetAlert({
-                        title: "Done!",
-                        text: "Form Submitted Successfully",
-                        type: "success"
-                    });
-                } else {
-                    sweetAlert("Error Occured", "Record Didn't Exist Or An Error Occurred", "error")
-                }
+                        document.getElementById("redirecttoprojectindex").style = "";
+                    },
+                    error: function () {
+                        sweetAlert({
+                            title: "Failed",
+                            text: "Form Coudn't get Submit",
+                            type: "error"
+                        });
+                    }
+                });
+
+                //if (response.ok) {
+                //    sweetAlert({
+                //        title: "Done!",
+                //        text: "Form Submitted Successfully",
+                //        type: "success"
+                //    });
+
+
             }
             else {
                 sweetAlert("Canceled", "", "success")
@@ -80,7 +93,8 @@ document.getElementById("createpeojectsubmit").onclick = function () {
         })
 
 
-    } else {
+    }
+    else {
         return validation();
     }
 }
