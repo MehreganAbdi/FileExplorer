@@ -33,7 +33,8 @@ namespace FileExplorer.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var allProjects = new ProjectsStruct(){AllProjects = await projectService.GetAllAsync()}; 
+            var allProjects = await projectService.GetAllAsync(); 
+            
             ViewBag.data = allProjects;
 
 

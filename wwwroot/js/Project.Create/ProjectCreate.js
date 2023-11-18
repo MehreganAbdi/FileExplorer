@@ -32,46 +32,76 @@ function validation() {
 function CountCharsProject() {
     document.getElementById("projectnamecount").innerHTML = '100 / ' + document.getElementById("createprojectformname").value.length;
 }
+document.getElementById("createprojectformname").onkeyup = function () { return CountCharsProject() };
 
-document.getElementById("createprojectform").onsubmit = function () {
+document.getElementById("createpeojectsubmit").onclick = function () {
     if (validation()) {
+
+        let urel = "https://localhost:7242/Project/Create/"
+
         var valdata = $("#createprojectform").serialize();
 
-        $.ajax({
-            url: "/Peoject/Create",
-            type: "POST",
-            dataType: 'json',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            data: valdata,
-            complete: function (data) {
-                if (data) {
-                    sweetAlert({
-                        title: "Done",
-                        text: data,
-                        type: "success",
-                        timer: 4000
+        sweetAlert({
+            title: "Are you sure?",
+            text: "",
+            type: "warning",
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Yes, Submit It",
+            cancelButtonText: "No",
 
-                    });
-                } else {
-                    sweetAlert({
-                        title: "Failed",
-                        text: "Couldn't Create The Project",
-                        type: "error",
-                        timer: 4000
+        }).then(async function (result) {
+            if (result.dismiss != 'cancel') {
 
-                    });
-                }
+                $.ajax({
+                    url: urel,
+                    type: 'POST',
+                    data: valdata,
+                    success: function () {
+                        sweetAlert({
+                            title: "Done!",
+                            text: "Form Submitted Successfully",
+                            type: "success"
+                        });
+
+                        document.getElementById("redirecttoprojectindex").style = "";
+                    },
+                    error: function () {
+                        sweetAlert({
+                            title: "Failed",
+                            text: "Form Coudn't get Submit",
+                            type: "error"
+                        });
+                    }
+                });
+
+                //if (response.ok) {
+                //    sweetAlert({
+                //        title: "Done!",
+                //        text: "Form Submitted Successfully",
+                //        type: "success"
+                //    });
 
 
             }
+            else {
+                sweetAlert("Canceled", "", "success")
+
+            }
+
+
         })
+
+
     }
     else {
         return validation();
     }
-};
+}
 
-document.getElementById("createprojectformname").onkeyup = function () { return CountCharsProject() };
+
+
+
 
 
 

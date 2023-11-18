@@ -10,21 +10,29 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
  
 @if (Model.CreateErrorTD != null)
 {
     <small>@Model.CreateErrorTD</small>
 }
+
 @if (Model.Error!= null)
 {
     <small>@Model.Error</small>
 }
+<center style="display:none" id="redirecttoprojectindex">
+    <a asp-controller="Project" asp-action="Index" class="btn-primary">All Projects</a>
 
+</center>
 
-<form method="post" id="createprojectform" >
+<form   id="createprojectform" >
     <div class="form-group">
-        <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
-        <input asp-for="ProjectName" id="createprojectformname"   type="text" name="projectname" class="btn-primary" placeholder="Enter ProjectName">
+        <label   class="btn-primary">ProjectName</label>
+        <input   id="createprojectformname"   type="text" name="projectname" class="btn-primary" placeholder="Enter ProjectName">
         <small id="projectnamecount">100 / 0 </small>
         <span asp-validation-for="ProjectName" class="text-danger"></span>
     </div>
@@ -32,7 +40,7 @@
 
 
     <br />
-    <button type="submit" id="createpeojectsubmit"  class="btn btn-primary">Submit</button>
+    <input type="button" id="createpeojectsubmit" class="btn btn-primary" value="submit" />
 </form>
 
 <script src="~/js/Project.Create/ProjectCreate.js"> </script>

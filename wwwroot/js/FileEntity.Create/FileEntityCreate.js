@@ -7,7 +7,7 @@
 
     if (filePath.length > 150 || file.path < 3) {
         sweetAlert({
-            title: "Description must be less than 180 and more than 3 characters",
+            title: "filePath must be less than 180 and more than 3 characters",
             text: "",
             type: "error",
             timer: 5000,
@@ -16,7 +16,7 @@
         return false;
     } else if (desc.length > 180 || desc.length < 3) {
         sweetAlert({
-            title: "file path must be less than 150 and more than 3 characters",
+            title: "Description must be less than 150 and more than 3 characters",
             text: "",
             type: "error",
             timer: 4000,
@@ -25,7 +25,7 @@
         return false;
     } else if (file == null) {
         sweetAlert({
-            title: "file path must be less than 150 characters",
+            title: "Select A File First",
             text: "",
             type: "error",
             timer: 4000,
