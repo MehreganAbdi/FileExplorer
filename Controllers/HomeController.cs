@@ -28,6 +28,7 @@ namespace FileExplorer.Controllers
 
         public async Task<IActionResult> Index(string path, string searching)
         {
+            return RedirectToAction("Index", "FileEntity");
 
             try
             {

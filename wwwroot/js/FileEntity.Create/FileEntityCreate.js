@@ -88,6 +88,7 @@ document.getElementById("fileentitycreateformsubmit").onclick = function () {
                     url: urel,
                     type: 'POST',
                     data: valdata,
+                    enctype: 'multipart/form-data',
                     success: function () {
                         sweetAlert({
                             title: "Done!",

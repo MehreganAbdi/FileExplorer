@@ -72,7 +72,7 @@ namespace FileExplorer
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=FileEntity}/{action=Index}/{id?}");
 
             app.Run();
         }

@@ -29,6 +29,7 @@
     
     <form method="post" id="fileentitycreatefrom" asp-action="Create" enctype="multipart/form-data">
         <input asp-for="Name" value="NewFile" type="hidden" />
+
         <input asp-for="Size" value="0" type="hidden" />
         <input asp-for="Type" value="type" type="hidden" />
 
@@ -69,7 +70,7 @@
             <br />
             <small id="filepath_count"></small>
             <label  >ProjectName</label>
-            <select asp-for="ProjectId" class="project-selection">
+            <select asp-for="ProjectId" id="projectidselect" class="project-selection">
                 @foreach (var project in allProjects)
                 {
                     <option  value="@project.Id">@project.ProjectName</option>

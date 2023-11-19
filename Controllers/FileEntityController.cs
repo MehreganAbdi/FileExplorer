@@ -22,13 +22,21 @@ namespace FileExplorer.Controllers
             this.directoryService = directoryService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searching)
         {
             var allfileEntities = await fileEntityService.GetAllAsync();
+
+            if(searching != null)
+            {
+                allfileEntities = allfileEntities.Where(fe => fe.FilePath.Contains(searching)).ToList();
+            }
+            //var modelJson = Json(allfileEntities);
+
             return View(allfileEntities);
         }
 
        
+
 
         [HttpGet]
         public async Task<IActionResult> Create()

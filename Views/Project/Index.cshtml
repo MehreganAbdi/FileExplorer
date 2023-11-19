@@ -1,5 +1,7 @@
-﻿@using FileExplorer.DTOs;
-@model ICollection<ProjectDTO>
+﻿@using FileExplorer.DTOs; 
+@model ICollection<ProjectDTO> 
+
+
 
 @{
     ViewData["Title"] = "Projects";
@@ -10,8 +12,7 @@
 
 
 @if (Model != null)
-{
-
+{ 
     <div class="parent2">
 
         <br />
@@ -22,8 +23,8 @@
 
             <center>
                 <a asp-controller="Project" asp-action="Create" class="btn-primary">Add Project+</a>
-                <a asp-action="Index" asp-controller="Home" class="btn-primary">Home</a>
-            </center>
+                <a asp-action="Index" asp-controller="FileEntity" class="btn-primary">Home</a>
+            </center> 
             <table class="table">
                 <thead>
                     <tr>
@@ -34,13 +35,18 @@
                         <th scope="col">Delete</th>
                     </tr>
                 </thead>
-                @{
+                
+                
+                <>
+                
+                </>
+                @*   @{
                     var i = 1;
 
-                    @foreach (var project in Model)
-                    {
-                        <tbody>
-                            <tr>
+                    <tbody>
+                        <tr>
+                            @foreach (var project in Model)
+                            {
                                 <th scope="row">@i</th>
 
                                 <td><center>@project.ProjectName</center></td>
@@ -48,15 +54,15 @@
                                 <td><center><a asp-action="Edit" asp-controller="Project" asp-route-id="@project.Id" class="btn-edit">Edit</a></center></td>
                                 <td><center><input data-id="@project.Id" type="button" id="deleteproject" class="btn-delete project-index-delete" value="Delete" /></center></td>
 
-                            </tr>
-                        </tbody>
 
-                        i++;
-                    }
+                                i++;
+                            }
+                        </tr>
+                    </tbody>
 
 
 
-                }
+                } *@
             </table>
         </center>
 

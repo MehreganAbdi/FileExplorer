@@ -15,6 +15,7 @@
 @if (Model != null)
 {
 
+
     <div class="parent2">
 
 
@@ -27,9 +28,18 @@
             </h1>
             <br />
             <a asp-controller="FileEntity" asp-action="Create" class="btn-primary">Add File Record+</a>
-            <a asp-controller="Home" asp-action="Index" class="btn-primary">Home </a>
 
             <center>
+                <center>
+                    @using (Html.BeginForm("Index", "FileEntity", FormMethod.Get))
+                    {
+
+                         <input class="btn-primary" type="text" name="searching" placeholder="Search In Paths ..."/>                        
+                       
+                        //<input type="image" src="~/icons/search-3-32.png" style="width:20px; padding:5px; border-radius:20%" value="Search" class="btn-primary" />
+
+                    }
+                </center>
             </center>
             <table class="table">
                 <thead>
