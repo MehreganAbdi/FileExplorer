@@ -14,7 +14,7 @@
                 tr.append("<td><center>" + json.value[i].name + "</center></td>");
                 tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
                 tr.append("<td><center>" + json.value[i].dateCreated + "</center></td>");
-                tr.append("<td><center>" + json.value[i].filePath+ "</center></td>");
+                tr.append("<td><center>" + json.value[i].filePath + "</center></td>");
                 tr.append("<td><center>" + json.value[i].description + "</center></td>");
                 tr.append("<td><center>" + json.value[i].size + "</center></td>");
 
@@ -28,12 +28,6 @@
                 delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
             }
 
-            sweetAlert({
-                title: "Done",
-                text: "You Have Now Access To All Projects",
-                type: "success",
-                timer: 3000
-            });
 
         },
         srror: function () {
@@ -80,13 +74,14 @@ function deleteConfirm(id) {
             } else {
                 sweetAlert("Error Occured", "Record Didn't Exist Or An Error Occurred", "error")
             }
-
+            document.location.reload();
 
         } else {
             sweetAlert("Proccess Canceled ", "Record Is Safe", "success");
         }
 
     });
+   
 }
 
 
@@ -103,7 +98,7 @@ document.getElementById("fileentityindexsearch").onkeyup = function () {
                 var tr;
                 var j = 1;
 
-                
+
 
                 for (var i = 0; i < json.value.length; i++) {
 
@@ -124,7 +119,9 @@ document.getElementById("fileentityindexsearch").onkeyup = function () {
                         $('table').append(tr);
                         j++;
                     }
+
                 }
+               
 
                 const allDeleteButtons = document.querySelectorAll('.file-index-delete');
                 for (const delbtn of allDeleteButtons) {
@@ -173,7 +170,7 @@ document.getElementById("fileentityindexsearch").onkeyup = function () {
                     delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
                 }
 
-               
+
             },
             srror: function () {
                 sweetAlert({
@@ -187,5 +184,4 @@ document.getElementById("fileentityindexsearch").onkeyup = function () {
 
     }
 }
-  
- 
+
