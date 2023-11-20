@@ -1,4 +1,58 @@
-﻿function deleteConfirm(id) {
+﻿$(document).ready(function () {
+
+    $.ajax({
+
+        url: 'FileEntity/GetAllRecordsInJson',
+        type: 'GET',
+        success: function (json) {
+            var tr;
+
+            for (var i = 0; i < json.value.length; i++) {
+                var j = i + 1;
+                tr = $('<tr/>');
+                tr.append("<td><center>" + j + "|</td></center>")
+                tr.append("<td><center>" + json.value[i].name + "</center></td>");
+                tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
+                tr.append("<td><center>" + json.value[i].dateCreated + "</center></td>");
+                tr.append("<td><center>" + json.value[i].filePath+ "</center></td>");
+                tr.append("<td><center>" + json.value[i].description + "</center></td>");
+                tr.append("<td><center>" + json.value[i].size + "</center></td>");
+
+                tr.append('<td><center><a type="button" href="FileEntity/Edit/' + json.value[i].id + '" class="btn-edit">Edit</a></center></td>');
+                tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn-delete file-index-delete" value="Delete" /></center></td>');
+                $('table').append(tr);
+            }
+
+            const allDeleteButtons = document.querySelectorAll('.file-index-delete');
+            for (const delbtn of allDeleteButtons) {
+                delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
+            }
+
+            sweetAlert({
+                title: "Done",
+                text: "You Have Now Access To All Projects",
+                type: "success",
+                timer: 3000
+            });
+
+        },
+        srror: function () {
+            sweetAlert({
+                title: "Failed",
+                text: "Form Coudn't get Submit",
+                type: "error"
+            });
+        }
+
+    });
+
+
+
+});
+
+
+
+function deleteConfirm(id) {
 
     let url = "https://localhost:7242/FileEntity/Delete/" + id;
 
@@ -35,9 +89,109 @@
     });
 }
 
-const allDeleteButtons = document.querySelectorAll('.file-index-delete');
-for (const delbtn of allDeleteButtons) {
-    delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
+
+document.getElementById("fileentityindexsearch").onkeyup = function () {
+
+    if (document.getElementById("fileentityindexsearch").value != "") {
+        var search = document.getElementById("fileentityindexsearch").value;
+        document.getElementById("fileentityindextable").innerHTML = "";
+        $.ajax({
+
+            url: 'FileEntity/GetAllRecordsInJson',
+            type: 'GET',
+            success: function (json) {
+                var tr;
+                var j = 1;
+
+                
+
+                for (var i = 0; i < json.value.length; i++) {
+
+                    if (json.value[i].projectName.includes(search) || json.value[i].name.includes(search) || json.value[i].filePath.includes(search)
+                        || json.value[i].description.includes(search) || json.value[i].size.includes(search)) {
+
+                        tr = $('<tr/>');
+                        tr.append("<td><center>" + j + "|</td></center>")
+                        tr.append("<td><center>" + json.value[i].name + "</center></td>");
+                        tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
+                        tr.append("<td><center>" + json.value[i].dateCreated + "</center></td>");
+                        tr.append("<td><center>" + json.value[i].filePath + "</center></td>");
+                        tr.append("<td><center>" + json.value[i].description + "</center></td>");
+                        tr.append("<td><center>" + json.value[i].size + "</center></td>");
+
+                        tr.append('<td><center><a type="button" href="FileEntity/Edit/' + json.value[i].id + '" class="btn-edit">Edit</a></center></td>');
+                        tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn-delete file-index-delete" value="Delete" /></center></td>');
+                        $('table').append(tr);
+                        j++;
+                    }
+                }
+
+                const allDeleteButtons = document.querySelectorAll('.file-index-delete');
+                for (const delbtn of allDeleteButtons) {
+                    delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
+                }
+
+            },
+            srror: function () {
+                sweetAlert({
+                    title: "Failed",
+                    text: "Form Coudn't get Submit",
+                    type: "error"
+                });
+            }
+
+        });
+
+    }
+    else {
+
+        $.ajax({
+
+            url: 'FileEntity/GetAllRecordsInJson',
+            type: 'GET',
+            success: function (json) {
+                var tr;
+
+                for (var i = 0; i < json.value.length; i++) {
+                    var j = i + 1;
+                    tr = $('<tr/>');
+                    tr.append("<td><center>" + j + "|</td></center>")
+                    tr.append("<td><center>" + json.value[i].name + "</center></td>");
+                    tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
+                    tr.append("<td><center>" + json.value[i].dateCreated + "</center></td>");
+                    tr.append("<td><center>" + json.value[i].filePath + "</center></td>");
+                    tr.append("<td><center>" + json.value[i].description + "</center></td>");
+                    tr.append("<td><center>" + json.value[i].size + "</center></td>");
+
+                    tr.append('<td><center><a type="button" href="FileEntity/Edit/' + json.value[i].id + '" class="btn-edit">Edit</a></center></td>');
+                    tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn-delete file-index-delete" value="Delete" /></center></td>');
+                    $('table').append(tr);
+                }
+
+                const allDeleteButtons = document.querySelectorAll('.file-index-delete');
+                for (const delbtn of allDeleteButtons) {
+                    delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
+                }
+
+                sweetAlert({
+                    title: "Done",
+                    text: "You Have Now Access To All Projects",
+                    type: "success",
+                    timer: 3000
+                });
+
+            },
+            srror: function () {
+                sweetAlert({
+                    title: "Failed",
+                    text: "Form Coudn't get Submit",
+                    type: "error"
+                });
+            }
+
+        });
+
+    }
 }
-    
+  
  

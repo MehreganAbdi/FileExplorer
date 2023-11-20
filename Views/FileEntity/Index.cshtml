@@ -1,7 +1,4 @@
-﻿@using FileExplorer.DTOs;
-@model ICollection<FileEntityDTO>
-
-@{
+﻿@{
     ViewData["Title"] = "FileEntities";
     Layout = "CustomLayout";
 
@@ -12,9 +9,7 @@
 
 
 
-@if (Model != null)
-{
-
+<body>
 
     <div class="parent2">
 
@@ -31,17 +26,10 @@
 
             <center>
                 <center>
-                    @using (Html.BeginForm("Index", "FileEntity", FormMethod.Get))
-                    {
-
-                         <input class="btn-primary" type="text" name="searching" placeholder="Search In Paths ..."/>                        
-                       
-                        //<input type="image" src="~/icons/search-3-32.png" style="width:20px; padding:5px; border-radius:20%" value="Search" class="btn-primary" />
-
-                    }
+                    <input class="btn-primary" placeholder="Search..." id="fileentityindexsearch" />
                 </center>
             </center>
-            <table class="table">
+            <table class="table" id="fileentityindextable">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -57,39 +45,43 @@
 
                     </tr>
                 </thead>
-                @{
-                    var i = 1;
-
-                    @foreach (var file in Model)
-                    {
-                        <tbody>
-                            <tr>
-                                <th scope="row">@i</th>
-
-                                <td><center>@file.Name</center></td>
-                                <td><center>@file.ProjectName</center></td>
-                                <td><center>@file.DateCreated</center></td>
-                                <td><center>@file.FilePath</center></td>
-                                <td><center>@file.Description</center></td>
-                                <td><center>@file.Size</center></td>
-                                <td><center><a asp-action="Edit" asp-controller="FileEntity" asp-route-id="@file.Id" class="btn-edit">Edit</a></center></td>
-                            
-                                <td><center><input class="btn-delete file-index-delete" type="button" data-id="@file.Id" value="Delete" /> </center></td>
-
-                            </tr>
-
-                        </tbody>
-
-                        i++;
-                    }
 
 
+                @*   @{
+                var i = 1;
 
+                @foreach (var file in Model)
+                {
+                <tbody>
+                <tr>
+                <th scope="row">@i</th>
+
+                <td><center>@file.Name</center></td>
+                <td><center>@file.ProjectName</center></td>
+                <td><center>@file.DateCreated</center></td>
+                <td><center>@file.FilePath</center></td>
+                <td><center>@file.Description</center></td>
+                <td><center>@file.Size</center></td>
+                <td><center><a asp-action="Edit" asp-controller="FileEntity" asp-route-id="@file.Id" class="btn-edit">Edit</a></center></td>
+
+                <td><center><input class="btn-delete file-index-delete" type="button" data-id="@file.Id" value="Delete" /> </center></td>
+
+                </tr>
+
+                </tbody>
+
+                i++;
                 }
+
+
+
+                } *@
             </table>
         </center>
 
         <br />
     </div>
-}
-<script src="~/js/FileEntity.Index/FileEntityIndex.js"></script>
+
+    <script src="~/js/FileEntity.Index/FileEntityIndex.js"></script>
+
+</body>

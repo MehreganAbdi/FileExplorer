@@ -24,25 +24,23 @@ namespace FileExplorer.Controllers
 
         public async Task<IActionResult> Index(string searching)
         {
-            var allfileEntities = await fileEntityService.GetAllAsync();
-
-            if(searching != null)
-            {
-                allfileEntities = allfileEntities.Where(fe => fe.FilePath.Contains(searching)).ToList();
-            }
-            //var modelJson = Json(allfileEntities);
-
-            return View(allfileEntities);
+            return View();
         }
 
-       
+        public async Task<IActionResult> GetAllRecordsInJson()
+        {
+            var allfileEntities = await fileEntityService.GetAllAsync();
+
+            var modelJson = Json(allfileEntities);
+            return Json(modelJson);
+        }
 
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var allProjects = await projectService.GetAllAsync(); 
-            
+            var allProjects = await projectService.GetAllAsync();
+
             ViewBag.data = allProjects;
 
 
@@ -56,7 +54,7 @@ namespace FileExplorer.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(FileEntityDTO fileEntityDTO)
         {
-             var allProjects = await projectService.GetAllAsync();
+            var allProjects = await projectService.GetAllAsync();
             ViewBag.data = allProjects;
 
             ViewBag.recentPaths = fileEntityService.LastFivePaths();
@@ -70,7 +68,7 @@ namespace FileExplorer.Controllers
                     return View(fileEntityDTO);
                 }
 
-                if (fileEntityDTO.Type == null|| fileEntityDTO.Type == "Type"  || fileEntityDTO.Size==null || fileEntityDTO.Size == "0")
+                if (fileEntityDTO.Type == null || fileEntityDTO.Type == "Type" || fileEntityDTO.Size == null || fileEntityDTO.Size == "0")
                 {
                     fileEntityDTO.NamingErrorTD = "Path Is Not Valid";
                     return View(fileEntityDTO);
@@ -78,7 +76,7 @@ namespace FileExplorer.Controllers
 
 
                 fileEntityDTO.ProjectName = (await projectService.GetByIdAsync(fileEntityDTO.ProjectId)).ProjectName;
-                
+
                 fileEntityDTO.DateCreated = DateTime.Now;
 
 
@@ -183,7 +181,7 @@ namespace FileExplorer.Controllers
                 if (!result)
                 {
                     TempData["DeleteError"] = "File Didn't Delete , Try Again";
-                    
+
                     return Ok(false);
 
                 }
@@ -194,7 +192,7 @@ namespace FileExplorer.Controllers
             catch (Exception ex)
             {
                 TempData["DeleteError"] = ex.Message.ToString();
-                
+
                 return Ok(false);
             }
         }
