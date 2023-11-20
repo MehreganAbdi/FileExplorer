@@ -22,19 +22,25 @@ namespace FileExplorer.Controllers
             this.directoryService = directoryService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searching)
         {
-            var allfileEntities = await fileEntityService.GetAllAsync();
-            return View(allfileEntities);
+            return View();
         }
 
-       
+        public async Task<IActionResult> GetAllRecordsInJson()
+        {
+            var allfileEntities = await fileEntityService.GetAllAsync();
+
+            var modelJson = Json(allfileEntities);
+            return Json(modelJson);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var allProjects = await projectService.GetAllAsync(); 
-            
+            var allProjects = await projectService.GetAllAsync();
+
             ViewBag.data = allProjects;
 
 
@@ -48,7 +54,7 @@ namespace FileExplorer.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(FileEntityDTO fileEntityDTO)
         {
-             var allProjects = await projectService.GetAllAsync();
+            var allProjects = await projectService.GetAllAsync();
             ViewBag.data = allProjects;
 
             ViewBag.recentPaths = fileEntityService.LastFivePaths();
@@ -62,25 +68,24 @@ namespace FileExplorer.Controllers
                     return View(fileEntityDTO);
                 }
 
-                if (fileEntityDTO.FileToCopy == null)
+                if (fileEntityDTO.Type == null || fileEntityDTO.Type == "Type" || fileEntityDTO.Size == null || fileEntityDTO.Size == "0")
                 {
-                    fileEntityDTO.Error = "A File Must Be Selected";
+                    fileEntityDTO.NamingErrorTD = "Path Is Not Valid";
                     return View(fileEntityDTO);
                 }
 
 
                 fileEntityDTO.ProjectName = (await projectService.GetByIdAsync(fileEntityDTO.ProjectId)).ProjectName;
 
+                fileEntityDTO.DateCreated = DateTime.Now;
 
 
-                var file = fileEntityDTO.FileToCopy;
-                var finalFileEntityDTO = await fileEntityService.CreateFileEntityDTODirectly(file, fileEntityDTO);
 
-                var result = await fileEntityService.AddFileEntityAsync(finalFileEntityDTO);
+                var result = await fileEntityService.AddFileEntityAsync(fileEntityDTO);
                 if (!result)
                 {
                     fileEntityDTO.CreateErrorTD = "An Error Happened While Creating , try Again";
-                    return View(finalFileEntityDTO);
+                    return View(fileEntityDTO);
                 }
 
                 fileEntityDTO.CreateErrorTD = "File Added Successfully";
@@ -176,7 +181,7 @@ namespace FileExplorer.Controllers
                 if (!result)
                 {
                     TempData["DeleteError"] = "File Didn't Delete , Try Again";
-                    
+
                     return Ok(false);
 
                 }
@@ -187,7 +192,7 @@ namespace FileExplorer.Controllers
             catch (Exception ex)
             {
                 TempData["DeleteError"] = ex.Message.ToString();
-                
+
                 return Ok(false);
             }
         }

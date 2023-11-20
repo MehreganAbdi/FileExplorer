@@ -17,7 +17,7 @@ function validation() {
             showConfirmButton: false
         });
         return false;
-    } else if (desc.length > 180 || desc.length<3) {
+    } else if (desc.length > 180 || desc.length < 3) {
         sweetAlert({
             title: "Description must be less than 180 and more than 3 characters",
             text: "",
@@ -26,7 +26,7 @@ function validation() {
             showConfirmButton: false
         });
         return false;
-    } else if (filePath.length > 150 || dilepath.length<3) {
+    } else if (filePath.length > 150 || filePath.length < 3) {
         sweetAlert({
             title: "file path must be less than 150 and more than 3 characters",
             text: "",
@@ -64,4 +64,63 @@ document.getElementById("fileentityeditformfilepath").onkeyup = function () { re
 
 document.getElementById("fileentityeditformdesc").onkeyup = function () { return CountCharsDesc() };
 
-document.getElementById("fileentityeditform").onsubmit = function () { return validation() };
+
+
+document.getElementById("editfileentitysubmit").onclick = function () {
+    if (validation()) {
+
+        let urel = "https://localhost:7242/FileEntity/Edit/"
+
+        var valdata = $("#editfileentityform").serialize();
+
+        sweetAlert({
+            title: "Are you sure?",
+            text: "",
+            type: "warning",
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Yes, Apply The Changes",
+            cancelButtonText: "No",
+
+        }).then(async function (result) {
+            if (result.dismiss != 'cancel') {
+
+                $.ajax({
+                    url: urel,
+                    type: 'POST',
+                    data: valdata,
+                    success: function () {
+                        sweetAlert({
+                            title: "Done!",
+                            text: "Changes Updated Successfully",
+                            type: "success"
+                        });
+
+                        document.getElementById("redirecttofileentityindex").style = "";
+                    },
+                    error: function () {
+                        sweetAlert({
+                            title: "Failed",
+                            text: "Form Coudn't get Submit",
+                            type: "error"
+                        });
+                    }
+                });
+
+
+
+            }
+            else {
+                sweetAlert("Canceled", "", "success")
+
+            }
+
+
+        })
+
+
+    }
+    else {
+        return validation();
+    }
+}

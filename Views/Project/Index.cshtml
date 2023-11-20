@@ -1,5 +1,6 @@
-﻿@using FileExplorer.DTOs;
-@model ICollection<ProjectDTO>
+﻿
+
+
 
 @{
     ViewData["Title"] = "Projects";
@@ -8,9 +9,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
 
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
 
-@if (Model != null)
-{
 
     <div class="parent2">
 
@@ -21,47 +22,30 @@
             </h1>
 
             <center>
+                <input id="projectindexsearch" placeholder="Search..." class="btn-primary"  />
+                <br />
                 <a asp-controller="Project" asp-action="Create" class="btn-primary">Add Project+</a>
-                <a asp-action="Index" asp-controller="Home" class="btn-primary">Home</a>
-            </center>
-            <table class="table">
+
+                <a asp-action="Index" asp-controller="FileEntity" class="btn-primary" >Home</a>
+            </center> 
+            <table class="table" id="projectindextable">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
                         <th scope="col">Id</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                     </tr>
                 </thead>
-                @{
-                    var i = 1;
-
-                    @foreach (var project in Model)
-                    {
-                        <tbody>
-                            <tr>
-                                <th scope="row">@i</th>
-
-                                <td><center>@project.ProjectName</center></td>
-                                <td><center>@project.Id</center></td>
-                                <td><center><a asp-action="Edit" asp-controller="Project" asp-route-id="@project.Id" class="btn-edit">Edit</a></center></td>
-                                <td><center><input data-id="@project.Id" type="button" id="deleteproject" class="btn-delete project-index-delete" value="Delete" /></center></td>
-
-                            </tr>
-                        </tbody>
-
-                        i++;
-                    }
-
-
-
-                }
+                
+           
+               
             </table>
         </center>
 
         <br />
     </div>
-}
+
 
 <script src="~/js/Project.Index/ProjectIndex.js"></script>

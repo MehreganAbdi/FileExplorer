@@ -15,13 +15,7 @@ function validation() {
         return false;
     } else {
 
-        //sweetAlert({
-        //    title: "Done!",
-        //    text: "Project Added",
-        //    type: "success",
-        //    timer: 4000,
-        //    showConfirmButton: false
-        //});
+       
         return true;
     }
 
