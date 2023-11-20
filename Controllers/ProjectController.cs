@@ -25,9 +25,15 @@ namespace FileExplorer.Controllers
         }
 
 
-        public async Task<IActionResult> GetAllProjectsInJson()
+        public async Task<IActionResult> GetAllProjectsInJson(string searching)
         {
             var allProjects = await projectService.GetAllAsync();
+
+            if(searching != null)
+            {
+                allProjects = allProjects.Where(p => p.ProjectName.Contains(searching)).ToList();
+
+            }
 
             var modelJson = Json(allProjects);
 

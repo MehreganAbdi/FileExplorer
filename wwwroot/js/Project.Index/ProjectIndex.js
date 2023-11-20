@@ -36,10 +36,6 @@
 }
 
 
-const allDeleteButtons = document.querySelectorAll('.project-index-delete');
-for (const delbtn of allDeleteButtons) {
-    delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
-}
 
 document.getElementById("getallprojectsinjson").onclick = function () {
 
@@ -50,15 +46,28 @@ document.getElementById("getallprojectsinjson").onclick = function () {
         success: function (json) {
             var tr;
 
-            for (var i = 0; i < json.length; i++) {
+            for (var i = 0; i < json.value.length; i++) {
+                var j = i+1;
                 tr = $('<tr/>');
-                tr.append("<td><center>" + json[i].Id + "</center></td>");
-                tr.append("<td><center>" + json[i].ProjectName + "</center></td>");
-                tr.append('<td><center><a asp-action="Edit" asp-controller="Project" asp-route-id="' + json[i].Id + '" class="btn-edit">Edit</a></center></td>');
-                tr.append(' <td><center><input data-id="' + json[i].Id + '" type="button" id="deleteproject" class="btn-delete project-index-delete" value="Delete" /></center></td>');
+                tr.append("<td><center>" + j +"|</td></center>")
+                tr.append("<td><center>" + json.value[i].id + "</center></td>");
+                tr.append("<td><center>" + json.value[i].projectName+ "</center></td>");
+                tr.append('<td><center><a type="button" asp-action="Edit" asp-controller="Project" asp-route-id="' + json.value[i].id + '" class="btn-edit">Edit</a></center></td>');
+                tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn-delete project-index-delete" value="Delete" /></center></td>');
                 $('table').append(tr);
             }
 
+            const allDeleteButtons = document.querySelectorAll('.project-index-delete');
+            for (const delbtn of allDeleteButtons) {
+                delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
+            }
+
+            sweetAlert({
+                title: "Done",
+                text: "You Have Now Access To All Projects",
+                type: "success",
+                timer:3000
+            });
 
         },
         srror: function () {
@@ -74,3 +83,4 @@ document.getElementById("getallprojectsinjson").onclick = function () {
 
    
 }
+
