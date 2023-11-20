@@ -70,25 +70,24 @@ namespace FileExplorer.Controllers
                     return View(fileEntityDTO);
                 }
 
-                if (fileEntityDTO.FileToCopy == null)
+                if (fileEntityDTO.Type == null|| fileEntityDTO.Type == "Type"  || fileEntityDTO.Size==null || fileEntityDTO.Size == "0")
                 {
-                    fileEntityDTO.Error = "A File Must Be Selected";
+                    fileEntityDTO.NamingErrorTD = "Path Is Not Valid";
                     return View(fileEntityDTO);
                 }
 
 
                 fileEntityDTO.ProjectName = (await projectService.GetByIdAsync(fileEntityDTO.ProjectId)).ProjectName;
+                
+                fileEntityDTO.DateCreated = DateTime.Now;
 
 
 
-                var file = fileEntityDTO.FileToCopy;
-                var finalFileEntityDTO = await fileEntityService.CreateFileEntityDTODirectly(file, fileEntityDTO);
-
-                var result = await fileEntityService.AddFileEntityAsync(finalFileEntityDTO);
+                var result = await fileEntityService.AddFileEntityAsync(fileEntityDTO);
                 if (!result)
                 {
                     fileEntityDTO.CreateErrorTD = "An Error Happened While Creating , try Again";
-                    return View(finalFileEntityDTO);
+                    return View(fileEntityDTO);
                 }
 
                 fileEntityDTO.CreateErrorTD = "File Added Successfully";

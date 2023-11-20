@@ -306,8 +306,10 @@ namespace FileExplorer.Controllers
                 }
                 else if (!await directoryService.ValidatePathPattern(fileEntityDTO.FilePath) )
                 {
+
                     fileEntityDTO.NamingErrorTD = " Path Is Unvalid";
                     return View(fileEntityDTO);
+
                 }
                 else if(!await directoryService.ValidateNamePattern(fileEntityDTO.Name))
                 {

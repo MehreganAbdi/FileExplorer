@@ -17,12 +17,23 @@ namespace FileExplorer.Controllers
 
         public async Task<IActionResult> Index()
         {
+            //var allProjects = await projectService.GetAllAsync();
+
+            //var modelJson = Json(allProjects);
+            //return Json(modelJson);
+            return View();
+        }
+
+
+        public async Task<IActionResult> GetAllProjectsInJson()
+        {
             var allProjects = await projectService.GetAllAsync();
 
             var modelJson = Json(allProjects);
 
-            return View(modelJson);
+            return Json(modelJson);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Create()

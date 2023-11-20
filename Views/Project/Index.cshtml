@@ -1,5 +1,5 @@
 ﻿@using FileExplorer.DTOs; 
-@model ICollection<ProjectDTO> 
+@* @model ICollection<ProjectDTO>  *@
 
 
 
@@ -10,9 +10,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
 
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
 
-@if (Model != null)
-{ 
+
     <div class="parent2">
 
         <br />
@@ -23,7 +24,8 @@
 
             <center>
                 <a asp-controller="Project" asp-action="Create" class="btn-primary">Add Project+</a>
-                <a asp-action="Index" asp-controller="FileEntity" class="btn-primary">Home</a>
+                <input id="getallprojectsinjson" class="btn-primary" value="Get All Projects" type="button" />
+                <a asp-action="Index" asp-controller="FileEntity" class="btn-primary" >Home</a>
             </center> 
             <table class="table">
                 <thead>
@@ -68,6 +70,6 @@
 
         <br />
     </div>
-}
+
 
 <script src="~/js/Project.Index/ProjectIndex.js"></script>
