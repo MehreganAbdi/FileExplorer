@@ -68,54 +68,59 @@ document.getElementById("fileentitycreateformsubmit").onclick = function () {
 
         let urel = "https://localhost:7242/FileEntity/Create/"
         var file = $("#fileentitycreatefromfile").prop("files")[0];
-        var imageResult = "";
 
-        var imageData = new FormData();
-        imageData.append("fileToUpload", jQuery("#fileentitycreatefromfile").get(0).files[0]);
+        //document.getElementById("hiddenforminfileentitycreatefile").prop("files").push(file);
 
-        $.ajax({
-            url: "https://localhost:7242/FileEntity/UploadPhotoAsync/",
-            type: 'POST',
-            data: imageData,
-            contentType: false,
-            processData: false,
-            success: function (json) {
+        //var imageResult = "";
 
-                if (json.value == 'false') {
-                    sweetAlert({
-                        title: "Upload Failed",
-                        text: "File Value Recived File As Null",
-                        type: "error"
-                    });
+        //var imageData = new FormData(document.getElementById("hiddenforminfileentitycreate"));
+        
+        //$.ajax({
+        //    url: "https://localhost:7242/FileEntity/UploadPhotoAsync/",
+        //    type: 'POST',
+        //    data: imageData,
+        //    contentType: false,
+        //    processData: false,
+        //    success: function (json) {
 
-                } else {
-                    imageResult = json.value;
+        //        if (json.value == 'false') {
+        //            sweetAlert({
+        //                title: "Upload Failed",
+        //                text: "File Value Recived File As Null",
+        //                type: "error"
+        //            });
 
-
-                }
-            }
-
-        })
+        //        } else {
+        //            imageResult = json.value;
 
 
-        if (imageResult != "") {
+        //        }
+        //    }
 
-            document.getElementById("fileentitycreatefromsize").value = imageResult;
-        }
+        //})
+
+
+        //if (imageResult != "") {
+
+        //    document.getElementById("fileentitycreatefromsize").value = imageResult;
+        //}
 
         document.getElementById("fileentitycreatefromname").value = file.name;
         document.getElementById("fileentitycreatefromsize").value = file.size.toString();
         document.getElementById("fileentitycreatefromtype").value = file.type;
 
 
-        var valdata = $("#fileentitycreatefrom").serialize();
-        //var allData = new FormData();
+        //var valdata = $("#fileentitycreatefrom").serialize();
+        var formData = new FormData();
+        formData.append("fileToCopy", file);
+        formData.append("name", $("#fileentitycreatefromname").val());
+        formData.append("description", $("#fileentitycreatefromdesc").val());
+        formData.append("filePath", $("#fileentitycreatefromfilepath").val());
+        formData.append("projectId", $("#projectidselect").val());
+        formData.append("size", $("#fileentitycreatefromsize").val());
+        formData.append("type", $("#fileentitycreatefromtype").val());
 
-
-        //allData.append("FileToCopy", $("#fileentitycreatefromfile").prop("files")[0]);
-
-        //allData.append("form", valdata);
-
+        
         sweetAlert({
             title: "Are you sure?",
             text: "",
@@ -130,9 +135,12 @@ document.getElementById("fileentitycreateformsubmit").onclick = function () {
 
                 $.ajax({
                     url: urel,
-                    type: 'POST',
-                    data: valdata + '&FileToCopy=' + file,
+                    method: 'POST',
+                    data: formData,
                     enctype: 'multipart/form-data',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
                     success: function () {
                         sweetAlert({
                             title: "Done!",

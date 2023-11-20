@@ -71,7 +71,10 @@ namespace FileExplorer.Controllers
                     fileEntityDTO.NamingErrorTD = "Path Is Not Valid";
                     return View(fileEntityDTO);
                 }
-
+                if(fileEntityDTO.FileToCopy == null)
+                {
+                    fileEntityDTO.Error = "Select A File First";
+                }
                 if (fileEntityDTO.Type == null || fileEntityDTO.Type == "Type" || fileEntityDTO.Size == null || fileEntityDTO.Size == "0")
                 {
                     fileEntityDTO.NamingErrorTD = "Path Is Not Valid";
@@ -83,7 +86,7 @@ namespace FileExplorer.Controllers
 
                 fileEntityDTO.DateCreated = DateTime.Now;
 
-
+                
 
                 var result = await fileEntityService.AddFileEntityAsync(fileEntityDTO);
                 if (!result)
@@ -107,14 +110,16 @@ namespace FileExplorer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadPhotoAsync(IFormFile fileToUpload)
+        public async Task<IActionResult> UploadPhotoAsync()
         {
-            if(fileToUpload == null)
+            if(Request.Form.Files == null)
             {
                 return Json(false);
             }
 
-            var result = await photoService.AddPhotoAsync(fileToUpload);
+            var file = Request.Form.Files[0];
+
+            var result = await photoService.AddPhotoAsync(file);
 
             return Json(result.Url.ToString());
         } 
