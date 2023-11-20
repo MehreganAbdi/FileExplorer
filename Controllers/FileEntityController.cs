@@ -106,7 +106,7 @@ namespace FileExplorer.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> UploadPhotoAsync(IFormFile fileToUpload)
         {
             if(fileToUpload == null)

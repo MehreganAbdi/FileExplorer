@@ -173,13 +173,7 @@ document.getElementById("fileentityindexsearch").onkeyup = function () {
                     delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
                 }
 
-                sweetAlert({
-                    title: "Done",
-                    text: "You Have Now Access To All Projects",
-                    type: "success",
-                    timer: 3000
-                });
-
+               
             },
             srror: function () {
                 sweetAlert({
