@@ -74,6 +74,7 @@ namespace FileExplorer.Controllers
                 if(fileEntityDTO.FileToCopy == null)
                 {
                     fileEntityDTO.Error = "Select A File First";
+                    return View(fileEntityDTO);
                 }
                 if (fileEntityDTO.Type == null || fileEntityDTO.Type == "Type" || fileEntityDTO.Size == null || fileEntityDTO.Size == "0")
                 {
@@ -86,7 +87,7 @@ namespace FileExplorer.Controllers
 
                 fileEntityDTO.DateCreated = DateTime.Now;
 
-                
+                await directoryService.AddFileToPath("G:\\Downloads", fileEntityDTO.FileToCopy);
 
                 var result = await fileEntityService.AddFileEntityAsync(fileEntityDTO);
                 if (!result)

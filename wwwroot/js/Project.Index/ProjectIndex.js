@@ -23,12 +23,7 @@
                 delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
             }
 
-            sweetAlert({
-                title: "Done",
-                text: "You Have Now Access To All Projects",
-                type: "success",
-                timer: 3000
-            });
+          
 
         },
         srror: function () {
@@ -75,7 +70,7 @@ function deleteConfirm(id) {
             } else {
                 sweetAlert("Error Occured", "Project Didn't Exist Or An Error Occurred", "error")
             }
-
+            document.location.reload();
 
         } else {
             sweetAlert("Proccess Canceled ", "Project Is Safe", "success");
@@ -118,6 +113,7 @@ document.getElementById("projectindexsearch").onkeyup = function () {
                     delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
                 }
 
+                
 
             },
             srror: function () {
@@ -169,6 +165,7 @@ document.getElementById("projectindexsearch").onkeyup = function () {
         });
 
     }
+    location.reload();
 }
 
 

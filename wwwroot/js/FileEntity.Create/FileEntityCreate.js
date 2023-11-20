@@ -23,7 +23,7 @@
             showConfirmButton: false
         });
         return false;
-    } else if (file.size > 2000000 || file == null) {
+    } else if (file.size > 2000 || file == null) {
         sweetAlert({
             title: "Select An Acceptable File (File Must Be < 2 Mb )",
             text: "",
