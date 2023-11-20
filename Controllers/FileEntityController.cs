@@ -4,6 +4,7 @@ using FileExplorer.IService;
 using FileExplorer.Services;
 using FileExplorer.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing;
 
 namespace FileExplorer.Controllers
 {
@@ -25,7 +26,7 @@ namespace FileExplorer.Controllers
             this.photoService = photoService;
         }
 
-        public async Task<IActionResult> Index(string searching)
+        public async Task<IActionResult> Index()
         {
             return View();
         }
@@ -104,6 +105,20 @@ namespace FileExplorer.Controllers
                 return View(fileEntityDTO);
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> UploadPhotoAsync(IFormFile fileToUpload)
+        {
+            if(fileToUpload == null)
+            {
+                return Json(false);
+            }
+
+            var result = await photoService.AddPhotoAsync(fileToUpload);
+
+            return Json(result.Url.ToString());
+        } 
+
 
 
         [HttpGet]

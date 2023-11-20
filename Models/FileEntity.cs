@@ -22,5 +22,7 @@ namespace FileExplorer.Models
         [MaxLength(15,ErrorMessage="Can't Be More Than 15 Characters")]
         public string Type { get; set; }
 
+        public string? ImageLink { get; set; }
+
     }
 }
