@@ -31,7 +31,8 @@ namespace FileExplorer.Services
                 Description = fileDTO.Description,
                 FilePath = fileDTO.FilePath,
                 ProjectId = fileDTO.ProjectId,
-                Type = fileDTO.Type
+                Type = fileDTO.Type,
+                ImageLink = fileDTO.ImageLink != null ? fileDTO.ImageLink : "false"
             };
         }
 
@@ -46,7 +47,7 @@ namespace FileExplorer.Services
                 FilePath = fileDTO.FilePath,
                 ProjectId = fileDTO.ProjectId,
                 ProjectName = fileDTO.ProjectName,
-                 
+                ImageLink = fileDTO.ImageLink != null ? fileDTO.ImageLink : "false",
                 Type = fileDTO.Type
             };
         }
@@ -62,7 +63,7 @@ namespace FileExplorer.Services
                 FilePath = fileDTO.FilePath,
                 ProjectId = fileDTO.ProjectId,
                 ProjectName = fileDTO.ProjectName,
-
+                ImageLink = fileDTO.ImageLink != null ? fileDTO.ImageLink : "false",
                 Type = fileDTO.Type,
                 Id = fileDTO.Id
             };
@@ -80,7 +81,8 @@ namespace FileExplorer.Services
                 ProjectId = fileDTO.ProjectId,
                 ProjectName = fileDTO.ProjectName,
                 Type = fileDTO.Type,
-                Id = fileDTO.Id
+                Id = fileDTO.Id,
+                ImageLink = fileDTO.ImageLink != null ? fileDTO.ImageLink : "false"
             };
 
         }
@@ -97,7 +99,8 @@ namespace FileExplorer.Services
                 ProjectId = file.ProjectId,
                 Type = file.Type,
                 Id = file.Id,
-                ProjectName = file.ProjectName
+                ProjectName = file.ProjectName,
+                ImageLink = file.ImageLink != null ? file.ImageLink : "false"
             };
         }
 
@@ -114,7 +117,8 @@ namespace FileExplorer.Services
                 ProjectId = file.ProjectId,
                 ProjectName = file.ProjectName,
                 Type = file.Type,
-                Id = file.Id
+                Id = file.Id,
+                ImageLink = file.ImageLink != null ? file.ImageLink : "false"
             };
         }
 

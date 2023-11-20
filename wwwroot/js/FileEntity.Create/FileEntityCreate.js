@@ -25,7 +25,7 @@
         return false;
     } else if (file.size > 2000000 || file == null) {
         sweetAlert({
-            title: "Select a File (File Must Be <2 Mb )",
+            title: "Select An Acceptable File (File Must Be < 2 Mb )",
             text: "",
             type: "error",
             timer: 4000,
@@ -68,16 +68,52 @@ document.getElementById("fileentitycreateformsubmit").onclick = function () {
 
         let urel = "https://localhost:7242/FileEntity/Create/"
         var file = $("#fileentitycreatefromfile").prop("files")[0];
+        var imageResult = "";
+
+        var imageData = new FormData();
+        imageData.append("fileToUpload", jQuery("#fileentitycreatefromfile").get(0).files[0]);
+
+        $.ajax({
+            url: "https://localhost:7242/FileEntity/UploadPhotoAsync/",
+            type: 'POST',
+            data: imageData,
+            contentType: false,
+            processData: false,
+            success: function (json) {
+
+                if (json.value == 'false') {
+                    sweetAlert({
+                        title: "Upload Failed",
+                        text: "File Value Recived File As Null",
+                        type: "error"
+                    });
+
+                } else {
+                    imageResult = json.value;
+
+
+                }
+            }
+
+        })
+
+
+        if (imageResult != "") {
+
+            document.getElementById("fileentitycreatefromsize").value = imageResult;
+        }
+
         document.getElementById("fileentitycreatefromname").value = file.name;
         document.getElementById("fileentitycreatefromsize").value = file.size.toString();
         document.getElementById("fileentitycreatefromtype").value = file.type;
+
 
         var valdata = $("#fileentitycreatefrom").serialize();
         //var allData = new FormData();
 
 
         //allData.append("FileToCopy", $("#fileentitycreatefromfile").prop("files")[0]);
-       
+
         //allData.append("form", valdata);
 
         sweetAlert({

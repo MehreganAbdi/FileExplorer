@@ -27,6 +27,7 @@ namespace FileExplorer.DTOs
         public string? Error { get; set; }
         public string? EditErrorTD { get; set; }
         public string? FileInStringFormat { get; set; }
+        public string? ImageLink { get; set; }
 
     }
 }

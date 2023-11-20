@@ -1,5 +1,6 @@
 using FileExplorer.Controllers;
 using FileExplorer.Data;
+using FileExplorer.ICloudinarySetup;
 using FileExplorer.IRepository;
 using FileExplorer.IService;
 using FileExplorer.Repositories;
@@ -28,8 +29,7 @@ namespace FileExplorer
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IProjectService, ProjectService>();
             builder.Services.AddScoped<IFileEntityService, FileEntityService>();
-
-
+            builder.Services.AddScoped<IPhotoService ,PhotoService>();
 
 
             //Repositories DI
@@ -43,7 +43,10 @@ namespace FileExplorer
             #endregion
 
 
+            #region  Configs
 
+            //DataBase
+            
             builder.Services.AddDbContext<FileExplorerDbContext>(
                options =>
                {
@@ -51,6 +54,12 @@ namespace FileExplorer
                });
 
 
+
+            //ICloudinary
+            builder.Services.Configure<CloudinarySetup>(builder.Configuration.GetSection("CloudinarySetup"));
+
+
+            #endregion
 
 
             var app = builder.Build();
