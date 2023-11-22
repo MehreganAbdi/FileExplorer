@@ -32,7 +32,17 @@
             showConfirmButton: false
         });
         return false;
-    } else {
+    } else if (file.type != "image/png" && file.type!="image/jpg" && file.type!="image/jpeg"  ) {
+        sweetAlert({
+            title: "Select An Acceptable File (File Must Be An Image)",
+            text: "",
+            type: "error",
+            timer: 4000,
+            showConfirmButton: false
+        });
+        return false;
+    }
+    else {
 
         return true;
     }
