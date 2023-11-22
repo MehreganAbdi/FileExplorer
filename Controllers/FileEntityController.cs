@@ -76,9 +76,14 @@ namespace FileExplorer.Controllers
                     fileEntityDTO.Error = "Select A File First";
                     return View(fileEntityDTO);
                 }
-                if (fileEntityDTO.Type == null || fileEntityDTO.Type == "Type" || fileEntityDTO.Size == null || fileEntityDTO.Size == "0")
+                if (fileEntityDTO.Type != "image/png" && fileEntityDTO.Type != "image/jpg" && fileEntityDTO.Type != "image/jpeg")
                 {
-                    fileEntityDTO.NamingErrorTD = "Path Is Not Valid";
+                    fileEntityDTO.NamingErrorTD = "File Must Be Image Type";
+                    return View(fileEntityDTO);
+                }
+                if(Convert.ToInt64(fileEntityDTO.Size) > 200000)
+                {
+                    fileEntityDTO.Error = "File Size Must Be Under 2 Mbs";
                     return View(fileEntityDTO);
                 }
 
