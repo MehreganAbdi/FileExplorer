@@ -107,6 +107,14 @@ namespace FileExplorer.Repositories
             return await context.SaveChangesAsync() > 0;
         }
 
+        public async Task<ICollection<FileEntity>> SearchInRecords(string searchValue)
+        {
+            return await context.Files.Where(f => f.Name.Contains(searchValue) ||
+                                             f.FilePath.Contains(searchValue) ||
+                                             f.ProjectName.Contains(searchValue) ||
+                                             f.Description.Contains(searchValue)).ToListAsync();
+        }
+
         public bool Update(FileEntity file)
         {
             context.Files.Update(file);

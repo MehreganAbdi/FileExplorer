@@ -192,6 +192,19 @@ namespace FileExplorer.Services
 
         }
 
+        public async Task<ICollection<FileEntityDTO>> SearchInRecords(string search)
+        {
+            var files =await fileEntityRepository.SearchInRecords(search);
+            var fileEntitiesDTO = new List<FileEntityDTO>();
+
+            foreach (var file in files)
+            {
+                fileEntitiesDTO.Add(await dataTranformerService.ChangeFileEntityToFileEntityDTOAsync(file));
+            }
+
+            return fileEntitiesDTO;
+        }
+
         public bool Update(FileEntityDTO file)
         {
             return fileEntityRepository.Update(dataTranformerService.ChangeFileEntityDTOToFileEntityWithId(file));

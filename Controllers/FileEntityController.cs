@@ -31,8 +31,9 @@ namespace FileExplorer.Controllers
             return View();
         }
 
-        public async Task<IActionResult> GetAllRecordsInJson()
+        public async Task<IActionResult> GetAllRecordsInJson(string? searching)
         {
+            
             var allfileEntities = await fileEntityService.GetAllAsync();
 
             var modelJson = Json(allfileEntities);

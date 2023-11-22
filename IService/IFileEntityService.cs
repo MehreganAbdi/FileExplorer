@@ -20,7 +20,7 @@ namespace FileExplorer.IService
         Task<FileEntityDTO> CreateFileEntityDTODirectly(IFormFile file, FileEntityDTO fileEntityDTO);
         bool AddFileEntity(FileEntityDTO file);
         Task<bool> AddFileEntityAsync(FileEntityDTO file);
-
+        Task<ICollection<FileEntityDTO>> SearchInRecords(string search);
         bool Update(FileEntityDTO file);
         Task<bool> UpdateAsync(FileEntityDTO file);
         bool RemoveFileEntity(FileEntityDTO file);
