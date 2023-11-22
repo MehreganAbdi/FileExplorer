@@ -4,6 +4,7 @@ using FileExplorer.IService;
 using FileExplorer.Services;
 using FileExplorer.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using System.Drawing;
 
 namespace FileExplorer.Controllers
@@ -30,18 +31,21 @@ namespace FileExplorer.Controllers
         {
             return View();
         }
-
-        public async Task<IActionResult> GetAllRecordsInJson(string? searching)
+        [Route("FileEntity/GetAllRecordsInJson")]
+        [Route("FileEntity/GetAllRecordsInJson/{searching}")]
+        public async Task<IActionResult> GetAllRecordsInJson(string searching)
         {
-            
-            
-            if(searching!= null)
+
+
+            if (searching != null)
             {
-            
+
                 var allfileEntitiesBySearch = await fileEntityService.SearchInRecords(searching);
 
-                return Json(allfileEntitiesBySearch);
-            
+                var modelInJson = Json(allfileEntitiesBySearch);
+
+                return Json(modelInJson);
+
             }
             else
             {
@@ -49,11 +53,11 @@ namespace FileExplorer.Controllers
                 var allfileEntities = await fileEntityService.GetAllAsync();
 
                 var modelJson = Json(allfileEntities);
-                
+
                 return Json(modelJson);
-            
+
             }
-            
+
         }
 
 
@@ -88,7 +92,7 @@ namespace FileExplorer.Controllers
                     fileEntityDTO.NamingErrorTD = "Path Is Not Valid";
                     return View(fileEntityDTO);
                 }
-                if(fileEntityDTO.FileToCopy == null)
+                if (fileEntityDTO.FileToCopy == null)
                 {
                     fileEntityDTO.Error = "Select A File First";
                     return View(fileEntityDTO);
@@ -98,7 +102,7 @@ namespace FileExplorer.Controllers
                     fileEntityDTO.NamingErrorTD = "File Must Be Image Type";
                     return View(fileEntityDTO);
                 }
-                if(Convert.ToInt64(fileEntityDTO.Size) > 200000)
+                if (Convert.ToInt64(fileEntityDTO.Size) > 200000)
                 {
                     fileEntityDTO.Error = "File Size Must Be Under 2 Mbs";
                     return View(fileEntityDTO);
@@ -132,20 +136,20 @@ namespace FileExplorer.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> UploadPhotoAsync()
-        {
-            if(Request.Form.Files == null)
-            {
-                return Json(false);
-            }
-
-            var file = Request.Form.Files[0];
-
-            var result = await photoService.AddPhotoAsync(file);
-
-            return Json(result.Url.ToString());
-        } 
+        //[HttpPost]
+        //public async Task<IActionResult> UploadPhotoAsync()
+        //{
+        //    if(Request.Form.Files == null)
+        //    {
+        //        return Json(false);
+        //    }
+        //
+        //    var file = Request.Form.Files[0];
+        //
+        //    var result = await photoService.AddPhotoAsync(file);
+        //
+        //    return Json(result.Url.ToString());
+        //} 
 
 
 
