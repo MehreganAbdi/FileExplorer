@@ -34,10 +34,26 @@ namespace FileExplorer.Controllers
         public async Task<IActionResult> GetAllRecordsInJson(string? searching)
         {
             
-            var allfileEntities = await fileEntityService.GetAllAsync();
+            
+            if(searching!= null)
+            {
+            
+                var allfileEntitiesBySearch = await fileEntityService.SearchInRecords(searching);
 
-            var modelJson = Json(allfileEntities);
-            return Json(modelJson);
+                return Json(allfileEntitiesBySearch);
+            
+            }
+            else
+            {
+
+                var allfileEntities = await fileEntityService.GetAllAsync();
+
+                var modelJson = Json(allfileEntities);
+                
+                return Json(modelJson);
+            
+            }
+            
         }
 
 
