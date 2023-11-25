@@ -351,8 +351,21 @@ select.project-dropdown {
 input.filepath-sug {
     border: 0px;
     position: absolute;
-    top: 0px;
-    left: 95px;
+    top: 5px;
+    left: 96px;
+    width: 300px;
+    width: 180px\9;
+    #width:180px;
+    height: 23px;
+    height: 21px\9;
+    #height:18px;
+    border: 1px solid #556;
+}
+input.filepath-sug ::after {
+    border: 0px;
+    position: absolute;
+    top: 5px;
+    left: 96px;
     width: 300px;
     width: 180px\9;
     #width:180px;

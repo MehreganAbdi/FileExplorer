@@ -69,7 +69,7 @@ $("#fileentitycreatefromfile").change(function () {
 });
 $("#pathsuggestion").change ( function () {
 
-    $("#fileentitycreatefromfilepath").val() = document.getElementById("pathsuggestion").options[document.getElementById("pathsuggestion").selectedIndex].text;
+    document.getElementById("fileentitycreatefromfilepath").value = document.getElementById("pathsuggestion").options[document.getElementById("pathsuggestion").selectedIndex].text;
     CountCharsFilePath();
 });
 
