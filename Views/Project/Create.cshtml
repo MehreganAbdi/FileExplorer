@@ -29,19 +29,23 @@
 
 </center>
 
-<form   id="createprojectform" class="form-horizontal form-primary">
-    <div class="form-group">
-        <label   class="btn-primary">ProjectName</label>
-        <input   id="createprojectformname"   type="text" name="projectname" class="btn-primary" placeholder="Enter ProjectName">
-        <small id="projectnamecount">100 / 0 </small>
+<form id="createprojectform" class="form-inline">
+
+    <div class="form-group mb-2" style="position:center;">
+        <label  class="form-control btn-primary"  >ProjectName</label>
+        <input   id="createprojectformname"   type="text" name="projectname" class="form-control" placeholder="Enter ProjectName">
+        <small id="projectnamecount" class="form-control" >100 / 0 </small>
         <span asp-validation-for="ProjectName" class="text-danger"></span>
     </div>
     <br />
 
 
     <br />
+    <div class="form-group mb-2">
+
     <input type="button" id="createpeojectsubmit" class="btn btn-primary" value="submit" />
+    </div >
 </form>
 
-@* <script src="~/js/Project.Create/ProjectCreate.js"> </script> *@
-<script src="~/js/Project.Index/bundle.js"> </script>
+<script src="~/js/Project.Create/ProjectCreate.js"> </script>
+@* <script src="~/js/Project.Index/bundle.js"> </script> *@

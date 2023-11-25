@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="AjaxControlToolkit" Version="20.1.0" />
+    <PackageReference Include="bootstrap" Version="4.6.2" />
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="CloudinaryDotNet" Version="1.23.0" />
     <PackageReference Include="CurrieTechnologies.Razor.SweetAlert2" Version="5.5.0" />

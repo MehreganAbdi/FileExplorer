@@ -29,15 +29,17 @@
     <a asp-controller="Project" asp-action="Index" class="btn-primary">All Projects</a>
 
 </center>
+<br />
+<br />
 
-<form method="post"   id="editprojectform" >
+<form method="post"  class="form-inline" id="editprojectform" >
 
     <input type="hidden" asp-for="Id" value="@Model.Id"/>
-    <div class="form-group">
-        <label asp-for="ProjectName" class="btn-primary">ProjectName</label>
-        <input asp-for="ProjectName" id="projecteditformname" type="text" class="btn-primary" placeholder="Enter ProjectName">
+    <div class="form-group mb-2">
+        <label asp-for="ProjectName" class="btn-primary form-control">ProjectName</label>
+        <input asp-for="ProjectName" id="projecteditformname" type="text" class="form-control" placeholder="Enter ProjectName">
 
-        <small id="editprojectnc">100 /  @Model.ProjectName.Length</small>
+        <small id="editprojectnc" class="form-control" >100 /  @Model.ProjectName.Length</small>
          
     </div>
     <br />
