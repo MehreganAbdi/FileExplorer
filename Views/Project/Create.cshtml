@@ -25,26 +25,21 @@
     <small>@Model.Error</small>
 }
 <center style="display:none" id="redirecttoprojectindex">
-    <a asp-controller="Project" asp-action="Index" class="btn-primary">All Projects</a>
+    <a asp-controller="Project" asp-action="Index" class="btn btn-outline-info">All Projects</a>
 
 </center>
 
-<form id="createprojectform" class="form-inline">
+<form id="createprojectform">
 
-    <div class="form-group mb-2" style="position:center;">
-        <label  class="form-control btn-primary"  >ProjectName</label>
-        <input   id="createprojectformname"   type="text" name="projectname" class="form-control" placeholder="Enter ProjectName">
-        <small id="projectnamecount" class="form-control" >100 / 0 </small>
-        <span asp-validation-for="ProjectName" class="text-danger"></span>
+    <div class="form-group row w-100 " >
+        <label for="createprojectformname">ProjectName</label>
+        <input id="createprojectformname"   type="text" name="projectname" class="form-control" placeholder="Enter ProjectName">
+        <small id="projectnamecount">100 / 0 </small>
+        
     </div>
-    <br />
-
-
-    <br />
-    <div class="form-group mb-2">
-
-    <input type="button" id="createpeojectsubmit" class="btn btn-primary" value="submit" />
-    </div >
+    
+    <input type="button" id="createpeojectsubmit" class="btn btn-success" value="submit" />
+    
 </form>
 
 <script src="~/js/Project.Create/ProjectCreate.js"> </script>
