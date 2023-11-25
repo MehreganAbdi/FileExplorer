@@ -76,14 +76,7 @@ else if (TempData["EditError"] != null)
         <br />
 
 
-       @*  <div class="form-group mb-3">
-            <label class="btn-primary">
-
-
-                <input asp-for="FileToCopy" id="fileentityeditformfile" style="display:none;" type="file" class="btn-primary">
-            </label>
-            <br />
-        </div> *@
+      
         <div class="form-group mb-3">
             <label asp-for="ProjectName" class="btn-primary" >ProjectName</label>
             <select asp-for="ProjectId" class="project-selection">
@@ -99,7 +92,7 @@ else if (TempData["EditError"] != null)
 
 
         <br />
-        <input type="button" id="editfileentitysubmit" value="submit" class="btn btn-primary" style="margin-top:0px;margin-left:40px;" />
+        <input type="button" id="editfileentitysubmit" value="submit" class="btn btn-primary ml40-mt0" />
     </form>
 
 

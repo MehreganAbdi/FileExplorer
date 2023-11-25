@@ -396,3 +396,30 @@ input.project-index-delete
 {
 
 }
+
+input.left-margin-50{
+    margin-left:50px;
+}
+input.top-margin-10{
+    margin-top:10px;
+}
+label.left-margin-50{
+    margin-left:50px;
+}
+label.top-margin-10{
+    margin-top:10px;
+}
+label.top-margin-15 {
+    margin-top: 15px;
+}
+div.mt40-ml20{
+    margin-left: 20px;
+    margin-top: 40px;
+}
+div.ml50{
+    margin-left:50px;
+}
+input.ml40-mt0 {
+    margin-top: 0px;
+    margin-left: 40px;
+}
