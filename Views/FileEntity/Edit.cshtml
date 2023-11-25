@@ -59,7 +59,7 @@
       
         <div class="form-group row w-100">
             <label asp-for="ProjectName" >ProjectName</label>
-            <select asp-for="ProjectId" >
+            <select asp-for="ProjectId" class="fileentity-create-project-selection">
                 @foreach (var project in allprojectNames)
                 {
                     <option value="@project.Id">@project.ProjectName</option>

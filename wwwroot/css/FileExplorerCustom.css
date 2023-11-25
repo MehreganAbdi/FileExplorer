@@ -326,15 +326,9 @@ input.home-index-delete {
 
 select.filepath-sug {
     position: absolute;
-    top: 15px;
-    left: 105px;
-    width: 350px;
-    margin-left: 10px;
-    margin-top: 20px;
-    height: 33px;
-    line-height: 20px;
-    margin: 0;
-    padding: 0;
+    left: 50px;
+    width: 1100px;
+    height: 35px
 }
 
 select.project-dropdown {
@@ -349,32 +343,12 @@ select.project-dropdown {
 }
 
 input.filepath-sug {
-    border: 0px;
     position: absolute;
-    top: 5px;
-    left: 96px;
-    width: 300px;
-    width: 180px\9;
-    #width:180px;
-    height: 23px;
-    height: 21px\9;
-    #height:18px;
-    border: 1px solid #556;
+    left: 50px;
+    width: 1075px;
+    height: 35px;
 }
-input.filepath-sug ::after {
-    border: 0px;
-    position: absolute;
-    top: 5px;
-    left: 96px;
-    width: 300px;
-    width: 180px\9;
-    #width:180px;
-    height: 23px;
-    height: 21px\9;
-    #height:18px;
-    border: 1px solid #556;
-}
-
+   
 
 select.project-selection {
     right:10px;
@@ -422,4 +396,9 @@ div.ml50{
 input.ml40-mt0 {
     margin-top: 0px;
     margin-left: 40px;
+}
+
+select.fileentity-create-project-selection{
+    width: 1040px;
+    margin-left: 16px;
 }
