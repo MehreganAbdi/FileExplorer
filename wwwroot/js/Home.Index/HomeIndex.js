@@ -75,11 +75,11 @@ function deleteConfirm(path) {
 }
 
 
-document.getElementById("selectfilehomepageinput").onchange = function () {
+$("#selectfilehomepageinput").change (function () {
 
-    document.getElementById("selectfilehomepagelabel").innerHTML = "Selected";
-    document.getElementById("selectfilehomepagesubmit").type = "submit";
-}
+    $("#selectfilehomepagelabel").html("Selected");
+    $("#selectfilehomepagesubmit").type = "submit";
+})
 
 
 

@@ -1,7 +1,7 @@
 ﻿function validation() {
-    var name = document.getElementById("createname");
-    var filePath = document.getElementById("createfilepath");
-    var desc = document.myform.getElementById("createdescription");
+    var name = $("#createname");
+    var filePath = $("#createfilepath");
+    var desc = $("#createdescription");
 
 
 
@@ -23,7 +23,7 @@
             showConfirmButton: false
         });
         return false;
-    } else if (filePath.length > 150) {
+    } else if (filePath.length > 150 || filePath.length < 3) {
         sweetAlert({
             title: "file path must be less than 150 and more than 3 characters",
             text: "",
@@ -45,20 +45,21 @@
 }
 
 function CountCharsName() {
-    document.getElementById("namecount").innerHTML = '100 / ' + document.getElementById("createname").value.length;
+$("#namecount").html( '100 / ' + $("#createname").val().length);
    
 }
 function CountCharsFilePath() {
-    document.getElementById("filepathcount").innerHTML = '180 / ' + document.getElementById("createfilepath").value.length;
+    $("#filepathcount").html( '180 / ' + $("#createfilepath").val().length);
 
 }
 function CountCharsDesc() {
-    document.getElementById("desccount").innerHTML = '150 / ' + document.getElementById("createdescription").value.length;
+    $("#desccount").html( '150 / ' + $("#createdescription").val().length);
 
 }
 
 
-document.getElementById("createform").onsubmit = function () { return validation(); };
-document.getElementById("createname").onkeyup = function () { return CountCharsName() };
-document.getElementById("createfilepath").onkeyup = function () { return CountCharsFilePath(); };
-document.getElementById("createdescription").onkeyup = function () { return CountCharsDesc(); };
+
+$("#createform").submit (function () { return validation(); });
+$("#createname").keyup (function () { return CountCharsName() });
+$("#createfilepath").keyup ( function () { return CountCharsFilePath(); });
+$("#createdescription").keyup (function () { return CountCharsDesc(); });
