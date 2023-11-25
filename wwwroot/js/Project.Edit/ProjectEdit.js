@@ -1,6 +1,6 @@
 function validation() {
 
-    var projectName = document.getElementById("projecteditformname").value;
+    var projectName = $("#projecteditformname").val();
 
     if (projectName.length < 3 || projectName.length > 100) {
         sweetAlert({
@@ -24,13 +24,14 @@ function validation() {
     }
 }
 function CountCharsEditProject() {
-    document.getElementById("editprojectnc").innerHTML = '100 / ' + document.getElementById("projecteditformname").value.length;
+    $("#editprojectnc").html( '100 / ' + $("#projecteditformname").val().length);
 }
 
 
-document.getElementById("projecteditformname").onkeyup = function () { return CountCharsEditProject(); };
+$("#projecteditformname").keyup (function () { return CountCharsEditProject(); });
 
-document.getElementById("editprojectsubmit").onclick = function () {
+
+$("#editprojectsubmit").click (function () {
     if (validation()) {
 
         let urel = "https://localhost:7242/Project/Edit/"
@@ -87,4 +88,4 @@ document.getElementById("editprojectsubmit").onclick = function () {
     else {
         return validation();
     }
-}
+})

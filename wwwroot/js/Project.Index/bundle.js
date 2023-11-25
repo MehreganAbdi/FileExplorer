@@ -80,9 +80,9 @@ function deleteConfirm(id) {
 }
 
 
-document.getElementById("projectindexsearch").onkeyup = function () {
+$("#projectindexsearch").keyup ( function () {
 
-    var searchValue = document.getElementById("projectindexsearch").value;
+    var searchValue = $("#projectindexsearch").val();
 
     if (searchValue == "") {
 
@@ -128,97 +128,7 @@ document.getElementById("projectindexsearch").onkeyup = function () {
     }
 
 
-}
-
-//document.getElementById("projectindexsearch").onkeyup = function () {
-
-//    if (document.getElementById("projectindexsearch").value != "") {
-//        var search = document.getElementById("projectindexsearch").value;
-//        document.getElementById("projectindextable").innerHTML = "";
-//        $.ajax({
-
-//            url: 'Project/GetAllProjectsInJson',
-//            type: 'GET',
-//            success: function (json) {
-//                var tr;
-//                var j = 1;
-
-//                for (var i = 0; i < json.value.length; i++) {
-
-//                    if (json.value[i].projectName.includes(search)) {
-
-//                        tr = $('<tr/>');
-//                        tr.append("<td class='table-info'  ><center>" + j + "</td></center>")
-//                        tr.append("<td><center>" + json.value[i].id + "</center></td>");
-//                        tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
-//                        tr.append('<td><center><a type="button" href="Project/Edit/' + json.value[i].id + '" class="btn-edit">Edit</a></center></td>');
-//                        tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn-delete project-index-delete" value="Delete" /></center></td>');
-//                        $('table').append(tr);
-//                        j++;
-//                    }
-//                }
-
-//                const allDeleteButtons = document.querySelectorAll('.project-index-delete');
-//                for (const delbtn of allDeleteButtons) {
-//                    delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
-//                }
-
-
-
-//            },
-//            srror: function () {
-//                sweetAlert({
-//                    title: "Failed",
-//                    text: "Form Coudn't get Submit",
-//                    type: "error"
-//                });
-//            }
-
-//        });
-
-//    }
-//    else {
-
-//        $.ajax({
-
-//            url: 'Project/GetAllProjectsInJson',
-//            type: 'GET',
-//            success: function (json) {
-//                var tr;
-
-//                for (var i = 0; i < json.value.length; i++) {
-//                    var j = i + 1;
-//                    tr = $('<tr/>');
-//                    tr.append("<td class='table-info'  ><center>" + j + "</td></center>")
-//                    tr.append("<td><center>" + json.value[i].id + "</center></td>");
-//                    tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
-//                    tr.append('<td><center><a type="button" href="Project/Edit/' + json.value[i].id + '" class="btn-edit">Edit</a></center></td>');
-//                    tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn-delete project-index-delete" value="Delete" /></center></td>');
-//                    $('table').append(tr);
-//                }
-
-//                const allDeleteButtons = document.querySelectorAll('.project-index-delete');
-//                for (const delbtn of allDeleteButtons) {
-//                    delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
-//                }
-
-
-//            },
-//            srror: function () {
-//                sweetAlert({
-//                    title: "Failed",
-//                    text: "Form Coudn't get Submit",
-//                    type: "error"
-//                });
-//            }
-
-//        });
-
-//    }
-//    location.reload();
-//}
-
-
+})
 
 
 function validation() {
@@ -311,7 +221,7 @@ $("#createpeojectsubmit").click (function () {
 })
 function validation() {
 
-    var projectName = document.getElementById("projecteditformname").value;
+    var projectName = $("#projecteditformname").val();
 
     if (projectName.length < 3 || projectName.length > 100) {
         sweetAlert({
@@ -335,13 +245,14 @@ function validation() {
     }
 }
 function CountCharsEditProject() {
-    document.getElementById("editprojectnc").innerHTML = '100 / ' + document.getElementById("projecteditformname").value.length;
+    $("#editprojectnc").html( '100 / ' + $("#projecteditformname").val().length);
 }
 
 
-document.getElementById("projecteditformname").onkeyup = function () { return CountCharsEditProject(); };
+$("#projecteditformname").keyup (function () { return CountCharsEditProject(); });
 
-document.getElementById("editprojectsubmit").onclick = function () {
+
+$("#editprojectsubmit").click (function () {
     if (validation()) {
 
         let urel = "https://localhost:7242/Project/Edit/"
@@ -398,4 +309,4 @@ document.getElementById("editprojectsubmit").onclick = function () {
     else {
         return validation();
     }
-}
+})
