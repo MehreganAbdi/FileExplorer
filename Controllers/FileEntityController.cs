@@ -31,9 +31,9 @@ namespace FileExplorer.Controllers
         {
             return View();
         }
-        [Route("FileEntity/GetAllRecordsInJson")]
-        [Route("FileEntity/GetAllRecordsInJson/{searching}")]
-        public async Task<IActionResult> GetAllRecordsInJson(string searching)
+
+        [Route("FileEntity/GetAllRecordsInJson/{searching?}")]
+        public async Task<IActionResult> GetAllRecordsInJson(string searching )
         {
 
 

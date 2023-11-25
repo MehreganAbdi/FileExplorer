@@ -20,6 +20,7 @@ namespace FileExplorer.IService
         ProjectDTO GetProjectByName(string Name);
         Task<ProjectDTO> GetProjectByNameAsync(string Name);
         Task<bool> ProjectExists(string name);
+        Task<ICollection<ProjectDTO>> GetProjectsBysearch(string searchValue);
 
     }
 }

@@ -30,7 +30,7 @@
  
   
     
-    <form method="post" id="fileentitycreatefrom" asp-action="Create" enctype="multipart/form-data">
+    <form method="post" id="fileentitycreatefrom" asp-action="Create" enctype="multipart/form-data" class="form-horizontal  form-inline" >
         <input asp-for="Name" value="NewFile" type="hidden" id="fileentitycreatefromname"/>
         <input asp-for="ImageLink" id="fileentitycreatefromimagelink" type="hidden"/>
         <input asp-for="Size"  type="hidden" id="fileentitycreatefromsize" />
@@ -38,7 +38,7 @@
 
 
         <br />
-        <div class="form-group" style="position:relative;width:500px;height:15px;border:0;padding:0;margin:0;">
+        <div class="form-group form-control" style="position:relative;width:500px;height:15px;border:0;padding:0;margin:0;">
            
              
             <select class="projectselect-dropdown filepath-sug project-dropdown"
@@ -104,6 +104,6 @@
 
 </body>
 
-<script src="~/js//FileEntity.Create/FileEntityCreate.js"></script>
+<script src="~/js//FileEntity.Create/FileEntityCreate.min.js"></script>
 
  

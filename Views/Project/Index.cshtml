@@ -21,25 +21,31 @@
                 .  Projects  .
             </h1>
 
-            <center>
-                <input id="projectindexsearch" placeholder="Search..." class="btn-primary"  />
+            <center> 
                 <br />
                 <a asp-controller="Project" asp-action="Create" class="btn-primary">Add Project+</a>
 
                 <a asp-action="Index" asp-controller="FileEntity" class="btn-primary" >Home</a>
-            </center> 
-            <table class="table" id="projectindextable">
+            <form>
+
+                <input name="searching" class="btn-primary" placeholder="Name,Path Or ..." id="projectindexsearch" />
+                <input class="btn-primary" value="Search" id="projectindexsearchsubmit" type="button" />
+            </form>
+            </center>
+        <table class="table table-responsive table-striped" id="projectindextable">
                 <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Id</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
+                <tr class="table-info">
+                        <th scope="col"><center>#</center></th>
+                    <th scope="col"><center>Id</center></th>
+                    <th scope="col"><center>Name</center></th>
+                    <th scope="col"><center>Edit</center></th>
+                    <th scope="col"><center>Delete</center></th>
                     </tr>
                 </thead>
                 
-           
+                <tbody>
+
+                </tbody>
                
             </table>
         </center>

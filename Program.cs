@@ -7,6 +7,7 @@ using FileExplorer.Repositories;
 using FileExplorer.Services;
 using FileExplorer.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using System.Web.Optimization;
 
 namespace FileExplorer
 {
@@ -60,6 +61,7 @@ namespace FileExplorer
 
 
             #endregion
+
 
 
             var app = builder.Build();

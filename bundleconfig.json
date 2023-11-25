@@ -1,0 +1,40 @@
+[
+  {
+    "outputFileName": "wwwroot/js/Project.Index/bundle.js",
+    "inputFiles": [
+      "wwwroot/js/Project.Index/ProjectIndex.js",
+      "wwwroot/js/Project.Create/ProjectCreate.js",
+      "wwwroot/js/project.edit/ProjectEdit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/FileEntity.Create/FileEntityCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/FileEntity.Create/FileEntityCreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/FileEntity.Edit/FileEntityEdit.min.js",
+    "inputFiles": [
+      "wwwroot/js/FileEntity.Edit/FileEntityEdit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/FileEntity.Index/FileEntityIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/FileEntity.Index/FileEntityIndex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Home.Create/HomeCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/Home.Create/HomeCreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Home.Index/HomeIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/Home.Index/HomeIndex.js"
+    ]
+  }
+]

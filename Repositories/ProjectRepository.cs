@@ -67,6 +67,13 @@ namespace FileExplorer.Repositories
 
         }
 
+        public async Task<ICollection<Project>> GetProjectsBySearch(string searchValue)
+        {
+            return await context.Projects.Where(p => p.ProjectName.Contains(searchValue)).ToListAsync();
+                                                
+
+        }
+
         public bool RemoveProject(Project project)
         {
             context.Projects.Remove(project);

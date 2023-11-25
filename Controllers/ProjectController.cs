@@ -24,20 +24,19 @@ namespace FileExplorer.Controllers
             return View();
         }
 
-
-        public async Task<IActionResult> GetAllProjectsInJson(string searching)
+        [Route("Project/GetAllProjectsInJson/{searching?}")]
+        public async Task<IActionResult> GetAllProjectsInJson(string searching )
         {
-            var allProjects = await projectService.GetAllAsync();
-
-            if(searching != null)
+            if (searching != null)
             {
-                allProjects = allProjects.Where(p => p.ProjectName.Contains(searching)).ToList();
-
+                var projectsBySearch = await projectService.GetProjectsBysearch(searching);
+                return Json(projectsBySearch);
             }
+            
+            var allProjects = await projectService.GetAllAsync();
+            
+            return Json(allProjects);
 
-            var modelJson = Json(allProjects);
-
-            return Json(modelJson);
         }
 
 
@@ -53,15 +52,15 @@ namespace FileExplorer.Controllers
         {
             try
             {
-                
+
                 if (await projectService.ProjectExists(projectDTO.ProjectName))
                 {
-                    projectDTO.CreateErrorTD =  "There Is An Existing Project With This Name";
+                    projectDTO.CreateErrorTD = "There Is An Existing Project With This Name";
                     return View(projectDTO);
                 }
 
                 var addResult = await projectService.AddProjectAsync(projectDTO);
-                
+
                 if (!addResult)
                 {
                     projectDTO.CreateErrorTD = "Adding Failed , Try Again";
@@ -93,7 +92,7 @@ namespace FileExplorer.Controllers
 
                     return RedirectToAction("Index", "Project");
                 }
-                
+
                 return View(project);
 
             }
@@ -116,8 +115,8 @@ namespace FileExplorer.Controllers
                     return View(projectDTO);
                 }
 
-                 await projectService.UpdateAsync(projectDTO);
-                
+                await projectService.UpdateAsync(projectDTO);
+
 
                 return RedirectToAction("Index", "Project");
 
@@ -142,12 +141,12 @@ namespace FileExplorer.Controllers
                 }
                 project.Id = Id;
                 await projectService.RemoveProjectAsync(project);
-                
+
                 TempData["DeleteError"] = " File Deleted Successfully";
 
                 return Ok(true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 TempData["DeleteError"] = ex.Message.ToString();
 

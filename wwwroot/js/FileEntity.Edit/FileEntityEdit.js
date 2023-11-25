@@ -1,8 +1,8 @@
 ﻿
 function validation() {
-    var name = document.getElementById("fileentityeditformname").value;
-    var filePath = document.getElementById("fileentityeditformfilepath").value;
-    var desc = document.getElementById("fileentityeditformdesc").value;
+    var name = $("#fileentityeditformname").val();
+    var filePath = $("#fileentityeditformfilepath").val();
+    var desc = $("#fileentityeditformdesc").val();
 
 
 
@@ -48,25 +48,25 @@ function validation() {
 }
 
 function CountCharsName() {
-    document.getElementById("namecount").innerHTML = '100 / ' + document.getElementById("fileentityeditformname").value.length;
+    $("#namecount").html('100 / ' + $("#fileentityeditformname").val().length);
 }
 function CountCharsFilePath() {
-    document.getElementById("filepathcount").innerHTML = '180 / ' + document.getElementById("fileentityeditformfilepath").value.length;
+    $("#filepathcount").html( '180 / ' + ("#fileentityeditformfilepath").val().length);
 
 }
 function CountCharsDesc() {
-    document.getElementById("desccount").innerHTML = '150 / ' + document.getElementById("fileentityeditformdesc").value.length;
+    $("#desccount").html( '150 / ' + $("#fileentityeditformdesc").val().length);
 
 }
-document.getElementById("fileentityeditformname").onkeyup = function () { return CountCharsName() };
+$("#fileentityeditformname").keyup (function () { return CountCharsName() });
 
-document.getElementById("fileentityeditformfilepath").onkeyup = function () { return CountCharsFilePath() };
+$("#fileentityeditformfilepath").keyup (function () { return CountCharsFilePath() });
 
-document.getElementById("fileentityeditformdesc").onkeyup = function () { return CountCharsDesc() };
+$("#fileentityeditformdesc").keyup (function () { return CountCharsDesc() });
 
 
 
-document.getElementById("editfileentitysubmit").onclick = function () {
+$("#editfileentitysubmit").click ( function () {
     if (validation()) {
 
         let urel = "https://localhost:7242/FileEntity/Edit/"
@@ -123,4 +123,4 @@ document.getElementById("editfileentitysubmit").onclick = function () {
     else {
         return validation();
     }
-}
+})

@@ -86,6 +86,20 @@ namespace FileExplorer.Services
         {
             return await dataTranformerService.ChangeProjectToProjectDTOAsync(await projectRepository.GetProjectByProjectNameAsync(Name));
         }
+
+        public async Task<ICollection<ProjectDTO>> GetProjectsBysearch(string searchValue)
+        {
+            var projects = await projectRepository.GetProjectsBySearch(searchValue);
+            var projectsDTOs = new List<ProjectDTO>();
+
+            foreach (var project in projects)
+            {
+                projectsDTOs.Add(await dataTranformerService.ChangeProjectToProjectDTOAsync(project));
+            }
+
+            return projectsDTOs;
+        }
+
         public async Task<bool> ProjectExists(string name)
         {
             return await projectRepository.GetProjectByProjectNameAsync(name) != null ? true : false;

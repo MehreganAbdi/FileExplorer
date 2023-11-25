@@ -6,6 +6,7 @@ namespace FileExplorer.IRepository
     {
         ICollection<Project> GetAll();
         Task<ICollection<Project>> GetAllAsync();
+        Task<ICollection<Project>> GetProjectsBySearch(string searchValue);
         Project GetById(int Id);
         Task<Project> GetByIdAsync(int Id);
         Project GetByIdAsNoTracking(int Id);
@@ -18,6 +19,7 @@ namespace FileExplorer.IRepository
         Task<bool> RemoveProjectAsync(Project project);
         Project GetProjectByProjectName(string ProjectName);
         Task<Project> GetProjectByProjectNameAsync(string ProjectName);
+
         bool Save();
         Task<bool> SaveAsync();
     }

@@ -1,6 +1,6 @@
 
 function validation() {
-    var projectName = document.getElementById("createprojectformname").value;
+    var projectName = $("#createprojectformname").val();
 
 
 
@@ -24,11 +24,11 @@ function validation() {
 
 
 function CountCharsProject() {
-    document.getElementById("projectnamecount").innerHTML = '100 / ' + document.getElementById("createprojectformname").value.length;
+    $("#projectnamecount").html( '100 / ' + $("#createprojectformname").val().length);
 }
-document.getElementById("createprojectformname").onkeyup = function () { return CountCharsProject() };
+$("#createprojectformname").keyup (function () { return CountCharsProject() });
 
-document.getElementById("createpeojectsubmit").onclick = function () {
+$("#createpeojectsubmit").click (function () {
     if (validation()) {
 
         let urel = "https://localhost:7242/Project/Create/"
@@ -69,12 +69,7 @@ document.getElementById("createpeojectsubmit").onclick = function () {
                     }
                 });
 
-                //if (response.ok) {
-                //    sweetAlert({
-                //        title: "Done!",
-                //        text: "Form Submitted Successfully",
-                //        type: "success"
-                //    });
+             
 
 
             }
@@ -91,11 +86,4 @@ document.getElementById("createpeojectsubmit").onclick = function () {
     else {
         return validation();
     }
-}
-
-
-
-
-
-
-
+})

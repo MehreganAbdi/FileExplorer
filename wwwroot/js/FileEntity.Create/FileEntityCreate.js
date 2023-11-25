@@ -1,7 +1,7 @@
 ﻿function validation() {
 
-    var filePath = document.getElementById("fileentitycreatefromfilepath").value;
-    var desc = document.getElementById("fileentitycreatefromdesc").value;
+    var filePath = $("#fileentitycreatefromfilepath").val();
+    var desc = $("#fileentitycreatefromdesc").val();
     var file = $("#fileentitycreatefromfile").prop("files")[0];
 
 
@@ -23,7 +23,7 @@
             showConfirmButton: false
         });
         return false;
-    } else if (file.size > 2000 || file == null) {
+    } else if ($("#fileentitycreatefromfile").prop("files").length == 0  || file.size > 2000000) {
         sweetAlert({
             title: "Select An Acceptable File (File Must Be < 2 Mb )",
             text: "",
@@ -50,77 +50,43 @@
 
 
 function CountCharsFilePath() {
-    document.getElementById("filepathcount").innerHTML = '180 / ' + document.getElementById("fileentitycreatefromfilepath").value.length;
+    $("#filepathcount").html('180 / ' + $("#fileentitycreatefromfilepath").val().length);
 
 }
 function CountCharsDesc() {
-    document.getElementById("desccount").innerHTML = '150 / ' + document.getElementById("fileentitycreatefromdesc").value.length;
+    $("#desccount").html('150 / ' + $("#fileentitycreatefromdesc").val().length);
 
 }
 
-document.getElementById("fileentitycreatefromdesc").onkeyup = function () { return CountCharsDesc() };
+$("#fileentitycreatefromdesc").keyup(function () { return CountCharsDesc() });
 
-document.getElementById("fileentitycreatefromfilepath").onkeyup = function () { return CountCharsFilePath() };
+$("#fileentitycreatefromfilepath").keyup (function () { return CountCharsFilePath() });
 
 
 
-document.getElementById("fileentitycreatefromfile").onchange = function () {
-    document.getElementById("createfileentityselectfile").innerHTML = "Selected";
-}
-document.getElementById("pathsuggestion").onchange = function () {
+$("#fileentitycreatefromfile").change(function () {
+    $("#createfileentityselectfile").html("Selected");
+});
+$("#pathsuggestion").change ( function () {
 
-    document.getElementById("fileentitycreatefromfilepath").value = document.getElementById("pathsuggestion").options[document.getElementById("pathsuggestion").selectedIndex].text;
+    $("#fileentitycreatefromfilepath").val() = document.getElementById("pathsuggestion").options[document.getElementById("pathsuggestion").selectedIndex].text;
     CountCharsFilePath();
-};
+});
 
-document.getElementById("fileentitycreateformsubmit").onclick = function () {
+$("#fileentitycreateformsubmit").click (function () {
     if (validation()) {
 
         let urel = "https://localhost:7242/FileEntity/Create/"
         var file = $("#fileentitycreatefromfile").prop("files")[0];
 
-        //document.getElementById("hiddenforminfileentitycreatefile").prop("files").push(file);
+       
 
-        //var imageResult = "";
-
-        //var imageData = new FormData(document.getElementById("hiddenforminfileentitycreate"));
-        
-        //$.ajax({
-        //    url: "https://localhost:7242/FileEntity/UploadPhotoAsync/",
-        //    type: 'POST',
-        //    data: imageData,
-        //    contentType: false,
-        //    processData: false,
-        //    success: function (json) {
-
-        //        if (json.value == 'false') {
-        //            sweetAlert({
-        //                title: "Upload Failed",
-        //                text: "File Value Recived File As Null",
-        //                type: "error"
-        //            });
-
-        //        } else {
-        //            imageResult = json.value;
+        $("#fileentitycreatefromname").val() = file.name;
+        $("#fileentitycreatefromsize").val() = file.size.toString();
+        $("#fileentitycreatefromtype").val() = file.type;
 
 
-        //        }
-        //    }
 
-        //})
-
-
-        //if (imageResult != "") {
-
-        //    document.getElementById("fileentitycreatefromsize").value = imageResult;
-        //}
-
-        document.getElementById("fileentitycreatefromname").value = file.name;
-        document.getElementById("fileentitycreatefromsize").value = file.size.toString();
-        document.getElementById("fileentitycreatefromtype").value = file.type;
-
-
-        //var valdata = $("#fileentitycreatefrom").serialize();
         var formData = new FormData();
         formData.append("fileToCopy", file);
         formData.append("name", $("#fileentitycreatefromname").val());
@@ -191,4 +157,4 @@ document.getElementById("fileentitycreateformsubmit").onclick = function () {
 
 
 
-};
+});

@@ -8,7 +8,7 @@ namespace FileExplorer.IService
     {
         ICollection<FileEntityDTO> GetAllByType(string type);
         Task<ICollection<FileEntityDTO>> GetAllByTypeAsync(string type);
-
+      
         ICollection<FileEntityDTO> GetAll();
         Task<ICollection<FileEntityDTO>> GetAllAsync();
         ICollection<FileEntityDTO> GetFilesByProjectId(int projectId);
