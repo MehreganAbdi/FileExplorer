@@ -51,7 +51,7 @@ function CountCharsName() {
     $("#namecount").html('100 / ' + $("#fileentityeditformname").val().length);
 }
 function CountCharsFilePath() {
-    $("#filepathcount").html( '180 / ' + ("#fileentityeditformfilepath").val().length);
+    $("#filepathcount").html( '180 / ' + $("#fileentityeditformfilepath").val().length);
 
 }
 function CountCharsDesc() {

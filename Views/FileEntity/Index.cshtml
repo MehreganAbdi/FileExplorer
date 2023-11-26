@@ -22,42 +22,45 @@
             </h1>
             <br />
 
-            <div class="row">
-            <div class="col-6">
+            <div class="row container">
+                <div class="col-6">
                     <a asp-controller="FileEntity" asp-action="Create" class="btn btn-outline-dark">Add+</a>
                     <a asp-controller="Project" asp-action="Index" class="btn btn-outline-dark">Projects</a>
-            </div>
+                </div>
 
 
-            <div class="col-6">
+                <div class="col-6">
                     <input name="searching" class="btn btn-outline-dark" placeholder="Name,Path Or ..." id="fileentityindexsearch" />
-            </div>
+                </div>
             </div>
 
 
             <br />
             <br />
 
-            <table class="table table-responsive table-striped" id="fileentityindextable">
-                <thead class="thead-dark">
-                    <tr class="table-dark">
-                        <th scope="col" class="col-1"><center>#</center></th>
-                        <th scope="col" class="col-2"><center>Name</center></th>
-                        <th scope="col" class="col-2"><center>ProjectName</center></th>
-                        <th scope="col" class="col-1"><center>Date Added</center></th>
-                        <th scope="col" class="col-2"><center>FilePath</center></th>
-                        <th scope="col" class="col-1"><center>Description</center></th>
-                        <th scope="col" class="col-1"><center>Size</center></th>
-                        <th scope="col" class="col-1"><center>Edit</center></th>
-                        <th scope="col" class="col-1"><center>Delete</center></th>
+            <div class="row container">
 
-                    </tr>
+                <table class="table table-responsive table-striped" id="fileentityindextable">
+                    <thead class="thead-dark align-self-center">
+                        <tr class="table-dark">
+                            <th scope="col" class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><center>#</center></th>
+                            <th scope="col" class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2"><center>Name</center></th>
+                            <th scope="col" class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2"><center>ProjectName</center></th>
+                            <th scope="col" class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><center>Date Added</center></th>
+                            <th scope="col" class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2"><center>FilePath</center></th>
+                            <th scope="col" class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><center>Description</center></th>
+                            <th scope="col" class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><center>Size</center></th>
+                            <th scope="col" class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"><center>Edit</center></th>
+                            <th scope="col" class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 "><center>Delete</center></th>
 
-                </thead>
+                        </tr>
 
-                <tbody>
-                </tbody>
-            </table>
+                    </thead>
+
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
 
 
         </center>

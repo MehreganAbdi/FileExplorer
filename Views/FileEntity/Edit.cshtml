@@ -14,76 +14,83 @@
 
 
 
-<div>
+<div class="container">
+    <br />
+    <br />
+    <center>
+        <h3 class="text-dark border border-dark border-left-0 border-bottom-0 border-right-0 ">. Edit Record . </h3>
+    </center>
+
+
+
+    <center style="display:none" id="redirecttofileentityindex">
+        <a asp-controller="FileEntity" asp-action="Index" class="btn btn-outline-info">All Records</a>
+
+    </center>
 
 
 
 
-<center style="display:none" id="redirecttofileentityindex">
-    <a asp-controller="FileEntity" asp-action="Index" class="btn btn-outline-info">All Records</a>
-
-</center>
-
-
-
-<body>
-    <form id="editfileentityform" enctype="multipart/form-data" >
+    <form id="editfileentityform" enctype="multipart/form-data">
 
         <input asp-for="Size" value="@Model.Size" type="hidden" />
         <input asp-for="Type" value="@Model.Type" type="hidden" />
         <input asp-for="Id" value="@Model.Id" type="hidden" />
         <input asp-for="DateCreated" value="@Model.DateCreated" type="hidden" />
+        <br />
+        <br />
 
 
- 
         <div class="row ">
-            <label asp-for="Name" for="fileentityeditformname" class="">Name</label>
-            <input asp-for="Name" id="fileentityeditformname" type="text" class="form-control " placeholder="Enter FilePath">
+            <label asp-for="Name" for="fileentityeditformname" class="col-3 justify-content-end text-dark">Name</label>
+            <input asp-for="Name" id="fileentityeditformname" type="text" class="form-control col-6 btn btn-outline-dark border-0" placeholder="Enter FilePath">
             <small id="namecount">100 / @Model.Name.Length </small>
 
         </div>
 
-     
+        <br />
+
         <div class="row">
-            <label asp-for="FilePath" for="fileentityeditformfilepath" >FilePath</label>
-            <input asp-for="FilePath" id="fileentityeditformfilepath" type="text" class="form-control" placeholder="Enter FilePath">
+            <label asp-for="FilePath" for="fileentityeditformfilepath" class="col-3 justify-content-end text-dark">FilePath</label>
+            <input asp-for="FilePath" id="fileentityeditformfilepath" type="text" class="form-control col-6 btn btn-outline-dark border-0" placeholder="Enter FilePath">
             <small id="filepathcount">180 / @Model.FilePath.Length </small>
         </div>
 
- 
+
+        <br />
 
 
-    
         <div class="row ">
-            <label asp-for="Description" for="fileentityeditformdesc" >Description</label>
-            <input asp-for="Description" id="fileentityeditformdesc" type="text" class="form-control" placeholder="Description">
+            <label asp-for="Description" for="fileentityeditformdesc" class="col-3 justify-content-end text-dark">Description</label>
+            <input asp-for="Description" id="fileentityeditformdesc" type="text" class="form-control col-6 btn btn-outline-dark border-0" placeholder="Description">
             <small id="desccount">150 / @Model.Description.Length</small>
         </div>
- 
 
-         
-      
+        <br />
+
+
         <div class="row">
-            <label asp-for="ProjectName" >ProjectName</label>
-            <select asp-for="ProjectId" class="fileentity-create-project-selection">
+            <label asp-for="ProjectName" class="col-3 justify-content-end text-dark">ProjectName</label>
+            <select asp-for="ProjectId" class="col-9 text-dark border-0  btn-outline-dark   ">
                 @foreach (var project in allprojectNames)
                 {
-                    <option value="@project.Id">@project.ProjectName</option>
+                    <option value="@project.Id" class="bg-dark text-light"><center>@project.ProjectName</center></option>
 
                 }
             </select>
         </div>
 
+        <br />
+        <br />
+        <div class="row justify-content-end container">
+            <input type="button" id="editfileentitysubmit" class="btn btn-success col-3 col-sm-3 col-md-2 col-lg-1 col-xl-1 justify-content-start" value="submit" class="btn btn-success " />
+        </div>
 
-        <br />
-        <br />
-        <input type="button" id="editfileentitysubmit" value="submit" class="btn btn-success " />
     </form>
 
 
 
 
-</body>
 
 </div>
 
