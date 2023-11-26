@@ -1,58 +1,72 @@
-﻿
-
-
-
-@{
+﻿@{
     ViewData["Title"] = "Projects";
-    Layout = "CustomLayout";
+    Layout = "_Layout";
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
 
 
-    <div class="parent2">
+<div class="parent2">
+
+    <br />
+    <center>
+        <h1>
+            .  Projects  .
+        </h1>
+
 
         <br />
-        <center>
-            <h1>
-                .  Projects  .
-            </h1>
+        <div class="row container">
+            <div class="col-6">
+                <a asp-controller="Project" asp-action="Create" class="btn btn-outline-dark">Add+</a>
+                <a asp-action="Index" asp-controller="FileEntity" class="btn btn-outline-dark">Home</a>
+            </div>
 
-            <center> 
-                <br />
-                <a asp-controller="Project" asp-action="Create" class="btn-primary">Add Project+</a>
 
-                <a asp-action="Index" asp-controller="FileEntity" class="btn-primary" >Home</a>
-            <form>
+            <div class="col-6">
+                <input name="searching" class="btn btn-outline-dark" placeholder="Name,Path Or ..." id="projectindexsearch" />
+            </div class="col">
 
-                <input name="searching" class="btn-primary" placeholder="Name,Path Or ..." id="projectindexsearch" />
-                <input class="btn-primary" value="Search" id="projectindexsearchsubmit" type="button" />
-            </form>
-            </center>
-        <table class="table  table-striped" id="projectindextable">
-                <thead>
-                <tr class="table-info">
-                        <th scope="col"><center>#</center></th>
-                    <th scope="col"><center>Id</center></th>
-                    <th scope="col"><center>Name</center></th>
-                    <th scope="col"><center>Edit</center></th>
-                    <th scope="col"><center>Delete</center></th>
-                    </tr>
-                </thead>
-                
-                <tbody>
+         
+        </div>
 
-                </tbody>
-               
-            </table>
-        </center>
 
-        <br />
+    </center>
+    <br />
+    <br />
+    <br />
+    <div class="row container ">
+
+        <table class="table table-responsive  table-striped" id="projectindextable">
+
+            <thead class="thead-dark align-self-center">
+                <tr class="table-dark">
+                    @* <th scope="col" class="col-2 col-md-2 col-sm-2 col-lg-2 col-xl-2"><center>#</center></th>
+                    <th scope="col" class="col-2 col-md-2 col-sm-2 col-lg-2 col-xl-2"><center>Id</center></th>
+                    <th scope="col" class="col-4 col-md-4 col-sm-4 col-lg-8 col-xl-8" ><center>Name</center></th>
+                    <th scope="col" class="col-2 col-md-2 col-sm-2 col-lg-3 col-xl-3"><center>Edit</center></th>
+                    <th scope="col" class="col-2 col-md-2 col-sm-2 col-lg-3 col-xl-3"><center>Delete</center></th> *@
+                    <th scope="col" class="col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2"><center>#</center></th>
+                    <th scope="col" class="col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2"><center>Id</center></th>
+                    <th scope="col" class="col"><center>Name</center></th>
+                    <th scope="col" class="col"><center>Edit</center></th>
+                    <th scope="col" class="col"><center>Delete</center></th>
+                </tr>
+            </thead>
+
+            <tbody>
+            </tbody>
+
+        </table>
     </div>
 
 
-@* <script src="~/js/Project.Index/ProjectIndex.js"></script> *@
-<script src="~/js/Project.Index/bundle.js"></script>
+    <br />
+</div>
+
+
+<script src="~/js/Project.Index/ProjectIndex.js"></script>
+@* <script src="~/js/Project.Index/bundle.js"></script> *@
 
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
