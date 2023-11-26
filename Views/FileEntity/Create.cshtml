@@ -34,7 +34,8 @@
         <div class="form-group row w-100" style="position:relative;width:505px;height:15px;border:0;padding:0;margin:0;">
 
 
-            <label>Path</label>
+            <label class="col-3 justify-content-end text-dark">Path</label>
+                  
             <br />
             <select id="pathsuggestion" class="filepath-sug">
 
@@ -46,23 +47,23 @@
             </select>
 
             <input asp-for="FilePath" id="fileentitycreatefromfilepath" type="text"
-                   class="from-control filepath-sug"
-                   placeholder="Enter FilePath">
-                   <br />
-            @* <small id="filepathcount">180 / 0 </small> *@
+                   placeholder="Enter FilePath" class="form-control col-6 btn btn-outline-dark border-0">
+            <br />
+
+
         </div>
         <br />
 
-        <div class="form-group row w-100">
-            <label asp-for="Description">Description</label>
-            <input asp-for="Description" id="fileentitycreatefromdesc" type="text" class="form-control " placeholder="Description">
+        <div class="row ">
+            <label asp-for="Description" class="col-3 justify-content-end text-dark">Description</label>
+            <input asp-for="Description" id="fileentitycreatefromdesc" type="text" class="form-control col-6 btn btn-outline-dark border-0" placeholder="Description">
             <small id="desccount">150 / 0</small>
         </div>
 
-        <div class="form-group  row w-100">
+        <div class="row ">
 
-            <label for="projectidselect">ProjectName </label>
-            <select asp-for="ProjectId" id="projectidselect" class="fileentity-create-project-selection">
+            <label for="projectidselect" class="col-3 justify-content-end text-dark">ProjectName </label>
+            <select asp-for="ProjectId" id="projectidselect" class="form-control col-6 btn btn-outline-dark border-0">
                 @foreach (var project in allProjects)
                 {
                     <option value="@project.Id">@project.ProjectName</option>
@@ -72,17 +73,23 @@
         </div>
 
         <br />
-        <div class="form-group row w-100">
+        <div class="row ">
 
-            <label>
+
+            <label class="col-12 border-top-0 border-bottom-0 text-dark btn btn-dark">
                 <span id="createfileentityselectfile" style="color:dodgerblue; font-size:15px;">SelectFile</span>
 
-                <input asp-for="FileToCopy" name="filetocopy" id="fileentitycreatefromfile" type="file">
+                <input asp-for="FileToCopy" name="filetocopy" id="fileentitycreatefromfile" type="file" class="form-control col-6 btn btn-outline-dark border-0">
             </label>
         </div>
 
-        <input class="btn btn-success" type="button" value="Submit" id="fileentitycreateformsubmit" />
+        <br />
+        <br />
 
+        <div class="row justify-content-end container">
+
+            <input class="btn btn-success" type="button" value="Submit" id="fileentitycreateformsubmit" />
+        </div>
 
 
     </form>
