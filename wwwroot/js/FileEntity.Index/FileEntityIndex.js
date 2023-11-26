@@ -10,7 +10,7 @@
             for (var i = 0; i < json.value.length; i++) {
                 var j = i + 1;
                 tr = $('<tr/>');
-                tr.append("<td class='table-info'><center>" + j + "</td></center>")
+                tr.append("<td class='table-dark'><center>" + j + "</td></center>")
                 tr.append("<td><center>" + json.value[i].name + "</center></td>");
                 tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
                 tr.append("<td><center>" + json.value[i].dateCreated + "</center></td>");
@@ -18,8 +18,8 @@
                 tr.append("<td><center>" + json.value[i].description + "</center></td>");
                 tr.append("<td><center>" + json.value[i].size + "</center></td>");
 
-                tr.append('<td><center><a type="button" href="FileEntity/Edit/' + json.value[i].id + '" class="btn-edit">Edit</a></center></td>');
-                tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn-delete file-index-delete" value="Delete" /></center></td>');
+                tr.append('<td><center><a type="button" href="FileEntity/Edit/' + json.value[i].id + '" class="btn btn-outline-dark">Edit</a></center></td>');
+                tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn btn-outline-danger file-index-delete" value="Delete" /></center></td>');
                 $('table').append(tr);
             }
 
@@ -105,7 +105,7 @@ $("#fileentityindexsearch").keyup ( function () {
                 for (var i = 0; i < json.value.length; i++) {
                     var j = i + 1;
                     tr = $('<tr/>');
-                    tr.append("<td class='table-info' ><center>" + j + "|</td></center>")
+                    tr.append("<td class='table-dark' ><center>" + j + "</td></center>")
                     tr.append("<td><center>" + json.value[i].name + "</center></td>");
                     tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
                     tr.append("<td><center>" + json.value[i].dateCreated + "</center></td>");
@@ -113,8 +113,8 @@ $("#fileentityindexsearch").keyup ( function () {
                     tr.append("<td><center>" + json.value[i].description + "</center></td>");
                     tr.append("<td><center>" + json.value[i].size + "</center></td>");
 
-                    tr.append('<td><center><a type="button" href="FileEntity/Edit/' + json.value[i].id + '" class="btn-edit">Edit</a></center></td>');
-                    tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn-delete file-index-delete" value="Delete" /></center></td>');
+                    tr.append('<td><center><a type="button" href="FileEntity/Edit/' + json.value[i].id + '" class="btn btn-outline-dark">Edit</a></center></td>');
+                    tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn btn-outline-danger file-index-delete" value="Delete" /></center></td>');
                     $('table tbody').append(tr);
                 }
 

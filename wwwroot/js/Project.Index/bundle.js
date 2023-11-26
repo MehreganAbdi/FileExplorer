@@ -10,11 +10,11 @@ $(document).ready(function () {
             for (var i = 0; i < json.length; i++) {
                 var j = i + 1;
                 tr = $('<tr/>');
-                tr.append("<td class='table-secondary' ><center>" + j + "</td></center>")
+                tr.append("<td class='table-dark' ><center>" + j + "</td></center>")
                 tr.append("<td><center>" + json[i].id + "</center></td>");
                 tr.append("<td><center>" + json[i].projectName + "</center></td>");
                 tr.append('<td><center><a type="button" href="Project/Edit/' + json[i].id + '" class="btn btn-outline-dark">Edit</a></center></td>');
-                tr.append(' <td><center><input data-id="' + json[i].id + '" type="button" id="deleteproject" class="btn btn-outline-danger" value="Delete" /></center></td>');
+                tr.append(' <td><center><input data-id="' + json[i].id + '" type="button" id="deleteproject" class="btn btn-outline-danger .project-index-delete" value="Delete" /></center></td>');
                 $('table').append(tr);
             }
 
@@ -102,7 +102,7 @@ $("#projectindexsearch").keyup ( function () {
                 for (var i = 0; i < json.length; i++) {
                     var j = i + 1;
                     tr = $('<tr/>');
-                    tr.append("<td class='table-secondary' ><center>" + j + "</td></center>")
+                    tr.append("<td class='table-dark' ><center>" + j + "</td></center>")
                     tr.append("<td><center>" + json[i].id + "</center></td>");
                     tr.append("<td><center>" + json[i].projectName + "</center></td>");
                     tr.append('<td><center><a type="button" href="Project/Edit/' + json[i].id + '" class="btn btn-outline-dark">Edit</a></center></td>');
