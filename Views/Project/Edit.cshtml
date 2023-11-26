@@ -9,34 +9,47 @@
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
 
-
-
-<center style="display:none" id="redirecttoprojectindex">
-    <a asp-controller="Project" asp-action="Index" class="btn btn-outline-primary">All Projects</a>
-
-</center>
-<br />
-<br />
-
-<form method="post"  id="editprojectform" >
-
-    <input type="hidden" asp-for="Id" value="@Model.Id"/>
-    <div class="form-group row w-100">
-        <label asp-for="ProjectName" for="projecteditformname" >ProjectName</label>
-        <input asp-for="ProjectName" id="projecteditformname" type="text" class="form-control form-inline" placeholder="Enter ProjectName">
-
-        <small id="editprojectnc"  >100 /  @Model.ProjectName.Length</small>
-         
-    </div>
+<div class="container">
+    <br />
     <br />
 
+    <center>
+        <h3 class="text-dark border border-dark border-left-0 border-bottom-0 border-right-0 ">. Edit Project .</h3>
+        <br />
+        <br />
+        <br />
+        <center style="display:none" id="redirecttoprojectindex">
+            <a asp-controller="Project" asp-action="Index" class="btn btn-outline-info">All Projects</a>
 
-    <br />
-    <input type="button" id="editprojectsubmit" class="btn btn-success" value="submit" />
+        </center>
+        <br />
+        <br />
 
-</form>
+
+    </center>
+
+    <form method="post" id="editprojectform">
+
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+
+        <div class="row">
+            <label asp-for="ProjectName" for="projecteditformname" class="col-3 justify-content-end text-dark">ProjectName</label>
+            <input asp-for="ProjectName" id="projecteditformname" type="text" class="form-control col-6 btn btn-outline-dark border-0" placeholder="Enter ProjectName">
+
+            <small id="editprojectnc" class="col-3 align-self-left text-secondary">100 /  @Model.ProjectName.Length</small>
+
+        </div>
+        <br />
 
 
+        <br />
+        <div class="row justify-content-end container">
+            <input type="button" id="editprojectsubmit" class="btn btn-success" value="submit" />
+        </div>
+    </form>
+
+
+</div>
 
 @* <script src="~/js/Project.Edit/ProjectEdit.js"> </script> *@
 <script src="~/js/Project.Index/bundle.js"> </script>

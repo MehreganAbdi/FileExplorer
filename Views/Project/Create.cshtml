@@ -14,33 +14,52 @@
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
 
 
- 
+
 @if (Model.CreateErrorTD != null)
 {
     <small>@Model.CreateErrorTD</small>
 }
 
-@if (Model.Error!= null)
+@if (Model.Error != null)
 {
     <small>@Model.Error</small>
 }
-<center style="display:none" id="redirecttoprojectindex">
-    <a asp-controller="Project" asp-action="Index" class="btn btn-outline-info">All Projects</a>
 
-</center>
 
-<form id="createprojectform">
 
-    <div class="form-group row w-100 " >
-        <label for="createprojectformname">ProjectName</label>
-        <input id="createprojectformname"   type="text" name="projectname" class="form-control" placeholder="Enter ProjectName">
-        <small id="projectnamecount">100 / 0 </small>
-        
-    </div>
-    
-    <input type="button" id="createpeojectsubmit" class="btn btn-success" value="submit" />
-    
-</form>
+<div class="container">
+    <center>
+        <h3 class="text-dark border border-dark border-left-0 border-bottom-0 border-right-0 ">. Create Project .</h3>
+        <br />
+        <br />
+        <br />
+        <center style="display:none" id="redirecttoprojectindex">
+            <a asp-controller="Project" asp-action="Index" class="btn btn-outline-info">All Projects</a>
+
+        </center>
+        <br />
+        <br />
+
+
+    </center>
+    <form id="createprojectform">
+
+        <div class="row">
+
+            <label for="createprojectformname" class="col-3 justify-content-end text-dark">ProjectName</label>
+            <input id="createprojectformname" type="text" name="projectname" class="form-control col-6 btn btn-outline-dark border-0" placeholder="Enter ProjectName">
+            <small id="projectnamecount" class="col-3 align-self-left text-secondary">100 / 0 </small>
+
+        </div>
+        <br />
+        <br />
+        <div class="row justify-content-end container">
+
+            <input type="button" id="createpeojectsubmit" class="btn btn-success col-3 col-sm-3 col-md-2 col-lg-1 col-xl-1 justify-content-start" value="submit" />
+        </div>
+
+    </form>
+</div>
 
 <script src="~/js/Project.Create/ProjectCreate.js"> </script>
 @* <script src="~/js/Project.Index/bundle.js"> </script> *@
