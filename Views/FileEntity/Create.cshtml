@@ -32,83 +32,103 @@
 
 <body>
 
+    <div class="container">
 
 
-    <form method="post" id="fileentitycreatefrom" asp-action="Create" enctype="multipart/form-data">
-        <input asp-for="Name" value="NewFile" type="hidden" id="fileentitycreatefromname" />
-        <input asp-for="ImageLink" id="fileentitycreatefromimagelink" type="hidden" />
-        <input asp-for="Size" type="hidden" id="fileentitycreatefromsize" />
-        <input asp-for="Type" type="hidden" id="fileentitycreatefromtype" />
+        <form method="post" id="fileentitycreatefrom" asp-action="Create" enctype="multipart/form-data">
+            <input asp-for="Name" value="NewFile" type="hidden" id="fileentitycreatefromname" />
+            <input asp-for="ImageLink" id="fileentitycreatefromimagelink" type="hidden" />
+            <input asp-for="Size" type="hidden" id="fileentitycreatefromsize" />
+            <input asp-for="Type" type="hidden" id="fileentitycreatefromtype" />
 
-
-        <br />
-        <div class="row">
-
-
-            <label class="col-3 justify-content-end text-dark">Path</label>
 
             <br />
-            <select id="pathsuggestion" class="form-control col-6 btn btn-outline-dark border-0">
 
-                @foreach (var path in recentPaths)
-                {
-                    <option class="bg-dark text-light" value="@path">@path </option>
-                }
+            <div>
+                <div class="row justify-content-start">
 
-            </select>
+
+                    <label class="text-dark">Path</label>
+                </div>
+                <div class="row ">
+                    <br />
+                    <select id="pathsuggestion" class="form-control col-12 ">
+
+                        @foreach (var path in recentPaths)
+                        {
+                            <option class="bg-dark text-light" value="@path">@path </option>
+                        }
+
+                    </select>
+                    <br />
+                </div>
+            </div>
+
+
+
+
             <br />
-        </div>
-        <div class="row" style="height:10px;">
-            <label is-acceptable="false" class="text-danger col-12" id="validatenamealerter"></label>
-        </div>
+
+            <div>
+                <div class="row justify-content-start">
+                    <label asp-for="Description" class="text-dark">Description</label>
+                </div>
+
+                <div class="row ">
+                    <input asp-for="Description" id="fileentitycreatefromdesc" type="text" class="form-control col-12 " placeholder="Description">
+                </div>
+
+                <div class="row justify-content-end text-secondary">
+                    <small id="desccount">150 / 0</small>
+                </div>
+            </div>
 
 
+            <div>
+                <div class="row justify-content-start">
+
+                    <label for="projectidselect" class="text-dark">ProjectName </label>
+                </div>
+                <div class="row">
+                    <select asp-for="ProjectId" id="projectidselect" class="form-control col-12">
+                        @foreach (var project in allProjects)
+                        {
+                            <option value="@project.Id">@project.ProjectName</option>
+                        }
+
+                    </select>
+                </div>
+            </div>
+
+            <br />
+            <br />
+
+            <div class="row">
+
+                <label id="createfileentityselectfile" class="text-dark justify-content-end">
+                    select file here
+                </label>
+            </div>
+
+            <div class="row mb-3  ">
+                <input asp-for="FileToCopy" name="FileToCopy" id="fileentitycreatefromfile" type="file" class="col-12 form-control-sm" >
+            </div>
+            
 
 
-        <br />
+            <br />
+            <br />
 
-        <div class="row ">
-            <label asp-for="Description" class="col-3 justify-content-end text-dark">Description</label>
-            <input asp-for="Description" id="fileentitycreatefromdesc" type="text" class="form-control col-6 btn btn-outline-dark border-0" placeholder="Description">
-            <small id="desccount">150 / 0</small>
-        </div>
+            <div class="row justify-content-end container">
 
-        <div class="row ">
-
-            <label for="projectidselect" class="col-3 justify-content-end text-dark">ProjectName </label>
-            <select asp-for="ProjectId" id="projectidselect" class="form-control col-6 btn btn-outline-dark border-0">
-                @foreach (var project in allProjects)
-                {
-                    <option value="@project.Id">@project.ProjectName</option>
-                }
-
-            </select>
-        </div>
-
-        <br />
-        <div class="row">
-
-                <label id="createfileentityselectfile" class="col-3 border-0 text-dark btn btn-outline-dark justify-content-end">
-            select file here
-            </label>
-
-            <input asp-for="FileToCopy" name="FileToCopy" id="fileentitycreatefromfile" type="file" class="form-control col-7 btn btn-outline-dark border-0">
-
-           
-        </div>
-
-        <br />
-        <br />
-
-        <div class="row justify-content-end container">
-
-            <input class="btn btn-success" type="button" value="Submit" id="fileentitycreateformsubmit" />
-        </div>
+                <input class="btn btn-success" type="button" value="Submit" id="fileentitycreateformsubmit" />
+            </div>
 
 
-    </form>
+        </form>
 
 
+    </div>
 
 </body>
 

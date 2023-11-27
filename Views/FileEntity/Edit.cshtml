@@ -42,18 +42,29 @@
 
 
         <div class="row ">
-            <label asp-for="Name" for="fileentityeditformname" class="col-3 justify-content-end text-dark">Name</label>
-            <input asp-for="Name" id="fileentityeditformname" type="text" class="form-control col-6 btn btn-outline-dark border-0" placeholder="Enter FilePath">
-            <small id="namecount">100 / @Model.Name.Length </small>
-
+            <label asp-for="Name" for="fileentityeditformname" class="justify-content-start text-dark">Name</label>
         </div>
+
+        <div class="row ">
+            <input asp-for="Name" id="fileentityeditformname" type="text" class="form-control col-12 " placeholder="Enter FilePath">
+        </div>
+
+        <div class="row justify-content-end">
+            <small class="justify-content-end" id="namecount">100 / @Model.Name.Length </small>
+        </div>
+
+
 
         <br />
 
         <div class="row">
-            <label asp-for="FilePath" for="fileentityeditformfilepath" class="col-3 justify-content-end text-dark">FilePath</label>
-            <input asp-for="FilePath" id="fileentityeditformfilepath" type="text" class="form-control col-6 btn btn-outline-dark border-0" placeholder="Enter FilePath">
-            <small id="filepathcount">180 / @Model.FilePath.Length </small>
+            <label asp-for="FilePath" for="fileentityeditformfilepath" class=" justify-content-start ">FilePath</label>
+        </div>
+        <div class="row">
+            <input asp-for="FilePath" id="fileentityeditformfilepath" type="text" class="form-control col-12 " placeholder="Enter FilePath">
+        </div>
+        <div class="row justify-content-end">
+            <small id="filepathcount" class="justify-content-end">180 / @Model.FilePath.Length </small>
         </div>
 
 
@@ -61,20 +72,30 @@
 
 
         <div class="row ">
-            <label asp-for="Description" for="fileentityeditformdesc" class="col-3 justify-content-end text-dark">Description</label>
-            <input asp-for="Description" id="fileentityeditformdesc" type="text" class="form-control col-6 btn btn-outline-dark border-0" placeholder="Description">
-            <small id="desccount">150 / @Model.Description.Length</small>
+            <label asp-for="Description" for="fileentityeditformdesc" class="justify-content-start text-dark">Description</label>
+        </div>
+
+        <div class="row">
+            <input asp-for="Description" id="fileentityeditformdesc" type="text" class="form-control col-12 " placeholder="Description">
+        </div>
+
+        <div class="row justify-content-end">
+            <small id="desccount" class="justify-content-end">150 / @Model.Description.Length</small>
         </div>
 
         <br />
 
 
         <div class="row">
-            <label asp-for="ProjectName" class="col-3 justify-content-end text-dark">ProjectName</label>
-            <select asp-for="ProjectId" class="col-9 text-dark border-0  btn-outline-dark   ">
+            <label asp-for="ProjectName" class="justify-content-end text-dark">ProjectName</label>
+        </div>
+
+        <div class="row">
+
+            <select asp-for="ProjectId" class="col-12 form-control">
                 @foreach (var project in allprojectNames)
                 {
-                    <option value="@project.Id" class="bg-dark text-light"><center>@project.ProjectName</center></option>
+                    <option value="@project.Id" ><center>@project.ProjectName</center></option>
 
                 }
             </select>
