@@ -1,10 +1,44 @@
-﻿function validation() {
+﻿$(document).ready(function () {
+    $("#pathsuggestion").select2({
+        tags: true
+    });
 
-    var filePath = $("#fileentitycreatefromfilepath").val();
+})
+
+function validation() {
+
+    var filePath = $("#pathsuggestion").val();
     var desc = $("#fileentitycreatefromdesc").val();
     var file = $("#fileentitycreatefromfile").prop("files")[0];
+    var pathpattern = "";
 
 
+
+    var value = $("#pathsuggestion").val();
+    if (value.length > 3) {
+
+
+        $.ajax({
+            url: 'FileEntity/ValidatePath/' + value,
+            method: 'GET',
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (json) {
+
+                if (json == 'true') {
+                    pathpattern = 'true';
+                } else {
+                    pathpattern = 'false';
+                }
+
+            }
+        });
+
+
+    }
+
+    
     if (filePath.length > 150 || filePath.length < 3) {
         sweetAlert({
             title: "filePath must be less than 180 and more than 3 characters",
@@ -14,7 +48,20 @@
             showConfirmButton: false
         });
         return false;
-    } else if (desc.length > 180 || desc.length < 3) {
+    } else if (pathpattern == 'false') {
+
+        sweetAlert({
+            title: "filePath Pattern Is Not Acceptable .",
+            text: "",
+            type: "error",
+            timer: 5000,
+            showConfirmButton: false
+        });
+
+        return false;
+
+    }
+    else if (desc.length > 180 || desc.length < 3) {
         sweetAlert({
             title: "Description must be less than 150 and more than 3 characters",
             text: "",
@@ -60,7 +107,11 @@ function CountCharsDesc() {
 
 $("#fileentitycreatefromdesc").keyup(function () { return CountCharsDesc() });
 
-$("#fileentitycreatefromfilepath").keyup (function () { return CountCharsFilePath() });
+
+
+$("#pathsuggestion").keyup(function () { return CountCharsFilePath() });
+
+
 
 
 
@@ -81,9 +132,9 @@ $("#fileentitycreateformsubmit").click (function () {
 
        
 
-        $("#fileentitycreatefromname").val() = file.name;
-        $("#fileentitycreatefromsize").val() = file.size.toString();
-        $("#fileentitycreatefromtype").val() = file.type;
+        document.getElementById("fileentitycreatefromname").value = file.name;
+        document.getElementById("fileentitycreatefromsize").value = file.size.toString();
+        document.getElementById("fileentitycreatefromtype").value = file.type;
 
 
 
@@ -91,7 +142,7 @@ $("#fileentitycreateformsubmit").click (function () {
         formData.append("fileToCopy", file);
         formData.append("name", $("#fileentitycreatefromname").val());
         formData.append("description", $("#fileentitycreatefromdesc").val());
-        formData.append("filePath", $("#fileentitycreatefromfilepath").val());
+        formData.append("filePath", $("#pathsuggestion").val());
         formData.append("projectId", $("#projectidselect").val());
         formData.append("size", $("#fileentitycreatefromsize").val());
         formData.append("type", $("#fileentitycreatefromtype").val());

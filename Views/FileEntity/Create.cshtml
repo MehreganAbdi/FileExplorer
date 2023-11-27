@@ -8,16 +8,27 @@
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
+
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css">
 
 <br />
 <br />
 
+<style>
+
+</style>
 
 
-<a id="fileentitycreatereturntohome" asp-action="Index" asp-controller="FileEntity" style="display:none" class="btn-primary">Record Added , Redirect To Home</a>
+<a id="fileentitycreatereturntohome" asp-action="Index" asp-controller="FileEntity" style="display:none;" class="btn btn-outline-info">All Records</a>
+<br />
+<br>
+
 
 <body>
 
@@ -31,27 +42,29 @@
 
 
         <br />
-        <div class="form-group row w-100" style="position:relative;width:505px;height:15px;border:0;padding:0;margin:0;">
+        <div class="row">
 
 
             <label class="col-3 justify-content-end text-dark">Path</label>
-                  
+
             <br />
-            <select id="pathsuggestion" class="filepath-sug">
+            <select id="pathsuggestion" class="form-control col-6 btn btn-outline-dark border-0">
 
                 @foreach (var path in recentPaths)
                 {
-                    <option value="@path">@path </option>
+                    <option class="bg-dark text-light" value="@path">@path </option>
                 }
 
             </select>
-
-            <input asp-for="FilePath" id="fileentitycreatefromfilepath" type="text"
-                   placeholder="Enter FilePath" class="form-control col-6 btn btn-outline-dark border-0">
             <br />
-
-
         </div>
+        <div class="row" style="height:10px;">
+            <label is-acceptable="false" class="text-danger col-12" id="validatenamealerter"></label>
+        </div>
+
+
+
+
         <br />
 
         <div class="row ">
@@ -73,14 +86,15 @@
         </div>
 
         <br />
-        <div class="row ">
+        <div class="row">
 
-
-            <label class="col-12 border-top-0 border-bottom-0 text-dark btn btn-dark">
-                <span id="createfileentityselectfile" style="color:dodgerblue; font-size:15px;">SelectFile</span>
-
-                <input asp-for="FileToCopy" name="filetocopy" id="fileentitycreatefromfile" type="file" class="form-control col-6 btn btn-outline-dark border-0">
+                <label id="createfileentityselectfile" class="col-3 border-0 text-dark btn btn-outline-dark justify-content-end">
+            select file here
             </label>
+
+            <input asp-for="FileToCopy" name="FileToCopy" id="fileentitycreatefromfile" type="file" class="form-control col-7 btn btn-outline-dark border-0">
+
+           
         </div>
 
         <br />
@@ -96,8 +110,6 @@
 
 
 
-
 </body>
 
-<script src="~/js//FileEntity.Create/FileEntityCreate.min.js"></script>
-
+<script src="~/js//FileEntity.Create/FileEntityCreate.js"></script>

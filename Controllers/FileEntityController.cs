@@ -86,10 +86,9 @@ namespace FileExplorer.Controllers
 
             try
             {
-
-                if (!await directoryService.ValidatePathPattern(fileEntityDTO.FilePath))
+                if(! await directoryService.ValidatePathPattern(fileEntityDTO.FilePath))
                 {
-                    fileEntityDTO.NamingErrorTD = "Path Is Not Valid";
+                    TempData["NamingErrorTD"] = " File Path Is Unvalid";
                     return View(fileEntityDTO);
                 }
                 if (fileEntityDTO.FileToCopy == null)
@@ -136,20 +135,6 @@ namespace FileExplorer.Controllers
             }
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> UploadPhotoAsync()
-        //{
-        //    if(Request.Form.Files == null)
-        //    {
-        //        return Json(false);
-        //    }
-        //
-        //    var file = Request.Form.Files[0];
-        //
-        //    var result = await photoService.AddPhotoAsync(file);
-        //
-        //    return Json(result.Url.ToString());
-        //} 
 
 
 
