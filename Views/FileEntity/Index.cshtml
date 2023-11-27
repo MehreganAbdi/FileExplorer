@@ -9,30 +9,6 @@
 
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark margin-0">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a asp-controller="FileEntity" asp-action="Create" class="nav-link">Add+</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Project" asp-action="Index">Projects</a>
-            </li>
-        </ul>
-
-        <div class="justify-content-end input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text btn-outline-light">Search</div>
-            </div>
-            <input name="searching" class="btn btn-outline-light " placeholder="Name,Path Or ..." id="fileentityindexsearch" />
-
-        </div>
-    </div>
-</nav>
 
 <body>
 
@@ -62,6 +38,30 @@
                 .  File Records  .
             </h1>
             <br />
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark margin-0">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a asp-controller="FileEntity" asp-action="Create" class="nav-link">Add+</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Project" asp-action="Index">Projects</a>
+            </li>
+        </ul>
+
+        <div class="justify-content-end input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text btn-outline-light">Search</div>
+            </div>
+            <input name="searching" class="btn btn-outline-light " placeholder="Name,Path Or ..." id="fileentityindexsearch" />
+
+        </div>
+    </div>
+</nav>
 
            @*  <div class="row container">
                 <div class="col col-md col-sm col-lg col-xl row">
@@ -112,5 +112,4 @@
     </div>
 
     <script src="~/js/FileEntity.Index/FileEntityIndex.min.js"></script>
-
 </body>

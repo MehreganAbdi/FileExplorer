@@ -10,7 +10,7 @@
             for (var i = 0; i < json.value.length; i++) {
                 var j = i + 1;
                 tr = $('<tr/>');
-                tr.append("<td class='table-dark'><center>" + j + "</td></center>")
+                tr.append("<td ><center>" + j + "</td></center>")
                 tr.append("<td><center>" + json.value[i].name + "</center></td>");
                 tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
                 tr.append("<td><center>" + json.value[i].dateCreated + "</center></td>");
@@ -105,7 +105,7 @@ $("#fileentityindexsearch").keyup ( function () {
                 for (var i = 0; i < json.value.length; i++) {
                     var j = i + 1;
                     tr = $('<tr/>');
-                    tr.append("<td class='table-dark' ><center>" + j + "</td></center>")
+                    tr.append("<td  ><center>" + j + "</td></center>")
                     tr.append("<td><center>" + json.value[i].name + "</center></td>");
                     tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
                     tr.append("<td><center>" + json.value[i].dateCreated + "</center></td>");
