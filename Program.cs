@@ -27,10 +27,8 @@ namespace FileExplorer
 
             builder.Services.AddScoped<IDirectoryService, DirectoryService>();
             builder.Services.AddScoped<IDataTranformerService, DataTransformerService>();
-            builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IProjectService, ProjectService>();
             builder.Services.AddScoped<IFileEntityService, FileEntityService>();
-            builder.Services.AddScoped<IPhotoService ,PhotoService>();
 
 
             //Repositories DI
