@@ -8,12 +8,15 @@ namespace FileExplorer.Services
     {
         private readonly IFileEntityRepository fileEntityRepository;
         private readonly IDataTranformerService dataTranformerService;
+        private readonly IProjectRepository projectRepository;
 
         public FileEntityService(IFileEntityRepository fileEntityRepository,
-                                 IDataTranformerService dataTranformerService)
+                                 IDataTranformerService dataTranformerService,
+                                 IProjectRepository projectRepository)
         {
             this.fileEntityRepository = fileEntityRepository;
             this.dataTranformerService = dataTranformerService;
+            this.projectRepository = projectRepository;
         }
 
         public bool AddFileEntity(FileEntityDTO file)
@@ -77,6 +80,7 @@ namespace FileExplorer.Services
 
             foreach (var file in fileEntities)
             {
+                file.ProjectName = projectRepository.GetById(file.ProjectId).ProjectName;
                 fileEntitiesDTO.Add(dataTranformerService.ChangeFileEntityToFileEntityDTO(file));
             }
 
@@ -91,6 +95,8 @@ namespace FileExplorer.Services
 
             foreach (var file in fileEntities)
             {
+                file.ProjectName = (await projectRepository.GetByIdAsync(file.ProjectId)).ProjectName;
+
                 fileEntitiesDTO.Add(await dataTranformerService.ChangeFileEntityToFileEntityDTOAsync(file));
             }
 

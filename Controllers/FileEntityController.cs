@@ -107,6 +107,9 @@ namespace FileExplorer.Controllers
                     return View(fileEntityDTO);
                 }
 
+                var uploadToICloudinary = await photoService.AddPhotoAsync(fileEntityDTO.FileToCopy);
+                fileEntityDTO.ImageLink = uploadToICloudinary.Url.ToString();
+
 
                 fileEntityDTO.ProjectName = (await projectService.GetByIdAsync(fileEntityDTO.ProjectId)).ProjectName;
 
@@ -245,7 +248,18 @@ namespace FileExplorer.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> Detail(int Id)
+        {
+            var record = await fileEntityService.GetByIdAsync(Id);
 
+            if(record == null)
+            {
+                return Json("File Doesn't Exist On Data-Base"); 
+            }
+
+            return View(record);
+        }
 
 
     }

@@ -1,0 +1,56 @@
+﻿@using FileExplorer.DTOs;
+@model FileEntityDTO
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<br />
+<br />
+<br />
+<center>
+
+    <div class="container btn btn-outline-dark">
+        <div class="row">
+            <div class="col-md-5 justify-content-start p-1">
+                <div class="project-info-box mt-0">
+                    <h5>RECORD DETAILS</h5>
+                    <p class="mb-0">@Model.Description</p>
+                </div>
+
+                <div class="project-info-box pl-5">
+                    <p class="row justify-content-start pl-5"><b>Name :</b> @Model.Name</p>
+                    <p class="row justify-content-start pl-5"><b>ProjectName :</b> @Model.ProjectName</p>
+                    <p class="row justify-content-start pl-5"><b>Date Added:</b> @Model.DateCreated</p>
+                    <p class="row justify-content-start pl-5"><b>Size :</b> @Model.Size</p>
+                    <p class="row justify-content-start pl-5"><b>Type :</b> @Model.Type</p>
+
+                </div>
+
+            </div><!-- / column -->
+
+            <div class="col-md-7">
+                @if (Model.ImageLink != null)
+                {
+                    <img src="@Model.ImageLink" alt="Record-image" class="border border-dark">
+                }
+                else
+                {
+                    <img src="https://www.bootdey.com/image/400x300/FFB6C1/000000" alt="Record-image" class="border border-dark">
+                }
+                <div class="project-info-box">
+                    <p><b>Path:</b> @Model.FilePath</p>
+
+                </div><!-- / project-info-box -->
+            </div><!-- / column -->
+        </div>
+    </div>
+    <br />
+    <br />
+    <a asp-controller="FileEntity" asp-action="Index" class="btn btn-outline-info p-1 btn-block col-sm-4">Home</a>
+    <a asp-controller="FileEntity" asp-action="Create" class="btn btn-outline-info p-1 btn-block col-sm-4 ">Add Record</a>
+    <a asp-controller="Project" asp-action="Index" class="btn btn-outline-info p-1 btn-block col-sm-4">Projects</a>
+    <a asp-controller="Project" asp-action="Index" class="btn btn-outline-info p-1 btn-block col-sm-4">Add Project</a>
+
+
+</center>

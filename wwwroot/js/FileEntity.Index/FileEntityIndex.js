@@ -14,6 +14,7 @@
 
         tr.append('<td><center><a type="button" href="FileEntity/Edit/' + json.value[i].id + '" class="btn btn-outline-dark">Edit</a></center></td>');
         tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn btn-outline-danger file-index-delete" value="Delete" /></center></td>');
+        tr.append('<td><center><a type="button" href="FileEntity/Detail/' + json.value[i].id + '" class="btn btn-outline-secondary">Detail</a></center></td>')
         $('table tbody').append(tr);
     }
 }
@@ -36,6 +37,7 @@ $(document).ready(function () {
             for (const delbtn of allDeleteButtons) {
                 delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
             }
+
 
 
         },
