@@ -2,11 +2,6 @@
     $("#pathsuggestion").select2({
         tags: true
     });
-
-
-   
-
-
 })
 
 function validation() {
@@ -85,8 +80,6 @@ $("#fileentitycreatefromfile").change(function () {
     $("#createfileentityselectfile").html("Selected");
 });
 $("#pathsuggestion").change(function () {
-
-    document.getElementById("fileentitycreatefromfilepath").value = document.getElementById("pathsuggestion").options[document.getElementById("pathsuggestion").selectedIndex].text;
     CountCharsFilePath();
 });
 
@@ -176,7 +169,7 @@ $("#fileentitycreateformsubmit").click(function () {
 
 });
 
-document.getElementById("pathsuggestion").onchange = function () {
+$("#pathsuggestion").on("change", function () {
 
     var s2input = $("#pathsuggestion").val();
     s2input = s2input.replace("\\", "%5C");
@@ -192,16 +185,14 @@ document.getElementById("pathsuggestion").onchange = function () {
                 pathValidator = true
             }
 
-
-
             if (pathValidator) {
                 $('#filepathvalidationalerter').attr('style', 'color:green;');
                 $("#filepathvalidationalerter").html('filePath Is Acceptable');
-            }
-            else {
+            } else {
                 $('#filepathvalidationalerter').attr('style', 'color:red;');
                 $("#filepathvalidationalerter").html('filePath Is Not Acceptable , Try Another One');
             }
+
             if (s2input == "") {
                 $("#filepathvalidationalerter").html('');
             }
@@ -216,8 +207,4 @@ document.getElementById("pathsuggestion").onchange = function () {
         }
 
     });
-
-
-
-
-};
+});

@@ -96,7 +96,7 @@ $("#editfileentitysubmit").click ( function () {
                             type: "success"
                         });
 
-                        document.getElementById("redirecttofileentityindex").style = "";
+                        $("#redirecttofileentityindex").attr('style' , "");
                     },
                     error: function () {
                         sweetAlert({

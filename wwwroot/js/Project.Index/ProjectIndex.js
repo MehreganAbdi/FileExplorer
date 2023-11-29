@@ -1,22 +1,27 @@
-﻿$(document).ready(function () {
+﻿function AddToTable(json) {
+    var tr;
+
+    for (var i = 0; i < json.length; i++) {
+        var j = i + 1;
+        tr = $('<tr/>');
+        tr.append("<td  ><center>" + j + "</td></center>")
+        tr.append("<td><center>" + json[i].id + "</center></td>");
+        tr.append("<td><center>" + json[i].projectName + "</center></td>");
+        tr.append('<td><center><a type="button" href="Project/Edit/' + json[i].id + '" class="btn btn-outline-dark">Edit</a></center></td>');
+        tr.append(' <td><center><input data-id="' + json[i].id + '" type="button" id="deleteproject" class="btn btn-outline-danger project-index-delete" value="Delete" /></center></td>');
+        $('table tbody').append(tr);
+    }
+}
+
+$(document).ready(function () {
 
     $.ajax({
 
         url: 'Project/GetAllProjectsInJson',
         type: 'GET',
         success: function (json) {
-            var tr;
 
-            for (var i = 0; i < json.length; i++) {
-                var j = i + 1;
-                tr = $('<tr/>');
-                tr.append("<td  ><center>" + j + "</td></center>")
-                tr.append("<td><center>" + json[i].id + "</center></td>");
-                tr.append("<td><center>" + json[i].projectName + "</center></td>");
-                tr.append('<td><center><a type="button" href="Project/Edit/' + json[i].id + '" class="btn btn-outline-dark">Edit</a></center></td>');
-                tr.append(' <td><center><input data-id="' + json[i].id + '" type="button" id="deleteproject" class="btn btn-outline-danger project-index-delete" value="Delete" /></center></td>');
-                $('table').append(tr);
-            }
+            AddToTable(json);
 
             const allDeleteButtons = document.querySelectorAll('.project-index-delete');
             for (const delbtn of allDeleteButtons) {
@@ -80,7 +85,7 @@ function deleteConfirm(id) {
 }
 
 
-$("#projectindexsearch").keyup ( function () {
+$("#projectindexsearch").keyup(function () {
 
     var searchValue = $("#projectindexsearch").val();
 
@@ -89,26 +94,15 @@ $("#projectindexsearch").keyup ( function () {
         document.location.reload();
 
     } else {
-
+        $('table tbody').html("");
         $.ajax({
             url: "Project/GetAllProjectsInJson/" + searchValue,
             method: "GET",
 
             success: function (json) {
 
-                var tr;
-                $('table tbody').html("");
 
-                for (var i = 0; i < json.length; i++) {
-                    var j = i + 1;
-                    tr = $('<tr/>');
-                    tr.append("<td  ><center>" + j + "</td></center>")
-                    tr.append("<td><center>" + json[i].id + "</center></td>");
-                    tr.append("<td><center>" + json[i].projectName + "</center></td>");
-                    tr.append('<td><center><a type="button" href="Project/Edit/' + json[i].id + '" class="btn btn-outline-dark">Edit</a></center></td>');
-                    tr.append(' <td><center><input data-id="' + json[i].id + '" type="button" id="deleteproject" class="btn btn-outline-danger" value="Delete" /></center></td>');
-                    $('table tbody').append(tr);
-                }
+                AddToTable(json);
 
                 const allDeleteButtons = document.querySelectorAll('.project-index-delete');
                 for (const delbtn of allDeleteButtons) {

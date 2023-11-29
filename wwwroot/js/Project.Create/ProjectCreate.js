@@ -58,7 +58,7 @@ $("#createpeojectsubmit").click (function () {
                             type: "success"
                         });
 
-                        document.getElementById("redirecttoprojectindex").style = "";
+                        $("#redirecttoprojectindex").attr("style","");
                     },
                     error: function () {
                         sweetAlert({

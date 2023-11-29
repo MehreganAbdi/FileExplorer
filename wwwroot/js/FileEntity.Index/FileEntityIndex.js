@@ -1,27 +1,36 @@
-﻿$(document).ready(function () {
+﻿function AddToTable(json) {
+    var tr;
+
+    for (var i = 0; i < json.value.length; i++) {
+        var j = i + 1;
+        tr = $('<tr/>');
+        tr.append("<td ><center>" + j + "</td></center>")
+        tr.append("<td><center>" + json.value[i].name + "</center></td>");
+        tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
+        tr.append("<td><center>" + json.value[i].dateCreated + "</center></td>");
+        tr.append("<td><center>" + json.value[i].filePath + "</center></td>");
+        tr.append("<td><center>" + json.value[i].description + "</center></td>");
+        tr.append("<td><center>" + json.value[i].size + "</center></td>");
+
+        tr.append('<td><center><a type="button" href="FileEntity/Edit/' + json.value[i].id + '" class="btn btn-outline-dark">Edit</a></center></td>');
+        tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn btn-outline-danger file-index-delete" value="Delete" /></center></td>');
+        $('table tbody').append(tr);
+    }
+}
+
+
+
+
+
+$(document).ready(function () {
 
     $.ajax({
 
         url: 'FileEntity/GetAllRecordsInJson',
         type: 'GET',
         success: function (json) {
-            var tr;
 
-            for (var i = 0; i < json.value.length; i++) {
-                var j = i + 1;
-                tr = $('<tr/>');
-                tr.append("<td ><center>" + j + "</td></center>")
-                tr.append("<td><center>" + json.value[i].name + "</center></td>");
-                tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
-                tr.append("<td><center>" + json.value[i].dateCreated + "</center></td>");
-                tr.append("<td><center>" + json.value[i].filePath + "</center></td>");
-                tr.append("<td><center>" + json.value[i].description + "</center></td>");
-                tr.append("<td><center>" + json.value[i].size + "</center></td>");
-
-                tr.append('<td><center><a type="button" href="FileEntity/Edit/' + json.value[i].id + '" class="btn btn-outline-dark">Edit</a></center></td>');
-                tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn btn-outline-danger file-index-delete" value="Delete" /></center></td>');
-                $('table').append(tr);
-            }
+            AddToTable(json);
 
             const allDeleteButtons = document.querySelectorAll('.file-index-delete');
             for (const delbtn of allDeleteButtons) {
@@ -87,7 +96,7 @@ function deleteConfirm(id) {
 
 $("#fileentityindexsearch").keyup ( function () {
 
-    var searchValue = document.getElementById("fileentityindexsearch").value;
+    var searchValue = $("#fileentityindexsearch").val();
 
 
     if (searchValue != null) {
@@ -100,32 +109,12 @@ $("#fileentityindexsearch").keyup ( function () {
 
             success: function (json) {
 
-                var tr;
+                AddToTable(json);
 
-                for (var i = 0; i < json.value.length; i++) {
-                    var j = i + 1;
-                    tr = $('<tr/>');
-                    tr.append("<td  ><center>" + j + "</td></center>")
-                    tr.append("<td><center>" + json.value[i].name + "</center></td>");
-                    tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
-                    tr.append("<td><center>" + json.value[i].dateCreated + "</center></td>");
-                    tr.append("<td><center>" + json.value[i].filePath + "</center></td>");
-                    tr.append("<td><center>" + json.value[i].description + "</center></td>");
-                    tr.append("<td><center>" + json.value[i].size + "</center></td>");
-
-                    tr.append('<td><center><a type="button" href="FileEntity/Edit/' + json.value[i].id + '" class="btn btn-outline-dark">Edit</a></center></td>');
-                    tr.append(' <td><center><input data-id="' + json.value[i].id + '" type="button" id="deleteproject" class="btn btn-outline-danger file-index-delete" value="Delete" /></center></td>');
-                    $('table tbody').append(tr);
-                }
-
-                const allDeleteButtons = document.querySelectorAll('.file-index-delete');
-                for (const delbtn of allDeleteButtons) {
-                    delbtn.addEventListener("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
-                }
-
-
-                
-
+                const allDeleteButtons = $('.file-index-delete');
+                allDeleteButtons.each(function (delbtn) {
+                    delbtn.on("click", function () { deleteConfirm(delbtn.getAttribute("data-id")); });
+                });
             },
             error: function () {
                 sweetAlert({

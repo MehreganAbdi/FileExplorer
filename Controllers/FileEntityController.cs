@@ -14,14 +14,17 @@ namespace FileExplorer.Controllers
         private readonly IFileEntityService fileEntityService;
         private readonly IProjectService projectService;
         private readonly IDirectoryService directoryService;
-        
+        private readonly IPhotoService photoService;
+
         public FileEntityController(IFileEntityService fileEntityService,
                                     IProjectService projectService,
-                                    IDirectoryService directoryService)
+                                    IDirectoryService directoryService,
+                                    IPhotoService photoService)
         {
             this.fileEntityService = fileEntityService;
             this.projectService = projectService;
             this.directoryService = directoryService;
+            this.photoService = photoService;
         }
 
         public async Task<IActionResult> Index()
