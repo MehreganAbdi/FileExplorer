@@ -32,7 +32,7 @@ namespace FileExplorer.Services
                 FilePath = fileDTO.FilePath,
                 ProjectId = fileDTO.ProjectId,
                 Type = fileDTO.Type,
-                ImageLink = fileDTO.ImageLink != null ? fileDTO.ImageLink : "false"
+                ImageLink = fileDTO.ImageLink
             };
         }
 
@@ -47,7 +47,7 @@ namespace FileExplorer.Services
                 FilePath = fileDTO.FilePath,
                 ProjectId = fileDTO.ProjectId,
                 ProjectName = fileDTO.ProjectName,
-                ImageLink = fileDTO.ImageLink != null ? fileDTO.ImageLink : "false",
+                ImageLink = fileDTO.ImageLink,
                 Type = fileDTO.Type
             };
         }
@@ -63,7 +63,7 @@ namespace FileExplorer.Services
                 FilePath = fileDTO.FilePath,
                 ProjectId = fileDTO.ProjectId,
                 ProjectName = fileDTO.ProjectName,
-                ImageLink = fileDTO.ImageLink != null ? fileDTO.ImageLink : "false",
+                ImageLink = fileDTO.ImageLink,
                 Type = fileDTO.Type,
                 Id = fileDTO.Id
             };
@@ -82,7 +82,7 @@ namespace FileExplorer.Services
                 ProjectName = fileDTO.ProjectName,
                 Type = fileDTO.Type,
                 Id = fileDTO.Id,
-                ImageLink = fileDTO.ImageLink != null ? fileDTO.ImageLink : "false"
+                ImageLink = fileDTO.ImageLink
             };
 
         }
@@ -100,7 +100,7 @@ namespace FileExplorer.Services
                 Type = file.Type,
                 Id = file.Id,
                 ProjectName = file.ProjectName,
-                ImageLink = file.ImageLink != null ? file.ImageLink : "false"
+                ImageLink = file.ImageLink
             };
         }
 
@@ -118,7 +118,7 @@ namespace FileExplorer.Services
                 ProjectName = file.ProjectName,
                 Type = file.Type,
                 Id = file.Id,
-                ImageLink = file.ImageLink != null ? file.ImageLink : "false"
+                ImageLink = file.ImageLink 
             };
         }
 

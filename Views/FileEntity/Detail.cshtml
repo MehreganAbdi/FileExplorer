@@ -9,13 +9,37 @@
 <br />
 <br />
 <center>
+    <nav class="navbar col-10 navbar-expand navbar-dark bg-dark margin-0 container m-4">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="FilEntity" asp-action="Index">Records</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="FileEntity" asp-action="Create" class="nav-link">Add Record+</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Project" asp-action="Index">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Project" asp-action="Create">Add Project+</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br />
+    <br />
 
     <div class="container btn btn-outline-dark">
         <div class="row">
             <div class="col-md-5 justify-content-start p-1">
                 <div class="project-info-box mt-0">
                     <h5>RECORD DETAILS</h5>
-                    <p class="mb-0">@Model.Description</p>
+                    <p class="mb-0 p-2">@Model.Description</p>
                 </div>
 
                 <div class="project-info-box pl-5">
@@ -47,10 +71,6 @@
     </div>
     <br />
     <br />
-    <a asp-controller="FileEntity" asp-action="Index" class="btn btn-outline-info p-1 btn-block col-sm-4">Home</a>
-    <a asp-controller="FileEntity" asp-action="Create" class="btn btn-outline-info p-1 btn-block col-sm-4 ">Add Record</a>
-    <a asp-controller="Project" asp-action="Index" class="btn btn-outline-info p-1 btn-block col-sm-4">Projects</a>
-    <a asp-controller="Project" asp-action="Index" class="btn btn-outline-info p-1 btn-block col-sm-4">Add Project</a>
-
+ 
 
 </center>

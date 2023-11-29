@@ -9,7 +9,6 @@
         tr.append("<td><center>" + json.value[i].projectName + "</center></td>");
         tr.append("<td><center>" + json.value[i].dateCreated + "</center></td>");
         tr.append("<td><center>" + json.value[i].filePath + "</center></td>");
-        tr.append("<td><center>" + json.value[i].description + "</center></td>");
         tr.append("<td><center>" + json.value[i].size + "</center></td>");
 
         tr.append('<td><center><a type="button" href="FileEntity/Edit/' + json.value[i].id + '" class="btn btn-outline-dark">Edit</a></center></td>');

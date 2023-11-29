@@ -44,6 +44,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\js\Project.Create\" />
     <Folder Include="wwwroot\js\Project.Edit\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>
