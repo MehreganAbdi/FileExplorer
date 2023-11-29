@@ -9,7 +9,7 @@
 
 
 
-<div class="parent2 container">
+<div class="container">
 
     <br />
     <center>
@@ -18,72 +18,75 @@
         </h1>
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark margin-0">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <nav class="navbar navbar-expand  navbar-dark bg-dark margin-0">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-       
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a asp-controller="FileEntity" asp-action="Index" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Project" asp-action="Create">Add+</a>
-            </li>
-        </ul>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 
-        <div class="justify-content-end input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text btn-outline-light">Search</div>
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a asp-controller="FileEntity" asp-action="Index" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Project" asp-action="Create">Add+</a>
+                    </li>
+                </ul>
+
+                <div class="justify-content-end input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text btn-outline-light">Search</div>
+                    </div>
+                    <input name="searching" class="btn btn-outline-light " placeholder="Name,Path Or ..." id="projectindexsearch" />
+
+
+                </div>
             </div>
-            <input name="searching" class="btn btn-outline-light " placeholder="Name,Path Or ..." id="projectindexsearch" />
-
-
-        </div>
-    </div>
-</nav>
+        </nav>
 
         <br />
-@*         <div class="row container">
-            <div class="col-6">
-                <a asp-controller="Project" asp-action="Create" class="btn btn-outline-dark">Add+</a>
-                <a asp-action="Index" asp-controller="FileEntity" class="btn btn-outline-dark">Home</a>
-            </div>
-
-
-            <div class="col-6">
-                <input name="searching" class="btn btn-outline-dark col-2 col-sm-2 col-md-2 col-lg-1 col-ml-1" placeholder="Name,Path Or ..." id="projectindexsearch" />
-            </div >
-
-         
+        @*         <div class="row container">
+        <div class="col-6">
+        <a asp-controller="Project" asp-action="Create" class="btn btn-outline-dark">Add+</a>
+        <a asp-action="Index" asp-controller="FileEntity" class="btn btn-outline-dark">Home</a>
         </div>
- *@
+
+
+        <div class="col-6">
+        <input name="searching" class="btn btn-outline-dark col-2 col-sm-2 col-md-2 col-lg-1 col-ml-1" placeholder="Name,Path Or ..." id="projectindexsearch" />
+        </div >
+
+
+        </div>
+        *@
 
     </center>
     <br />
     <br />
     <br />
-    <div class="row container justify-content-center ">
+    <center>
 
-        <table class="table table-responsive  table-striped" id="projectindextable">
+        <div class="row container p-0">
 
-            <thead class="thead-dark align-self-center">
-                <tr class="table-dark">
-                    <th scope="col" class="col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2"><center>#</center></th>
-                    <th scope="col" class="col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2"><center>Id</center></th>
-                    <th scope="col" class="col"><center>Name</center></th>
-                    <th scope="col" class="col"><center>Edit</center></th>
-                    <th scope="col" class="col"><center>Delete</center></th>
-                </tr>
-            </thead>
+            <table class="table table-responsive  table-striped" id="projectindextable">
 
-            <tbody>
-            </tbody>
+                <thead class="thead-dark align-self-center">
+                    <tr class="table-dark">
+                        <th scope="col" class="col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2"><center>#</center></th>
+                        <th scope="col" class="col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2"><center>Id</center></th>
+                        <th scope="col" class="col"><center>Name</center></th>
+                        <th scope="col" class="col"><center>Edit</center></th>
+                        <th scope="col" class="col"><center>Delete</center></th>
+                    </tr>
+                </thead>
 
-        </table>
-    </div>
+                <tbody>
+                </tbody>
+
+            </table>
+        </div>
+    </center>
 
 
     <br />
