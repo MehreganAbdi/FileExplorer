@@ -3,6 +3,10 @@
         tags: true
     });
 
+
+   
+
+
 })
 
 function validation() {
@@ -10,35 +14,10 @@ function validation() {
     var filePath = $("#pathsuggestion").val();
     var desc = $("#fileentitycreatefromdesc").val();
     var file = $("#fileentitycreatefromfile").prop("files")[0];
-    var pathpattern = "";
 
 
 
-    var value = $("#pathsuggestion").val();
-    if (value.length > 3) {
 
-
-        $.ajax({
-            url: 'FileEntity/ValidatePath/' + value,
-            method: 'GET',
-            processData: false,
-            contentType: false,
-            cache: false,
-            success: function (json) {
-
-                if (json == 'true') {
-                    pathpattern = 'true';
-                } else {
-                    pathpattern = 'false';
-                }
-
-            }
-        });
-
-
-    }
-
-    
     if (filePath.length > 150 || filePath.length < 3) {
         sweetAlert({
             title: "filePath must be less than 180 and more than 3 characters",
@@ -48,20 +27,7 @@ function validation() {
             showConfirmButton: false
         });
         return false;
-    } else if (pathpattern == 'false') {
-
-        sweetAlert({
-            title: "filePath Pattern Is Not Acceptable .",
-            text: "",
-            type: "error",
-            timer: 5000,
-            showConfirmButton: false
-        });
-
-        return false;
-
-    }
-    else if (desc.length > 180 || desc.length < 3) {
+    } else if (desc.length > 180 || desc.length < 3) {
         sweetAlert({
             title: "Description must be less than 150 and more than 3 characters",
             text: "",
@@ -70,7 +36,7 @@ function validation() {
             showConfirmButton: false
         });
         return false;
-    } else if ($("#fileentitycreatefromfile").prop("files").length == 0  || file.size > 2000000) {
+    } else if ($("#fileentitycreatefromfile").prop("files").length == 0 || file.size > 2000000) {
         sweetAlert({
             title: "Select An Acceptable File (File Must Be < 2 Mb )",
             text: "",
@@ -79,7 +45,7 @@ function validation() {
             showConfirmButton: false
         });
         return false;
-    } else if (file.type != "image/png" && file.type!="image/jpg" && file.type!="image/jpeg"  ) {
+    } else if (file.type != "image/png" && file.type != "image/jpg" && file.type != "image/jpeg") {
         sweetAlert({
             title: "Select An Acceptable File (File Must Be An Image)",
             text: "",
@@ -118,23 +84,23 @@ $("#pathsuggestion").keyup(function () { return CountCharsFilePath() });
 $("#fileentitycreatefromfile").change(function () {
     $("#createfileentityselectfile").html("Selected");
 });
-$("#pathsuggestion").change ( function () {
+$("#pathsuggestion").change(function () {
 
     document.getElementById("fileentitycreatefromfilepath").value = document.getElementById("pathsuggestion").options[document.getElementById("pathsuggestion").selectedIndex].text;
     CountCharsFilePath();
 });
 
-$("#fileentitycreateformsubmit").click (function () {
+$("#fileentitycreateformsubmit").click(function () {
     if (validation()) {
 
         let urel = "https://localhost:7242/FileEntity/Create/"
         var file = $("#fileentitycreatefromfile").prop("files")[0];
 
-       
 
-        document.getElementById("fileentitycreatefromname").value = file.name;
-        document.getElementById("fileentitycreatefromsize").value = file.size.toString();
-        document.getElementById("fileentitycreatefromtype").value = file.type;
+
+        $("#fileentitycreatefromname").attr("value", file.name);
+        $("#fileentitycreatefromsize").attr("value" ,file.size.toString());
+        $("#fileentitycreatefromtype").attr("value",file.type);
 
 
 
@@ -147,7 +113,7 @@ $("#fileentitycreateformsubmit").click (function () {
         formData.append("size", $("#fileentitycreatefromsize").val());
         formData.append("type", $("#fileentitycreatefromtype").val());
 
-        
+
         sweetAlert({
             title: "Are you sure?",
             text: "",
@@ -175,7 +141,7 @@ $("#fileentitycreateformsubmit").click (function () {
                             type: "success"
                         });
 
-                        document.getElementById("fileentitycreatereturntohome").style = "";
+                        $("#fileentitycreatereturntohome").attr('style','');
                     },
                     error: function () {
                         sweetAlert({
@@ -209,3 +175,49 @@ $("#fileentitycreateformsubmit").click (function () {
 
 
 });
+
+document.getElementById("pathsuggestion").onchange = function () {
+
+    var s2input = $("#pathsuggestion").val();
+    s2input = s2input.replace("\\", "%5C");
+    s2input = s2input.replace(":", "%3A");
+
+    var pathValidator = false;
+
+    $.ajax({
+        url: 'PathValidator/' + s2input,
+        method: 'GET',
+        success: function (json) {
+            if (json == 'true') {
+                pathValidator = true
+            }
+
+
+
+            if (pathValidator) {
+                $('#filepathvalidationalerter').attr('style', 'color:green;');
+                $("#filepathvalidationalerter").html('filePath Is Acceptable');
+            }
+            else {
+                $('#filepathvalidationalerter').attr('style', 'color:red;');
+                $("#filepathvalidationalerter").html('filePath Is Not Acceptable , Try Another One');
+            }
+            if (s2input == "") {
+                $("#filepathvalidationalerter").html('');
+            }
+
+        },
+        error: function (json) {
+            sweetAlert({
+                title: "Error",
+                type: 'error',
+                text: json
+            })
+        }
+
+    });
+
+
+
+
+};

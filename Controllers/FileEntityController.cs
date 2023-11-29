@@ -133,6 +133,18 @@ namespace FileExplorer.Controllers
         }
 
 
+        [Route("FileEntity/PathValidator/{path?}")]
+        public async Task<IActionResult> PathValidator(string path)
+        {
+            if(await directoryService.ValidatePathPattern(path))
+            {
+
+                return Json("true");
+            }
+
+            return Json("false");
+        }
+
 
 
         [HttpGet]
