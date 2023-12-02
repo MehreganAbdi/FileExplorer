@@ -27,7 +27,7 @@ namespace FileExplorer.Services
                 DateCreated = fileDTO.DateCreated,
                 Size = fileDTO.Size,
                 ProjectName = fileDTO.ProjectName,
-
+                ImagePathOnServer = fileDTO.ImagePathOnServer,
                 Description = fileDTO.Description,
                 FilePath = fileDTO.FilePath,
                 ProjectId = fileDTO.ProjectId,
@@ -48,7 +48,9 @@ namespace FileExplorer.Services
                 ProjectId = fileDTO.ProjectId,
                 ProjectName = fileDTO.ProjectName,
                 ImageLink = fileDTO.ImageLink,
-                Type = fileDTO.Type
+                Type = fileDTO.Type,
+                ImagePathOnServer = fileDTO.ImagePathOnServer
+
             };
         }
 
@@ -65,7 +67,9 @@ namespace FileExplorer.Services
                 ProjectName = fileDTO.ProjectName,
                 ImageLink = fileDTO.ImageLink,
                 Type = fileDTO.Type,
-                Id = fileDTO.Id
+                Id = fileDTO.Id,
+                ImagePathOnServer = fileDTO.ImagePathOnServer
+
             };
         }
 
@@ -82,7 +86,9 @@ namespace FileExplorer.Services
                 ProjectName = fileDTO.ProjectName,
                 Type = fileDTO.Type,
                 Id = fileDTO.Id,
-                ImageLink = fileDTO.ImageLink
+                ImageLink = fileDTO.ImageLink,
+                ImagePathOnServer = fileDTO.ImagePathOnServer
+
             };
 
         }
@@ -100,7 +106,9 @@ namespace FileExplorer.Services
                 Type = file.Type,
                 Id = file.Id,
                 ProjectName = file.ProjectName,
-                ImageLink = file.ImageLink
+                ImageLink = file.ImageLink,
+                ImagePathOnServer = file.ImagePathOnServer
+
             };
         }
 
@@ -118,7 +126,9 @@ namespace FileExplorer.Services
                 ProjectName = file.ProjectName,
                 Type = file.Type,
                 Id = file.Id,
-                ImageLink = file.ImageLink 
+                ImageLink = file.ImageLink,
+                ImagePathOnServer = file.ImagePathOnServer
+
             };
         }
 

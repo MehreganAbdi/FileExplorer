@@ -20,14 +20,11 @@ namespace FileExplorer.DTOs
         [MaxLength(15, ErrorMessage = "Can't Be More Than 15 Characters")]
         public string Type { get; set; }
         public IFormFile? FileToCopy { get; set; }
-        public string? AddResultTD { get; set; }
+        public string? ImagePathOnServer { get; set; }
         public string? CreateErrorTD { get; set; }
         public string? NamingErrorTD { get; set; }
-        public string? SelectErrorTD { get; set; }
         public string? Error { get; set; }
         public string? EditErrorTD { get; set; }
-        public string? FileInStringFormat { get; set; }
         public string? ImageLink { get; set; }
-
     }
 }
