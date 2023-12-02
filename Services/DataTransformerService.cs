@@ -50,7 +50,6 @@ namespace FileExplorer.Services
                 ImageLink = fileDTO.ImageLink,
                 Type = fileDTO.Type,
                 ImagePathOnServer = fileDTO.ImagePathOnServer
-
             };
         }
 
@@ -69,7 +68,6 @@ namespace FileExplorer.Services
                 Type = fileDTO.Type,
                 Id = fileDTO.Id,
                 ImagePathOnServer = fileDTO.ImagePathOnServer
-
             };
         }
 
@@ -88,7 +86,6 @@ namespace FileExplorer.Services
                 Id = fileDTO.Id,
                 ImageLink = fileDTO.ImageLink,
                 ImagePathOnServer = fileDTO.ImagePathOnServer
-
             };
 
         }
@@ -108,7 +105,6 @@ namespace FileExplorer.Services
                 ProjectName = file.ProjectName,
                 ImageLink = file.ImageLink,
                 ImagePathOnServer = file.ImagePathOnServer
-
             };
         }
 
@@ -128,7 +124,6 @@ namespace FileExplorer.Services
                 Id = file.Id,
                 ImageLink = file.ImageLink,
                 ImagePathOnServer = file.ImagePathOnServer
-
             };
         }
 
@@ -141,7 +136,6 @@ namespace FileExplorer.Services
                 CreatedDate = file.CreatedDate,
                 path = file.path,
                 Type = file.Type
-
             };
         }
 

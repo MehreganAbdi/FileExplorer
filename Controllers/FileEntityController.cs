@@ -106,10 +106,17 @@ namespace FileExplorer.Controllers
                     fileEntityDTO.Error = "File Size Must Be Under 2 Mbs";
                     return View(fileEntityDTO);
                 }
+                
+                var uploadToServer = await UploadFile(fileEntityDTO.FileToCopy);
+                if (!uploadToServer)
+                {
+                    fileEntityDTO.Error = "An Error Occured , Try Again (Select An Acceptable File)";
+                    return View(fileEntityDTO);
+                }
 
                 var uploadToICloudinary = await photoService.AddPhotoAsync(fileEntityDTO.FileToCopy);
                 fileEntityDTO.ImageLink = uploadToICloudinary.Url.ToString();
-                 
+
 
 
 
@@ -265,7 +272,7 @@ namespace FileExplorer.Controllers
         }
 
 
-        private async Task<string> UploadFile(IFormFile ufile)
+        private async Task<bool> UploadFile(IFormFile ufile)
         {
             if (ufile != null && ufile.Length > 0)
             {
@@ -273,7 +280,7 @@ namespace FileExplorer.Controllers
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images", fileName);
                 if (Path.Exists(filePath))
                 {
-                    return "exists";
+                    return false;
                 }
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
@@ -281,9 +288,9 @@ namespace FileExplorer.Controllers
                     await ufile.CopyToAsync(fileStream);
                 
                 }
-                return "true";
+                return false;
             }
-            return "false";
+            return false;
         }
 
     }
