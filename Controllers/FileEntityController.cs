@@ -114,10 +114,13 @@ namespace FileExplorer.Controllers
                     return View(fileEntityDTO);
                 }
 
+                var fileName = Path.GetFileName(fileEntityDTO.FileToCopy.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images", fileName);
+
+                fileEntityDTO.ImagePathOnServer = filePath;
+
                 var uploadToICloudinary = await photoService.AddPhotoAsync(fileEntityDTO.FileToCopy);
                 fileEntityDTO.ImageLink = uploadToICloudinary.Url.ToString();
-
-
 
 
 
@@ -288,7 +291,7 @@ namespace FileExplorer.Controllers
                     await ufile.CopyToAsync(fileStream);
                 
                 }
-                return false;
+                return true;
             }
             return false;
         }

@@ -20,10 +20,12 @@
 <br />
 <br />
 
-<style>
-
-</style>
-
+@if(Model.Error != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @Model.Error
+    </div>
+}
 
 <a id="fileentitycreatereturntohome" asp-action="Index" asp-controller="FileEntity" style="display:none;" class="btn btn-outline-info">All Records</a>
 <br />
