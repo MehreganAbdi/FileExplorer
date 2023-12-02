@@ -109,6 +109,9 @@ namespace FileExplorer.Controllers
 
                 var uploadToICloudinary = await photoService.AddPhotoAsync(fileEntityDTO.FileToCopy);
                 fileEntityDTO.ImageLink = uploadToICloudinary.Url.ToString();
+                 
+
+
 
 
                 fileEntityDTO.ProjectName = (await projectService.GetByIdAsync(fileEntityDTO.ProjectId)).ProjectName;
@@ -261,6 +264,27 @@ namespace FileExplorer.Controllers
             return View(record);
         }
 
+
+        private async Task<string> UploadFile(IFormFile ufile)
+        {
+            if (ufile != null && ufile.Length > 0)
+            {
+                var fileName = Path.GetFileName(ufile.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\images", fileName);
+                if (Path.Exists(filePath))
+                {
+                    return "exists";
+                }
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                 
+                    await ufile.CopyToAsync(fileStream);
+                
+                }
+                return "true";
+            }
+            return "false";
+        }
 
     }
 }

@@ -4,6 +4,7 @@ using FileExplorer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FileExplorer.Migrations
 {
     [DbContext(typeof(FileExplorerDbContext))]
-    partial class FileExplorerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231202083222_ImageNAmeOnServerAdded")]
+    partial class ImageNAmeOnServerAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
